@@ -13,7 +13,7 @@ const SnackBarComp = () => {
     }
 
     return (
-        <Snackbar open={snackBar.open} autoHideDuration={3000} onClose={handleClose}>
+        <Snackbar open={snackBar.open} autoHideDuration={6000} onClose={handleClose}>
           <Alert
             onClose={handleClose}
             severity={snackBar.severity}

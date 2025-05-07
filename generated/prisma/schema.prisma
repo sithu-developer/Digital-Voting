@@ -32,8 +32,8 @@ model Admin {
 model Major {
   id            Int     @id @default(autoincrement())
   majorsOrAdmin String  @unique
-  quantity      Int
-  password      String
+  maxQuantity   Int
+  passCode      String  @unique
   User          User[]
   Admin         Admin[]
 }

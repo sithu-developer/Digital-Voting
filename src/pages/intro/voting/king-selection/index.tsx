@@ -1,18 +1,18 @@
 import { useAppSelector } from "@/store/hooks";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material"
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 
-const KingQueenPage = () => {
-    const admin = useAppSelector(store => store.adminSlice.admin)
-    
+const KingSelectionPage = () => {
+    const user = useAppSelector(store => store.userSlice.user);
 
-    if(admin) 
+    
+    if(user)
     return (
         <Box>
-            <Typography>King queen page</Typography>
-            <Typography>{admin.email}</Typography>
-            <Typography>{admin.adminMajorId} /</Typography>
+            <Typography>{user.email}</Typography>
+            <Typography>{user.name}</Typography>
+            <Typography>{user.majorId}</Typography>
             <Button variant="contained" onClick={() => {
                 localStorage.clear();
                 signOut({callbackUrl : "/intro"})
@@ -27,4 +27,4 @@ const KingQueenPage = () => {
     )
 }
 
-export default KingQueenPage;
+export default KingSelectionPage;

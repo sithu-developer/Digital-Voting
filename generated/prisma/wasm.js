@@ -136,8 +136,8 @@ exports.Prisma.AdminScalarFieldEnum = {
 exports.Prisma.MajorScalarFieldEnum = {
   id: 'id',
   majorsOrAdmin: 'majorsOrAdmin',
-  quantity: 'quantity',
-  password: 'password'
+  maxQuantity: 'maxQuantity',
+  passCode: 'passCode'
 };
 
 exports.Prisma.SortOrder = {

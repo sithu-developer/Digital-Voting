@@ -1,32 +1,32 @@
+import { Box } from "@mui/material"
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { createNewAdmin } from "@/store/slices/adminSlice";
 import { openSnackBar } from "@/store/slices/snackBarSlice";
+import { createNewUser } from "@/store/slices/userSlice";
 import { Severity } from "@/types/snackBar";
-import { Box } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const BackofficeTopBar = () => {
+const VotingBottomBar = () => {
+    const [ majorCode , setMajorCode ] = useState<string>("");
     const { data : session } = useSession();
-    const [ password , setPassword ] = useState<string>("");
     const dispatch = useAppDispatch();
     const router = useRouter();
-    const admin = useAppSelector(store => store.adminSlice.admin);
+    const user = useAppSelector(store => store.userSlice.user);
 
     useEffect(() => {
         if(localStorage) {
-            const password = String(localStorage.getItem("adminPassword"));
-            setPassword(password)
+            const majorCode = String(localStorage.getItem("majorCode"));
+            setMajorCode(majorCode)
         }
     } , [] )
 
     useEffect(() => {
-        if(password && session && session.user){
-            dispatch(createNewAdmin({ password , email : String(session.user.email) , isFail : (err) => {
+        if(majorCode && session && session.user){
+            dispatch(createNewUser({ majorCode , email : String(session.user.email) , isFail : (err) => {
                 router.push("/intro")
                 dispatch(openSnackBar({ open : true , message : String(err) , severity : Severity.error}))
-            } }))
+            }}))
         } else {
             const interval = setInterval(() => {
                 router.push("/intro")
@@ -35,13 +35,12 @@ const BackofficeTopBar = () => {
                 clearInterval(interval);
             }
         }
-        
-    } , [password , session])
+    } , [majorCode , session])
     
-    if(!admin) return null;
+    if(!user) return null;
     return (
-        <Box>top</Box>
+        <Box>bottom bar</Box>
     )
 }
 
-export default BackofficeTopBar;
+export default VotingBottomBar;

@@ -3257,66 +3257,66 @@ export namespace Prisma {
 
   export type MajorAvgAggregateOutputType = {
     id: number | null
-    quantity: number | null
+    maxQuantity: number | null
   }
 
   export type MajorSumAggregateOutputType = {
     id: number | null
-    quantity: number | null
+    maxQuantity: number | null
   }
 
   export type MajorMinAggregateOutputType = {
     id: number | null
     majorsOrAdmin: string | null
-    quantity: number | null
-    password: string | null
+    maxQuantity: number | null
+    passCode: string | null
   }
 
   export type MajorMaxAggregateOutputType = {
     id: number | null
     majorsOrAdmin: string | null
-    quantity: number | null
-    password: string | null
+    maxQuantity: number | null
+    passCode: string | null
   }
 
   export type MajorCountAggregateOutputType = {
     id: number
     majorsOrAdmin: number
-    quantity: number
-    password: number
+    maxQuantity: number
+    passCode: number
     _all: number
   }
 
 
   export type MajorAvgAggregateInputType = {
     id?: true
-    quantity?: true
+    maxQuantity?: true
   }
 
   export type MajorSumAggregateInputType = {
     id?: true
-    quantity?: true
+    maxQuantity?: true
   }
 
   export type MajorMinAggregateInputType = {
     id?: true
     majorsOrAdmin?: true
-    quantity?: true
-    password?: true
+    maxQuantity?: true
+    passCode?: true
   }
 
   export type MajorMaxAggregateInputType = {
     id?: true
     majorsOrAdmin?: true
-    quantity?: true
-    password?: true
+    maxQuantity?: true
+    passCode?: true
   }
 
   export type MajorCountAggregateInputType = {
     id?: true
     majorsOrAdmin?: true
-    quantity?: true
-    password?: true
+    maxQuantity?: true
+    passCode?: true
     _all?: true
   }
 
@@ -3409,8 +3409,8 @@ export namespace Prisma {
   export type MajorGroupByOutputType = {
     id: number
     majorsOrAdmin: string
-    quantity: number
-    password: string
+    maxQuantity: number
+    passCode: string
     _count: MajorCountAggregateOutputType | null
     _avg: MajorAvgAggregateOutputType | null
     _sum: MajorSumAggregateOutputType | null
@@ -3435,8 +3435,8 @@ export namespace Prisma {
   export type MajorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     majorsOrAdmin?: boolean
-    quantity?: boolean
-    password?: boolean
+    maxQuantity?: boolean
+    passCode?: boolean
     User?: boolean | Major$UserArgs<ExtArgs>
     Admin?: boolean | Major$AdminArgs<ExtArgs>
     _count?: boolean | MajorCountOutputTypeDefaultArgs<ExtArgs>
@@ -3445,25 +3445,25 @@ export namespace Prisma {
   export type MajorSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     majorsOrAdmin?: boolean
-    quantity?: boolean
-    password?: boolean
+    maxQuantity?: boolean
+    passCode?: boolean
   }, ExtArgs["result"]["major"]>
 
   export type MajorSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     majorsOrAdmin?: boolean
-    quantity?: boolean
-    password?: boolean
+    maxQuantity?: boolean
+    passCode?: boolean
   }, ExtArgs["result"]["major"]>
 
   export type MajorSelectScalar = {
     id?: boolean
     majorsOrAdmin?: boolean
-    quantity?: boolean
-    password?: boolean
+    maxQuantity?: boolean
+    passCode?: boolean
   }
 
-  export type MajorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "majorsOrAdmin" | "quantity" | "password", ExtArgs["result"]["major"]>
+  export type MajorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "majorsOrAdmin" | "maxQuantity" | "passCode", ExtArgs["result"]["major"]>
   export type MajorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     User?: boolean | Major$UserArgs<ExtArgs>
     Admin?: boolean | Major$AdminArgs<ExtArgs>
@@ -3481,8 +3481,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       majorsOrAdmin: string
-      quantity: number
-      password: string
+      maxQuantity: number
+      passCode: string
     }, ExtArgs["result"]["major"]>
     composites: {}
   }
@@ -3910,8 +3910,8 @@ export namespace Prisma {
   interface MajorFieldRefs {
     readonly id: FieldRef<"Major", 'Int'>
     readonly majorsOrAdmin: FieldRef<"Major", 'String'>
-    readonly quantity: FieldRef<"Major", 'Int'>
-    readonly password: FieldRef<"Major", 'String'>
+    readonly maxQuantity: FieldRef<"Major", 'Int'>
+    readonly passCode: FieldRef<"Major", 'String'>
   }
     
 
@@ -4402,8 +4402,8 @@ export namespace Prisma {
   export const MajorScalarFieldEnum: {
     id: 'id',
     majorsOrAdmin: 'majorsOrAdmin',
-    quantity: 'quantity',
-    password: 'password'
+    maxQuantity: 'maxQuantity',
+    passCode: 'passCode'
   };
 
   export type MajorScalarFieldEnum = (typeof MajorScalarFieldEnum)[keyof typeof MajorScalarFieldEnum]
@@ -4580,8 +4580,8 @@ export namespace Prisma {
     NOT?: MajorWhereInput | MajorWhereInput[]
     id?: IntFilter<"Major"> | number
     majorsOrAdmin?: StringFilter<"Major"> | string
-    quantity?: IntFilter<"Major"> | number
-    password?: StringFilter<"Major"> | string
+    maxQuantity?: IntFilter<"Major"> | number
+    passCode?: StringFilter<"Major"> | string
     User?: UserListRelationFilter
     Admin?: AdminListRelationFilter
   }
@@ -4589,8 +4589,8 @@ export namespace Prisma {
   export type MajorOrderByWithRelationInput = {
     id?: SortOrder
     majorsOrAdmin?: SortOrder
-    quantity?: SortOrder
-    password?: SortOrder
+    maxQuantity?: SortOrder
+    passCode?: SortOrder
     User?: UserOrderByRelationAggregateInput
     Admin?: AdminOrderByRelationAggregateInput
   }
@@ -4598,20 +4598,20 @@ export namespace Prisma {
   export type MajorWhereUniqueInput = Prisma.AtLeast<{
     id?: number
     majorsOrAdmin?: string
+    passCode?: string
     AND?: MajorWhereInput | MajorWhereInput[]
     OR?: MajorWhereInput[]
     NOT?: MajorWhereInput | MajorWhereInput[]
-    quantity?: IntFilter<"Major"> | number
-    password?: StringFilter<"Major"> | string
+    maxQuantity?: IntFilter<"Major"> | number
     User?: UserListRelationFilter
     Admin?: AdminListRelationFilter
-  }, "id" | "majorsOrAdmin">
+  }, "id" | "majorsOrAdmin" | "passCode">
 
   export type MajorOrderByWithAggregationInput = {
     id?: SortOrder
     majorsOrAdmin?: SortOrder
-    quantity?: SortOrder
-    password?: SortOrder
+    maxQuantity?: SortOrder
+    passCode?: SortOrder
     _count?: MajorCountOrderByAggregateInput
     _avg?: MajorAvgOrderByAggregateInput
     _max?: MajorMaxOrderByAggregateInput
@@ -4625,8 +4625,8 @@ export namespace Prisma {
     NOT?: MajorScalarWhereWithAggregatesInput | MajorScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Major"> | number
     majorsOrAdmin?: StringWithAggregatesFilter<"Major"> | string
-    quantity?: IntWithAggregatesFilter<"Major"> | number
-    password?: StringWithAggregatesFilter<"Major"> | string
+    maxQuantity?: IntWithAggregatesFilter<"Major"> | number
+    passCode?: StringWithAggregatesFilter<"Major"> | string
   }
 
   export type UserCreateInput = {
@@ -4714,8 +4714,8 @@ export namespace Prisma {
 
   export type MajorCreateInput = {
     majorsOrAdmin: string
-    quantity: number
-    password: string
+    maxQuantity: number
+    passCode: string
     User?: UserCreateNestedManyWithoutMajorInput
     Admin?: AdminCreateNestedManyWithoutMajarInput
   }
@@ -4723,16 +4723,16 @@ export namespace Prisma {
   export type MajorUncheckedCreateInput = {
     id?: number
     majorsOrAdmin: string
-    quantity: number
-    password: string
+    maxQuantity: number
+    passCode: string
     User?: UserUncheckedCreateNestedManyWithoutMajorInput
     Admin?: AdminUncheckedCreateNestedManyWithoutMajarInput
   }
 
   export type MajorUpdateInput = {
     majorsOrAdmin?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    password?: StringFieldUpdateOperationsInput | string
+    maxQuantity?: IntFieldUpdateOperationsInput | number
+    passCode?: StringFieldUpdateOperationsInput | string
     User?: UserUpdateManyWithoutMajorNestedInput
     Admin?: AdminUpdateManyWithoutMajarNestedInput
   }
@@ -4740,8 +4740,8 @@ export namespace Prisma {
   export type MajorUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     majorsOrAdmin?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    password?: StringFieldUpdateOperationsInput | string
+    maxQuantity?: IntFieldUpdateOperationsInput | number
+    passCode?: StringFieldUpdateOperationsInput | string
     User?: UserUncheckedUpdateManyWithoutMajorNestedInput
     Admin?: AdminUncheckedUpdateManyWithoutMajarNestedInput
   }
@@ -4749,21 +4749,21 @@ export namespace Prisma {
   export type MajorCreateManyInput = {
     id?: number
     majorsOrAdmin: string
-    quantity: number
-    password: string
+    maxQuantity: number
+    passCode: string
   }
 
   export type MajorUpdateManyMutationInput = {
     majorsOrAdmin?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    password?: StringFieldUpdateOperationsInput | string
+    maxQuantity?: IntFieldUpdateOperationsInput | number
+    passCode?: StringFieldUpdateOperationsInput | string
   }
 
   export type MajorUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     majorsOrAdmin?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    password?: StringFieldUpdateOperationsInput | string
+    maxQuantity?: IntFieldUpdateOperationsInput | number
+    passCode?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -4913,32 +4913,32 @@ export namespace Prisma {
   export type MajorCountOrderByAggregateInput = {
     id?: SortOrder
     majorsOrAdmin?: SortOrder
-    quantity?: SortOrder
-    password?: SortOrder
+    maxQuantity?: SortOrder
+    passCode?: SortOrder
   }
 
   export type MajorAvgOrderByAggregateInput = {
     id?: SortOrder
-    quantity?: SortOrder
+    maxQuantity?: SortOrder
   }
 
   export type MajorMaxOrderByAggregateInput = {
     id?: SortOrder
     majorsOrAdmin?: SortOrder
-    quantity?: SortOrder
-    password?: SortOrder
+    maxQuantity?: SortOrder
+    passCode?: SortOrder
   }
 
   export type MajorMinOrderByAggregateInput = {
     id?: SortOrder
     majorsOrAdmin?: SortOrder
-    quantity?: SortOrder
-    password?: SortOrder
+    maxQuantity?: SortOrder
+    passCode?: SortOrder
   }
 
   export type MajorSumOrderByAggregateInput = {
     id?: SortOrder
-    quantity?: SortOrder
+    maxQuantity?: SortOrder
   }
 
   export type MajorCreateNestedOneWithoutUserInput = {
@@ -5136,16 +5136,16 @@ export namespace Prisma {
 
   export type MajorCreateWithoutUserInput = {
     majorsOrAdmin: string
-    quantity: number
-    password: string
+    maxQuantity: number
+    passCode: string
     Admin?: AdminCreateNestedManyWithoutMajarInput
   }
 
   export type MajorUncheckedCreateWithoutUserInput = {
     id?: number
     majorsOrAdmin: string
-    quantity: number
-    password: string
+    maxQuantity: number
+    passCode: string
     Admin?: AdminUncheckedCreateNestedManyWithoutMajarInput
   }
 
@@ -5167,31 +5167,31 @@ export namespace Prisma {
 
   export type MajorUpdateWithoutUserInput = {
     majorsOrAdmin?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    password?: StringFieldUpdateOperationsInput | string
+    maxQuantity?: IntFieldUpdateOperationsInput | number
+    passCode?: StringFieldUpdateOperationsInput | string
     Admin?: AdminUpdateManyWithoutMajarNestedInput
   }
 
   export type MajorUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     majorsOrAdmin?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    password?: StringFieldUpdateOperationsInput | string
+    maxQuantity?: IntFieldUpdateOperationsInput | number
+    passCode?: StringFieldUpdateOperationsInput | string
     Admin?: AdminUncheckedUpdateManyWithoutMajarNestedInput
   }
 
   export type MajorCreateWithoutAdminInput = {
     majorsOrAdmin: string
-    quantity: number
-    password: string
+    maxQuantity: number
+    passCode: string
     User?: UserCreateNestedManyWithoutMajorInput
   }
 
   export type MajorUncheckedCreateWithoutAdminInput = {
     id?: number
     majorsOrAdmin: string
-    quantity: number
-    password: string
+    maxQuantity: number
+    passCode: string
     User?: UserUncheckedCreateNestedManyWithoutMajorInput
   }
 
@@ -5213,16 +5213,16 @@ export namespace Prisma {
 
   export type MajorUpdateWithoutAdminInput = {
     majorsOrAdmin?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    password?: StringFieldUpdateOperationsInput | string
+    maxQuantity?: IntFieldUpdateOperationsInput | number
+    passCode?: StringFieldUpdateOperationsInput | string
     User?: UserUpdateManyWithoutMajorNestedInput
   }
 
   export type MajorUncheckedUpdateWithoutAdminInput = {
     id?: IntFieldUpdateOperationsInput | number
     majorsOrAdmin?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    password?: StringFieldUpdateOperationsInput | string
+    maxQuantity?: IntFieldUpdateOperationsInput | number
+    passCode?: StringFieldUpdateOperationsInput | string
     User?: UserUncheckedUpdateManyWithoutMajorNestedInput
   }
 

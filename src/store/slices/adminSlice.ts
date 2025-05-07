@@ -18,12 +18,12 @@ export const createNewAdmin = createAsyncThunk("adminSlice/checkAdminPassword" ,
             },
             body : JSON.stringify({ password , email })
         });
-        const { newAdmin } = await response.json();
+        const { newAdmin , err } = await response.json();
         if(newAdmin) {
             thunkApi.dispatch(setAdmin(newAdmin));
             isSuccess && isSuccess();
         } else {
-            isFail && isFail();
+            isFail && isFail(err);
         }
     } catch(err) {
         isFail && isFail(err);
