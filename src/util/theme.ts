@@ -12,5 +12,7 @@ export const theme  = createTheme({
             main : "#091370"
         }
     },
-  
+    typography : {
+        fontFamily : "cursive"
+    }
 })
