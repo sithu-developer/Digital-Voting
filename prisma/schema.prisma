@@ -15,25 +15,52 @@ datasource db {
 }
 
 model User {
-  id  Int @id @default(autoincrement())
-  name String
-  email String @unique()
+  id      Int     @id @default(autoincrement())
+  name    String
+  email   String  @unique()
   majorId Int
-  Major Major @relation(fields: [majorId] , references: [id])
+  Major   Major   @relation(fields: [majorId], references: [id])
+  Votes   Votes[]
 }
 
 model Admin {
-  id  Int @id @default(autoincrement())
-  email String @unique()
+  id           Int    @id @default(autoincrement())
+  email        String @unique()
   adminMajorId Int
-  Majar Major @relation(fields: [adminMajorId] , references: [id])
+  Majar        Major  @relation(fields: [adminMajorId], references: [id])
 }
 
 model Major {
-  id  Int @id @default(autoincrement())
-  majorsOrAdmin String @unique
-  maxQuantity Int
-  passCode String @unique
-  User  User[]
-  Admin Admin[]
+  id            Int     @id @default(autoincrement())
+  majorsOrAdmin String  @unique
+  maxQuantity   Int
+  passCode      String  @unique
+  User          User[]
+  Admin         Admin[]
+}
+
+model Categories {
+  id      Int        @id @default(autoincrement())
+  name    String
+  Student Students[]
+}
+
+model Students {
+  id               Int        @id @default(autoincrement())
+  contestantNumber Int        @unique
+  name             String
+  year             Int
+  major            String
+  zodiacId         Int
+  categoryId       Int
+  Categories       Categories @relation(fields: [categoryId], references: [id])
+  Votes            Votes[]
+}
+
+model Votes {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  StudentId Int
+  User      User     @relation(fields: [userId], references: [id])
+  Students  Students @relation(fields: [StudentId], references: [id])
 }

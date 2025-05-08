@@ -2,12 +2,18 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { createNewAdmin } from "@/store/slices/adminSlice";
 import { openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
-import { Box } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import ModeNightOutlinedIcon from '@mui/icons-material/ModeNightOutlined';
 
-const BackofficeTopBar = () => {
+interface Props {
+    setSideBarOpen : ( value : boolean ) => void;
+}
+
+const BackofficeTopBar = ({ setSideBarOpen } : Props ) => {
     const { data : session } = useSession();
     const [ password , setPassword ] = useState<string>("");
     const dispatch = useAppDispatch();
@@ -40,7 +46,18 @@ const BackofficeTopBar = () => {
     
     if(!admin) return null;
     return (
-        <Box>top</Box>
+        <Box sx={{ bgcolor : "info.main" , position : "relative" , width : "95vw" , height : "50px" , borderRadius : "8px" , justifySelf : "center", display : "flex" , justifyContent : "space-between" , alignItems : "center" , px : "8px"}} >
+            <IconButton onClick={() => setSideBarOpen(true)} >
+                <MenuRoundedIcon sx={{ color : "white" , fontSize : "32px"}}  />
+            </IconButton>
+            <Typography sx={{ mt : "10px"}}>Admin</Typography>
+            <IconButton>
+                <ModeNightOutlinedIcon sx={{ color : "white" , transform : "rotate(30deg)", fontSize : "25px"}} />
+            </IconButton>
+            <Box sx={{ bgcolor : "secondary.main" , position : "absolute" , top : "-25px" , left : "50%" , transform: 'translateX(-50%)',  justifySelf : "center" , clipPath: 'polygon(-5% 0%, 105% 0%, 80% 100%, 20% 100%)' , width : "90px" , height : "40px" , display : "flex" , justifyContent : "center" , alignItems : "center"  }}> 
+                <img alt="king crown logo" src={"/kingCrownLogo.png"} style={{ width : "50px" , height : "50px"}} />
+            </Box>
+        </Box>
     )
 }
 

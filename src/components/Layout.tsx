@@ -1,10 +1,10 @@
 import { Box } from "@mui/material"
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import BackofficeTopBar from "./BackofficeTopBar";
 import { useRouter } from "next/router";
 import SnackBarComp from "./SnackBar";
 import VotingBottomBar from "./VotingBottomBar";
-import { useAppSelector } from "@/store/hooks";
+import BackofficeSideBar from "./BackofficeSideBar";
 
 interface Props {
     children : ReactNode;
@@ -12,16 +12,16 @@ interface Props {
 
 const Layout = ({ children } : Props ) => {
     const router = useRouter();
-    const admin = useAppSelector(store => store.adminSlice.admin);
-    const user = useAppSelector(store => store.userSlice.user);
     const path = router.asPath;
     const isBackoffice = path.includes("/intro/backoffice");
     const isVotingPage = path.includes("/intro/voting");
+    const [ sideBarOpen , setSideBarOpen ] = useState<boolean>(false);
 
     return (
-        <Box>
-           {isBackoffice && <BackofficeTopBar />}
-            {children}
+        <Box  sx={{ bgcolor : "secondary.main" , pt :( isBackoffice ? "30px" : "0px") , width : "100vw" , height : "100vh"}}>
+           {isBackoffice && <BackofficeTopBar setSideBarOpen={setSideBarOpen} />}
+           {isBackoffice && <BackofficeSideBar setSideBarOpen={setSideBarOpen} sideBarOpen={sideBarOpen} />}
+            <Box>{children}</Box>
             {isVotingPage && <VotingBottomBar />}
             <SnackBarComp />
         </Box>

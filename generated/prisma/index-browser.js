@@ -140,6 +140,27 @@ exports.Prisma.MajorScalarFieldEnum = {
   passCode: 'passCode'
 };
 
+exports.Prisma.CategoriesScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.StudentsScalarFieldEnum = {
+  id: 'id',
+  contestantNumber: 'contestantNumber',
+  name: 'name',
+  year: 'year',
+  major: 'major',
+  zodiacId: 'zodiacId',
+  categoryId: 'categoryId'
+};
+
+exports.Prisma.VotesScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  StudentId: 'StudentId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -154,7 +175,10 @@ exports.Prisma.QueryMode = {
 exports.Prisma.ModelName = {
   User: 'User',
   Admin: 'Admin',
-  Major: 'Major'
+  Major: 'Major',
+  Categories: 'Categories',
+  Students: 'Students',
+  Votes: 'Votes'
 };
 
 /**

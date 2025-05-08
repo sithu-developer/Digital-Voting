@@ -3,16 +3,20 @@ import { createTheme } from "@mui/material";
 export const theme  = createTheme({
     palette : {
         primary : {
-            main : "#326BBA"
+            main : "#326BBA" // button color
         },
         secondary : {
-            main : "#6790CC"
+            main : "#6790CC" // background color
         },
         info : {
-            main : "#091370"
+            main : "#091370" // backoffice topbar bg color
         }
     },
     typography : {
-        fontFamily : "cursive"
-    }
+        fontFamily : "cursive",
+        allVariants : {
+            color : "white"
+        }
+    },
+    
 })
