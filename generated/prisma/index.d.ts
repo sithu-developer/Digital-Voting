@@ -7006,31 +7006,31 @@ export namespace Prisma {
   export type VotesAvgAggregateOutputType = {
     id: number | null
     userId: number | null
-    StudentId: number | null
+    studentId: number | null
   }
 
   export type VotesSumAggregateOutputType = {
     id: number | null
     userId: number | null
-    StudentId: number | null
+    studentId: number | null
   }
 
   export type VotesMinAggregateOutputType = {
     id: number | null
     userId: number | null
-    StudentId: number | null
+    studentId: number | null
   }
 
   export type VotesMaxAggregateOutputType = {
     id: number | null
     userId: number | null
-    StudentId: number | null
+    studentId: number | null
   }
 
   export type VotesCountAggregateOutputType = {
     id: number
     userId: number
-    StudentId: number
+    studentId: number
     _all: number
   }
 
@@ -7038,31 +7038,31 @@ export namespace Prisma {
   export type VotesAvgAggregateInputType = {
     id?: true
     userId?: true
-    StudentId?: true
+    studentId?: true
   }
 
   export type VotesSumAggregateInputType = {
     id?: true
     userId?: true
-    StudentId?: true
+    studentId?: true
   }
 
   export type VotesMinAggregateInputType = {
     id?: true
     userId?: true
-    StudentId?: true
+    studentId?: true
   }
 
   export type VotesMaxAggregateInputType = {
     id?: true
     userId?: true
-    StudentId?: true
+    studentId?: true
   }
 
   export type VotesCountAggregateInputType = {
     id?: true
     userId?: true
-    StudentId?: true
+    studentId?: true
     _all?: true
   }
 
@@ -7155,7 +7155,7 @@ export namespace Prisma {
   export type VotesGroupByOutputType = {
     id: number
     userId: number
-    StudentId: number
+    studentId: number
     _count: VotesCountAggregateOutputType | null
     _avg: VotesAvgAggregateOutputType | null
     _sum: VotesSumAggregateOutputType | null
@@ -7180,7 +7180,7 @@ export namespace Prisma {
   export type VotesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    StudentId?: boolean
+    studentId?: boolean
     User?: boolean | UserDefaultArgs<ExtArgs>
     Students?: boolean | StudentsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["votes"]>
@@ -7188,7 +7188,7 @@ export namespace Prisma {
   export type VotesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    StudentId?: boolean
+    studentId?: boolean
     User?: boolean | UserDefaultArgs<ExtArgs>
     Students?: boolean | StudentsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["votes"]>
@@ -7196,7 +7196,7 @@ export namespace Prisma {
   export type VotesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    StudentId?: boolean
+    studentId?: boolean
     User?: boolean | UserDefaultArgs<ExtArgs>
     Students?: boolean | StudentsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["votes"]>
@@ -7204,10 +7204,10 @@ export namespace Prisma {
   export type VotesSelectScalar = {
     id?: boolean
     userId?: boolean
-    StudentId?: boolean
+    studentId?: boolean
   }
 
-  export type VotesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "StudentId", ExtArgs["result"]["votes"]>
+  export type VotesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "studentId", ExtArgs["result"]["votes"]>
   export type VotesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     User?: boolean | UserDefaultArgs<ExtArgs>
     Students?: boolean | StudentsDefaultArgs<ExtArgs>
@@ -7230,7 +7230,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       userId: number
-      StudentId: number
+      studentId: number
     }, ExtArgs["result"]["votes"]>
     composites: {}
   }
@@ -7658,7 +7658,7 @@ export namespace Prisma {
   interface VotesFieldRefs {
     readonly id: FieldRef<"Votes", 'Int'>
     readonly userId: FieldRef<"Votes", 'Int'>
-    readonly StudentId: FieldRef<"Votes", 'Int'>
+    readonly studentId: FieldRef<"Votes", 'Int'>
   }
     
 
@@ -8140,7 +8140,7 @@ export namespace Prisma {
   export const VotesScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
-    StudentId: 'StudentId'
+    studentId: 'studentId'
   };
 
   export type VotesScalarFieldEnum = (typeof VotesScalarFieldEnum)[keyof typeof VotesScalarFieldEnum]
@@ -8440,10 +8440,10 @@ export namespace Prisma {
 
   export type StudentsWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    contestantNumber?: number
     AND?: StudentsWhereInput | StudentsWhereInput[]
     OR?: StudentsWhereInput[]
     NOT?: StudentsWhereInput | StudentsWhereInput[]
+    contestantNumber?: IntFilter<"Students"> | number
     name?: StringFilter<"Students"> | string
     year?: IntFilter<"Students"> | number
     major?: StringFilter<"Students"> | string
@@ -8451,7 +8451,7 @@ export namespace Prisma {
     categoryId?: IntFilter<"Students"> | number
     Categories?: XOR<CategoriesScalarRelationFilter, CategoriesWhereInput>
     Votes?: VotesListRelationFilter
-  }, "id" | "contestantNumber">
+  }, "id">
 
   export type StudentsOrderByWithAggregationInput = {
     id?: SortOrder
@@ -8487,7 +8487,7 @@ export namespace Prisma {
     NOT?: VotesWhereInput | VotesWhereInput[]
     id?: IntFilter<"Votes"> | number
     userId?: IntFilter<"Votes"> | number
-    StudentId?: IntFilter<"Votes"> | number
+    studentId?: IntFilter<"Votes"> | number
     User?: XOR<UserScalarRelationFilter, UserWhereInput>
     Students?: XOR<StudentsScalarRelationFilter, StudentsWhereInput>
   }
@@ -8495,7 +8495,7 @@ export namespace Prisma {
   export type VotesOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
-    StudentId?: SortOrder
+    studentId?: SortOrder
     User?: UserOrderByWithRelationInput
     Students?: StudentsOrderByWithRelationInput
   }
@@ -8506,7 +8506,7 @@ export namespace Prisma {
     OR?: VotesWhereInput[]
     NOT?: VotesWhereInput | VotesWhereInput[]
     userId?: IntFilter<"Votes"> | number
-    StudentId?: IntFilter<"Votes"> | number
+    studentId?: IntFilter<"Votes"> | number
     User?: XOR<UserScalarRelationFilter, UserWhereInput>
     Students?: XOR<StudentsScalarRelationFilter, StudentsWhereInput>
   }, "id">
@@ -8514,7 +8514,7 @@ export namespace Prisma {
   export type VotesOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
-    StudentId?: SortOrder
+    studentId?: SortOrder
     _count?: VotesCountOrderByAggregateInput
     _avg?: VotesAvgOrderByAggregateInput
     _max?: VotesMaxOrderByAggregateInput
@@ -8528,7 +8528,7 @@ export namespace Prisma {
     NOT?: VotesScalarWhereWithAggregatesInput | VotesScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Votes"> | number
     userId?: IntWithAggregatesFilter<"Votes"> | number
-    StudentId?: IntWithAggregatesFilter<"Votes"> | number
+    studentId?: IntWithAggregatesFilter<"Votes"> | number
   }
 
   export type UserCreateInput = {
@@ -8786,7 +8786,7 @@ export namespace Prisma {
   export type VotesUncheckedCreateInput = {
     id?: number
     userId: number
-    StudentId: number
+    studentId: number
   }
 
   export type VotesUpdateInput = {
@@ -8797,13 +8797,13 @@ export namespace Prisma {
   export type VotesUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
-    StudentId?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
   }
 
   export type VotesCreateManyInput = {
     id?: number
     userId: number
-    StudentId: number
+    studentId: number
   }
 
   export type VotesUpdateManyMutationInput = {
@@ -8813,7 +8813,7 @@ export namespace Prisma {
   export type VotesUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
-    StudentId?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -9098,31 +9098,31 @@ export namespace Prisma {
   export type VotesCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    StudentId?: SortOrder
+    studentId?: SortOrder
   }
 
   export type VotesAvgOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    StudentId?: SortOrder
+    studentId?: SortOrder
   }
 
   export type VotesMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    StudentId?: SortOrder
+    studentId?: SortOrder
   }
 
   export type VotesMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    StudentId?: SortOrder
+    studentId?: SortOrder
   }
 
   export type VotesSumOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    StudentId?: SortOrder
+    studentId?: SortOrder
   }
 
   export type MajorCreateNestedOneWithoutUserInput = {
@@ -9512,7 +9512,7 @@ export namespace Prisma {
 
   export type VotesUncheckedCreateWithoutUserInput = {
     id?: number
-    StudentId: number
+    studentId: number
   }
 
   export type VotesCreateOrConnectWithoutUserInput = {
@@ -9573,7 +9573,7 @@ export namespace Prisma {
     NOT?: VotesScalarWhereInput | VotesScalarWhereInput[]
     id?: IntFilter<"Votes"> | number
     userId?: IntFilter<"Votes"> | number
-    StudentId?: IntFilter<"Votes"> | number
+    studentId?: IntFilter<"Votes"> | number
   }
 
   export type MajorCreateWithoutAdminInput = {
@@ -9940,7 +9940,7 @@ export namespace Prisma {
 
   export type VotesCreateManyUserInput = {
     id?: number
-    StudentId: number
+    studentId: number
   }
 
   export type VotesUpdateWithoutUserInput = {
@@ -9949,12 +9949,12 @@ export namespace Prisma {
 
   export type VotesUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    StudentId?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
   }
 
   export type VotesUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    StudentId?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
   }
 
   export type UserCreateManyMajorInput = {

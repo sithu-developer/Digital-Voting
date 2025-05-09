@@ -158,7 +158,7 @@ exports.Prisma.StudentsScalarFieldEnum = {
 exports.Prisma.VotesScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  StudentId: 'StudentId'
+  studentId: 'studentId'
 };
 
 exports.Prisma.SortOrder = {

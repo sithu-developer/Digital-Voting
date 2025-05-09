@@ -35,7 +35,7 @@ const NewCategory = ({ newCategoryOpen , setNewCategoryOpen } : Props) => {
                         setNewCategoryOpen(false);
                         setNewCategory("");
                     }} >cancel</Button>
-                    <Button variant="contained" onClick={handleCreateNewCategory} >Create</Button>
+                    <Button variant="contained" disabled={!newCategory} onClick={handleCreateNewCategory} >Create</Button>
                 </Box>
             </DialogContent>
 

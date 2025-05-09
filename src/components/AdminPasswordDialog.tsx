@@ -14,8 +14,6 @@ interface Props {
 const AdminPasswordDialog = ({ adminPasswordItems , setAdminPasswordItems } : Props) => {
     const [ showPassword , setShowPassword ] = useState<boolean>(false);
 
-    
-
     return (
         <Dialog open={adminPasswordItems.open} onClose={() => {
             setAdminPasswordItems({open : false , password : ""});
@@ -38,17 +36,17 @@ const AdminPasswordDialog = ({ adminPasswordItems , setAdminPasswordItems } : Pr
                           </InputAdornment>
                         ),
                         endAdornment : (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label={
-                            showPassword ? 'hide the password' : 'display the password'
-                          }
-                          onClick={() => setShowPassword(!showPassword)}
-                          edge="end"
-                        >
-                          {showPassword ? <VisibilityOffIcon sx={{ fontSize : "20px"  }} /> : <VisibilityIcon sx={{ fontSize : "20px"}} />}
-                        </IconButton>
-                      </InputAdornment>
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label={
+                                showPassword ? 'hide the password' : 'display the password'
+                              }
+                              onClick={() => setShowPassword(!showPassword)}
+                              edge="end"
+                            >
+                              {showPassword ? <VisibilityOffIcon sx={{ fontSize : "20px"  }} /> : <VisibilityIcon sx={{ fontSize : "20px"}} />}
+                            </IconButton>
+                          </InputAdornment>
                         )
                       },
                   }}

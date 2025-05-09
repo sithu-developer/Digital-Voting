@@ -21,11 +21,23 @@ export default async function handler(
       if(adminInMajor.passCode === password) {
         const exit = await prisma.admin.findUnique({ where : { email }})
         if(exit) {
-          return res.status(200).json({ newAdmin : exit })
+          const categories = await prisma.categories.findMany({ orderBy : { id : 'asc'}});
+          const students = await prisma.students.findMany({ orderBy : { id : 'asc'}})
+          const votes = await prisma.votes.findMany({ orderBy : { id : 'asc'}})
+          return res.status(200).json({ newAdmin : exit  , categories , students , votes})
         } else {
           if( exitedAdmins.length < adminInMajor.maxQuantity ) {
             const newAdmin = await prisma.admin.create({ data : { email , adminMajorId : adminInMajor.id }})
-            return res.status(200).json({ newAdmin })
+            const categories = await prisma.categories.findMany({ orderBy : { id : 'asc'}});
+            const students = await prisma.students.findMany({ orderBy : { id : 'asc'}})
+            const votes = await prisma.students.findMany({ orderBy : { id : 'asc'}})
+            if(categories.length) {
+              return res.status(200).json({ newAdmin , categories , students , votes })
+            } else {
+              const defaultCategory = await prisma.categories.create({ data : { name : "Dafault Category"}});
+              const defaultStudent = await prisma.students.create({ data : { contestantNumber : 1 , major : "default Major" , name : "default name" , year : 1 , zodiacId : 0 , categoryId : defaultCategory.id }});
+              return res.status(200).json({ newAdmin , categories : [defaultCategory] , students : [ defaultStudent ] , votes : [] })
+            }
           } else {
             return res.status(200).json({ err : "Admin limited quantity exceeded !" })
           }

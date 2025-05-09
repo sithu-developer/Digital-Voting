@@ -3,6 +3,8 @@ import userReducer from "@/store/slices/userSlice";
 import adminReducer from "@/store/slices/adminSlice";
 import snackBarReducer from "@/store/slices/snackBarSlice"
 import categoriesReducer from "@/store/slices/categoriesSlice"
+import studentsReducer from "@/store/slices/studentsSlice"
+import votesReducer from "@/store/slices/votesSlice"
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +12,8 @@ export const store = configureStore({
     adminSlice : adminReducer,
     snackBar : snackBarReducer,
     categoriesSlice : categoriesReducer,
+    studentsSlice : studentsReducer,
+    votesSlice : votesReducer,
     
   },
 })

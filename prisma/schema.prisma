@@ -47,7 +47,7 @@ model Categories {
 
 model Students {
   id               Int        @id @default(autoincrement())
-  contestantNumber Int        @unique
+  contestantNumber Int        
   name             String
   year             Int
   major            String
@@ -60,7 +60,7 @@ model Students {
 model Votes {
   id        Int      @id @default(autoincrement())
   userId    Int
-  StudentId Int
+  studentId Int
   User      User     @relation(fields: [userId], references: [id])
-  Students  Students @relation(fields: [StudentId], references: [id])
+  Students  Students @relation(fields: [studentId], references: [id])
 }
