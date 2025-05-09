@@ -5858,6 +5858,7 @@ export namespace Prisma {
   export type StudentsMinAggregateOutputType = {
     id: number | null
     contestantNumber: number | null
+    url: string | null
     name: string | null
     year: number | null
     major: string | null
@@ -5868,6 +5869,7 @@ export namespace Prisma {
   export type StudentsMaxAggregateOutputType = {
     id: number | null
     contestantNumber: number | null
+    url: string | null
     name: string | null
     year: number | null
     major: string | null
@@ -5878,6 +5880,7 @@ export namespace Prisma {
   export type StudentsCountAggregateOutputType = {
     id: number
     contestantNumber: number
+    url: number
     name: number
     year: number
     major: number
@@ -5906,6 +5909,7 @@ export namespace Prisma {
   export type StudentsMinAggregateInputType = {
     id?: true
     contestantNumber?: true
+    url?: true
     name?: true
     year?: true
     major?: true
@@ -5916,6 +5920,7 @@ export namespace Prisma {
   export type StudentsMaxAggregateInputType = {
     id?: true
     contestantNumber?: true
+    url?: true
     name?: true
     year?: true
     major?: true
@@ -5926,6 +5931,7 @@ export namespace Prisma {
   export type StudentsCountAggregateInputType = {
     id?: true
     contestantNumber?: true
+    url?: true
     name?: true
     year?: true
     major?: true
@@ -6023,6 +6029,7 @@ export namespace Prisma {
   export type StudentsGroupByOutputType = {
     id: number
     contestantNumber: number
+    url: string
     name: string
     year: number
     major: string
@@ -6052,6 +6059,7 @@ export namespace Prisma {
   export type StudentsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     contestantNumber?: boolean
+    url?: boolean
     name?: boolean
     year?: boolean
     major?: boolean
@@ -6065,6 +6073,7 @@ export namespace Prisma {
   export type StudentsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     contestantNumber?: boolean
+    url?: boolean
     name?: boolean
     year?: boolean
     major?: boolean
@@ -6076,6 +6085,7 @@ export namespace Prisma {
   export type StudentsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     contestantNumber?: boolean
+    url?: boolean
     name?: boolean
     year?: boolean
     major?: boolean
@@ -6087,6 +6097,7 @@ export namespace Prisma {
   export type StudentsSelectScalar = {
     id?: boolean
     contestantNumber?: boolean
+    url?: boolean
     name?: boolean
     year?: boolean
     major?: boolean
@@ -6094,7 +6105,7 @@ export namespace Prisma {
     categoryId?: boolean
   }
 
-  export type StudentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "contestantNumber" | "name" | "year" | "major" | "zodiacId" | "categoryId", ExtArgs["result"]["students"]>
+  export type StudentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "contestantNumber" | "url" | "name" | "year" | "major" | "zodiacId" | "categoryId", ExtArgs["result"]["students"]>
   export type StudentsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Categories?: boolean | CategoriesDefaultArgs<ExtArgs>
     Votes?: boolean | Students$VotesArgs<ExtArgs>
@@ -6116,6 +6127,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       contestantNumber: number
+      url: string
       name: string
       year: number
       major: string
@@ -6548,6 +6560,7 @@ export namespace Prisma {
   interface StudentsFieldRefs {
     readonly id: FieldRef<"Students", 'Int'>
     readonly contestantNumber: FieldRef<"Students", 'Int'>
+    readonly url: FieldRef<"Students", 'String'>
     readonly name: FieldRef<"Students", 'String'>
     readonly year: FieldRef<"Students", 'Int'>
     readonly major: FieldRef<"Students", 'String'>
@@ -8127,6 +8140,7 @@ export namespace Prisma {
   export const StudentsScalarFieldEnum: {
     id: 'id',
     contestantNumber: 'contestantNumber',
+    url: 'url',
     name: 'name',
     year: 'year',
     major: 'major',
@@ -8417,6 +8431,7 @@ export namespace Prisma {
     NOT?: StudentsWhereInput | StudentsWhereInput[]
     id?: IntFilter<"Students"> | number
     contestantNumber?: IntFilter<"Students"> | number
+    url?: StringFilter<"Students"> | string
     name?: StringFilter<"Students"> | string
     year?: IntFilter<"Students"> | number
     major?: StringFilter<"Students"> | string
@@ -8429,6 +8444,7 @@ export namespace Prisma {
   export type StudentsOrderByWithRelationInput = {
     id?: SortOrder
     contestantNumber?: SortOrder
+    url?: SortOrder
     name?: SortOrder
     year?: SortOrder
     major?: SortOrder
@@ -8444,6 +8460,7 @@ export namespace Prisma {
     OR?: StudentsWhereInput[]
     NOT?: StudentsWhereInput | StudentsWhereInput[]
     contestantNumber?: IntFilter<"Students"> | number
+    url?: StringFilter<"Students"> | string
     name?: StringFilter<"Students"> | string
     year?: IntFilter<"Students"> | number
     major?: StringFilter<"Students"> | string
@@ -8456,6 +8473,7 @@ export namespace Prisma {
   export type StudentsOrderByWithAggregationInput = {
     id?: SortOrder
     contestantNumber?: SortOrder
+    url?: SortOrder
     name?: SortOrder
     year?: SortOrder
     major?: SortOrder
@@ -8474,6 +8492,7 @@ export namespace Prisma {
     NOT?: StudentsScalarWhereWithAggregatesInput | StudentsScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Students"> | number
     contestantNumber?: IntWithAggregatesFilter<"Students"> | number
+    url?: StringWithAggregatesFilter<"Students"> | string
     name?: StringWithAggregatesFilter<"Students"> | string
     year?: IntWithAggregatesFilter<"Students"> | number
     major?: StringWithAggregatesFilter<"Students"> | string
@@ -8710,6 +8729,7 @@ export namespace Prisma {
 
   export type StudentsCreateInput = {
     contestantNumber: number
+    url: string
     name: string
     year: number
     major: string
@@ -8721,6 +8741,7 @@ export namespace Prisma {
   export type StudentsUncheckedCreateInput = {
     id?: number
     contestantNumber: number
+    url: string
     name: string
     year: number
     major: string
@@ -8731,6 +8752,7 @@ export namespace Prisma {
 
   export type StudentsUpdateInput = {
     contestantNumber?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
     major?: StringFieldUpdateOperationsInput | string
@@ -8742,6 +8764,7 @@ export namespace Prisma {
   export type StudentsUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     contestantNumber?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
     major?: StringFieldUpdateOperationsInput | string
@@ -8753,6 +8776,7 @@ export namespace Prisma {
   export type StudentsCreateManyInput = {
     id?: number
     contestantNumber: number
+    url: string
     name: string
     year: number
     major: string
@@ -8762,6 +8786,7 @@ export namespace Prisma {
 
   export type StudentsUpdateManyMutationInput = {
     contestantNumber?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
     major?: StringFieldUpdateOperationsInput | string
@@ -8771,6 +8796,7 @@ export namespace Prisma {
   export type StudentsUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     contestantNumber?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
     major?: StringFieldUpdateOperationsInput | string
@@ -9042,6 +9068,7 @@ export namespace Prisma {
   export type StudentsCountOrderByAggregateInput = {
     id?: SortOrder
     contestantNumber?: SortOrder
+    url?: SortOrder
     name?: SortOrder
     year?: SortOrder
     major?: SortOrder
@@ -9060,6 +9087,7 @@ export namespace Prisma {
   export type StudentsMaxOrderByAggregateInput = {
     id?: SortOrder
     contestantNumber?: SortOrder
+    url?: SortOrder
     name?: SortOrder
     year?: SortOrder
     major?: SortOrder
@@ -9070,6 +9098,7 @@ export namespace Prisma {
   export type StudentsMinOrderByAggregateInput = {
     id?: SortOrder
     contestantNumber?: SortOrder
+    url?: SortOrder
     name?: SortOrder
     year?: SortOrder
     major?: SortOrder
@@ -9717,6 +9746,7 @@ export namespace Prisma {
 
   export type StudentsCreateWithoutCategoriesInput = {
     contestantNumber: number
+    url: string
     name: string
     year: number
     major: string
@@ -9727,6 +9757,7 @@ export namespace Prisma {
   export type StudentsUncheckedCreateWithoutCategoriesInput = {
     id?: number
     contestantNumber: number
+    url: string
     name: string
     year: number
     major: string
@@ -9766,6 +9797,7 @@ export namespace Prisma {
     NOT?: StudentsScalarWhereInput | StudentsScalarWhereInput[]
     id?: IntFilter<"Students"> | number
     contestantNumber?: IntFilter<"Students"> | number
+    url?: StringFilter<"Students"> | string
     name?: StringFilter<"Students"> | string
     year?: IntFilter<"Students"> | number
     major?: StringFilter<"Students"> | string
@@ -9862,6 +9894,7 @@ export namespace Prisma {
 
   export type StudentsCreateWithoutVotesInput = {
     contestantNumber: number
+    url: string
     name: string
     year: number
     major: string
@@ -9872,6 +9905,7 @@ export namespace Prisma {
   export type StudentsUncheckedCreateWithoutVotesInput = {
     id?: number
     contestantNumber: number
+    url: string
     name: string
     year: number
     major: string
@@ -9921,6 +9955,7 @@ export namespace Prisma {
 
   export type StudentsUpdateWithoutVotesInput = {
     contestantNumber?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
     major?: StringFieldUpdateOperationsInput | string
@@ -9931,6 +9966,7 @@ export namespace Prisma {
   export type StudentsUncheckedUpdateWithoutVotesInput = {
     id?: IntFieldUpdateOperationsInput | number
     contestantNumber?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
     major?: StringFieldUpdateOperationsInput | string
@@ -10004,6 +10040,7 @@ export namespace Prisma {
   export type StudentsCreateManyCategoriesInput = {
     id?: number
     contestantNumber: number
+    url: string
     name: string
     year: number
     major: string
@@ -10012,6 +10049,7 @@ export namespace Prisma {
 
   export type StudentsUpdateWithoutCategoriesInput = {
     contestantNumber?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
     major?: StringFieldUpdateOperationsInput | string
@@ -10022,6 +10060,7 @@ export namespace Prisma {
   export type StudentsUncheckedUpdateWithoutCategoriesInput = {
     id?: IntFieldUpdateOperationsInput | number
     contestantNumber?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
     major?: StringFieldUpdateOperationsInput | string
@@ -10032,6 +10071,7 @@ export namespace Prisma {
   export type StudentsUncheckedUpdateManyWithoutCategoriesInput = {
     id?: IntFieldUpdateOperationsInput | number
     contestantNumber?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
     major?: StringFieldUpdateOperationsInput | string

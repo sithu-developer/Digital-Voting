@@ -148,6 +148,7 @@ exports.Prisma.CategoriesScalarFieldEnum = {
 exports.Prisma.StudentsScalarFieldEnum = {
   id: 'id',
   contestantNumber: 'contestantNumber',
+  url: 'url',
   name: 'name',
   year: 'year',
   major: 'major',

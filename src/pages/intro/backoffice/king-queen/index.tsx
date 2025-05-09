@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/store/hooks";
-import { Box, Chip, Divider, IconButton, Typography } from "@mui/material";
+import { Box, Button, Chip, Divider, IconButton, Typography } from "@mui/material";
 import Link from "next/link";
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import { useEffect, useState } from "react";
@@ -17,7 +17,10 @@ const KingQueenPage = () => {
     const [ selectedCategory , setSelectedCategory ] = useState<Categories>();
     const [ deleteOpen , setDeleteOpen ] = useState<boolean>(false);
     const categories = useAppSelector(store => store.categoriesSlice.categories);
-    
+    const students = useAppSelector(store => store.studentsSlice.students);
+    const relatedStudents = students.filter(item => item.categoryId === selectedCategory?.id)  // check => ?
+    const sortedStudents = relatedStudents.sort((a,b) => a.contestantNumber - b.contestantNumber )
+
     useEffect(() => {
         if(categories.length && localStorage) {
             const selsectedCategoryId = Number(localStorage.getItem("selectedCategoryId"));
@@ -56,8 +59,26 @@ const KingQueenPage = () => {
                 </IconButton>
             </Box>
             <Divider variant="middle" sx={{ bgcolor : "black"}} />
-            
-
+            <Box sx={{ display : "flex" , flexDirection : "column" , gap : "10px", p : "10px"}}>
+                <Box sx={{ display : "flex" , justifyContent : "end"}} >
+                    <Button variant="contained" >Create</Button>
+                </Box>
+                <Box sx={{ display : "flex"  , flexWrap : "wrap" , gap : "10px" }}>
+                    {sortedStudents.map(item => (
+                        <Box key={item.id} sx={{ width : "110px" , height : "130px" , bgcolor : `radial-gradient(ellipse at center,#AAB6F8 5%,#8D9CF2 25%,#5B6DD7 55%,#3747A3 75%)` , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "start" , alignItems : "center" , position : "relative" , overflow : "hidden" }} >
+                            <img alt="king photo" src={item.url} style={{ width : "100%"}} />
+                            <Box sx={{ position : "absolute" , top : "5px" , right : "5px"}}>
+                                <img alt="number boundary" src={"/numberBoundary.svg"}/>
+                                <Typography sx={{ position : "absolute" , top : "0px" , left : "35%"}} >{item.contestantNumber}</Typography>
+                            </Box>
+                            <Box sx={{ position : "absolute" , bottom : "0px" , bgcolor : "info.main" , width : "100%" , display : "flex"  , flexDirection : "column" , justifyContent : "center" , alignItems : "center" , gap : "3px" , p : "5px" , borderRadius : "15px" }} >
+                                <Typography sx={{ fontSize : "12px" , lineHeight : 1}} >{item.name}</Typography>
+                                <Typography sx={{ fontSize : "12px" , lineHeight : 1}}>{ item.year  + " " + item.major }</Typography>
+                            </Box>
+                        </Box>
+                    ))}
+                </Box>
+            </Box>
             <NewCategory newCategoryOpen={newCategoryOpen} setNewCategoryOpen={setNewCategoryOpen} />
             {selectedCategory && <EditCategory selectedCategory={selectedCategory} editCategoryOpen={editCategoryOpen} setEditCategoryOpen={setEditCategoryOpen} />}
             <DeleteComfirmation deleteOpen={deleteOpen} setDeleteOpen={setDeleteOpen} categoryToDelete={selectedCategory} />

@@ -48,6 +48,7 @@ model Categories {
 model Students {
   id               Int        @id @default(autoincrement())
   contestantNumber Int
+  url              String
   name             String
   year             Int
   major            String
