@@ -33,13 +33,12 @@ const NewStudent = ({ selectedCategory , newStudentOpen , setNewStudentOpen } : 
 
     const handleCreateNewStudent = () => {
         const exitContestantNumbers = relatedStudent.map(item => item.contestantNumber);
-        console.log(exitContestantNumbers)
         if(!exitContestantNumbers.includes(newStudent.contestantNumber) ) {
             // here to upload photo to database
             dispatch(createNewStudent({...newStudent , isSuccess : () => {
                 setNewStudentOpen(false);
                 setPhotoFile(undefined);
-                setNewStudent({...defaultNewStudent , categoryId : selectedCategory.id });
+                setNewStudent({...defaultNewStudent , categoryId : selectedCategory.id  , url : `/${selectedCategory.name.toLowerCase().trim()}Default.jpg` });
                 dispatch(openSnackBar({ open : true , message : "Successfully created a student" , severity : Severity.success}))
             } }))
         } else {

@@ -15,7 +15,7 @@ const votesSlice = createSlice({
     name : "votesSlice",
     initialState , 
     reducers : {
-        removeVotesFromCategory : ( state , action : PayloadAction<Votes[]>) => {
+        removeVotes : ( state , action : PayloadAction<Votes[]>) => {
             const deletedVoteIds = action.payload.map(item => item.id);
             state.votes = state.votes.filter(item => !deletedVoteIds.includes(item.id))
         },
@@ -25,7 +25,7 @@ const votesSlice = createSlice({
     }
 })
 
-export const { removeVotesFromCategory , setVotes } = votesSlice.actions;
+export const { removeVotes , setVotes } = votesSlice.actions;
 
 
 export default votesSlice.reducer;

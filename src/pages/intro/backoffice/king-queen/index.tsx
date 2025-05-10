@@ -38,7 +38,7 @@ const KingQueenPage = () => {
     
     if(admin) 
     return (
-        <Box sx={{ display : "flex" , flexDirection : "column" }} >
+        <Box sx={{ display : "flex" , flexDirection : "column"}} >
             <Box sx={{  px : "10px" , display : "flex" , alignItems : "center" , gap : "1px" }} >
                 <IconButton onClick={() => setNewCategoryOpen(true)} >
                     <AddCircleOutlineRoundedIcon sx={{ color : "black" , fontSize : "35px"}} />
@@ -65,10 +65,10 @@ const KingQueenPage = () => {
                 <Box sx={{ display : "flex" , justifyContent : "end"}} >
                     <Button variant="contained" onClick={() => setNewStudentOpen(true)} >Create</Button>
                 </Box>
-                <Box sx={{ display : "flex"  , flexWrap : "wrap" , gap : "10px" }}>
+                <Box sx={{ display : "grid" , gridTemplateColumns : "repeat(auto-fill, minmax(100px, 1fr))" , gap : "10px" ,  overflow : "hidden" , overflowY : "auto", maxHeight : "calc(100vh - 200px)" }}>
                     {sortedStudents.map(item => (
                     <Link href={`/intro/backoffice/king-queen/${item.id}`} key={item.id} style={{ textDecoration : "none"}} >
-                        <Box sx={{ width : "110px" , height : "130px" , bgcolor : `radial-gradient(ellipse at center,#AAB6F8 5%,#8D9CF2 25%,#5B6DD7 55%,#3747A3 75%)` , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "start" , alignItems : "center" , position : "relative" , overflow : "hidden" }} >
+                        <Box sx={{ width : "115px" , height : "140px" , background : `radial-gradient(ellipse at center,#AAB6F8 5%,#8D9CF2 25%,#5B6DD7 55%,#3747A3 75%)` , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "start" , alignItems : "center" , position : "relative" , overflow : "hidden" }} >
                             <img alt="king photo" src={item.url} style={{ width : "100%"}} />
                             <Box sx={{ position : "absolute" , top : "5px" , right : "5px"}}>
                                 <img alt="number boundary" src={ item.url.includes("Default.jpg") ? "/numberBoundaryWithBg.svg" : "/numberBoundary.svg"}/>
@@ -98,3 +98,5 @@ const KingQueenPage = () => {
 }
 
 export default KingQueenPage;
+
+// display : "flex"  , flexWrap : "wrap" , gap : "10px" ,

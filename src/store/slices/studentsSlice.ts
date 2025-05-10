@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Students } from "../../../generated/prisma";
-import { NewStudentItems } from "@/types/student";
+import { DeletedStudentItems, NewStudentItems, UpdatedStudentItems } from "@/types/student";
 import { envValues } from "@/util/envValues";
+import { removeVotes } from "./votesSlice";
 
 interface StudentsSliceInitialState {
     students : Students[],
@@ -31,6 +32,39 @@ export const createNewStudent  = createAsyncThunk("studentsSlice/createNewStuden
     }
 } )
 
+export const updateStudent  = createAsyncThunk("studentsSlice/updateStudent" , async( updatedStudentItems : UpdatedStudentItems , thunkApi ) => {
+    const { id , contestantNumber , name , year , major , zodiacId , url  , isFail , isSuccess } = updatedStudentItems;
+    try {
+        const response = await fetch(`${envValues.apiUrl}/student` , {
+            method : "PUT",
+            headers : {
+                "content-type" : "application/json"
+            },
+            body : JSON.stringify({ id , contestantNumber , name , year , major , zodiacId , url  })
+        });
+        const { updatedStudent } = await response.json();
+        thunkApi.dispatch(replaceStudent(updatedStudent));
+        isSuccess && isSuccess();
+    } catch(err) {
+        console.log(err)
+    }
+} )
+
+export const deleteStudent = createAsyncThunk("categoriesSlice/deleteStudent" , async( deletedStudentItems : DeletedStudentItems , thunkApi) => {
+    const { studentId , isFail , isSuccess } = deletedStudentItems;
+    try {
+        const response = await fetch(`${envValues.apiUrl}/student?studentId=${studentId}` , {
+            method : "DELETE",
+        });
+        const { deletedStudentId , deletedVotes } = await response.json();
+        thunkApi.dispatch(removeStudent(deletedStudentId));
+        thunkApi.dispatch(removeVotes(deletedVotes));
+        isSuccess && isSuccess();
+    } catch(err) {
+        isFail && isFail();
+    }
+})
+
 const studentsSlice = createSlice({
     name : "studentsSlice",
     initialState , 
@@ -43,11 +77,17 @@ const studentsSlice = createSlice({
         },
         addStudent : ( state , action : PayloadAction<Students>) => {
             state.students = [...state.students , action.payload ]
+        },
+        replaceStudent : ( state , action : PayloadAction<Students>) => {
+            state.students = state.students.map(item => item.id === action.payload.id ? action.payload : item );
+        },
+        removeStudent : ( state , action : PayloadAction<number>) => {
+            state.students = state.students.filter(item => item.id !== action.payload)
         }
     }
 })
 
-export const { removeStudentsFromCategory , setStudents , addStudent } = studentsSlice.actions;
+export const { removeStudentsFromCategory , setStudents , addStudent , replaceStudent , removeStudent } = studentsSlice.actions;
 
 
 export default studentsSlice.reducer;

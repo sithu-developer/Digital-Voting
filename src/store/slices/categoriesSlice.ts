@@ -3,7 +3,7 @@ import { Categories } from "../../../generated/prisma";
 import { DeletedCategoryItems, NewCategoryItems, UpdatedCategoryItems } from "@/types/categories";
 import { envValues } from "@/util/envValues";
 import { removeStudentsFromCategory } from "./studentsSlice";
-import { removeVotesFromCategory } from "./votesSlice";
+import { removeVotes } from "./votesSlice";
 
 interface CategoriesInitialState {
     categories : Categories[],
@@ -60,7 +60,7 @@ export const deleteCategory = createAsyncThunk("categoriesSlice/deleteCategory" 
         const { deletedCategoryId , deletedVotes } = await response.json();
         thunkApi.dispatch(removeCategory(deletedCategoryId));
         thunkApi.dispatch(removeStudentsFromCategory(deletedCategoryId));
-        thunkApi.dispatch(removeVotesFromCategory(deletedVotes));
+        thunkApi.dispatch(removeVotes(deletedVotes));
         isSuccess && isSuccess();
     } catch(err) {
         isFail && isFail();

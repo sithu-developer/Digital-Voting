@@ -7,6 +7,8 @@ import { useAppDispatch } from "@/store/hooks";
 import { openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
 import { deleteCategory } from "@/store/slices/categoriesSlice";
+import { deleteStudent } from "@/store/slices/studentsSlice";
+import { useRouter } from "next/router";
 
 interface Props {
     deleteOpen : boolean;
@@ -20,6 +22,7 @@ const DeleteComfirmation = ({ deleteOpen , setDeleteOpen , categoryToDelete , st
     const [ adminCodeFromTyping , setAdminCodeFromTyping ] = useState<string>("");
     const [ showPassword , setShowPassword ] = useState<boolean>(false);
     const dispatch = useAppDispatch();
+    const router = useRouter();
     
     useEffect(() => {
         if(localStorage) {
@@ -29,7 +32,7 @@ const DeleteComfirmation = ({ deleteOpen , setDeleteOpen , categoryToDelete , st
 
 
     
-    const handleDelete = () => {
+    const handleDeleteCategory = () => {
         if(categoryToDelete) {
             if(adminCodeFromLocalStrage === adminCodeFromTyping) {
                 dispatch(deleteCategory({categoryId : categoryToDelete.id , isSuccess : () => {
@@ -42,8 +45,17 @@ const DeleteComfirmation = ({ deleteOpen , setDeleteOpen , categoryToDelete , st
                 dispatch(openSnackBar({open : true , message : "Wrong admin passcode!" , severity : Severity.error}))
             }
         }
+    }
+
+    const handleDeleteStudent = () => {
         if(studentToDelete) {
-            // delete student dispatch here
+            dispatch(deleteStudent({studentId : studentToDelete.id , isSuccess : () => {
+                setShowPassword(false);
+                setDeleteOpen(false);
+                router.push("/intro/backoffice/king-queen")
+                dispatch(openSnackBar({ open : true , message : "Successfully deleted to this student" , severity : Severity.success}))
+            }}))
+
         }
     }
 
@@ -57,7 +69,7 @@ const DeleteComfirmation = ({ deleteOpen , setDeleteOpen , categoryToDelete , st
             <DialogContent sx={{ bgcolor : "secondary.main" , display : "flex" , flexDirection : "column" , gap : "20px"}}  >
                 <Typography variant="h5" color="error" >Delete</Typography>
                 {categoryToDelete && <Typography color="info" >Note : Deleting this category( {categoryToDelete.name} ) will also delete all the students related to that category</Typography>}
-                {studentToDelete && <Typography color="info" >Are you sure to delete this student({studentToDelete.name})</Typography>}
+                {studentToDelete && <Typography color="info" >Are you sure that you want to delete this student({studentToDelete.name}) ?</Typography>}
                 {categoryToDelete && <TextField 
                     label="Enter Admin Code" 
                     defaultValue={adminCodeFromTyping} 
@@ -87,7 +99,8 @@ const DeleteComfirmation = ({ deleteOpen , setDeleteOpen , categoryToDelete , st
                         setShowPassword(false);
                         setDeleteOpen(false);
                     }} >Cancel</Button>
-                    <Button variant="contained" color="error" disabled={!adminCodeFromTyping} onClick={handleDelete} >Delete</Button>
+                    {categoryToDelete && <Button variant="contained" color="error" disabled={!adminCodeFromTyping} onClick={handleDeleteCategory} >Delete</Button>}
+                    {studentToDelete && <Button variant="contained" color="error" onClick={handleDeleteStudent} >Delete</Button>}
                 </Box>
             </DialogContent>
         </Dialog>
