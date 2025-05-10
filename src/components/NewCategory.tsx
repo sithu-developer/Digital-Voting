@@ -28,8 +28,8 @@ const NewCategory = ({ newCategoryOpen , setNewCategoryOpen } : Props) => {
             setNewCategory("");
         }} >
             <DialogContent sx={{ bgcolor : "secondary.main" , display : "flex" , flexDirection : "column" , gap : "20px"}} >
-                <Typography variant="h5" >New Category</Typography>
-                <TextField variant="outlined" label="name" onChange={(event) => setNewCategory(event.target.value)} />
+                <Typography variant="h5" color="info" >New Category</Typography>
+                <TextField label="Name" onChange={(event) => setNewCategory(event.target.value)} />
                 <Box sx={{ display : "flex" , justifyContent : "end" , gap : "10px"}} >
                     <Button variant="contained" onClick={() => {
                         setNewCategoryOpen(false);
@@ -38,7 +38,6 @@ const NewCategory = ({ newCategoryOpen , setNewCategoryOpen } : Props) => {
                     <Button variant="contained" disabled={!newCategory} onClick={handleCreateNewCategory} >Create</Button>
                 </Box>
             </DialogContent>
-
         </Dialog>
     )
 }

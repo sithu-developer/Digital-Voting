@@ -37,8 +37,8 @@ const EditCategory = ({ selectedCategory , editCategoryOpen ,setEditCategoryOpen
             setEditedCategory(selectedCategory);
         }} >
             <DialogContent sx={{ bgcolor : "secondary.main" , display : "flex" , flexDirection : "column" , gap : "20px"}} >
-                <Typography variant="h5" >Rename category</Typography>
-                <TextField label={"name"} defaultValue={selectedCategory.name} onChange={(event) => setEditedCategory({...editedCategory , name : event.target.value}) } />
+                <Typography variant="h5" color="info" >Rename category</Typography>
+                <TextField label={"Name"} defaultValue={selectedCategory.name} onChange={(event) => setEditedCategory({...editedCategory , name : event.target.value}) } />
                 <Box sx={{ display : "flex" , justifyContent : "end" , gap : "10px"}} >
                     <Button variant="contained" onClick={() => {
                         setEditCategoryOpen(false);
