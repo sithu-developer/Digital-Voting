@@ -1,17 +1,20 @@
 import { useAppSelector } from "@/store/hooks";
-import { Box, Button, Chip, Divider, IconButton, Typography } from "@mui/material";
+import { Box, Button, Chip, Divider, IconButton, TextField, Typography } from "@mui/material";
 import Link from "next/link";
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 import { useEffect, useState } from "react";
 import NewCategory from "@/components/NewCategory";
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import EditCategory from "@/components/EditCategory";
-import { Categories } from "../../../../../generated/prisma";
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import DeleteComfirmation from "@/components/DeleteComfirmation";
 import NewStudent from "@/components/NewStudent";
 import { zodiacSigns } from "@/util/general";
 import { ZodiacSignType } from "@/types/general";
+import { Categories } from "../../../../../generated/prisma";
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+
 
 const KingQueenPage = () => {
     const admin = useAppSelector(store => store.adminSlice.admin)
@@ -20,9 +23,11 @@ const KingQueenPage = () => {
     const [ selectedCategory , setSelectedCategory ] = useState<Categories>();
     const [ deleteOpen , setDeleteOpen ] = useState<boolean>(false);
     const [ newStudentOpen , setNewStudentOpen ] = useState<boolean>(false);
+    const [ searchOpen , setSearchOpen ] = useState(false);
+    const [ searchValue , setSearchValue ] = useState<string>("");
     const categories = useAppSelector(store => store.categoriesSlice.categories);
     const students = useAppSelector(store => store.studentsSlice.students);
-    const relatedStudents = students.filter(item => item.categoryId === selectedCategory?.id);
+    const relatedStudents = students.filter(item => item.categoryId === selectedCategory?.id).filter(item => item.name.toLowerCase().includes(searchValue.toLowerCase()));
     const sortedStudents = relatedStudents.sort((a,b) => a.contestantNumber - b.contestantNumber )
 
     useEffect(() => {
@@ -64,7 +69,19 @@ const KingQueenPage = () => {
             </Box>
             <Divider variant="middle" sx={{ bgcolor : "black"}} />
             <Box sx={{ display : "flex" , flexDirection : "column" , gap : "10px", p : "10px"}}>
-                <Box sx={{ display : "flex" , justifyContent : "end"}} >
+                <Box sx={{ display : "flex" , justifyContent : "space-between" , gap : "20px" , alignItems : "center"}} >
+                    {searchOpen ? <Box sx={{ flexGrow : 1 , display : "flex" , justifyContent : "space-between"}}>
+                        <TextField sx={{ ml : "20px"}} variant="standard" placeholder="Search..." onChange={(event) => setSearchValue(event.target.value)} />
+                        <IconButton onClick={() => setSearchOpen(false)} >
+                            <CloseRoundedIcon sx={{ color : "black"}} />
+                        </IconButton> 
+                    </Box>
+                    :<Box sx={{ flexGrow : 1 , display : "flex" , justifyContent : "space-between"}}>
+                        <Typography variant="h5" sx={{ ml : "20px"}} >{selectedCategory?.name}</Typography>
+                        <IconButton onClick={() => setSearchOpen(true)} >
+                            <SearchRoundedIcon sx={{ color : "black"}} />
+                        </IconButton>   
+                    </Box>}
                     <Button variant="contained" onClick={() => setNewStudentOpen(true)} >Create</Button>
                 </Box>
                 <Box sx={{ display : "grid" , gridTemplateColumns : "repeat(auto-fill, minmax(100px, 1fr))" , gap : "10px" , overflowY : "auto", maxHeight : "calc(100vh - 200px)" }}>

@@ -5,6 +5,7 @@ import { envValues } from "@/util/envValues";
 
 interface userInitialState {
     user : User | null,
+    usersFromAdmin : User[]
     error : Error | null
 }
 
@@ -32,6 +33,7 @@ export const createNewUser = createAsyncThunk("userSlice" , async( newUser : New
 
 const initialState : userInitialState = {
     user : null,
+    usersFromAdmin : [],
     error : null,
 }
 
@@ -41,10 +43,13 @@ const userSlice = createSlice({
     reducers : {
         setUser : ( state , action : PayloadAction<User>) => {
             state.user = action.payload;
+        },
+        setUsersFromAdmin : ( state , action : PayloadAction<User[]>) => {
+            state.usersFromAdmin = action.payload;
         }
     }
 })
 
-export const { setUser } = userSlice.actions;
+export const { setUser , setUsersFromAdmin } = userSlice.actions;
 
 export default userSlice.reducer;

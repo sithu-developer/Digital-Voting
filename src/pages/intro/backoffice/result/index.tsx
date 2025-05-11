@@ -1,16 +1,22 @@
 import { useAppSelector } from "@/store/hooks";
-import { Box, Chip, Divider, Typography } from "@mui/material";
+import { Box, Chip, Divider, IconButton, TextField, Typography } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Categories } from "../../../../../generated/prisma";
 import { zodiacSigns } from "@/util/general";
 import { ZodiacSignType } from "@/types/general";
-import { StudentWithVotes } from "@/types/student";
+import { StudentWithVotes, VoteListItems } from "@/types/student";
+import VoteList from "@/components/VoteList";
+import { Categories } from "../../../../../generated/prisma";
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 const ResultPage = () => {
     const admin = useAppSelector(store => store.adminSlice.admin)
     const [ selectedCategory , setSelectedCategory ] = useState<Categories>();
     const [ studentsWithVotes , setStudentsWithVotes ] = useState<StudentWithVotes[]>([]);
+    const [ voteListItems , setVoteListItems ] = useState<VoteListItems>({ open : false , selectedStudentId : 0});
+    const [ searchOpen , setSearchOpen ] = useState(false);
+    const [ searchValue , setSearchValue ] = useState<string>("");
     const categories = useAppSelector(store => store.categoriesSlice.categories);
     const students = useAppSelector(store => store.studentsSlice.students);
     const votes = useAppSelector(store => store.votesSlice.votes);
@@ -35,14 +41,14 @@ const ResultPage = () => {
             const studentsWithVotes = relatedStudents.map(student => {
                 const relatedVotes = votes.filter(vote => vote.studentId === student.id);
                 return { student , relatedVotes }
-            }).sort((a,b) => b.relatedVotes.length - a.relatedVotes.length );
+            }).sort((a,b) => b.relatedVotes.length - a.relatedVotes.length ).filter(item => item.student.name.toLowerCase().includes(searchValue.toLowerCase()));
             setStudentsWithVotes(studentsWithVotes);
         }
-    } , [ votes , students , selectedCategory ])
+    } , [ votes , students , selectedCategory , searchValue ])
 
     if(admin) 
     return (
-        <Box sx={{ display : "flex" , flexDirection : "column" , gap : "10px"}} >
+        <Box sx={{ display : "flex" , flexDirection : "column" , gap : "5px"}} >
             <Box sx={{ display : "flex" , justifyContent : "start" , gap : "10px", overflow : "hidden" , overflowX : "auto" , py : "8px" , mx : "20px" }}>
                 {selectedCategory && categories.map(item => (
                     <Chip  key={item.id} sx={{ bgcolor : (selectedCategory.id === item.id ? "info.dark" : "") , '&:hover' : { bgcolor : "info.dark"} , color : (selectedCategory.id === item.id ? "white" : "black") }} label={item.name} onClick={() => {
@@ -51,7 +57,21 @@ const ResultPage = () => {
                     }} />
                 ))}
             </Box>
-            <Box sx={{ display : "flex" , flexDirection : "column" , alignItems : "center" , gap : "10px" , maxHeight : "calc(100vh - 150px)", overflowY : "auto" , p : "10px" }}>
+            <Box sx={{  px : "20px"}}>
+                {searchOpen ? <Box sx={{ flexGrow : 1 , display : "flex" , justifyContent : "space-between"}}>
+                    <TextField sx={{ ml : "20px"}} variant="standard" placeholder="Search..." onChange={(event) => setSearchValue(event.target.value)} />
+                    <IconButton onClick={() => setSearchOpen(false)} >
+                        <CloseRoundedIcon sx={{ color : "black"}} />
+                    </IconButton> 
+                </Box>
+                :<Box sx={{ flexGrow : 1 , display : "flex" , justifyContent : "space-between"}}>
+                    <Typography variant="h5" sx={{ ml : "20px"}} >{selectedCategory?.name}</Typography>
+                    <IconButton onClick={() => setSearchOpen(true)} >
+                        <SearchRoundedIcon sx={{ color : "black"}} />
+                    </IconButton>   
+                </Box>}
+            </Box>
+            <Box sx={{ display : "flex" , flexDirection : "column" , alignItems : "center" , gap : "10px" , maxHeight : "calc(100vh - 200px)", overflowY : "auto" , p : "10px" }}>
                 {studentsWithVotes.map(item => {
                 const currentZodiac = zodiacSigns.find(zodiac => zodiac.id === item.student.zodiacId) as ZodiacSignType;
                 return (
@@ -73,7 +93,9 @@ const ResultPage = () => {
                                 </Box>
                                 <Typography sx={{ fontSize : "12px" }} >Zodiac : {currentZodiac.zodiac.replace(/\s*\(.*$/, '')}</Typography>
                             </Box>
-                            <Box sx={{ clipPath: 'polygon(10% 0%, 100% 0%, 100% 100%, 0% 100%)' , width : "58%" , p : "5px" , bgcolor : "info.main" , position : "absolute" , bottom : "-1px" , right : "-1px" , display : "flex" , justifyContent : "end" , alignItems : "center" , gap :  "5px"}} >
+                            <Box sx={{ clipPath: 'polygon(10% 0%, 100% 0%, 100% 100%, 0% 100%)' , width : "58%" , p : "5px" , cursor : "pointer" , bgcolor : "info.main" , position : "absolute" , bottom : "-1px" , right : "-1px" , display : "flex" , justifyContent : "end" , alignItems : "center" , gap :  "5px"}} onClick={() => {
+                                setVoteListItems({open : true , selectedStudentId : item.student.id })
+                            }} >
                                 <Typography sx={{ fontSize : "12px" }}>Total votes</Typography>
                                 <Box sx={{ bgcolor : "#6D42B2" , minWidth : "30px" , px : "1px" , borderRadius : "3px"}}>
                                     <Typography  sx={{ fontSize : "12px" , color : "black" , textAlign : "center" }}>{item.relatedVotes.length}</Typography>
@@ -83,6 +105,7 @@ const ResultPage = () => {
                     </Box>
                 )})}
             </Box>
+            <VoteList voteListItems={voteListItems} setVoteListItems={setVoteListItems} />
         </Box>
     )
     else 

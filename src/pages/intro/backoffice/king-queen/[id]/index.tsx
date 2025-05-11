@@ -3,12 +3,12 @@ import { Box, Button, Chip, FormControl, InputLabel, MenuItem, Select, TextField
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Students } from "../../../../../../generated/prisma";
 import { zodiacSigns } from "@/util/general";
 import { deleteStudent, updateStudent } from "@/store/slices/studentsSlice";
 import { openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
 import DeleteComfirmation from "@/components/DeleteComfirmation";
+import { Students } from "../../../../../../generated/prisma";
 
 const EditStudentPage = () => {
     const admin = useAppSelector(store => store.adminSlice.admin)

@@ -21,3 +21,8 @@ export interface StudentWithVotes {
     student : Students
     relatedVotes : Votes[]
 }
+
+export interface VoteListItems {
+    open : boolean,
+    selectedStudentId : number,
+}
