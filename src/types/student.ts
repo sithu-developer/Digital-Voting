@@ -1,4 +1,4 @@
-import { Students } from "../../generated/prisma";
+import { Students, Votes } from "../../generated/prisma";
 import { IsFailOrSuccessType } from "./admin";
 
 export interface NewStudentItems extends IsFailOrSuccessType {
@@ -15,4 +15,9 @@ export interface UpdatedStudentItems extends Students , IsFailOrSuccessType {}
 
 export interface DeletedStudentItems extends IsFailOrSuccessType {
     studentId : number
+}
+
+export interface StudentWithVotes {
+    student : Students
+    relatedVotes : Votes[]
 }

@@ -23,11 +23,10 @@ const BackofficeSideBar = ({ setSideBarOpen , sideBarOpen } : Props ) => {
                         top : "100px",
                         backgroundColor: "rgba(255, 255, 255, 0.2)",
                         borderRadius : "5px",
-                        border: "1px solid  black",
-                        opacity: "0.8",
+                        border: "1px solid white",
                         backdropFilter : "blur(10px)",
                         WebkitBackdropFilter: "blur(10px)",
-                        p : "5px"
+                        p : "5px",
                     }
                 }
             }}
@@ -43,7 +42,7 @@ const BackofficeSideBar = ({ setSideBarOpen , sideBarOpen } : Props ) => {
             {sideBarListItems.slice(0 , -1).map(item => (
                 <Link key={item.id} href={item.href} style={{ textDecoration : "none"}} >
                     <IconButton>
-                        <item.icon sx={{ fontSize : "30px" , color : "black" }} />
+                        <item.icon sx={{ fontSize : "27px" , color : "black" }} />
                     </IconButton>
                 </Link>
             ))}
@@ -51,7 +50,7 @@ const BackofficeSideBar = ({ setSideBarOpen , sideBarOpen } : Props ) => {
             {sideBarListItems.slice(-1 , sideBarListItems.length).map(item => (
                 <Link key={item.id} href={item.href} style={{ textDecoration : "none"}} >
                     <IconButton>
-                        <item.icon sx={{ fontSize : "33px" , color : "black" }} />
+                        <item.icon sx={{ fontSize : "27px" , color : "black" }} />
                     </IconButton>
                 </Link>
             ))}
@@ -76,7 +75,7 @@ const sideBarListItems : SideBarListItemType[] = [
     },
     {
         id : 3 ,
-        href : "/intro/backoffice/",
+        href : "/intro/backoffice/result",
         icon : EmojiEventsRoundedIcon
     },
     {
