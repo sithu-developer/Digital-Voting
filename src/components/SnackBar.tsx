@@ -9,7 +9,7 @@ const SnackBarComp = () => {
     const dispatch = useAppDispatch();
 
     const handleClose = () => {
-        dispatch(openSnackBar({open : false , message : "" , severity : Severity.success}))
+        dispatch(openSnackBar({...snackBar , open : false , message : ""}))
     }
 
     return (

@@ -47,14 +47,14 @@ const VoteList = ( { voteListItems , setVoteListItems } : Props ) => {
                             <Box sx={{ p : "10px" , display : "flex" , alignItems : "center" , gap : "10px" }}>
                                 <Typography color="info" >{relatedUsers.indexOf(item)+1}.</Typography>
                                 <Box>
-                                    <Typography sx={{ lineHeight : 1 }} >Name : {item.name}</Typography>
-                                    <Typography  >Gmail : {item.email}</Typography>
+                                    <Typography sx={{ lineHeight : 1 , color : "black" }} >Name : {item.name}</Typography>
+                                    <Typography sx={{ color : "black"}} >Gmail : {item.email}</Typography>
                                 </Box>
                             </Box>
                             <Divider sx={{ bgcolor : "black"}} variant="middle" />
                         </Box>
                     ))
-                    :<Typography sx={{ p : "20px" , textAlign : "center"}} variant="h6" color="info" >No votes yet</Typography>}
+                    :<Typography sx={{ p : "20px" , textAlign : "center"}} variant="h6" color="info" >No vote yet</Typography>}
                 </Box>
         </Dialog>
     )

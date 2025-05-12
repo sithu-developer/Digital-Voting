@@ -4,22 +4,29 @@ import { signOut } from "next-auth/react";
 import { useState } from "react";
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
+import ChangeAdminCodeAndLimit from "@/components/ChangeAdminCodeAndLimit";
+import Link from "next/link";
+import NewMajor from "@/components/NewMajor";
+import EditMajor from "@/components/EditMajor";
+import DeleteComfirmation from "@/components/DeleteComfirmation";
 
 const SettingPage = () => {
+    const admin = useAppSelector(store => store.adminSlice.admin)
     const majorsAndAdmin = useAppSelector(store => store.majorsSlice.majors);
     const majors = majorsAndAdmin.filter(item => item.majorsOrAdmin !== "admin");
     const [ selectedMajorId , setSelectedMajorId ] = useState<number>(0);
-    const [ newMajorOpen , setNewMajorOpen ] = useState<boolean>(false); // here
+    const [ newMajorOpen , setNewMajorOpen ] = useState<boolean>(false);
     const [ editMajorOpen , setEditMajorOpen ] = useState<boolean>(false);
     const [ deleteMajorOpen , setDeleteMajorOpen ] = useState<boolean>(false);
+    const [ changeAdminCodeAndLimitOpen , setChangeAdminCodeAndLimitOpen ] = useState<boolean>(false);
 
-    console.log(majors)
 
+    if(admin)
     return (
-        <Box sx={{ p : "20px" , display : "flex" , flexDirection : "column" , gap : "20px"}} >
+        <Box sx={{ p : "20px" , display : "flex" , flexDirection : "column" , gap : "30px"}} >
             <Box sx={{ display :"flex" , justifyContent : "space-between" , alignItems : "center"}} >
                 <Typography  variant="h5" >Admin : </Typography>
-                <Button variant="contained" sx={{ textTransform : "none"}} >Edit Admin code & limit</Button>
+                <Button onClick={() => setChangeAdminCodeAndLimitOpen(true) } variant="contained" sx={{ textTransform : "none"}} >Change Admin code & limit</Button>
             </Box>
             <Divider sx={{ bgcolor : "black"}} />
             <Box sx={{ display : "flex" , justifyContent : "space-between"}} >
@@ -37,26 +44,25 @@ const SettingPage = () => {
                     MenuProps={{
                       PaperProps: {
                         sx: {
-                          backgroundColor: 'secondary.dark',
-                          color: 'black',
+                          backgroundColor: 'secondary.light',
                         },
                       },
                     }}
                   >
-                    <MenuItem value={0}>Select Major first</MenuItem>
+                    <MenuItem value={0} sx={{ color : "black"}} >Select Major first</MenuItem>
                     {majors.map(item => (
-                        <MenuItem value={item.id}>{item.majorsOrAdmin}</MenuItem>
+                        <MenuItem value={item.id} sx={{ color : "black"}} >{item.majorsOrAdmin}</MenuItem>
                     ))}
                   </Select>
                 </FormControl>
                 <Box sx={{ display : "flex"}}>
-                    <IconButton onClick={() => setEditMajorOpen(true) } >
-                        <EditRoundedIcon sx={{ color : "black"}} />
+                    <IconButton disabled={!selectedMajorId} onClick={() => setEditMajorOpen(true) } >
+                        <EditRoundedIcon sx={{ color :( selectedMajorId ? "black" : "gray" )}} />
                     </IconButton>
-                    <IconButton onClick={() => {
+                    <IconButton disabled={!selectedMajorId} onClick={() => {
                         setDeleteMajorOpen(true);
                     }} >
-                        <DeleteOutlineRoundedIcon sx={{ color : "error.main"}} />
+                        <DeleteOutlineRoundedIcon sx={{ color : ( selectedMajorId ? "error.main" : "gray" )}} />
                     </IconButton>
                 </Box>
             </Box>
@@ -67,6 +73,16 @@ const SettingPage = () => {
                     signOut({callbackUrl : "/intro"})
                 }} >sing out</Button>
             </Box>
+            <ChangeAdminCodeAndLimit changeAdminCodeAndLimitOpen={changeAdminCodeAndLimitOpen} setChangeAdminCodeAndLimitOpen={setChangeAdminCodeAndLimitOpen} />
+            <NewMajor newMajorOpen={newMajorOpen} setNewMajorOpen={setNewMajorOpen} />
+            {selectedMajorId ? <EditMajor selectedMajorId={selectedMajorId} editMajorOpen={editMajorOpen} setEditMajorOpen={setEditMajorOpen} /> : null}
+            {selectedMajorId ? <DeleteComfirmation deleteOpen={deleteMajorOpen} setDeleteOpen={setDeleteMajorOpen} majorIdToDelete={selectedMajorId} setSelectedMajorId={setSelectedMajorId} /> : null}
+        </Box>
+    )
+    else 
+    return (
+        <Box >
+            <Typography variant="h5" sx={{ textAlign : "center"}} > Wait for the nextwork or go to intro page <Link href={"/intro"} >Click here</Link></Typography>
         </Box>
     )
 }

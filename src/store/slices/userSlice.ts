@@ -46,10 +46,13 @@ const userSlice = createSlice({
         },
         setUsersFromAdmin : ( state , action : PayloadAction<User[]>) => {
             state.usersFromAdmin = action.payload;
+        },
+        removeUsersFromMajor : ( state , action : PayloadAction<number>) => {
+            state.usersFromAdmin = state.usersFromAdmin.filter(item => item.majorId !== action.payload)
         }
     }
 })
 
-export const { setUser , setUsersFromAdmin } = userSlice.actions;
+export const { setUser , setUsersFromAdmin , removeUsersFromMajor } = userSlice.actions;
 
 export default userSlice.reducer;

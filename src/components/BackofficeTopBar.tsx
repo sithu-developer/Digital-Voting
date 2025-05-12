@@ -29,7 +29,6 @@ const BackofficeTopBar = ({ setSideBarOpen } : Props ) => {
 
     useEffect(() => {
         if(password && session && session.user){
-            console.log("hello")
             dispatch(createNewAdmin({ password , email : String(session.user.email) , isFail : (err) => {
                 router.push("/intro")
                 dispatch(openSnackBar({ open : true , message : String(err) , severity : Severity.error}))

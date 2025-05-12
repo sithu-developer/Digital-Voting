@@ -68,7 +68,13 @@ const EditStudentPage = () => {
                       value={updatedStudent.zodiacId}
                       label="Zodiac sign"
                       onChange={(event) => setUpdatedStudent({...updatedStudent , zodiacId : event.target.value})}
-                      sx={{ '& .MuiMenuItem-root': { backgroundColor : "secondary.main" }}}
+                      MenuProps={{
+                        PaperProps: {
+                            sx: {
+                              backgroundColor: 'secondary.light',
+                            },
+                        },
+                      }}
                     >
                         {zodiacSigns.map(item => (
                             <MenuItem key={item.id} value={item.id} sx={{ color : "black"}} >{item.zodiac}</MenuItem>
