@@ -5,6 +5,7 @@ import snackBarReducer from "@/store/slices/snackBarSlice"
 import categoriesReducer from "@/store/slices/categoriesSlice"
 import studentsReducer from "@/store/slices/studentsSlice"
 import votesReducer from "@/store/slices/votesSlice"
+import majorsReducer from "@/store/slices/majorSlice"
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     categoriesSlice : categoriesReducer,
     studentsSlice : studentsReducer,
     votesSlice : votesReducer,
+    majorsSlice : majorsReducer,
     
   },
 })

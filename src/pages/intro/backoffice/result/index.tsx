@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/store/hooks";
-import { Box, Chip, Divider, IconButton, TextField, Typography } from "@mui/material";
+import { Box, Button, Chip, Divider, IconButton, TextField, Typography } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { zodiacSigns } from "@/util/general";
@@ -48,7 +48,7 @@ const ResultPage = () => {
 
     if(admin) 
     return (
-        <Box sx={{ display : "flex" , flexDirection : "column" , gap : "5px"}} >
+        <Box sx={{ display : "flex" , flexDirection : "column" , gap : "5px" , position : "relative"}} >
             <Box sx={{ display : "flex" , justifyContent : "start" , gap : "10px", overflow : "hidden" , overflowX : "auto" , py : "8px" , mx : "20px" }}>
                 {selectedCategory && categories.map(item => (
                     <Chip  key={item.id} sx={{ bgcolor : (selectedCategory.id === item.id ? "info.dark" : "") , '&:hover' : { bgcolor : "info.dark"} , color : (selectedCategory.id === item.id ? "white" : "black") }} label={item.name} onClick={() => {
@@ -59,8 +59,11 @@ const ResultPage = () => {
             </Box>
             <Box sx={{  px : "20px"}}>
                 {searchOpen ? <Box sx={{ flexGrow : 1 , display : "flex" , justifyContent : "space-between"}}>
-                    <TextField sx={{ ml : "20px"}} variant="standard" placeholder="Search..." onChange={(event) => setSearchValue(event.target.value)} />
-                    <IconButton onClick={() => setSearchOpen(false)} >
+                    <TextField sx={{ ml : "20px"}} autoFocus variant="standard" placeholder="Search..." onChange={(event) => setSearchValue(event.target.value)} />
+                    <IconButton onClick={() => {
+                        setSearchValue("");
+                        setSearchOpen(false)
+                    }} >
                         <CloseRoundedIcon sx={{ color : "black"}} />
                     </IconButton> 
                 </Box>
@@ -71,7 +74,7 @@ const ResultPage = () => {
                     </IconButton>   
                 </Box>}
             </Box>
-            <Box sx={{ display : "flex" , flexDirection : "column" , alignItems : "center" , gap : "10px" , maxHeight : "calc(100vh - 200px)", overflowY : "auto" , p : "10px" }}>
+            <Box sx={{ display : "flex" , flexDirection : "column" , alignItems : "center" , gap : "10px" , height : "calc(100vh - 200px)", overflowY : "auto" , p : "10px" }}>
                 {studentsWithVotes.map(item => {
                 const currentZodiac = zodiacSigns.find(zodiac => zodiac.id === item.student.zodiacId) as ZodiacSignType;
                 return (
@@ -106,6 +109,7 @@ const ResultPage = () => {
                 )})}
             </Box>
             <VoteList voteListItems={voteListItems} setVoteListItems={setVoteListItems} />
+            <Button sx={{ position : "absolute" , bgcolor : "#6D42B2" , bottom : "5px" , left : "50%" , transform: "translateX(-50%)" , border : "1px solid white" , textTransform : "none"}} variant="contained" >Show {selectedCategory?.name} Result</Button>
         </Box>
     )
     else 

@@ -5,6 +5,7 @@ import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import Groups3RoundedIcon from '@mui/icons-material/Groups3Rounded';
 import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded';
+import { useRouter } from "next/router";
 
 interface Props {
     sideBarOpen : boolean,
@@ -12,6 +13,8 @@ interface Props {
 }
 
 const BackofficeSideBar = ({ setSideBarOpen , sideBarOpen } : Props ) => {
+    const router = useRouter();
+    const path = router.asPath;
     
     return (
         <Drawer open={sideBarOpen} onClose={() => setSideBarOpen(false)} 
@@ -42,7 +45,7 @@ const BackofficeSideBar = ({ setSideBarOpen , sideBarOpen } : Props ) => {
             {sideBarListItems.slice(0 , -1).map(item => (
                 <Link key={item.id} href={item.href} style={{ textDecoration : "none"}} >
                     <IconButton>
-                        <item.icon sx={{ fontSize : "27px" , color : "black" }} />
+                        <item.icon sx={{ fontSize : "27px" , color : (path.includes(item.href) ? "white" :  "black") }} />
                     </IconButton>
                 </Link>
             ))}
@@ -50,7 +53,7 @@ const BackofficeSideBar = ({ setSideBarOpen , sideBarOpen } : Props ) => {
             {sideBarListItems.slice(-1 , sideBarListItems.length).map(item => (
                 <Link key={item.id} href={item.href} style={{ textDecoration : "none"}} >
                     <IconButton>
-                        <item.icon sx={{ fontSize : "27px" , color : "black" }} />
+                        <item.icon sx={{ fontSize : "27px" , color : (path.includes(item.href) ? "white" :  "black") }} />
                     </IconButton>
                 </Link>
             ))}
@@ -70,7 +73,7 @@ const sideBarListItems : SideBarListItemType[] = [
     },
     {
         id : 2 ,
-        href : "/intro/backoffice/",
+        href : "/intro/backoffice/agenda",
         icon : EventNoteRoundedIcon
     },
     {

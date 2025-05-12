@@ -46,7 +46,7 @@ const KingQueenPage = () => {
     if(admin) 
     return (
         <Box sx={{ display : "flex" , flexDirection : "column"}} >
-            <Box sx={{  px : "10px" , display : "flex" , alignItems : "center" , gap : "1px" }} >
+            <Box sx={{  px : "10px" , display : "flex" , alignItems : "center" , gap : "2px" }} >
                 <IconButton onClick={() => setNewCategoryOpen(true)} >
                     <AddCircleOutlineRoundedIcon sx={{ color : "black" , fontSize : "35px"}} />
                 </IconButton>
@@ -58,21 +58,26 @@ const KingQueenPage = () => {
                         }} />
                     ))}
                 </Box>
-                <IconButton onClick={() => setEditCategoryOpen(true) } >
-                    <EditRoundedIcon sx={{ color : "black"}} />
-                </IconButton>
-                <IconButton onClick={() => {
-                    setDeleteOpen(true);
-                }} >
-                    <DeleteOutlineRoundedIcon sx={{ color : "black"}} />
-                </IconButton>
+                <Box sx={{ display : "flex"}}>
+                    <IconButton onClick={() => setEditCategoryOpen(true) } >
+                        <EditRoundedIcon sx={{ color : "black"}} />
+                    </IconButton>
+                    <IconButton onClick={() => {
+                        setDeleteOpen(true);
+                    }} >
+                        <DeleteOutlineRoundedIcon sx={{ color : "error.main"}} />
+                    </IconButton>
+                </Box>
             </Box>
             <Divider variant="middle" sx={{ bgcolor : "black"}} />
             <Box sx={{ display : "flex" , flexDirection : "column" , gap : "10px", p : "10px"}}>
                 <Box sx={{ display : "flex" , justifyContent : "space-between" , gap : "20px" , alignItems : "center"}} >
                     {searchOpen ? <Box sx={{ flexGrow : 1 , display : "flex" , justifyContent : "space-between"}}>
-                        <TextField sx={{ ml : "20px"}} variant="standard" placeholder="Search..." onChange={(event) => setSearchValue(event.target.value)} />
-                        <IconButton onClick={() => setSearchOpen(false)} >
+                        <TextField sx={{ ml : "20px"}} autoFocus variant="standard" placeholder="Search..." onChange={(event) => setSearchValue(event.target.value)} />
+                        <IconButton onClick={() => {
+                            setSearchValue("")
+                            setSearchOpen(false)
+                        }} >
                             <CloseRoundedIcon sx={{ color : "black"}} />
                         </IconButton> 
                     </Box>
