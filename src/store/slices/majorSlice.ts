@@ -16,14 +16,14 @@ const initialState : MajorsSliceInitialState = {
 }
 
 export const changeAdminCodeAndLimit = createAsyncThunk( "majorSlice/changeAdminCodeAndLimit" , async( changedAdminInMajor : UpdatedMajorItems , thunkApi ) => {
-    const { id , majorsOrAdmin , maxQuantity , passCode , isFail , isSuccess } = changedAdminInMajor;
+    const { id , majorsOrAdmin , maxQuantity , passCode , isTimeUp , isFail , isSuccess } = changedAdminInMajor;
     try {
         const response = await fetch(`${envValues.apiUrl}/major` , {
             method : "PUT",
             headers : {
                 "content-type" : "application/json"
             },
-            body : JSON.stringify({ id , majorsOrAdmin , maxQuantity , passCode })
+            body : JSON.stringify({ id , majorsOrAdmin , maxQuantity , passCode , isTimeUp })
         });
         const { updatedAdminInMajor } = await response.json();
         thunkApi.dispatch(replaceMajor(updatedAdminInMajor));
@@ -52,14 +52,14 @@ export const createMajor = createAsyncThunk( "majorSlice/createMajor" , async( n
 })
 
 export const updateMajor = createAsyncThunk( "majorSlice/updateMajor" , async( updatedMajor : UpdatedMajorItems , thunkApi ) => {
-    const { id , majorsOrAdmin , maxQuantity , passCode , isFail , isSuccess } = updatedMajor;
+    const { id , majorsOrAdmin , maxQuantity , passCode , isTimeUp , isFail , isSuccess } = updatedMajor;
     try {
         const response = await fetch(`${envValues.apiUrl}/major` , {
             method : "PUT",
             headers : {
                 "content-type" : "application/json"
             },
-            body : JSON.stringify({ id , majorsOrAdmin , maxQuantity , passCode })
+            body : JSON.stringify({ id , majorsOrAdmin , maxQuantity , passCode , isTimeUp })
         });
         const { updatedMajor } = await response.json();
         thunkApi.dispatch(replaceMajor(updatedMajor));

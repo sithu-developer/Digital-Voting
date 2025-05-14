@@ -2,6 +2,10 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "../../../generated/prisma";
 import { NewUserType } from "@/types/user";
 import { envValues } from "@/util/envValues";
+import { setCategories } from "./categoriesSlice";
+import { setStudents } from "./studentsSlice";
+import { setAgendas } from "./agendaSlice";
+import { setVotes } from "./votesSlice";
 
 interface userInitialState {
     user : User | null,
@@ -19,15 +23,19 @@ export const createNewUser = createAsyncThunk("userSlice" , async( newUser : New
             },
             body : JSON.stringify({ email , majorCode })
         });
-        const { newUser , err } = await response.json();
+        const { newUser , categories , students , agendas , votes , err } = await response.json();
         if(newUser) {
             thunkApi.dispatch(setUser(newUser));
+            thunkApi.dispatch(setCategories(categories));
+            thunkApi.dispatch(setStudents(students));
+            thunkApi.dispatch(setAgendas(agendas));
+            thunkApi.dispatch(setVotes(votes));
             isSuccess && isSuccess();
         } else {
             isFail && isFail(err);
         }
     } catch (err) {
-        isFail && isFail(err);
+        console.log(err);
     }
 })
 

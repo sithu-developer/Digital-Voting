@@ -16,7 +16,7 @@ const AgendaPage = () => {
                   component="label"
                   sx={{ height : "53px"}}
                 >
-                  Choose Agenda Photo
+                  Add New Agenda Photo
                   <input
                     type="file"
                     hidden

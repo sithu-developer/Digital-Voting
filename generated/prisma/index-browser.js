@@ -120,11 +120,12 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.UserScalarFieldEnum = {
+exports.Prisma.MajorScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  email: 'email',
-  majorId: 'majorId'
+  majorsOrAdmin: 'majorsOrAdmin',
+  maxQuantity: 'maxQuantity',
+  passCode: 'passCode',
+  isTimeUp: 'isTimeUp'
 };
 
 exports.Prisma.AdminScalarFieldEnum = {
@@ -133,16 +134,18 @@ exports.Prisma.AdminScalarFieldEnum = {
   adminMajorId: 'adminMajorId'
 };
 
-exports.Prisma.MajorScalarFieldEnum = {
+exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
-  majorsOrAdmin: 'majorsOrAdmin',
-  maxQuantity: 'maxQuantity',
-  passCode: 'passCode'
+  name: 'name',
+  email: 'email',
+  majorId: 'majorId',
+  isSubmited: 'isSubmited'
 };
 
 exports.Prisma.CategoriesScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  isShownResult: 'isShownResult'
 };
 
 exports.Prisma.StudentsScalarFieldEnum = {
@@ -162,6 +165,11 @@ exports.Prisma.VotesScalarFieldEnum = {
   studentId: 'studentId'
 };
 
+exports.Prisma.AgendaScalarFieldEnum = {
+  id: 'id',
+  agendaUrl: 'agendaUrl'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -174,12 +182,13 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
-  User: 'User',
-  Admin: 'Admin',
   Major: 'Major',
+  Admin: 'Admin',
+  User: 'User',
   Categories: 'Categories',
   Students: 'Students',
-  Votes: 'Votes'
+  Votes: 'Votes',
+  Agenda: 'Agenda'
 };
 
 /**

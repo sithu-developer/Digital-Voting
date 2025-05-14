@@ -7,6 +7,7 @@ import { setStudents } from "./studentsSlice";
 import { setVotes } from "./votesSlice";
 import { setUsersFromAdmin } from "./userSlice";
 import { setMajors } from "./majorSlice";
+import { setAgendas } from "./agendaSlice";
 
 interface AdminSliceInitialState {
     admin : Admin | null,
@@ -23,7 +24,7 @@ export const createNewAdmin = createAsyncThunk("adminSlice/checkAdminPassword" ,
             },
             body : JSON.stringify({ password , email })
         });
-        const { newAdmin , categories , students , votes , users , majors , err } = await response.json();
+        const { newAdmin , categories , students , votes , users , majors , agendas , err } = await response.json();
         if(newAdmin) {
             thunkApi.dispatch(setAdmin(newAdmin));
             thunkApi.dispatch(setCategories(categories));
@@ -31,6 +32,7 @@ export const createNewAdmin = createAsyncThunk("adminSlice/checkAdminPassword" ,
             thunkApi.dispatch(setVotes(votes));
             thunkApi.dispatch(setUsersFromAdmin(users))
             thunkApi.dispatch(setMajors(majors))
+            thunkApi.dispatch(setAgendas(agendas))
             isSuccess && isSuccess();
         } else {
             isFail && isFail(err);

@@ -9,6 +9,7 @@ import Link from "next/link";
 import NewMajor from "@/components/NewMajor";
 import EditMajor from "@/components/EditMajor";
 import DeleteComfirmation from "@/components/DeleteComfirmation";
+import Permission from "@/components/Permission";
 
 const SettingPage = () => {
     const admin = useAppSelector(store => store.adminSlice.admin)
@@ -19,6 +20,8 @@ const SettingPage = () => {
     const [ editMajorOpen , setEditMajorOpen ] = useState<boolean>(false);
     const [ deleteMajorOpen , setDeleteMajorOpen ] = useState<boolean>(false);
     const [ changeAdminCodeAndLimitOpen , setChangeAdminCodeAndLimitOpen ] = useState<boolean>(false);
+    const [ permissionOpen , setPermissionOpen ] = useState<boolean>(false);
+
 
 
     if(admin)
@@ -68,11 +71,16 @@ const SettingPage = () => {
             </Box>
             <Divider sx={{ bgcolor : "black"}} />
             <Box sx={{ display : "flex" , justifyContent : "center"}} >
-                <Button variant="contained" onClick={() => {
+                <Button variant="contained" sx={{ textTransform : "none"}} onClick={() => setPermissionOpen(true)} >Close Voting</Button>
+            </Box>
+            <Divider sx={{ bgcolor : "black"}} />
+            <Box sx={{ display : "flex" , justifyContent : "center"}} >
+                <Button variant="contained"  sx={{ textTransform : "none"}} onClick={() => {
                     localStorage.clear();
                     signOut({callbackUrl : "/intro"})
-                }} >sing out</Button>
+                }} >Sign Out</Button>
             </Box>
+            <Permission permissionOpen={permissionOpen} setPermissionOpen={setPermissionOpen} />
             <ChangeAdminCodeAndLimit changeAdminCodeAndLimitOpen={changeAdminCodeAndLimitOpen} setChangeAdminCodeAndLimitOpen={setChangeAdminCodeAndLimitOpen} />
             <NewMajor newMajorOpen={newMajorOpen} setNewMajorOpen={setNewMajorOpen} />
             {selectedMajorId ? <EditMajor selectedMajorId={selectedMajorId} editMajorOpen={editMajorOpen} setEditMajorOpen={setEditMajorOpen} /> : null}

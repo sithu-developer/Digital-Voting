@@ -50,7 +50,7 @@ const SignUpPage = () => {
                 />
                 <Button variant="contained" disabled={!majorCode} onClick={() => {
                     localStorage.setItem("majorCode" , majorCode);
-                    signIn("google" , { callbackUrl : "/intro/voting/king-selection"});
+                    signIn("google" , { callbackUrl : "/intro/voting/selections"});
                 }}  sx={{ border : "1px solid white" , borderRadius : "23px" , py : "10px" , px : "25px" , textTransform : "none" , boxShadow : '0px 6px 4px rgba(0, 0, 0, 0.2)' }} >
                     <Image alt="gmail icon" src={"/gmail.svg"} width={35} height={35} />
                     <Typography sx={{ ml : "10px" , fontFamily : "Jomolhari" , fontSize : "23px"}}>continue with gmail</Typography>

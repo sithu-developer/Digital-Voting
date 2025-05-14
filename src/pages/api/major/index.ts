@@ -2,7 +2,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]";
 import { prisma } from "@/util/prisma";
-import { NewStudentItems, UpdatedStudentItems } from "@/types/student";
 import { NewMajorItems, UpdatedMajorItems } from "@/types/major";
 
 export default async function handler(
@@ -13,11 +12,11 @@ export default async function handler(
     if(!session) return res.status(401).send("unauthorized");
     const method = req.method;
     if(method === "PUT") {
-        const { id , majorsOrAdmin , maxQuantity , passCode } = req.body as UpdatedMajorItems;
-        const isValid = id && majorsOrAdmin && maxQuantity && passCode;
+        const { id , majorsOrAdmin , maxQuantity , passCode , isTimeUp } = req.body as UpdatedMajorItems;
+        const isValid = id && majorsOrAdmin && maxQuantity && passCode && isTimeUp !== undefined ;
         if(!isValid) return res.status(400).send("Bad request");
         if(majorsOrAdmin === "admin") {
-            const updatedAdminInMajor = await prisma.major.update({ where : { id } , data : { maxQuantity , passCode }});
+            const updatedAdminInMajor = await prisma.major.update({ where : { id } , data : { maxQuantity , passCode , isTimeUp }});
             return res.status(200).json({ updatedAdminInMajor });
         } else {
             const updatedMajor = await prisma.major.update({ where : { id } , data : { majorsOrAdmin , maxQuantity , passCode }});

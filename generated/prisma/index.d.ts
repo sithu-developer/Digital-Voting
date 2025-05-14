@@ -14,20 +14,20 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
- * Model User
+ * Model Major
  * 
  */
-export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+export type Major = $Result.DefaultSelection<Prisma.$MajorPayload>
 /**
  * Model Admin
  * 
  */
 export type Admin = $Result.DefaultSelection<Prisma.$AdminPayload>
 /**
- * Model Major
+ * Model User
  * 
  */
-export type Major = $Result.DefaultSelection<Prisma.$MajorPayload>
+export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
  * Model Categories
  * 
@@ -43,6 +43,11 @@ export type Students = $Result.DefaultSelection<Prisma.$StudentsPayload>
  * 
  */
 export type Votes = $Result.DefaultSelection<Prisma.$VotesPayload>
+/**
+ * Model Agenda
+ * 
+ */
+export type Agenda = $Result.DefaultSelection<Prisma.$AgendaPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -51,8 +56,8 @@ export type Votes = $Result.DefaultSelection<Prisma.$VotesPayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Users
- * const users = await prisma.user.findMany()
+ * // Fetch zero or more Majors
+ * const majors = await prisma.major.findMany()
  * ```
  *
  *
@@ -72,8 +77,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Users
-   * const users = await prisma.user.findMany()
+   * // Fetch zero or more Majors
+   * const majors = await prisma.major.findMany()
    * ```
    *
    *
@@ -170,14 +175,14 @@ export class PrismaClient<
   }>>
 
       /**
-   * `prisma.user`: Exposes CRUD operations for the **User** model.
+   * `prisma.major`: Exposes CRUD operations for the **Major** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Users
-    * const users = await prisma.user.findMany()
+    * // Fetch zero or more Majors
+    * const majors = await prisma.major.findMany()
     * ```
     */
-  get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+  get major(): Prisma.MajorDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.admin`: Exposes CRUD operations for the **Admin** model.
@@ -190,14 +195,14 @@ export class PrismaClient<
   get admin(): Prisma.AdminDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.major`: Exposes CRUD operations for the **Major** model.
+   * `prisma.user`: Exposes CRUD operations for the **User** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Majors
-    * const majors = await prisma.major.findMany()
+    * // Fetch zero or more Users
+    * const users = await prisma.user.findMany()
     * ```
     */
-  get major(): Prisma.MajorDelegate<ExtArgs, ClientOptions>;
+  get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.categories`: Exposes CRUD operations for the **Categories** model.
@@ -228,6 +233,16 @@ export class PrismaClient<
     * ```
     */
   get votes(): Prisma.VotesDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.agenda`: Exposes CRUD operations for the **Agenda** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Agenda
+    * const agenda = await prisma.agenda.findMany()
+    * ```
+    */
+  get agenda(): Prisma.AgendaDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -668,12 +683,13 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    User: 'User',
-    Admin: 'Admin',
     Major: 'Major',
+    Admin: 'Admin',
+    User: 'User',
     Categories: 'Categories',
     Students: 'Students',
-    Votes: 'Votes'
+    Votes: 'Votes',
+    Agenda: 'Agenda'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -692,81 +708,81 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "admin" | "major" | "categories" | "students" | "votes"
+      modelProps: "major" | "admin" | "user" | "categories" | "students" | "votes" | "agenda"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
-      User: {
-        payload: Prisma.$UserPayload<ExtArgs>
-        fields: Prisma.UserFieldRefs
+      Major: {
+        payload: Prisma.$MajorPayload<ExtArgs>
+        fields: Prisma.MajorFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.UserFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+            args: Prisma.MajorFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MajorPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.MajorFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MajorPayload>
           }
           findFirst: {
-            args: Prisma.UserFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+            args: Prisma.MajorFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MajorPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.MajorFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MajorPayload>
           }
           findMany: {
-            args: Prisma.UserFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+            args: Prisma.MajorFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MajorPayload>[]
           }
           create: {
-            args: Prisma.UserCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.MajorCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MajorPayload>
           }
           createMany: {
-            args: Prisma.UserCreateManyArgs<ExtArgs>
+            args: Prisma.MajorCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+            args: Prisma.MajorCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MajorPayload>[]
           }
           delete: {
-            args: Prisma.UserDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.MajorDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MajorPayload>
           }
           update: {
-            args: Prisma.UserUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.MajorUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MajorPayload>
           }
           deleteMany: {
-            args: Prisma.UserDeleteManyArgs<ExtArgs>
+            args: Prisma.MajorDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.UserUpdateManyArgs<ExtArgs>
+            args: Prisma.MajorUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.UserUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+            args: Prisma.MajorUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MajorPayload>[]
           }
           upsert: {
-            args: Prisma.UserUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.MajorUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MajorPayload>
           }
           aggregate: {
-            args: Prisma.UserAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateUser>
+            args: Prisma.MajorAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMajor>
           }
           groupBy: {
-            args: Prisma.UserGroupByArgs<ExtArgs>
-            result: $Utils.Optional<UserGroupByOutputType>[]
+            args: Prisma.MajorGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MajorGroupByOutputType>[]
           }
           count: {
-            args: Prisma.UserCountArgs<ExtArgs>
-            result: $Utils.Optional<UserCountAggregateOutputType> | number
+            args: Prisma.MajorCountArgs<ExtArgs>
+            result: $Utils.Optional<MajorCountAggregateOutputType> | number
           }
         }
       }
@@ -844,77 +860,77 @@ export namespace Prisma {
           }
         }
       }
-      Major: {
-        payload: Prisma.$MajorPayload<ExtArgs>
-        fields: Prisma.MajorFieldRefs
+      User: {
+        payload: Prisma.$UserPayload<ExtArgs>
+        fields: Prisma.UserFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.MajorFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MajorPayload> | null
+            args: Prisma.UserFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.MajorFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MajorPayload>
+            args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           findFirst: {
-            args: Prisma.MajorFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MajorPayload> | null
+            args: Prisma.UserFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.MajorFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MajorPayload>
+            args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           findMany: {
-            args: Prisma.MajorFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MajorPayload>[]
+            args: Prisma.UserFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
           }
           create: {
-            args: Prisma.MajorCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MajorPayload>
+            args: Prisma.UserCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           createMany: {
-            args: Prisma.MajorCreateManyArgs<ExtArgs>
+            args: Prisma.UserCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.MajorCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MajorPayload>[]
+            args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
           }
           delete: {
-            args: Prisma.MajorDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MajorPayload>
+            args: Prisma.UserDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           update: {
-            args: Prisma.MajorUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MajorPayload>
+            args: Prisma.UserUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           deleteMany: {
-            args: Prisma.MajorDeleteManyArgs<ExtArgs>
+            args: Prisma.UserDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.MajorUpdateManyArgs<ExtArgs>
+            args: Prisma.UserUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.MajorUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MajorPayload>[]
+            args: Prisma.UserUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
           }
           upsert: {
-            args: Prisma.MajorUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MajorPayload>
+            args: Prisma.UserUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           aggregate: {
-            args: Prisma.MajorAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateMajor>
+            args: Prisma.UserAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUser>
           }
           groupBy: {
-            args: Prisma.MajorGroupByArgs<ExtArgs>
-            result: $Utils.Optional<MajorGroupByOutputType>[]
+            args: Prisma.UserGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserGroupByOutputType>[]
           }
           count: {
-            args: Prisma.MajorCountArgs<ExtArgs>
-            result: $Utils.Optional<MajorCountAggregateOutputType> | number
+            args: Prisma.UserCountArgs<ExtArgs>
+            result: $Utils.Optional<UserCountAggregateOutputType> | number
           }
         }
       }
@@ -1140,6 +1156,80 @@ export namespace Prisma {
           }
         }
       }
+      Agenda: {
+        payload: Prisma.$AgendaPayload<ExtArgs>
+        fields: Prisma.AgendaFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AgendaFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AgendaPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AgendaFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AgendaPayload>
+          }
+          findFirst: {
+            args: Prisma.AgendaFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AgendaPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AgendaFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AgendaPayload>
+          }
+          findMany: {
+            args: Prisma.AgendaFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AgendaPayload>[]
+          }
+          create: {
+            args: Prisma.AgendaCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AgendaPayload>
+          }
+          createMany: {
+            args: Prisma.AgendaCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AgendaCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AgendaPayload>[]
+          }
+          delete: {
+            args: Prisma.AgendaDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AgendaPayload>
+          }
+          update: {
+            args: Prisma.AgendaUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AgendaPayload>
+          }
+          deleteMany: {
+            args: Prisma.AgendaDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AgendaUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AgendaUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AgendaPayload>[]
+          }
+          upsert: {
+            args: Prisma.AgendaUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AgendaPayload>
+          }
+          aggregate: {
+            args: Prisma.AgendaAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAgenda>
+          }
+          groupBy: {
+            args: Prisma.AgendaGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AgendaGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AgendaCountArgs<ExtArgs>
+            result: $Utils.Optional<AgendaCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1224,12 +1314,13 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
-    user?: UserOmit
-    admin?: AdminOmit
     major?: MajorOmit
+    admin?: AdminOmit
+    user?: UserOmit
     categories?: CategoriesOmit
     students?: StudentsOmit
     votes?: VotesOmit
+    agenda?: AgendaOmit
   }
 
   /* Types for Logging */
@@ -1320,37 +1411,6 @@ export namespace Prisma {
 
 
   /**
-   * Count Type UserCountOutputType
-   */
-
-  export type UserCountOutputType = {
-    Votes: number
-  }
-
-  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Votes?: boolean | UserCountOutputTypeCountVotesArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserCountOutputType
-     */
-    select?: UserCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountVotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: VotesWhereInput
-  }
-
-
-  /**
    * Count Type MajorCountOutputType
    */
 
@@ -1387,6 +1447,37 @@ export namespace Prisma {
    */
   export type MajorCountOutputTypeCountAdminArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AdminWhereInput
+  }
+
+
+  /**
+   * Count Type UserCountOutputType
+   */
+
+  export type UserCountOutputType = {
+    Votes: number
+  }
+
+  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Votes?: boolean | UserCountOutputTypeCountVotesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCountOutputType
+     */
+    select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountVotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VotesWhereInput
   }
 
 
@@ -1457,381 +1548,387 @@ export namespace Prisma {
    */
 
   /**
-   * Model User
+   * Model Major
    */
 
-  export type AggregateUser = {
-    _count: UserCountAggregateOutputType | null
-    _avg: UserAvgAggregateOutputType | null
-    _sum: UserSumAggregateOutputType | null
-    _min: UserMinAggregateOutputType | null
-    _max: UserMaxAggregateOutputType | null
+  export type AggregateMajor = {
+    _count: MajorCountAggregateOutputType | null
+    _avg: MajorAvgAggregateOutputType | null
+    _sum: MajorSumAggregateOutputType | null
+    _min: MajorMinAggregateOutputType | null
+    _max: MajorMaxAggregateOutputType | null
   }
 
-  export type UserAvgAggregateOutputType = {
+  export type MajorAvgAggregateOutputType = {
     id: number | null
-    majorId: number | null
+    maxQuantity: number | null
   }
 
-  export type UserSumAggregateOutputType = {
+  export type MajorSumAggregateOutputType = {
     id: number | null
-    majorId: number | null
+    maxQuantity: number | null
   }
 
-  export type UserMinAggregateOutputType = {
+  export type MajorMinAggregateOutputType = {
     id: number | null
-    name: string | null
-    email: string | null
-    majorId: number | null
+    majorsOrAdmin: string | null
+    maxQuantity: number | null
+    passCode: string | null
+    isTimeUp: boolean | null
   }
 
-  export type UserMaxAggregateOutputType = {
+  export type MajorMaxAggregateOutputType = {
     id: number | null
-    name: string | null
-    email: string | null
-    majorId: number | null
+    majorsOrAdmin: string | null
+    maxQuantity: number | null
+    passCode: string | null
+    isTimeUp: boolean | null
   }
 
-  export type UserCountAggregateOutputType = {
+  export type MajorCountAggregateOutputType = {
     id: number
-    name: number
-    email: number
-    majorId: number
+    majorsOrAdmin: number
+    maxQuantity: number
+    passCode: number
+    isTimeUp: number
     _all: number
   }
 
 
-  export type UserAvgAggregateInputType = {
+  export type MajorAvgAggregateInputType = {
     id?: true
-    majorId?: true
+    maxQuantity?: true
   }
 
-  export type UserSumAggregateInputType = {
+  export type MajorSumAggregateInputType = {
     id?: true
-    majorId?: true
+    maxQuantity?: true
   }
 
-  export type UserMinAggregateInputType = {
+  export type MajorMinAggregateInputType = {
     id?: true
-    name?: true
-    email?: true
-    majorId?: true
+    majorsOrAdmin?: true
+    maxQuantity?: true
+    passCode?: true
+    isTimeUp?: true
   }
 
-  export type UserMaxAggregateInputType = {
+  export type MajorMaxAggregateInputType = {
     id?: true
-    name?: true
-    email?: true
-    majorId?: true
+    majorsOrAdmin?: true
+    maxQuantity?: true
+    passCode?: true
+    isTimeUp?: true
   }
 
-  export type UserCountAggregateInputType = {
+  export type MajorCountAggregateInputType = {
     id?: true
-    name?: true
-    email?: true
-    majorId?: true
+    majorsOrAdmin?: true
+    maxQuantity?: true
+    passCode?: true
+    isTimeUp?: true
     _all?: true
   }
 
-  export type UserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MajorAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which User to aggregate.
+     * Filter which Major to aggregate.
      */
-    where?: UserWhereInput
+    where?: MajorWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Users to fetch.
+     * Determine the order of Majors to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: MajorOrderByWithRelationInput | MajorOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: MajorWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Users from the position of the cursor.
+     * Take `±n` Majors from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Users.
+     * Skip the first `n` Majors.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Users
+     * Count returned Majors
     **/
-    _count?: true | UserCountAggregateInputType
+    _count?: true | MajorCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: UserAvgAggregateInputType
+    _avg?: MajorAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: UserSumAggregateInputType
+    _sum?: MajorSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: UserMinAggregateInputType
+    _min?: MajorMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: UserMaxAggregateInputType
+    _max?: MajorMaxAggregateInputType
   }
 
-  export type GetUserAggregateType<T extends UserAggregateArgs> = {
-        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
+  export type GetMajorAggregateType<T extends MajorAggregateArgs> = {
+        [P in keyof T & keyof AggregateMajor]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateUser[P]>
-      : GetScalarType<T[P], AggregateUser[P]>
+        : GetScalarType<T[P], AggregateMajor[P]>
+      : GetScalarType<T[P], AggregateMajor[P]>
   }
 
 
 
 
-  export type UserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserWhereInput
-    orderBy?: UserOrderByWithAggregationInput | UserOrderByWithAggregationInput[]
-    by: UserScalarFieldEnum[] | UserScalarFieldEnum
-    having?: UserScalarWhereWithAggregatesInput
+  export type MajorGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MajorWhereInput
+    orderBy?: MajorOrderByWithAggregationInput | MajorOrderByWithAggregationInput[]
+    by: MajorScalarFieldEnum[] | MajorScalarFieldEnum
+    having?: MajorScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: UserCountAggregateInputType | true
-    _avg?: UserAvgAggregateInputType
-    _sum?: UserSumAggregateInputType
-    _min?: UserMinAggregateInputType
-    _max?: UserMaxAggregateInputType
+    _count?: MajorCountAggregateInputType | true
+    _avg?: MajorAvgAggregateInputType
+    _sum?: MajorSumAggregateInputType
+    _min?: MajorMinAggregateInputType
+    _max?: MajorMaxAggregateInputType
   }
 
-  export type UserGroupByOutputType = {
+  export type MajorGroupByOutputType = {
     id: number
-    name: string
-    email: string
-    majorId: number
-    _count: UserCountAggregateOutputType | null
-    _avg: UserAvgAggregateOutputType | null
-    _sum: UserSumAggregateOutputType | null
-    _min: UserMinAggregateOutputType | null
-    _max: UserMaxAggregateOutputType | null
+    majorsOrAdmin: string
+    maxQuantity: number
+    passCode: string
+    isTimeUp: boolean
+    _count: MajorCountAggregateOutputType | null
+    _avg: MajorAvgAggregateOutputType | null
+    _sum: MajorSumAggregateOutputType | null
+    _min: MajorMinAggregateOutputType | null
+    _max: MajorMaxAggregateOutputType | null
   }
 
-  type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
+  type GetMajorGroupByPayload<T extends MajorGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<UserGroupByOutputType, T['by']> &
+      PickEnumerable<MajorGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof MajorGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], UserGroupByOutputType[P]>
-            : GetScalarType<T[P], UserGroupByOutputType[P]>
+              : GetScalarType<T[P], MajorGroupByOutputType[P]>
+            : GetScalarType<T[P], MajorGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type MajorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
-    email?: boolean
-    majorId?: boolean
-    Major?: boolean | MajorDefaultArgs<ExtArgs>
-    Votes?: boolean | User$VotesArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["user"]>
+    majorsOrAdmin?: boolean
+    maxQuantity?: boolean
+    passCode?: boolean
+    isTimeUp?: boolean
+    User?: boolean | Major$UserArgs<ExtArgs>
+    Admin?: boolean | Major$AdminArgs<ExtArgs>
+    _count?: boolean | MajorCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["major"]>
 
-  export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type MajorSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
-    email?: boolean
-    majorId?: boolean
-    Major?: boolean | MajorDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["user"]>
+    majorsOrAdmin?: boolean
+    maxQuantity?: boolean
+    passCode?: boolean
+    isTimeUp?: boolean
+  }, ExtArgs["result"]["major"]>
 
-  export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type MajorSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
-    email?: boolean
-    majorId?: boolean
-    Major?: boolean | MajorDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["user"]>
+    majorsOrAdmin?: boolean
+    maxQuantity?: boolean
+    passCode?: boolean
+    isTimeUp?: boolean
+  }, ExtArgs["result"]["major"]>
 
-  export type UserSelectScalar = {
+  export type MajorSelectScalar = {
     id?: boolean
-    name?: boolean
-    email?: boolean
-    majorId?: boolean
+    majorsOrAdmin?: boolean
+    maxQuantity?: boolean
+    passCode?: boolean
+    isTimeUp?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "majorId", ExtArgs["result"]["user"]>
-  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Major?: boolean | MajorDefaultArgs<ExtArgs>
-    Votes?: boolean | User$VotesArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  export type MajorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "majorsOrAdmin" | "maxQuantity" | "passCode" | "isTimeUp", ExtArgs["result"]["major"]>
+  export type MajorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | Major$UserArgs<ExtArgs>
+    Admin?: boolean | Major$AdminArgs<ExtArgs>
+    _count?: boolean | MajorCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Major?: boolean | MajorDefaultArgs<ExtArgs>
-  }
-  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Major?: boolean | MajorDefaultArgs<ExtArgs>
-  }
+  export type MajorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type MajorIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
-  export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "User"
+  export type $MajorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Major"
     objects: {
-      Major: Prisma.$MajorPayload<ExtArgs>
-      Votes: Prisma.$VotesPayload<ExtArgs>[]
+      User: Prisma.$UserPayload<ExtArgs>[]
+      Admin: Prisma.$AdminPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      name: string
-      email: string
-      majorId: number
-    }, ExtArgs["result"]["user"]>
+      majorsOrAdmin: string
+      maxQuantity: number
+      passCode: string
+      isTimeUp: boolean
+    }, ExtArgs["result"]["major"]>
     composites: {}
   }
 
-  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
+  type MajorGetPayload<S extends boolean | null | undefined | MajorDefaultArgs> = $Result.GetResult<Prisma.$MajorPayload, S>
 
-  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: UserCountAggregateInputType | true
+  type MajorCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MajorFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MajorCountAggregateInputType | true
     }
 
-  export interface UserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
+  export interface MajorDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Major'], meta: { name: 'Major' } }
     /**
-     * Find zero or one User that matches the filter.
-     * @param {UserFindUniqueArgs} args - Arguments to find a User
+     * Find zero or one Major that matches the filter.
+     * @param {MajorFindUniqueArgs} args - Arguments to find a Major
      * @example
-     * // Get one User
-     * const user = await prisma.user.findUnique({
+     * // Get one Major
+     * const major = await prisma.major.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends UserFindUniqueArgs>(args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends MajorFindUniqueArgs>(args: SelectSubset<T, MajorFindUniqueArgs<ExtArgs>>): Prisma__MajorClient<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one User that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Major that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
+     * @param {MajorFindUniqueOrThrowArgs} args - Arguments to find a Major
      * @example
-     * // Get one User
-     * const user = await prisma.user.findUniqueOrThrow({
+     * // Get one Major
+     * const major = await prisma.major.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(args: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends MajorFindUniqueOrThrowArgs>(args: SelectSubset<T, MajorFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MajorClient<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first User that matches the filter.
+     * Find the first Major that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindFirstArgs} args - Arguments to find a User
+     * @param {MajorFindFirstArgs} args - Arguments to find a Major
      * @example
-     * // Get one User
-     * const user = await prisma.user.findFirst({
+     * // Get one Major
+     * const major = await prisma.major.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends UserFindFirstArgs>(args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends MajorFindFirstArgs>(args?: SelectSubset<T, MajorFindFirstArgs<ExtArgs>>): Prisma__MajorClient<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first User that matches the filter or
+     * Find the first Major that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
+     * @param {MajorFindFirstOrThrowArgs} args - Arguments to find a Major
      * @example
-     * // Get one User
-     * const user = await prisma.user.findFirstOrThrow({
+     * // Get one Major
+     * const major = await prisma.major.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends MajorFindFirstOrThrowArgs>(args?: SelectSubset<T, MajorFindFirstOrThrowArgs<ExtArgs>>): Prisma__MajorClient<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Users that matches the filter.
+     * Find zero or more Majors that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {MajorFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Users
-     * const users = await prisma.user.findMany()
+     * // Get all Majors
+     * const majors = await prisma.major.findMany()
      * 
-     * // Get first 10 Users
-     * const users = await prisma.user.findMany({ take: 10 })
+     * // Get first 10 Majors
+     * const majors = await prisma.major.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
+     * const majorWithIdOnly = await prisma.major.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends UserFindManyArgs>(args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends MajorFindManyArgs>(args?: SelectSubset<T, MajorFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a User.
-     * @param {UserCreateArgs} args - Arguments to create a User.
+     * Create a Major.
+     * @param {MajorCreateArgs} args - Arguments to create a Major.
      * @example
-     * // Create one User
-     * const User = await prisma.user.create({
+     * // Create one Major
+     * const Major = await prisma.major.create({
      *   data: {
-     *     // ... data to create a User
+     *     // ... data to create a Major
      *   }
      * })
      * 
      */
-    create<T extends UserCreateArgs>(args: SelectSubset<T, UserCreateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends MajorCreateArgs>(args: SelectSubset<T, MajorCreateArgs<ExtArgs>>): Prisma__MajorClient<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Users.
-     * @param {UserCreateManyArgs} args - Arguments to create many Users.
+     * Create many Majors.
+     * @param {MajorCreateManyArgs} args - Arguments to create many Majors.
      * @example
-     * // Create many Users
-     * const user = await prisma.user.createMany({
+     * // Create many Majors
+     * const major = await prisma.major.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends UserCreateManyArgs>(args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends MajorCreateManyArgs>(args?: SelectSubset<T, MajorCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Users and returns the data saved in the database.
-     * @param {UserCreateManyAndReturnArgs} args - Arguments to create many Users.
+     * Create many Majors and returns the data saved in the database.
+     * @param {MajorCreateManyAndReturnArgs} args - Arguments to create many Majors.
      * @example
-     * // Create many Users
-     * const user = await prisma.user.createManyAndReturn({
+     * // Create many Majors
+     * const major = await prisma.major.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Users and only return the `id`
-     * const userWithIdOnly = await prisma.user.createManyAndReturn({
+     * // Create many Majors and only return the `id`
+     * const majorWithIdOnly = await prisma.major.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -1841,28 +1938,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends UserCreateManyAndReturnArgs>(args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends MajorCreateManyAndReturnArgs>(args?: SelectSubset<T, MajorCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a User.
-     * @param {UserDeleteArgs} args - Arguments to delete one User.
+     * Delete a Major.
+     * @param {MajorDeleteArgs} args - Arguments to delete one Major.
      * @example
-     * // Delete one User
-     * const User = await prisma.user.delete({
+     * // Delete one Major
+     * const Major = await prisma.major.delete({
      *   where: {
-     *     // ... filter to delete one User
+     *     // ... filter to delete one Major
      *   }
      * })
      * 
      */
-    delete<T extends UserDeleteArgs>(args: SelectSubset<T, UserDeleteArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends MajorDeleteArgs>(args: SelectSubset<T, MajorDeleteArgs<ExtArgs>>): Prisma__MajorClient<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one User.
-     * @param {UserUpdateArgs} args - Arguments to update one User.
+     * Update one Major.
+     * @param {MajorUpdateArgs} args - Arguments to update one Major.
      * @example
-     * // Update one User
-     * const user = await prisma.user.update({
+     * // Update one Major
+     * const major = await prisma.major.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1872,30 +1969,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends UserUpdateArgs>(args: SelectSubset<T, UserUpdateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends MajorUpdateArgs>(args: SelectSubset<T, MajorUpdateArgs<ExtArgs>>): Prisma__MajorClient<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Users.
-     * @param {UserDeleteManyArgs} args - Arguments to filter Users to delete.
+     * Delete zero or more Majors.
+     * @param {MajorDeleteManyArgs} args - Arguments to filter Majors to delete.
      * @example
-     * // Delete a few Users
-     * const { count } = await prisma.user.deleteMany({
+     * // Delete a few Majors
+     * const { count } = await prisma.major.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends UserDeleteManyArgs>(args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends MajorDeleteManyArgs>(args?: SelectSubset<T, MajorDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Users.
+     * Update zero or more Majors.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {MajorUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Users
-     * const user = await prisma.user.updateMany({
+     * // Update many Majors
+     * const major = await prisma.major.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1905,14 +2002,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends UserUpdateManyArgs>(args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends MajorUpdateManyArgs>(args: SelectSubset<T, MajorUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Users and returns the data updated in the database.
-     * @param {UserUpdateManyAndReturnArgs} args - Arguments to update many Users.
+     * Update zero or more Majors and returns the data updated in the database.
+     * @param {MajorUpdateManyAndReturnArgs} args - Arguments to update many Majors.
      * @example
-     * // Update many Users
-     * const user = await prisma.user.updateManyAndReturn({
+     * // Update many Majors
+     * const major = await prisma.major.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1921,8 +2018,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Users and only return the `id`
-     * const userWithIdOnly = await prisma.user.updateManyAndReturn({
+     * // Update zero or more Majors and only return the `id`
+     * const majorWithIdOnly = await prisma.major.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -1935,56 +2032,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends UserUpdateManyAndReturnArgs>(args: SelectSubset<T, UserUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends MajorUpdateManyAndReturnArgs>(args: SelectSubset<T, MajorUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one User.
-     * @param {UserUpsertArgs} args - Arguments to update or create a User.
+     * Create or update one Major.
+     * @param {MajorUpsertArgs} args - Arguments to update or create a Major.
      * @example
-     * // Update or create a User
-     * const user = await prisma.user.upsert({
+     * // Update or create a Major
+     * const major = await prisma.major.upsert({
      *   create: {
-     *     // ... data to create a User
+     *     // ... data to create a Major
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the User we want to update
+     *     // ... the filter for the Major we want to update
      *   }
      * })
      */
-    upsert<T extends UserUpsertArgs>(args: SelectSubset<T, UserUpsertArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends MajorUpsertArgs>(args: SelectSubset<T, MajorUpsertArgs<ExtArgs>>): Prisma__MajorClient<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Users.
+     * Count the number of Majors.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserCountArgs} args - Arguments to filter Users to count.
+     * @param {MajorCountArgs} args - Arguments to filter Majors to count.
      * @example
-     * // Count the number of Users
-     * const count = await prisma.user.count({
+     * // Count the number of Majors
+     * const count = await prisma.major.count({
      *   where: {
-     *     // ... the filter for the Users we want to count
+     *     // ... the filter for the Majors we want to count
      *   }
      * })
     **/
-    count<T extends UserCountArgs>(
-      args?: Subset<T, UserCountArgs>,
+    count<T extends MajorCountArgs>(
+      args?: Subset<T, MajorCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], UserCountAggregateOutputType>
+          : GetScalarType<T['select'], MajorCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a User.
+     * Allows you to perform aggregations operations on a Major.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {MajorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -2004,13 +2101,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Prisma.PrismaPromise<GetUserAggregateType<T>>
+    aggregate<T extends MajorAggregateArgs>(args: Subset<T, MajorAggregateArgs>): Prisma.PrismaPromise<GetMajorAggregateType<T>>
 
     /**
-     * Group by User.
+     * Group by Major.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserGroupByArgs} args - Group by arguments.
+     * @param {MajorGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -2025,14 +2122,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends UserGroupByArgs,
+      T extends MajorGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: UserGroupByArgs['orderBy'] }
-        : { orderBy?: UserGroupByArgs['orderBy'] },
+        ? { orderBy: MajorGroupByArgs['orderBy'] }
+        : { orderBy?: MajorGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -2081,23 +2178,23 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, MajorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMajorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the User model
+   * Fields of the Major model
    */
-  readonly fields: UserFieldRefs;
+  readonly fields: MajorFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for User.
+   * The delegate class that acts as a "Promise-like" for Major.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__MajorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    Major<T extends MajorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MajorDefaultArgs<ExtArgs>>): Prisma__MajorClient<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Votes<T extends User$VotesArgs<ExtArgs> = {}>(args?: Subset<T, User$VotesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VotesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    User<T extends Major$UserArgs<ExtArgs> = {}>(args?: Subset<T, Major$UserArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Admin<T extends Major$AdminArgs<ExtArgs> = {}>(args?: Subset<T, Major$AdminArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2124,448 +2221,465 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the User model
+   * Fields of the Major model
    */
-  interface UserFieldRefs {
-    readonly id: FieldRef<"User", 'Int'>
-    readonly name: FieldRef<"User", 'String'>
-    readonly email: FieldRef<"User", 'String'>
-    readonly majorId: FieldRef<"User", 'Int'>
+  interface MajorFieldRefs {
+    readonly id: FieldRef<"Major", 'Int'>
+    readonly majorsOrAdmin: FieldRef<"Major", 'String'>
+    readonly maxQuantity: FieldRef<"Major", 'Int'>
+    readonly passCode: FieldRef<"Major", 'String'>
+    readonly isTimeUp: FieldRef<"Major", 'Boolean'>
   }
     
 
   // Custom InputTypes
   /**
-   * User findUnique
+   * Major findUnique
    */
-  export type UserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MajorFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Major
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: MajorSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the Major
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: MajorOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: MajorInclude<ExtArgs> | null
     /**
-     * Filter, which User to fetch.
+     * Filter, which Major to fetch.
      */
-    where: UserWhereUniqueInput
+    where: MajorWhereUniqueInput
   }
 
   /**
-   * User findUniqueOrThrow
+   * Major findUniqueOrThrow
    */
-  export type UserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MajorFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Major
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: MajorSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the Major
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: MajorOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: MajorInclude<ExtArgs> | null
     /**
-     * Filter, which User to fetch.
+     * Filter, which Major to fetch.
      */
-    where: UserWhereUniqueInput
+    where: MajorWhereUniqueInput
   }
 
   /**
-   * User findFirst
+   * Major findFirst
    */
-  export type UserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MajorFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Major
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: MajorSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the Major
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: MajorOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: MajorInclude<ExtArgs> | null
     /**
-     * Filter, which User to fetch.
+     * Filter, which Major to fetch.
      */
-    where?: UserWhereInput
+    where?: MajorWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Users to fetch.
+     * Determine the order of Majors to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: MajorOrderByWithRelationInput | MajorOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Users.
+     * Sets the position for searching for Majors.
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: MajorWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Users from the position of the cursor.
+     * Take `±n` Majors from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Users.
+     * Skip the first `n` Majors.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Users.
+     * Filter by unique combinations of Majors.
      */
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+    distinct?: MajorScalarFieldEnum | MajorScalarFieldEnum[]
   }
 
   /**
-   * User findFirstOrThrow
+   * Major findFirstOrThrow
    */
-  export type UserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MajorFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Major
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: MajorSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the Major
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: MajorOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: MajorInclude<ExtArgs> | null
     /**
-     * Filter, which User to fetch.
+     * Filter, which Major to fetch.
      */
-    where?: UserWhereInput
+    where?: MajorWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Users to fetch.
+     * Determine the order of Majors to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: MajorOrderByWithRelationInput | MajorOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Users.
+     * Sets the position for searching for Majors.
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: MajorWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Users from the position of the cursor.
+     * Take `±n` Majors from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Users.
+     * Skip the first `n` Majors.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Users.
+     * Filter by unique combinations of Majors.
      */
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+    distinct?: MajorScalarFieldEnum | MajorScalarFieldEnum[]
   }
 
   /**
-   * User findMany
+   * Major findMany
    */
-  export type UserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MajorFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Major
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: MajorSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the Major
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: MajorOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: MajorInclude<ExtArgs> | null
     /**
-     * Filter, which Users to fetch.
+     * Filter, which Majors to fetch.
      */
-    where?: UserWhereInput
+    where?: MajorWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Users to fetch.
+     * Determine the order of Majors to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: MajorOrderByWithRelationInput | MajorOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Users.
+     * Sets the position for listing Majors.
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: MajorWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Users from the position of the cursor.
+     * Take `±n` Majors from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Users.
+     * Skip the first `n` Majors.
      */
+    skip?: number
+    distinct?: MajorScalarFieldEnum | MajorScalarFieldEnum[]
+  }
+
+  /**
+   * Major create
+   */
+  export type MajorCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Major
+     */
+    select?: MajorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Major
+     */
+    omit?: MajorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MajorInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Major.
+     */
+    data: XOR<MajorCreateInput, MajorUncheckedCreateInput>
+  }
+
+  /**
+   * Major createMany
+   */
+  export type MajorCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Majors.
+     */
+    data: MajorCreateManyInput | MajorCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Major createManyAndReturn
+   */
+  export type MajorCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Major
+     */
+    select?: MajorSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Major
+     */
+    omit?: MajorOmit<ExtArgs> | null
+    /**
+     * The data used to create many Majors.
+     */
+    data: MajorCreateManyInput | MajorCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Major update
+   */
+  export type MajorUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Major
+     */
+    select?: MajorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Major
+     */
+    omit?: MajorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MajorInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Major.
+     */
+    data: XOR<MajorUpdateInput, MajorUncheckedUpdateInput>
+    /**
+     * Choose, which Major to update.
+     */
+    where: MajorWhereUniqueInput
+  }
+
+  /**
+   * Major updateMany
+   */
+  export type MajorUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Majors.
+     */
+    data: XOR<MajorUpdateManyMutationInput, MajorUncheckedUpdateManyInput>
+    /**
+     * Filter which Majors to update
+     */
+    where?: MajorWhereInput
+    /**
+     * Limit how many Majors to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Major updateManyAndReturn
+   */
+  export type MajorUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Major
+     */
+    select?: MajorSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Major
+     */
+    omit?: MajorOmit<ExtArgs> | null
+    /**
+     * The data used to update Majors.
+     */
+    data: XOR<MajorUpdateManyMutationInput, MajorUncheckedUpdateManyInput>
+    /**
+     * Filter which Majors to update
+     */
+    where?: MajorWhereInput
+    /**
+     * Limit how many Majors to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Major upsert
+   */
+  export type MajorUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Major
+     */
+    select?: MajorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Major
+     */
+    omit?: MajorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MajorInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Major to update in case it exists.
+     */
+    where: MajorWhereUniqueInput
+    /**
+     * In case the Major found by the `where` argument doesn't exist, create a new Major with this data.
+     */
+    create: XOR<MajorCreateInput, MajorUncheckedCreateInput>
+    /**
+     * In case the Major was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MajorUpdateInput, MajorUncheckedUpdateInput>
+  }
+
+  /**
+   * Major delete
+   */
+  export type MajorDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Major
+     */
+    select?: MajorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Major
+     */
+    omit?: MajorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MajorInclude<ExtArgs> | null
+    /**
+     * Filter which Major to delete.
+     */
+    where: MajorWhereUniqueInput
+  }
+
+  /**
+   * Major deleteMany
+   */
+  export type MajorDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Majors to delete
+     */
+    where?: MajorWhereInput
+    /**
+     * Limit how many Majors to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Major.User
+   */
+  export type Major$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
     skip?: number
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
   /**
-   * User create
+   * Major.Admin
    */
-  export type UserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Major$AdminArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Admin
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: AdminSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the Admin
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: AdminOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
-    /**
-     * The data needed to create a User.
-     */
-    data: XOR<UserCreateInput, UserUncheckedCreateInput>
-  }
-
-  /**
-   * User createMany
-   */
-  export type UserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Users.
-     */
-    data: UserCreateManyInput | UserCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * User createManyAndReturn
-   */
-  export type UserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * The data used to create many Users.
-     */
-    data: UserCreateManyInput | UserCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * User update
-   */
-  export type UserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    /**
-     * The data needed to update a User.
-     */
-    data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
-    /**
-     * Choose, which User to update.
-     */
-    where: UserWhereUniqueInput
-  }
-
-  /**
-   * User updateMany
-   */
-  export type UserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Users.
-     */
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
-    /**
-     * Filter which Users to update
-     */
-    where?: UserWhereInput
-    /**
-     * Limit how many Users to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * User updateManyAndReturn
-   */
-  export type UserUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * The data used to update Users.
-     */
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
-    /**
-     * Filter which Users to update
-     */
-    where?: UserWhereInput
-    /**
-     * Limit how many Users to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * User upsert
-   */
-  export type UserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    /**
-     * The filter to search for the User to update in case it exists.
-     */
-    where: UserWhereUniqueInput
-    /**
-     * In case the User found by the `where` argument doesn't exist, create a new User with this data.
-     */
-    create: XOR<UserCreateInput, UserUncheckedCreateInput>
-    /**
-     * In case the User was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
-  }
-
-  /**
-   * User delete
-   */
-  export type UserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    /**
-     * Filter which User to delete.
-     */
-    where: UserWhereUniqueInput
-  }
-
-  /**
-   * User deleteMany
-   */
-  export type UserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Users to delete
-     */
-    where?: UserWhereInput
-    /**
-     * Limit how many Users to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * User.Votes
-   */
-  export type User$VotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Votes
-     */
-    select?: VotesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Votes
-     */
-    omit?: VotesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VotesInclude<ExtArgs> | null
-    where?: VotesWhereInput
-    orderBy?: VotesOrderByWithRelationInput | VotesOrderByWithRelationInput[]
-    cursor?: VotesWhereUniqueInput
+    include?: AdminInclude<ExtArgs> | null
+    where?: AdminWhereInput
+    orderBy?: AdminOrderByWithRelationInput | AdminOrderByWithRelationInput[]
+    cursor?: AdminWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: VotesScalarFieldEnum | VotesScalarFieldEnum[]
+    distinct?: AdminScalarFieldEnum | AdminScalarFieldEnum[]
   }
 
   /**
-   * User without action
+   * Major without action
    */
-  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MajorDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Major
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: MajorSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the User
+     * Omit specific fields from the Major
      */
-    omit?: UserOmit<ExtArgs> | null
+    omit?: MajorOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: MajorInclude<ExtArgs> | null
   }
 
 
@@ -3640,375 +3754,393 @@ export namespace Prisma {
 
 
   /**
-   * Model Major
+   * Model User
    */
 
-  export type AggregateMajor = {
-    _count: MajorCountAggregateOutputType | null
-    _avg: MajorAvgAggregateOutputType | null
-    _sum: MajorSumAggregateOutputType | null
-    _min: MajorMinAggregateOutputType | null
-    _max: MajorMaxAggregateOutputType | null
+  export type AggregateUser = {
+    _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
+    _min: UserMinAggregateOutputType | null
+    _max: UserMaxAggregateOutputType | null
   }
 
-  export type MajorAvgAggregateOutputType = {
+  export type UserAvgAggregateOutputType = {
     id: number | null
-    maxQuantity: number | null
+    majorId: number | null
   }
 
-  export type MajorSumAggregateOutputType = {
+  export type UserSumAggregateOutputType = {
     id: number | null
-    maxQuantity: number | null
+    majorId: number | null
   }
 
-  export type MajorMinAggregateOutputType = {
+  export type UserMinAggregateOutputType = {
     id: number | null
-    majorsOrAdmin: string | null
-    maxQuantity: number | null
-    passCode: string | null
+    name: string | null
+    email: string | null
+    majorId: number | null
+    isSubmited: boolean | null
   }
 
-  export type MajorMaxAggregateOutputType = {
+  export type UserMaxAggregateOutputType = {
     id: number | null
-    majorsOrAdmin: string | null
-    maxQuantity: number | null
-    passCode: string | null
+    name: string | null
+    email: string | null
+    majorId: number | null
+    isSubmited: boolean | null
   }
 
-  export type MajorCountAggregateOutputType = {
+  export type UserCountAggregateOutputType = {
     id: number
-    majorsOrAdmin: number
-    maxQuantity: number
-    passCode: number
+    name: number
+    email: number
+    majorId: number
+    isSubmited: number
     _all: number
   }
 
 
-  export type MajorAvgAggregateInputType = {
+  export type UserAvgAggregateInputType = {
     id?: true
-    maxQuantity?: true
+    majorId?: true
   }
 
-  export type MajorSumAggregateInputType = {
+  export type UserSumAggregateInputType = {
     id?: true
-    maxQuantity?: true
+    majorId?: true
   }
 
-  export type MajorMinAggregateInputType = {
+  export type UserMinAggregateInputType = {
     id?: true
-    majorsOrAdmin?: true
-    maxQuantity?: true
-    passCode?: true
+    name?: true
+    email?: true
+    majorId?: true
+    isSubmited?: true
   }
 
-  export type MajorMaxAggregateInputType = {
+  export type UserMaxAggregateInputType = {
     id?: true
-    majorsOrAdmin?: true
-    maxQuantity?: true
-    passCode?: true
+    name?: true
+    email?: true
+    majorId?: true
+    isSubmited?: true
   }
 
-  export type MajorCountAggregateInputType = {
+  export type UserCountAggregateInputType = {
     id?: true
-    majorsOrAdmin?: true
-    maxQuantity?: true
-    passCode?: true
+    name?: true
+    email?: true
+    majorId?: true
+    isSubmited?: true
     _all?: true
   }
 
-  export type MajorAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Major to aggregate.
+     * Filter which User to aggregate.
      */
-    where?: MajorWhereInput
+    where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Majors to fetch.
+     * Determine the order of Users to fetch.
      */
-    orderBy?: MajorOrderByWithRelationInput | MajorOrderByWithRelationInput[]
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: MajorWhereUniqueInput
+    cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Majors from the position of the cursor.
+     * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Majors.
+     * Skip the first `n` Users.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Majors
+     * Count returned Users
     **/
-    _count?: true | MajorCountAggregateInputType
+    _count?: true | UserCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: MajorAvgAggregateInputType
+    _avg?: UserAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: MajorSumAggregateInputType
+    _sum?: UserSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: MajorMinAggregateInputType
+    _min?: UserMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: MajorMaxAggregateInputType
+    _max?: UserMaxAggregateInputType
   }
 
-  export type GetMajorAggregateType<T extends MajorAggregateArgs> = {
-        [P in keyof T & keyof AggregateMajor]: P extends '_count' | 'count'
+  export type GetUserAggregateType<T extends UserAggregateArgs> = {
+        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateMajor[P]>
-      : GetScalarType<T[P], AggregateMajor[P]>
+        : GetScalarType<T[P], AggregateUser[P]>
+      : GetScalarType<T[P], AggregateUser[P]>
   }
 
 
 
 
-  export type MajorGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MajorWhereInput
-    orderBy?: MajorOrderByWithAggregationInput | MajorOrderByWithAggregationInput[]
-    by: MajorScalarFieldEnum[] | MajorScalarFieldEnum
-    having?: MajorScalarWhereWithAggregatesInput
+  export type UserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithAggregationInput | UserOrderByWithAggregationInput[]
+    by: UserScalarFieldEnum[] | UserScalarFieldEnum
+    having?: UserScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: MajorCountAggregateInputType | true
-    _avg?: MajorAvgAggregateInputType
-    _sum?: MajorSumAggregateInputType
-    _min?: MajorMinAggregateInputType
-    _max?: MajorMaxAggregateInputType
+    _count?: UserCountAggregateInputType | true
+    _avg?: UserAvgAggregateInputType
+    _sum?: UserSumAggregateInputType
+    _min?: UserMinAggregateInputType
+    _max?: UserMaxAggregateInputType
   }
 
-  export type MajorGroupByOutputType = {
+  export type UserGroupByOutputType = {
     id: number
-    majorsOrAdmin: string
-    maxQuantity: number
-    passCode: string
-    _count: MajorCountAggregateOutputType | null
-    _avg: MajorAvgAggregateOutputType | null
-    _sum: MajorSumAggregateOutputType | null
-    _min: MajorMinAggregateOutputType | null
-    _max: MajorMaxAggregateOutputType | null
+    name: string
+    email: string
+    majorId: number
+    isSubmited: boolean
+    _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
+    _min: UserMinAggregateOutputType | null
+    _max: UserMaxAggregateOutputType | null
   }
 
-  type GetMajorGroupByPayload<T extends MajorGroupByArgs> = Prisma.PrismaPromise<
+  type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<MajorGroupByOutputType, T['by']> &
+      PickEnumerable<UserGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof MajorGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], MajorGroupByOutputType[P]>
-            : GetScalarType<T[P], MajorGroupByOutputType[P]>
+              : GetScalarType<T[P], UserGroupByOutputType[P]>
+            : GetScalarType<T[P], UserGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type MajorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    majorsOrAdmin?: boolean
-    maxQuantity?: boolean
-    passCode?: boolean
-    User?: boolean | Major$UserArgs<ExtArgs>
-    Admin?: boolean | Major$AdminArgs<ExtArgs>
-    _count?: boolean | MajorCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["major"]>
+    name?: boolean
+    email?: boolean
+    majorId?: boolean
+    isSubmited?: boolean
+    Major?: boolean | MajorDefaultArgs<ExtArgs>
+    Votes?: boolean | User$VotesArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["user"]>
 
-  export type MajorSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    majorsOrAdmin?: boolean
-    maxQuantity?: boolean
-    passCode?: boolean
-  }, ExtArgs["result"]["major"]>
+    name?: boolean
+    email?: boolean
+    majorId?: boolean
+    isSubmited?: boolean
+    Major?: boolean | MajorDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["user"]>
 
-  export type MajorSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    majorsOrAdmin?: boolean
-    maxQuantity?: boolean
-    passCode?: boolean
-  }, ExtArgs["result"]["major"]>
+    name?: boolean
+    email?: boolean
+    majorId?: boolean
+    isSubmited?: boolean
+    Major?: boolean | MajorDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["user"]>
 
-  export type MajorSelectScalar = {
+  export type UserSelectScalar = {
     id?: boolean
-    majorsOrAdmin?: boolean
-    maxQuantity?: boolean
-    passCode?: boolean
+    name?: boolean
+    email?: boolean
+    majorId?: boolean
+    isSubmited?: boolean
   }
 
-  export type MajorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "majorsOrAdmin" | "maxQuantity" | "passCode", ExtArgs["result"]["major"]>
-  export type MajorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    User?: boolean | Major$UserArgs<ExtArgs>
-    Admin?: boolean | Major$AdminArgs<ExtArgs>
-    _count?: boolean | MajorCountOutputTypeDefaultArgs<ExtArgs>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "majorId" | "isSubmited", ExtArgs["result"]["user"]>
+  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Major?: boolean | MajorDefaultArgs<ExtArgs>
+    Votes?: boolean | User$VotesArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type MajorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type MajorIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Major?: boolean | MajorDefaultArgs<ExtArgs>
+  }
+  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Major?: boolean | MajorDefaultArgs<ExtArgs>
+  }
 
-  export type $MajorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Major"
+  export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "User"
     objects: {
-      User: Prisma.$UserPayload<ExtArgs>[]
-      Admin: Prisma.$AdminPayload<ExtArgs>[]
+      Major: Prisma.$MajorPayload<ExtArgs>
+      Votes: Prisma.$VotesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      majorsOrAdmin: string
-      maxQuantity: number
-      passCode: string
-    }, ExtArgs["result"]["major"]>
+      name: string
+      email: string
+      majorId: number
+      isSubmited: boolean
+    }, ExtArgs["result"]["user"]>
     composites: {}
   }
 
-  type MajorGetPayload<S extends boolean | null | undefined | MajorDefaultArgs> = $Result.GetResult<Prisma.$MajorPayload, S>
+  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
 
-  type MajorCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<MajorFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: MajorCountAggregateInputType | true
+  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserCountAggregateInputType | true
     }
 
-  export interface MajorDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Major'], meta: { name: 'Major' } }
+  export interface UserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
     /**
-     * Find zero or one Major that matches the filter.
-     * @param {MajorFindUniqueArgs} args - Arguments to find a Major
+     * Find zero or one User that matches the filter.
+     * @param {UserFindUniqueArgs} args - Arguments to find a User
      * @example
-     * // Get one Major
-     * const major = await prisma.major.findUnique({
+     * // Get one User
+     * const user = await prisma.user.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends MajorFindUniqueArgs>(args: SelectSubset<T, MajorFindUniqueArgs<ExtArgs>>): Prisma__MajorClient<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends UserFindUniqueArgs>(args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Major that matches the filter or throw an error with `error.code='P2025'`
+     * Find one User that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {MajorFindUniqueOrThrowArgs} args - Arguments to find a Major
+     * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
      * @example
-     * // Get one Major
-     * const major = await prisma.major.findUniqueOrThrow({
+     * // Get one User
+     * const user = await prisma.user.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends MajorFindUniqueOrThrowArgs>(args: SelectSubset<T, MajorFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MajorClient<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(args: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Major that matches the filter.
+     * Find the first User that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MajorFindFirstArgs} args - Arguments to find a Major
+     * @param {UserFindFirstArgs} args - Arguments to find a User
      * @example
-     * // Get one Major
-     * const major = await prisma.major.findFirst({
+     * // Get one User
+     * const user = await prisma.user.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends MajorFindFirstArgs>(args?: SelectSubset<T, MajorFindFirstArgs<ExtArgs>>): Prisma__MajorClient<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends UserFindFirstArgs>(args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Major that matches the filter or
+     * Find the first User that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MajorFindFirstOrThrowArgs} args - Arguments to find a Major
+     * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
      * @example
-     * // Get one Major
-     * const major = await prisma.major.findFirstOrThrow({
+     * // Get one User
+     * const user = await prisma.user.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends MajorFindFirstOrThrowArgs>(args?: SelectSubset<T, MajorFindFirstOrThrowArgs<ExtArgs>>): Prisma__MajorClient<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Majors that matches the filter.
+     * Find zero or more Users that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MajorFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {UserFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Majors
-     * const majors = await prisma.major.findMany()
+     * // Get all Users
+     * const users = await prisma.user.findMany()
      * 
-     * // Get first 10 Majors
-     * const majors = await prisma.major.findMany({ take: 10 })
+     * // Get first 10 Users
+     * const users = await prisma.user.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const majorWithIdOnly = await prisma.major.findMany({ select: { id: true } })
+     * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends MajorFindManyArgs>(args?: SelectSubset<T, MajorFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends UserFindManyArgs>(args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Major.
-     * @param {MajorCreateArgs} args - Arguments to create a Major.
+     * Create a User.
+     * @param {UserCreateArgs} args - Arguments to create a User.
      * @example
-     * // Create one Major
-     * const Major = await prisma.major.create({
+     * // Create one User
+     * const User = await prisma.user.create({
      *   data: {
-     *     // ... data to create a Major
+     *     // ... data to create a User
      *   }
      * })
      * 
      */
-    create<T extends MajorCreateArgs>(args: SelectSubset<T, MajorCreateArgs<ExtArgs>>): Prisma__MajorClient<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends UserCreateArgs>(args: SelectSubset<T, UserCreateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Majors.
-     * @param {MajorCreateManyArgs} args - Arguments to create many Majors.
+     * Create many Users.
+     * @param {UserCreateManyArgs} args - Arguments to create many Users.
      * @example
-     * // Create many Majors
-     * const major = await prisma.major.createMany({
+     * // Create many Users
+     * const user = await prisma.user.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends MajorCreateManyArgs>(args?: SelectSubset<T, MajorCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends UserCreateManyArgs>(args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Majors and returns the data saved in the database.
-     * @param {MajorCreateManyAndReturnArgs} args - Arguments to create many Majors.
+     * Create many Users and returns the data saved in the database.
+     * @param {UserCreateManyAndReturnArgs} args - Arguments to create many Users.
      * @example
-     * // Create many Majors
-     * const major = await prisma.major.createManyAndReturn({
+     * // Create many Users
+     * const user = await prisma.user.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Majors and only return the `id`
-     * const majorWithIdOnly = await prisma.major.createManyAndReturn({
+     * // Create many Users and only return the `id`
+     * const userWithIdOnly = await prisma.user.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -4018,28 +4150,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends MajorCreateManyAndReturnArgs>(args?: SelectSubset<T, MajorCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends UserCreateManyAndReturnArgs>(args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a Major.
-     * @param {MajorDeleteArgs} args - Arguments to delete one Major.
+     * Delete a User.
+     * @param {UserDeleteArgs} args - Arguments to delete one User.
      * @example
-     * // Delete one Major
-     * const Major = await prisma.major.delete({
+     * // Delete one User
+     * const User = await prisma.user.delete({
      *   where: {
-     *     // ... filter to delete one Major
+     *     // ... filter to delete one User
      *   }
      * })
      * 
      */
-    delete<T extends MajorDeleteArgs>(args: SelectSubset<T, MajorDeleteArgs<ExtArgs>>): Prisma__MajorClient<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends UserDeleteArgs>(args: SelectSubset<T, UserDeleteArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Major.
-     * @param {MajorUpdateArgs} args - Arguments to update one Major.
+     * Update one User.
+     * @param {UserUpdateArgs} args - Arguments to update one User.
      * @example
-     * // Update one Major
-     * const major = await prisma.major.update({
+     * // Update one User
+     * const user = await prisma.user.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -4049,30 +4181,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends MajorUpdateArgs>(args: SelectSubset<T, MajorUpdateArgs<ExtArgs>>): Prisma__MajorClient<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends UserUpdateArgs>(args: SelectSubset<T, UserUpdateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Majors.
-     * @param {MajorDeleteManyArgs} args - Arguments to filter Majors to delete.
+     * Delete zero or more Users.
+     * @param {UserDeleteManyArgs} args - Arguments to filter Users to delete.
      * @example
-     * // Delete a few Majors
-     * const { count } = await prisma.major.deleteMany({
+     * // Delete a few Users
+     * const { count } = await prisma.user.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends MajorDeleteManyArgs>(args?: SelectSubset<T, MajorDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends UserDeleteManyArgs>(args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Majors.
+     * Update zero or more Users.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MajorUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {UserUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Majors
-     * const major = await prisma.major.updateMany({
+     * // Update many Users
+     * const user = await prisma.user.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -4082,14 +4214,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends MajorUpdateManyArgs>(args: SelectSubset<T, MajorUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends UserUpdateManyArgs>(args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Majors and returns the data updated in the database.
-     * @param {MajorUpdateManyAndReturnArgs} args - Arguments to update many Majors.
+     * Update zero or more Users and returns the data updated in the database.
+     * @param {UserUpdateManyAndReturnArgs} args - Arguments to update many Users.
      * @example
-     * // Update many Majors
-     * const major = await prisma.major.updateManyAndReturn({
+     * // Update many Users
+     * const user = await prisma.user.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -4098,8 +4230,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Majors and only return the `id`
-     * const majorWithIdOnly = await prisma.major.updateManyAndReturn({
+     * // Update zero or more Users and only return the `id`
+     * const userWithIdOnly = await prisma.user.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -4112,56 +4244,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends MajorUpdateManyAndReturnArgs>(args: SelectSubset<T, MajorUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends UserUpdateManyAndReturnArgs>(args: SelectSubset<T, UserUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one Major.
-     * @param {MajorUpsertArgs} args - Arguments to update or create a Major.
+     * Create or update one User.
+     * @param {UserUpsertArgs} args - Arguments to update or create a User.
      * @example
-     * // Update or create a Major
-     * const major = await prisma.major.upsert({
+     * // Update or create a User
+     * const user = await prisma.user.upsert({
      *   create: {
-     *     // ... data to create a Major
+     *     // ... data to create a User
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Major we want to update
+     *     // ... the filter for the User we want to update
      *   }
      * })
      */
-    upsert<T extends MajorUpsertArgs>(args: SelectSubset<T, MajorUpsertArgs<ExtArgs>>): Prisma__MajorClient<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends UserUpsertArgs>(args: SelectSubset<T, UserUpsertArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Majors.
+     * Count the number of Users.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MajorCountArgs} args - Arguments to filter Majors to count.
+     * @param {UserCountArgs} args - Arguments to filter Users to count.
      * @example
-     * // Count the number of Majors
-     * const count = await prisma.major.count({
+     * // Count the number of Users
+     * const count = await prisma.user.count({
      *   where: {
-     *     // ... the filter for the Majors we want to count
+     *     // ... the filter for the Users we want to count
      *   }
      * })
     **/
-    count<T extends MajorCountArgs>(
-      args?: Subset<T, MajorCountArgs>,
+    count<T extends UserCountArgs>(
+      args?: Subset<T, UserCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], MajorCountAggregateOutputType>
+          : GetScalarType<T['select'], UserCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Major.
+     * Allows you to perform aggregations operations on a User.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MajorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -4181,13 +4313,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends MajorAggregateArgs>(args: Subset<T, MajorAggregateArgs>): Prisma.PrismaPromise<GetMajorAggregateType<T>>
+    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Prisma.PrismaPromise<GetUserAggregateType<T>>
 
     /**
-     * Group by Major.
+     * Group by User.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MajorGroupByArgs} args - Group by arguments.
+     * @param {UserGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -4202,14 +4334,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends MajorGroupByArgs,
+      T extends UserGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: MajorGroupByArgs['orderBy'] }
-        : { orderBy?: MajorGroupByArgs['orderBy'] },
+        ? { orderBy: UserGroupByArgs['orderBy'] }
+        : { orderBy?: UserGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -4258,23 +4390,23 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, MajorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMajorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Major model
+   * Fields of the User model
    */
-  readonly fields: MajorFieldRefs;
+  readonly fields: UserFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Major.
+   * The delegate class that acts as a "Promise-like" for User.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__MajorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    User<T extends Major$UserArgs<ExtArgs> = {}>(args?: Subset<T, Major$UserArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Admin<T extends Major$AdminArgs<ExtArgs> = {}>(args?: Subset<T, Major$AdminArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Major<T extends MajorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MajorDefaultArgs<ExtArgs>>): Prisma__MajorClient<$Result.GetResult<Prisma.$MajorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    Votes<T extends User$VotesArgs<ExtArgs> = {}>(args?: Subset<T, User$VotesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VotesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4301,404 +4433,22 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Major model
+   * Fields of the User model
    */
-  interface MajorFieldRefs {
-    readonly id: FieldRef<"Major", 'Int'>
-    readonly majorsOrAdmin: FieldRef<"Major", 'String'>
-    readonly maxQuantity: FieldRef<"Major", 'Int'>
-    readonly passCode: FieldRef<"Major", 'String'>
+  interface UserFieldRefs {
+    readonly id: FieldRef<"User", 'Int'>
+    readonly name: FieldRef<"User", 'String'>
+    readonly email: FieldRef<"User", 'String'>
+    readonly majorId: FieldRef<"User", 'Int'>
+    readonly isSubmited: FieldRef<"User", 'Boolean'>
   }
     
 
   // Custom InputTypes
   /**
-   * Major findUnique
+   * User findUnique
    */
-  export type MajorFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Major
-     */
-    select?: MajorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Major
-     */
-    omit?: MajorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MajorInclude<ExtArgs> | null
-    /**
-     * Filter, which Major to fetch.
-     */
-    where: MajorWhereUniqueInput
-  }
-
-  /**
-   * Major findUniqueOrThrow
-   */
-  export type MajorFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Major
-     */
-    select?: MajorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Major
-     */
-    omit?: MajorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MajorInclude<ExtArgs> | null
-    /**
-     * Filter, which Major to fetch.
-     */
-    where: MajorWhereUniqueInput
-  }
-
-  /**
-   * Major findFirst
-   */
-  export type MajorFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Major
-     */
-    select?: MajorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Major
-     */
-    omit?: MajorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MajorInclude<ExtArgs> | null
-    /**
-     * Filter, which Major to fetch.
-     */
-    where?: MajorWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Majors to fetch.
-     */
-    orderBy?: MajorOrderByWithRelationInput | MajorOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Majors.
-     */
-    cursor?: MajorWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Majors from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Majors.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Majors.
-     */
-    distinct?: MajorScalarFieldEnum | MajorScalarFieldEnum[]
-  }
-
-  /**
-   * Major findFirstOrThrow
-   */
-  export type MajorFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Major
-     */
-    select?: MajorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Major
-     */
-    omit?: MajorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MajorInclude<ExtArgs> | null
-    /**
-     * Filter, which Major to fetch.
-     */
-    where?: MajorWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Majors to fetch.
-     */
-    orderBy?: MajorOrderByWithRelationInput | MajorOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Majors.
-     */
-    cursor?: MajorWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Majors from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Majors.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Majors.
-     */
-    distinct?: MajorScalarFieldEnum | MajorScalarFieldEnum[]
-  }
-
-  /**
-   * Major findMany
-   */
-  export type MajorFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Major
-     */
-    select?: MajorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Major
-     */
-    omit?: MajorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MajorInclude<ExtArgs> | null
-    /**
-     * Filter, which Majors to fetch.
-     */
-    where?: MajorWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Majors to fetch.
-     */
-    orderBy?: MajorOrderByWithRelationInput | MajorOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Majors.
-     */
-    cursor?: MajorWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Majors from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Majors.
-     */
-    skip?: number
-    distinct?: MajorScalarFieldEnum | MajorScalarFieldEnum[]
-  }
-
-  /**
-   * Major create
-   */
-  export type MajorCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Major
-     */
-    select?: MajorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Major
-     */
-    omit?: MajorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MajorInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Major.
-     */
-    data: XOR<MajorCreateInput, MajorUncheckedCreateInput>
-  }
-
-  /**
-   * Major createMany
-   */
-  export type MajorCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Majors.
-     */
-    data: MajorCreateManyInput | MajorCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Major createManyAndReturn
-   */
-  export type MajorCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Major
-     */
-    select?: MajorSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Major
-     */
-    omit?: MajorOmit<ExtArgs> | null
-    /**
-     * The data used to create many Majors.
-     */
-    data: MajorCreateManyInput | MajorCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Major update
-   */
-  export type MajorUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Major
-     */
-    select?: MajorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Major
-     */
-    omit?: MajorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MajorInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Major.
-     */
-    data: XOR<MajorUpdateInput, MajorUncheckedUpdateInput>
-    /**
-     * Choose, which Major to update.
-     */
-    where: MajorWhereUniqueInput
-  }
-
-  /**
-   * Major updateMany
-   */
-  export type MajorUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Majors.
-     */
-    data: XOR<MajorUpdateManyMutationInput, MajorUncheckedUpdateManyInput>
-    /**
-     * Filter which Majors to update
-     */
-    where?: MajorWhereInput
-    /**
-     * Limit how many Majors to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Major updateManyAndReturn
-   */
-  export type MajorUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Major
-     */
-    select?: MajorSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Major
-     */
-    omit?: MajorOmit<ExtArgs> | null
-    /**
-     * The data used to update Majors.
-     */
-    data: XOR<MajorUpdateManyMutationInput, MajorUncheckedUpdateManyInput>
-    /**
-     * Filter which Majors to update
-     */
-    where?: MajorWhereInput
-    /**
-     * Limit how many Majors to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Major upsert
-   */
-  export type MajorUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Major
-     */
-    select?: MajorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Major
-     */
-    omit?: MajorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MajorInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Major to update in case it exists.
-     */
-    where: MajorWhereUniqueInput
-    /**
-     * In case the Major found by the `where` argument doesn't exist, create a new Major with this data.
-     */
-    create: XOR<MajorCreateInput, MajorUncheckedCreateInput>
-    /**
-     * In case the Major was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<MajorUpdateInput, MajorUncheckedUpdateInput>
-  }
-
-  /**
-   * Major delete
-   */
-  export type MajorDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Major
-     */
-    select?: MajorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Major
-     */
-    omit?: MajorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MajorInclude<ExtArgs> | null
-    /**
-     * Filter which Major to delete.
-     */
-    where: MajorWhereUniqueInput
-  }
-
-  /**
-   * Major deleteMany
-   */
-  export type MajorDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Majors to delete
-     */
-    where?: MajorWhereInput
-    /**
-     * Limit how many Majors to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Major.User
-   */
-  export type Major$UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -4711,54 +4461,421 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User findUniqueOrThrow
+   */
+  export type UserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User findFirst
+   */
+  export type UserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
     where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
     orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Users.
+     */
     cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
     take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Users.
+     */
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * User findFirstOrThrow
+   */
+  export type UserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Users.
+     */
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * User findMany
+   */
+  export type UserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter, which Users to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
     skip?: number
     distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
   /**
-   * Major.Admin
+   * User create
    */
-  export type Major$AdminArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Admin
+     * Select specific fields to fetch from the User
      */
-    select?: AdminSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Admin
+     * Omit specific fields from the User
      */
-    omit?: AdminOmit<ExtArgs> | null
+    omit?: UserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: AdminInclude<ExtArgs> | null
-    where?: AdminWhereInput
-    orderBy?: AdminOrderByWithRelationInput | AdminOrderByWithRelationInput[]
-    cursor?: AdminWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AdminScalarFieldEnum | AdminScalarFieldEnum[]
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * The data needed to create a User.
+     */
+    data: XOR<UserCreateInput, UserUncheckedCreateInput>
   }
 
   /**
-   * Major without action
+   * User createMany
    */
-  export type MajorDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Major
+     * The data used to create many Users.
      */
-    select?: MajorSelect<ExtArgs> | null
+    data: UserCreateManyInput | UserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * User createManyAndReturn
+   */
+  export type UserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Omit specific fields from the Major
+     * Select specific fields to fetch from the User
      */
-    omit?: MajorOmit<ExtArgs> | null
+    select?: UserSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * The data used to create many Users.
+     */
+    data: UserCreateManyInput | UserCreateManyInput[]
+    skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MajorInclude<ExtArgs> | null
+    include?: UserIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * User update
+   */
+  export type UserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * The data needed to update a User.
+     */
+    data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+    /**
+     * Choose, which User to update.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User updateMany
+   */
+  export type UserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Users.
+     */
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    /**
+     * Filter which Users to update
+     */
+    where?: UserWhereInput
+    /**
+     * Limit how many Users to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * User updateManyAndReturn
+   */
+  export type UserUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * The data used to update Users.
+     */
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    /**
+     * Filter which Users to update
+     */
+    where?: UserWhereInput
+    /**
+     * Limit how many Users to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * User upsert
+   */
+  export type UserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * The filter to search for the User to update in case it exists.
+     */
+    where: UserWhereUniqueInput
+    /**
+     * In case the User found by the `where` argument doesn't exist, create a new User with this data.
+     */
+    create: XOR<UserCreateInput, UserUncheckedCreateInput>
+    /**
+     * In case the User was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+  }
+
+  /**
+   * User delete
+   */
+  export type UserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+     * Filter which User to delete.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User deleteMany
+   */
+  export type UserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Users to delete
+     */
+    where?: UserWhereInput
+    /**
+     * Limit how many Users to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * User.Votes
+   */
+  export type User$VotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Votes
+     */
+    select?: VotesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Votes
+     */
+    omit?: VotesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VotesInclude<ExtArgs> | null
+    where?: VotesWhereInput
+    orderBy?: VotesOrderByWithRelationInput | VotesOrderByWithRelationInput[]
+    cursor?: VotesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VotesScalarFieldEnum | VotesScalarFieldEnum[]
+  }
+
+  /**
+   * User without action
+   */
+  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
   }
 
 
@@ -4785,16 +4902,19 @@ export namespace Prisma {
   export type CategoriesMinAggregateOutputType = {
     id: number | null
     name: string | null
+    isShownResult: boolean | null
   }
 
   export type CategoriesMaxAggregateOutputType = {
     id: number | null
     name: string | null
+    isShownResult: boolean | null
   }
 
   export type CategoriesCountAggregateOutputType = {
     id: number
     name: number
+    isShownResult: number
     _all: number
   }
 
@@ -4810,16 +4930,19 @@ export namespace Prisma {
   export type CategoriesMinAggregateInputType = {
     id?: true
     name?: true
+    isShownResult?: true
   }
 
   export type CategoriesMaxAggregateInputType = {
     id?: true
     name?: true
+    isShownResult?: true
   }
 
   export type CategoriesCountAggregateInputType = {
     id?: true
     name?: true
+    isShownResult?: true
     _all?: true
   }
 
@@ -4912,6 +5035,7 @@ export namespace Prisma {
   export type CategoriesGroupByOutputType = {
     id: number
     name: string
+    isShownResult: boolean
     _count: CategoriesCountAggregateOutputType | null
     _avg: CategoriesAvgAggregateOutputType | null
     _sum: CategoriesSumAggregateOutputType | null
@@ -4936,6 +5060,7 @@ export namespace Prisma {
   export type CategoriesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    isShownResult?: boolean
     Student?: boolean | Categories$StudentArgs<ExtArgs>
     _count?: boolean | CategoriesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["categories"]>
@@ -4943,19 +5068,22 @@ export namespace Prisma {
   export type CategoriesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    isShownResult?: boolean
   }, ExtArgs["result"]["categories"]>
 
   export type CategoriesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    isShownResult?: boolean
   }, ExtArgs["result"]["categories"]>
 
   export type CategoriesSelectScalar = {
     id?: boolean
     name?: boolean
+    isShownResult?: boolean
   }
 
-  export type CategoriesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["categories"]>
+  export type CategoriesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "isShownResult", ExtArgs["result"]["categories"]>
   export type CategoriesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Student?: boolean | Categories$StudentArgs<ExtArgs>
     _count?: boolean | CategoriesCountOutputTypeDefaultArgs<ExtArgs>
@@ -4971,6 +5099,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
+      isShownResult: boolean
     }, ExtArgs["result"]["categories"]>
     composites: {}
   }
@@ -5397,6 +5526,7 @@ export namespace Prisma {
   interface CategoriesFieldRefs {
     readonly id: FieldRef<"Categories", 'Int'>
     readonly name: FieldRef<"Categories", 'String'>
+    readonly isShownResult: FieldRef<"Categories", 'Boolean'>
   }
     
 
@@ -8087,6 +8217,996 @@ export namespace Prisma {
 
 
   /**
+   * Model Agenda
+   */
+
+  export type AggregateAgenda = {
+    _count: AgendaCountAggregateOutputType | null
+    _avg: AgendaAvgAggregateOutputType | null
+    _sum: AgendaSumAggregateOutputType | null
+    _min: AgendaMinAggregateOutputType | null
+    _max: AgendaMaxAggregateOutputType | null
+  }
+
+  export type AgendaAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AgendaSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AgendaMinAggregateOutputType = {
+    id: number | null
+    agendaUrl: string | null
+  }
+
+  export type AgendaMaxAggregateOutputType = {
+    id: number | null
+    agendaUrl: string | null
+  }
+
+  export type AgendaCountAggregateOutputType = {
+    id: number
+    agendaUrl: number
+    _all: number
+  }
+
+
+  export type AgendaAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type AgendaSumAggregateInputType = {
+    id?: true
+  }
+
+  export type AgendaMinAggregateInputType = {
+    id?: true
+    agendaUrl?: true
+  }
+
+  export type AgendaMaxAggregateInputType = {
+    id?: true
+    agendaUrl?: true
+  }
+
+  export type AgendaCountAggregateInputType = {
+    id?: true
+    agendaUrl?: true
+    _all?: true
+  }
+
+  export type AgendaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Agenda to aggregate.
+     */
+    where?: AgendaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Agenda to fetch.
+     */
+    orderBy?: AgendaOrderByWithRelationInput | AgendaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AgendaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Agenda from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Agenda.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Agenda
+    **/
+    _count?: true | AgendaCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AgendaAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AgendaSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AgendaMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AgendaMaxAggregateInputType
+  }
+
+  export type GetAgendaAggregateType<T extends AgendaAggregateArgs> = {
+        [P in keyof T & keyof AggregateAgenda]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAgenda[P]>
+      : GetScalarType<T[P], AggregateAgenda[P]>
+  }
+
+
+
+
+  export type AgendaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AgendaWhereInput
+    orderBy?: AgendaOrderByWithAggregationInput | AgendaOrderByWithAggregationInput[]
+    by: AgendaScalarFieldEnum[] | AgendaScalarFieldEnum
+    having?: AgendaScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AgendaCountAggregateInputType | true
+    _avg?: AgendaAvgAggregateInputType
+    _sum?: AgendaSumAggregateInputType
+    _min?: AgendaMinAggregateInputType
+    _max?: AgendaMaxAggregateInputType
+  }
+
+  export type AgendaGroupByOutputType = {
+    id: number
+    agendaUrl: string
+    _count: AgendaCountAggregateOutputType | null
+    _avg: AgendaAvgAggregateOutputType | null
+    _sum: AgendaSumAggregateOutputType | null
+    _min: AgendaMinAggregateOutputType | null
+    _max: AgendaMaxAggregateOutputType | null
+  }
+
+  type GetAgendaGroupByPayload<T extends AgendaGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AgendaGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AgendaGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AgendaGroupByOutputType[P]>
+            : GetScalarType<T[P], AgendaGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AgendaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    agendaUrl?: boolean
+  }, ExtArgs["result"]["agenda"]>
+
+  export type AgendaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    agendaUrl?: boolean
+  }, ExtArgs["result"]["agenda"]>
+
+  export type AgendaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    agendaUrl?: boolean
+  }, ExtArgs["result"]["agenda"]>
+
+  export type AgendaSelectScalar = {
+    id?: boolean
+    agendaUrl?: boolean
+  }
+
+  export type AgendaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "agendaUrl", ExtArgs["result"]["agenda"]>
+
+  export type $AgendaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Agenda"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      agendaUrl: string
+    }, ExtArgs["result"]["agenda"]>
+    composites: {}
+  }
+
+  type AgendaGetPayload<S extends boolean | null | undefined | AgendaDefaultArgs> = $Result.GetResult<Prisma.$AgendaPayload, S>
+
+  type AgendaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AgendaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AgendaCountAggregateInputType | true
+    }
+
+  export interface AgendaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Agenda'], meta: { name: 'Agenda' } }
+    /**
+     * Find zero or one Agenda that matches the filter.
+     * @param {AgendaFindUniqueArgs} args - Arguments to find a Agenda
+     * @example
+     * // Get one Agenda
+     * const agenda = await prisma.agenda.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AgendaFindUniqueArgs>(args: SelectSubset<T, AgendaFindUniqueArgs<ExtArgs>>): Prisma__AgendaClient<$Result.GetResult<Prisma.$AgendaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Agenda that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AgendaFindUniqueOrThrowArgs} args - Arguments to find a Agenda
+     * @example
+     * // Get one Agenda
+     * const agenda = await prisma.agenda.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AgendaFindUniqueOrThrowArgs>(args: SelectSubset<T, AgendaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AgendaClient<$Result.GetResult<Prisma.$AgendaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Agenda that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AgendaFindFirstArgs} args - Arguments to find a Agenda
+     * @example
+     * // Get one Agenda
+     * const agenda = await prisma.agenda.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AgendaFindFirstArgs>(args?: SelectSubset<T, AgendaFindFirstArgs<ExtArgs>>): Prisma__AgendaClient<$Result.GetResult<Prisma.$AgendaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Agenda that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AgendaFindFirstOrThrowArgs} args - Arguments to find a Agenda
+     * @example
+     * // Get one Agenda
+     * const agenda = await prisma.agenda.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AgendaFindFirstOrThrowArgs>(args?: SelectSubset<T, AgendaFindFirstOrThrowArgs<ExtArgs>>): Prisma__AgendaClient<$Result.GetResult<Prisma.$AgendaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Agenda that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AgendaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Agenda
+     * const agenda = await prisma.agenda.findMany()
+     * 
+     * // Get first 10 Agenda
+     * const agenda = await prisma.agenda.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const agendaWithIdOnly = await prisma.agenda.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AgendaFindManyArgs>(args?: SelectSubset<T, AgendaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AgendaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Agenda.
+     * @param {AgendaCreateArgs} args - Arguments to create a Agenda.
+     * @example
+     * // Create one Agenda
+     * const Agenda = await prisma.agenda.create({
+     *   data: {
+     *     // ... data to create a Agenda
+     *   }
+     * })
+     * 
+     */
+    create<T extends AgendaCreateArgs>(args: SelectSubset<T, AgendaCreateArgs<ExtArgs>>): Prisma__AgendaClient<$Result.GetResult<Prisma.$AgendaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Agenda.
+     * @param {AgendaCreateManyArgs} args - Arguments to create many Agenda.
+     * @example
+     * // Create many Agenda
+     * const agenda = await prisma.agenda.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AgendaCreateManyArgs>(args?: SelectSubset<T, AgendaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Agenda and returns the data saved in the database.
+     * @param {AgendaCreateManyAndReturnArgs} args - Arguments to create many Agenda.
+     * @example
+     * // Create many Agenda
+     * const agenda = await prisma.agenda.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Agenda and only return the `id`
+     * const agendaWithIdOnly = await prisma.agenda.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AgendaCreateManyAndReturnArgs>(args?: SelectSubset<T, AgendaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AgendaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Agenda.
+     * @param {AgendaDeleteArgs} args - Arguments to delete one Agenda.
+     * @example
+     * // Delete one Agenda
+     * const Agenda = await prisma.agenda.delete({
+     *   where: {
+     *     // ... filter to delete one Agenda
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AgendaDeleteArgs>(args: SelectSubset<T, AgendaDeleteArgs<ExtArgs>>): Prisma__AgendaClient<$Result.GetResult<Prisma.$AgendaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Agenda.
+     * @param {AgendaUpdateArgs} args - Arguments to update one Agenda.
+     * @example
+     * // Update one Agenda
+     * const agenda = await prisma.agenda.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AgendaUpdateArgs>(args: SelectSubset<T, AgendaUpdateArgs<ExtArgs>>): Prisma__AgendaClient<$Result.GetResult<Prisma.$AgendaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Agenda.
+     * @param {AgendaDeleteManyArgs} args - Arguments to filter Agenda to delete.
+     * @example
+     * // Delete a few Agenda
+     * const { count } = await prisma.agenda.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AgendaDeleteManyArgs>(args?: SelectSubset<T, AgendaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Agenda.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AgendaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Agenda
+     * const agenda = await prisma.agenda.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AgendaUpdateManyArgs>(args: SelectSubset<T, AgendaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Agenda and returns the data updated in the database.
+     * @param {AgendaUpdateManyAndReturnArgs} args - Arguments to update many Agenda.
+     * @example
+     * // Update many Agenda
+     * const agenda = await prisma.agenda.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Agenda and only return the `id`
+     * const agendaWithIdOnly = await prisma.agenda.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AgendaUpdateManyAndReturnArgs>(args: SelectSubset<T, AgendaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AgendaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Agenda.
+     * @param {AgendaUpsertArgs} args - Arguments to update or create a Agenda.
+     * @example
+     * // Update or create a Agenda
+     * const agenda = await prisma.agenda.upsert({
+     *   create: {
+     *     // ... data to create a Agenda
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Agenda we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AgendaUpsertArgs>(args: SelectSubset<T, AgendaUpsertArgs<ExtArgs>>): Prisma__AgendaClient<$Result.GetResult<Prisma.$AgendaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Agenda.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AgendaCountArgs} args - Arguments to filter Agenda to count.
+     * @example
+     * // Count the number of Agenda
+     * const count = await prisma.agenda.count({
+     *   where: {
+     *     // ... the filter for the Agenda we want to count
+     *   }
+     * })
+    **/
+    count<T extends AgendaCountArgs>(
+      args?: Subset<T, AgendaCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AgendaCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Agenda.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AgendaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AgendaAggregateArgs>(args: Subset<T, AgendaAggregateArgs>): Prisma.PrismaPromise<GetAgendaAggregateType<T>>
+
+    /**
+     * Group by Agenda.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AgendaGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AgendaGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AgendaGroupByArgs['orderBy'] }
+        : { orderBy?: AgendaGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AgendaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAgendaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Agenda model
+   */
+  readonly fields: AgendaFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Agenda.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AgendaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Agenda model
+   */
+  interface AgendaFieldRefs {
+    readonly id: FieldRef<"Agenda", 'Int'>
+    readonly agendaUrl: FieldRef<"Agenda", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Agenda findUnique
+   */
+  export type AgendaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Agenda
+     */
+    select?: AgendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Agenda
+     */
+    omit?: AgendaOmit<ExtArgs> | null
+    /**
+     * Filter, which Agenda to fetch.
+     */
+    where: AgendaWhereUniqueInput
+  }
+
+  /**
+   * Agenda findUniqueOrThrow
+   */
+  export type AgendaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Agenda
+     */
+    select?: AgendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Agenda
+     */
+    omit?: AgendaOmit<ExtArgs> | null
+    /**
+     * Filter, which Agenda to fetch.
+     */
+    where: AgendaWhereUniqueInput
+  }
+
+  /**
+   * Agenda findFirst
+   */
+  export type AgendaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Agenda
+     */
+    select?: AgendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Agenda
+     */
+    omit?: AgendaOmit<ExtArgs> | null
+    /**
+     * Filter, which Agenda to fetch.
+     */
+    where?: AgendaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Agenda to fetch.
+     */
+    orderBy?: AgendaOrderByWithRelationInput | AgendaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Agenda.
+     */
+    cursor?: AgendaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Agenda from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Agenda.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Agenda.
+     */
+    distinct?: AgendaScalarFieldEnum | AgendaScalarFieldEnum[]
+  }
+
+  /**
+   * Agenda findFirstOrThrow
+   */
+  export type AgendaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Agenda
+     */
+    select?: AgendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Agenda
+     */
+    omit?: AgendaOmit<ExtArgs> | null
+    /**
+     * Filter, which Agenda to fetch.
+     */
+    where?: AgendaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Agenda to fetch.
+     */
+    orderBy?: AgendaOrderByWithRelationInput | AgendaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Agenda.
+     */
+    cursor?: AgendaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Agenda from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Agenda.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Agenda.
+     */
+    distinct?: AgendaScalarFieldEnum | AgendaScalarFieldEnum[]
+  }
+
+  /**
+   * Agenda findMany
+   */
+  export type AgendaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Agenda
+     */
+    select?: AgendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Agenda
+     */
+    omit?: AgendaOmit<ExtArgs> | null
+    /**
+     * Filter, which Agenda to fetch.
+     */
+    where?: AgendaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Agenda to fetch.
+     */
+    orderBy?: AgendaOrderByWithRelationInput | AgendaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Agenda.
+     */
+    cursor?: AgendaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Agenda from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Agenda.
+     */
+    skip?: number
+    distinct?: AgendaScalarFieldEnum | AgendaScalarFieldEnum[]
+  }
+
+  /**
+   * Agenda create
+   */
+  export type AgendaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Agenda
+     */
+    select?: AgendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Agenda
+     */
+    omit?: AgendaOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Agenda.
+     */
+    data: XOR<AgendaCreateInput, AgendaUncheckedCreateInput>
+  }
+
+  /**
+   * Agenda createMany
+   */
+  export type AgendaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Agenda.
+     */
+    data: AgendaCreateManyInput | AgendaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Agenda createManyAndReturn
+   */
+  export type AgendaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Agenda
+     */
+    select?: AgendaSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Agenda
+     */
+    omit?: AgendaOmit<ExtArgs> | null
+    /**
+     * The data used to create many Agenda.
+     */
+    data: AgendaCreateManyInput | AgendaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Agenda update
+   */
+  export type AgendaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Agenda
+     */
+    select?: AgendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Agenda
+     */
+    omit?: AgendaOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Agenda.
+     */
+    data: XOR<AgendaUpdateInput, AgendaUncheckedUpdateInput>
+    /**
+     * Choose, which Agenda to update.
+     */
+    where: AgendaWhereUniqueInput
+  }
+
+  /**
+   * Agenda updateMany
+   */
+  export type AgendaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Agenda.
+     */
+    data: XOR<AgendaUpdateManyMutationInput, AgendaUncheckedUpdateManyInput>
+    /**
+     * Filter which Agenda to update
+     */
+    where?: AgendaWhereInput
+    /**
+     * Limit how many Agenda to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Agenda updateManyAndReturn
+   */
+  export type AgendaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Agenda
+     */
+    select?: AgendaSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Agenda
+     */
+    omit?: AgendaOmit<ExtArgs> | null
+    /**
+     * The data used to update Agenda.
+     */
+    data: XOR<AgendaUpdateManyMutationInput, AgendaUncheckedUpdateManyInput>
+    /**
+     * Filter which Agenda to update
+     */
+    where?: AgendaWhereInput
+    /**
+     * Limit how many Agenda to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Agenda upsert
+   */
+  export type AgendaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Agenda
+     */
+    select?: AgendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Agenda
+     */
+    omit?: AgendaOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Agenda to update in case it exists.
+     */
+    where: AgendaWhereUniqueInput
+    /**
+     * In case the Agenda found by the `where` argument doesn't exist, create a new Agenda with this data.
+     */
+    create: XOR<AgendaCreateInput, AgendaUncheckedCreateInput>
+    /**
+     * In case the Agenda was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AgendaUpdateInput, AgendaUncheckedUpdateInput>
+  }
+
+  /**
+   * Agenda delete
+   */
+  export type AgendaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Agenda
+     */
+    select?: AgendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Agenda
+     */
+    omit?: AgendaOmit<ExtArgs> | null
+    /**
+     * Filter which Agenda to delete.
+     */
+    where: AgendaWhereUniqueInput
+  }
+
+  /**
+   * Agenda deleteMany
+   */
+  export type AgendaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Agenda to delete
+     */
+    where?: AgendaWhereInput
+    /**
+     * Limit how many Agenda to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Agenda without action
+   */
+  export type AgendaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Agenda
+     */
+    select?: AgendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Agenda
+     */
+    omit?: AgendaOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -8100,14 +9220,15 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-  export const UserScalarFieldEnum: {
+  export const MajorScalarFieldEnum: {
     id: 'id',
-    name: 'name',
-    email: 'email',
-    majorId: 'majorId'
+    majorsOrAdmin: 'majorsOrAdmin',
+    maxQuantity: 'maxQuantity',
+    passCode: 'passCode',
+    isTimeUp: 'isTimeUp'
   };
 
-  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+  export type MajorScalarFieldEnum = (typeof MajorScalarFieldEnum)[keyof typeof MajorScalarFieldEnum]
 
 
   export const AdminScalarFieldEnum: {
@@ -8119,19 +9240,21 @@ export namespace Prisma {
   export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
 
 
-  export const MajorScalarFieldEnum: {
+  export const UserScalarFieldEnum: {
     id: 'id',
-    majorsOrAdmin: 'majorsOrAdmin',
-    maxQuantity: 'maxQuantity',
-    passCode: 'passCode'
+    name: 'name',
+    email: 'email',
+    majorId: 'majorId',
+    isSubmited: 'isSubmited'
   };
 
-  export type MajorScalarFieldEnum = (typeof MajorScalarFieldEnum)[keyof typeof MajorScalarFieldEnum]
+  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
   export const CategoriesScalarFieldEnum: {
     id: 'id',
-    name: 'name'
+    name: 'name',
+    isShownResult: 'isShownResult'
   };
 
   export type CategoriesScalarFieldEnum = (typeof CategoriesScalarFieldEnum)[keyof typeof CategoriesScalarFieldEnum]
@@ -8158,6 +9281,14 @@ export namespace Prisma {
   };
 
   export type VotesScalarFieldEnum = (typeof VotesScalarFieldEnum)[keyof typeof VotesScalarFieldEnum]
+
+
+  export const AgendaScalarFieldEnum: {
+    id: 'id',
+    agendaUrl: 'agendaUrl'
+  };
+
+  export type AgendaScalarFieldEnum = (typeof AgendaScalarFieldEnum)[keyof typeof AgendaScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -8210,6 +9341,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -8226,59 +9364,64 @@ export namespace Prisma {
    */
 
 
-  export type UserWhereInput = {
-    AND?: UserWhereInput | UserWhereInput[]
-    OR?: UserWhereInput[]
-    NOT?: UserWhereInput | UserWhereInput[]
-    id?: IntFilter<"User"> | number
-    name?: StringFilter<"User"> | string
-    email?: StringFilter<"User"> | string
-    majorId?: IntFilter<"User"> | number
-    Major?: XOR<MajorScalarRelationFilter, MajorWhereInput>
-    Votes?: VotesListRelationFilter
+  export type MajorWhereInput = {
+    AND?: MajorWhereInput | MajorWhereInput[]
+    OR?: MajorWhereInput[]
+    NOT?: MajorWhereInput | MajorWhereInput[]
+    id?: IntFilter<"Major"> | number
+    majorsOrAdmin?: StringFilter<"Major"> | string
+    maxQuantity?: IntFilter<"Major"> | number
+    passCode?: StringFilter<"Major"> | string
+    isTimeUp?: BoolFilter<"Major"> | boolean
+    User?: UserListRelationFilter
+    Admin?: AdminListRelationFilter
   }
 
-  export type UserOrderByWithRelationInput = {
+  export type MajorOrderByWithRelationInput = {
     id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    majorId?: SortOrder
-    Major?: MajorOrderByWithRelationInput
-    Votes?: VotesOrderByRelationAggregateInput
+    majorsOrAdmin?: SortOrder
+    maxQuantity?: SortOrder
+    passCode?: SortOrder
+    isTimeUp?: SortOrder
+    User?: UserOrderByRelationAggregateInput
+    Admin?: AdminOrderByRelationAggregateInput
   }
 
-  export type UserWhereUniqueInput = Prisma.AtLeast<{
+  export type MajorWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    email?: string
-    AND?: UserWhereInput | UserWhereInput[]
-    OR?: UserWhereInput[]
-    NOT?: UserWhereInput | UserWhereInput[]
-    name?: StringFilter<"User"> | string
-    majorId?: IntFilter<"User"> | number
-    Major?: XOR<MajorScalarRelationFilter, MajorWhereInput>
-    Votes?: VotesListRelationFilter
-  }, "id" | "email">
+    majorsOrAdmin?: string
+    passCode?: string
+    AND?: MajorWhereInput | MajorWhereInput[]
+    OR?: MajorWhereInput[]
+    NOT?: MajorWhereInput | MajorWhereInput[]
+    maxQuantity?: IntFilter<"Major"> | number
+    isTimeUp?: BoolFilter<"Major"> | boolean
+    User?: UserListRelationFilter
+    Admin?: AdminListRelationFilter
+  }, "id" | "majorsOrAdmin" | "passCode">
 
-  export type UserOrderByWithAggregationInput = {
+  export type MajorOrderByWithAggregationInput = {
     id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    majorId?: SortOrder
-    _count?: UserCountOrderByAggregateInput
-    _avg?: UserAvgOrderByAggregateInput
-    _max?: UserMaxOrderByAggregateInput
-    _min?: UserMinOrderByAggregateInput
-    _sum?: UserSumOrderByAggregateInput
+    majorsOrAdmin?: SortOrder
+    maxQuantity?: SortOrder
+    passCode?: SortOrder
+    isTimeUp?: SortOrder
+    _count?: MajorCountOrderByAggregateInput
+    _avg?: MajorAvgOrderByAggregateInput
+    _max?: MajorMaxOrderByAggregateInput
+    _min?: MajorMinOrderByAggregateInput
+    _sum?: MajorSumOrderByAggregateInput
   }
 
-  export type UserScalarWhereWithAggregatesInput = {
-    AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
-    OR?: UserScalarWhereWithAggregatesInput[]
-    NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"User"> | number
-    name?: StringWithAggregatesFilter<"User"> | string
-    email?: StringWithAggregatesFilter<"User"> | string
-    majorId?: IntWithAggregatesFilter<"User"> | number
+  export type MajorScalarWhereWithAggregatesInput = {
+    AND?: MajorScalarWhereWithAggregatesInput | MajorScalarWhereWithAggregatesInput[]
+    OR?: MajorScalarWhereWithAggregatesInput[]
+    NOT?: MajorScalarWhereWithAggregatesInput | MajorScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Major"> | number
+    majorsOrAdmin?: StringWithAggregatesFilter<"Major"> | string
+    maxQuantity?: IntWithAggregatesFilter<"Major"> | number
+    passCode?: StringWithAggregatesFilter<"Major"> | string
+    isTimeUp?: BoolWithAggregatesFilter<"Major"> | boolean
   }
 
   export type AdminWhereInput = {
@@ -8328,59 +9471,64 @@ export namespace Prisma {
     adminMajorId?: IntWithAggregatesFilter<"Admin"> | number
   }
 
-  export type MajorWhereInput = {
-    AND?: MajorWhereInput | MajorWhereInput[]
-    OR?: MajorWhereInput[]
-    NOT?: MajorWhereInput | MajorWhereInput[]
-    id?: IntFilter<"Major"> | number
-    majorsOrAdmin?: StringFilter<"Major"> | string
-    maxQuantity?: IntFilter<"Major"> | number
-    passCode?: StringFilter<"Major"> | string
-    User?: UserListRelationFilter
-    Admin?: AdminListRelationFilter
+  export type UserWhereInput = {
+    AND?: UserWhereInput | UserWhereInput[]
+    OR?: UserWhereInput[]
+    NOT?: UserWhereInput | UserWhereInput[]
+    id?: IntFilter<"User"> | number
+    name?: StringFilter<"User"> | string
+    email?: StringFilter<"User"> | string
+    majorId?: IntFilter<"User"> | number
+    isSubmited?: BoolFilter<"User"> | boolean
+    Major?: XOR<MajorScalarRelationFilter, MajorWhereInput>
+    Votes?: VotesListRelationFilter
   }
 
-  export type MajorOrderByWithRelationInput = {
+  export type UserOrderByWithRelationInput = {
     id?: SortOrder
-    majorsOrAdmin?: SortOrder
-    maxQuantity?: SortOrder
-    passCode?: SortOrder
-    User?: UserOrderByRelationAggregateInput
-    Admin?: AdminOrderByRelationAggregateInput
+    name?: SortOrder
+    email?: SortOrder
+    majorId?: SortOrder
+    isSubmited?: SortOrder
+    Major?: MajorOrderByWithRelationInput
+    Votes?: VotesOrderByRelationAggregateInput
   }
 
-  export type MajorWhereUniqueInput = Prisma.AtLeast<{
+  export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    majorsOrAdmin?: string
-    passCode?: string
-    AND?: MajorWhereInput | MajorWhereInput[]
-    OR?: MajorWhereInput[]
-    NOT?: MajorWhereInput | MajorWhereInput[]
-    maxQuantity?: IntFilter<"Major"> | number
-    User?: UserListRelationFilter
-    Admin?: AdminListRelationFilter
-  }, "id" | "majorsOrAdmin" | "passCode">
+    email?: string
+    AND?: UserWhereInput | UserWhereInput[]
+    OR?: UserWhereInput[]
+    NOT?: UserWhereInput | UserWhereInput[]
+    name?: StringFilter<"User"> | string
+    majorId?: IntFilter<"User"> | number
+    isSubmited?: BoolFilter<"User"> | boolean
+    Major?: XOR<MajorScalarRelationFilter, MajorWhereInput>
+    Votes?: VotesListRelationFilter
+  }, "id" | "email">
 
-  export type MajorOrderByWithAggregationInput = {
+  export type UserOrderByWithAggregationInput = {
     id?: SortOrder
-    majorsOrAdmin?: SortOrder
-    maxQuantity?: SortOrder
-    passCode?: SortOrder
-    _count?: MajorCountOrderByAggregateInput
-    _avg?: MajorAvgOrderByAggregateInput
-    _max?: MajorMaxOrderByAggregateInput
-    _min?: MajorMinOrderByAggregateInput
-    _sum?: MajorSumOrderByAggregateInput
+    name?: SortOrder
+    email?: SortOrder
+    majorId?: SortOrder
+    isSubmited?: SortOrder
+    _count?: UserCountOrderByAggregateInput
+    _avg?: UserAvgOrderByAggregateInput
+    _max?: UserMaxOrderByAggregateInput
+    _min?: UserMinOrderByAggregateInput
+    _sum?: UserSumOrderByAggregateInput
   }
 
-  export type MajorScalarWhereWithAggregatesInput = {
-    AND?: MajorScalarWhereWithAggregatesInput | MajorScalarWhereWithAggregatesInput[]
-    OR?: MajorScalarWhereWithAggregatesInput[]
-    NOT?: MajorScalarWhereWithAggregatesInput | MajorScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Major"> | number
-    majorsOrAdmin?: StringWithAggregatesFilter<"Major"> | string
-    maxQuantity?: IntWithAggregatesFilter<"Major"> | number
-    passCode?: StringWithAggregatesFilter<"Major"> | string
+  export type UserScalarWhereWithAggregatesInput = {
+    AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    OR?: UserScalarWhereWithAggregatesInput[]
+    NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"User"> | number
+    name?: StringWithAggregatesFilter<"User"> | string
+    email?: StringWithAggregatesFilter<"User"> | string
+    majorId?: IntWithAggregatesFilter<"User"> | number
+    isSubmited?: BoolWithAggregatesFilter<"User"> | boolean
   }
 
   export type CategoriesWhereInput = {
@@ -8389,12 +9537,14 @@ export namespace Prisma {
     NOT?: CategoriesWhereInput | CategoriesWhereInput[]
     id?: IntFilter<"Categories"> | number
     name?: StringFilter<"Categories"> | string
+    isShownResult?: BoolFilter<"Categories"> | boolean
     Student?: StudentsListRelationFilter
   }
 
   export type CategoriesOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    isShownResult?: SortOrder
     Student?: StudentsOrderByRelationAggregateInput
   }
 
@@ -8404,12 +9554,14 @@ export namespace Prisma {
     OR?: CategoriesWhereInput[]
     NOT?: CategoriesWhereInput | CategoriesWhereInput[]
     name?: StringFilter<"Categories"> | string
+    isShownResult?: BoolFilter<"Categories"> | boolean
     Student?: StudentsListRelationFilter
   }, "id">
 
   export type CategoriesOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    isShownResult?: SortOrder
     _count?: CategoriesCountOrderByAggregateInput
     _avg?: CategoriesAvgOrderByAggregateInput
     _max?: CategoriesMaxOrderByAggregateInput
@@ -8423,6 +9575,7 @@ export namespace Prisma {
     NOT?: CategoriesScalarWhereWithAggregatesInput | CategoriesScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Categories"> | number
     name?: StringWithAggregatesFilter<"Categories"> | string
+    isShownResult?: BoolWithAggregatesFilter<"Categories"> | boolean
   }
 
   export type StudentsWhereInput = {
@@ -8550,53 +9703,104 @@ export namespace Prisma {
     studentId?: IntWithAggregatesFilter<"Votes"> | number
   }
 
-  export type UserCreateInput = {
-    name: string
-    email: string
-    Major: MajorCreateNestedOneWithoutUserInput
-    Votes?: VotesCreateNestedManyWithoutUserInput
+  export type AgendaWhereInput = {
+    AND?: AgendaWhereInput | AgendaWhereInput[]
+    OR?: AgendaWhereInput[]
+    NOT?: AgendaWhereInput | AgendaWhereInput[]
+    id?: IntFilter<"Agenda"> | number
+    agendaUrl?: StringFilter<"Agenda"> | string
   }
 
-  export type UserUncheckedCreateInput = {
+  export type AgendaOrderByWithRelationInput = {
+    id?: SortOrder
+    agendaUrl?: SortOrder
+  }
+
+  export type AgendaWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    name: string
-    email: string
-    majorId: number
-    Votes?: VotesUncheckedCreateNestedManyWithoutUserInput
+    AND?: AgendaWhereInput | AgendaWhereInput[]
+    OR?: AgendaWhereInput[]
+    NOT?: AgendaWhereInput | AgendaWhereInput[]
+    agendaUrl?: StringFilter<"Agenda"> | string
+  }, "id">
+
+  export type AgendaOrderByWithAggregationInput = {
+    id?: SortOrder
+    agendaUrl?: SortOrder
+    _count?: AgendaCountOrderByAggregateInput
+    _avg?: AgendaAvgOrderByAggregateInput
+    _max?: AgendaMaxOrderByAggregateInput
+    _min?: AgendaMinOrderByAggregateInput
+    _sum?: AgendaSumOrderByAggregateInput
   }
 
-  export type UserUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    Major?: MajorUpdateOneRequiredWithoutUserNestedInput
-    Votes?: VotesUpdateManyWithoutUserNestedInput
+  export type AgendaScalarWhereWithAggregatesInput = {
+    AND?: AgendaScalarWhereWithAggregatesInput | AgendaScalarWhereWithAggregatesInput[]
+    OR?: AgendaScalarWhereWithAggregatesInput[]
+    NOT?: AgendaScalarWhereWithAggregatesInput | AgendaScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Agenda"> | number
+    agendaUrl?: StringWithAggregatesFilter<"Agenda"> | string
   }
 
-  export type UserUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    majorId?: IntFieldUpdateOperationsInput | number
-    Votes?: VotesUncheckedUpdateManyWithoutUserNestedInput
+  export type MajorCreateInput = {
+    majorsOrAdmin: string
+    maxQuantity: number
+    passCode: string
+    isTimeUp?: boolean
+    User?: UserCreateNestedManyWithoutMajorInput
+    Admin?: AdminCreateNestedManyWithoutMajarInput
   }
 
-  export type UserCreateManyInput = {
+  export type MajorUncheckedCreateInput = {
     id?: number
-    name: string
-    email: string
-    majorId: number
+    majorsOrAdmin: string
+    maxQuantity: number
+    passCode: string
+    isTimeUp?: boolean
+    User?: UserUncheckedCreateNestedManyWithoutMajorInput
+    Admin?: AdminUncheckedCreateNestedManyWithoutMajarInput
   }
 
-  export type UserUpdateManyMutationInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+  export type MajorUpdateInput = {
+    majorsOrAdmin?: StringFieldUpdateOperationsInput | string
+    maxQuantity?: IntFieldUpdateOperationsInput | number
+    passCode?: StringFieldUpdateOperationsInput | string
+    isTimeUp?: BoolFieldUpdateOperationsInput | boolean
+    User?: UserUpdateManyWithoutMajorNestedInput
+    Admin?: AdminUpdateManyWithoutMajarNestedInput
   }
 
-  export type UserUncheckedUpdateManyInput = {
+  export type MajorUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    majorId?: IntFieldUpdateOperationsInput | number
+    majorsOrAdmin?: StringFieldUpdateOperationsInput | string
+    maxQuantity?: IntFieldUpdateOperationsInput | number
+    passCode?: StringFieldUpdateOperationsInput | string
+    isTimeUp?: BoolFieldUpdateOperationsInput | boolean
+    User?: UserUncheckedUpdateManyWithoutMajorNestedInput
+    Admin?: AdminUncheckedUpdateManyWithoutMajarNestedInput
+  }
+
+  export type MajorCreateManyInput = {
+    id?: number
+    majorsOrAdmin: string
+    maxQuantity: number
+    passCode: string
+    isTimeUp?: boolean
+  }
+
+  export type MajorUpdateManyMutationInput = {
+    majorsOrAdmin?: StringFieldUpdateOperationsInput | string
+    maxQuantity?: IntFieldUpdateOperationsInput | number
+    passCode?: StringFieldUpdateOperationsInput | string
+    isTimeUp?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type MajorUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    majorsOrAdmin?: StringFieldUpdateOperationsInput | string
+    maxQuantity?: IntFieldUpdateOperationsInput | number
+    passCode?: StringFieldUpdateOperationsInput | string
+    isTimeUp?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type AdminCreateInput = {
@@ -8637,94 +9841,103 @@ export namespace Prisma {
     adminMajorId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type MajorCreateInput = {
-    majorsOrAdmin: string
-    maxQuantity: number
-    passCode: string
-    User?: UserCreateNestedManyWithoutMajorInput
-    Admin?: AdminCreateNestedManyWithoutMajarInput
+  export type UserCreateInput = {
+    name: string
+    email: string
+    isSubmited?: boolean
+    Major: MajorCreateNestedOneWithoutUserInput
+    Votes?: VotesCreateNestedManyWithoutUserInput
   }
 
-  export type MajorUncheckedCreateInput = {
+  export type UserUncheckedCreateInput = {
     id?: number
-    majorsOrAdmin: string
-    maxQuantity: number
-    passCode: string
-    User?: UserUncheckedCreateNestedManyWithoutMajorInput
-    Admin?: AdminUncheckedCreateNestedManyWithoutMajarInput
+    name: string
+    email: string
+    majorId: number
+    isSubmited?: boolean
+    Votes?: VotesUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type MajorUpdateInput = {
-    majorsOrAdmin?: StringFieldUpdateOperationsInput | string
-    maxQuantity?: IntFieldUpdateOperationsInput | number
-    passCode?: StringFieldUpdateOperationsInput | string
-    User?: UserUpdateManyWithoutMajorNestedInput
-    Admin?: AdminUpdateManyWithoutMajarNestedInput
+  export type UserUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    isSubmited?: BoolFieldUpdateOperationsInput | boolean
+    Major?: MajorUpdateOneRequiredWithoutUserNestedInput
+    Votes?: VotesUpdateManyWithoutUserNestedInput
   }
 
-  export type MajorUncheckedUpdateInput = {
+  export type UserUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    majorsOrAdmin?: StringFieldUpdateOperationsInput | string
-    maxQuantity?: IntFieldUpdateOperationsInput | number
-    passCode?: StringFieldUpdateOperationsInput | string
-    User?: UserUncheckedUpdateManyWithoutMajorNestedInput
-    Admin?: AdminUncheckedUpdateManyWithoutMajarNestedInput
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    majorId?: IntFieldUpdateOperationsInput | number
+    isSubmited?: BoolFieldUpdateOperationsInput | boolean
+    Votes?: VotesUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type MajorCreateManyInput = {
+  export type UserCreateManyInput = {
     id?: number
-    majorsOrAdmin: string
-    maxQuantity: number
-    passCode: string
+    name: string
+    email: string
+    majorId: number
+    isSubmited?: boolean
   }
 
-  export type MajorUpdateManyMutationInput = {
-    majorsOrAdmin?: StringFieldUpdateOperationsInput | string
-    maxQuantity?: IntFieldUpdateOperationsInput | number
-    passCode?: StringFieldUpdateOperationsInput | string
+  export type UserUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    isSubmited?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type MajorUncheckedUpdateManyInput = {
+  export type UserUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    majorsOrAdmin?: StringFieldUpdateOperationsInput | string
-    maxQuantity?: IntFieldUpdateOperationsInput | number
-    passCode?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    majorId?: IntFieldUpdateOperationsInput | number
+    isSubmited?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CategoriesCreateInput = {
     name: string
+    isShownResult?: boolean
     Student?: StudentsCreateNestedManyWithoutCategoriesInput
   }
 
   export type CategoriesUncheckedCreateInput = {
     id?: number
     name: string
+    isShownResult?: boolean
     Student?: StudentsUncheckedCreateNestedManyWithoutCategoriesInput
   }
 
   export type CategoriesUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
+    isShownResult?: BoolFieldUpdateOperationsInput | boolean
     Student?: StudentsUpdateManyWithoutCategoriesNestedInput
   }
 
   export type CategoriesUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    isShownResult?: BoolFieldUpdateOperationsInput | boolean
     Student?: StudentsUncheckedUpdateManyWithoutCategoriesNestedInput
   }
 
   export type CategoriesCreateManyInput = {
     id?: number
     name: string
+    isShownResult?: boolean
   }
 
   export type CategoriesUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
+    isShownResult?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CategoriesUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    isShownResult?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type StudentsCreateInput = {
@@ -8842,6 +10055,38 @@ export namespace Prisma {
     studentId?: IntFieldUpdateOperationsInput | number
   }
 
+  export type AgendaCreateInput = {
+    agendaUrl: string
+  }
+
+  export type AgendaUncheckedCreateInput = {
+    id?: number
+    agendaUrl: string
+  }
+
+  export type AgendaUpdateInput = {
+    agendaUrl?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AgendaUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    agendaUrl?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AgendaCreateManyInput = {
+    id?: number
+    agendaUrl: string
+  }
+
+  export type AgendaUpdateManyMutationInput = {
+    agendaUrl?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AgendaUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    agendaUrl?: StringFieldUpdateOperationsInput | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -8868,50 +10113,63 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type MajorScalarRelationFilter = {
-    is?: MajorWhereInput
-    isNot?: MajorWhereInput
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type VotesListRelationFilter = {
-    every?: VotesWhereInput
-    some?: VotesWhereInput
-    none?: VotesWhereInput
+  export type UserListRelationFilter = {
+    every?: UserWhereInput
+    some?: UserWhereInput
+    none?: UserWhereInput
   }
 
-  export type VotesOrderByRelationAggregateInput = {
+  export type AdminListRelationFilter = {
+    every?: AdminWhereInput
+    some?: AdminWhereInput
+    none?: AdminWhereInput
+  }
+
+  export type UserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type UserCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    majorId?: SortOrder
+  export type AdminOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
-  export type UserAvgOrderByAggregateInput = {
+  export type MajorCountOrderByAggregateInput = {
     id?: SortOrder
-    majorId?: SortOrder
+    majorsOrAdmin?: SortOrder
+    maxQuantity?: SortOrder
+    passCode?: SortOrder
+    isTimeUp?: SortOrder
   }
 
-  export type UserMaxOrderByAggregateInput = {
+  export type MajorAvgOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    majorId?: SortOrder
+    maxQuantity?: SortOrder
   }
 
-  export type UserMinOrderByAggregateInput = {
+  export type MajorMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    majorId?: SortOrder
+    majorsOrAdmin?: SortOrder
+    maxQuantity?: SortOrder
+    passCode?: SortOrder
+    isTimeUp?: SortOrder
   }
 
-  export type UserSumOrderByAggregateInput = {
+  export type MajorMinOrderByAggregateInput = {
     id?: SortOrder
-    majorId?: SortOrder
+    majorsOrAdmin?: SortOrder
+    maxQuantity?: SortOrder
+    passCode?: SortOrder
+    isTimeUp?: SortOrder
+  }
+
+  export type MajorSumOrderByAggregateInput = {
+    id?: SortOrder
+    maxQuantity?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -8948,6 +10206,19 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type MajorScalarRelationFilter = {
+    is?: MajorWhereInput
+    isNot?: MajorWhereInput
+  }
+
   export type AdminCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
@@ -8976,55 +10247,48 @@ export namespace Prisma {
     adminMajorId?: SortOrder
   }
 
-  export type UserListRelationFilter = {
-    every?: UserWhereInput
-    some?: UserWhereInput
-    none?: UserWhereInput
+  export type VotesListRelationFilter = {
+    every?: VotesWhereInput
+    some?: VotesWhereInput
+    none?: VotesWhereInput
   }
 
-  export type AdminListRelationFilter = {
-    every?: AdminWhereInput
-    some?: AdminWhereInput
-    none?: AdminWhereInput
-  }
-
-  export type UserOrderByRelationAggregateInput = {
+  export type VotesOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type AdminOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type UserCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    majorId?: SortOrder
+    isSubmited?: SortOrder
   }
 
-  export type MajorCountOrderByAggregateInput = {
+  export type UserAvgOrderByAggregateInput = {
     id?: SortOrder
-    majorsOrAdmin?: SortOrder
-    maxQuantity?: SortOrder
-    passCode?: SortOrder
+    majorId?: SortOrder
   }
 
-  export type MajorAvgOrderByAggregateInput = {
+  export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
-    maxQuantity?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    majorId?: SortOrder
+    isSubmited?: SortOrder
   }
 
-  export type MajorMaxOrderByAggregateInput = {
+  export type UserMinOrderByAggregateInput = {
     id?: SortOrder
-    majorsOrAdmin?: SortOrder
-    maxQuantity?: SortOrder
-    passCode?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    majorId?: SortOrder
+    isSubmited?: SortOrder
   }
 
-  export type MajorMinOrderByAggregateInput = {
+  export type UserSumOrderByAggregateInput = {
     id?: SortOrder
-    majorsOrAdmin?: SortOrder
-    maxQuantity?: SortOrder
-    passCode?: SortOrder
-  }
-
-  export type MajorSumOrderByAggregateInput = {
-    id?: SortOrder
-    maxQuantity?: SortOrder
+    majorId?: SortOrder
   }
 
   export type StudentsListRelationFilter = {
@@ -9040,6 +10304,7 @@ export namespace Prisma {
   export type CategoriesCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    isShownResult?: SortOrder
   }
 
   export type CategoriesAvgOrderByAggregateInput = {
@@ -9049,11 +10314,13 @@ export namespace Prisma {
   export type CategoriesMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    isShownResult?: SortOrder
   }
 
   export type CategoriesMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    isShownResult?: SortOrder
   }
 
   export type CategoriesSumOrderByAggregateInput = {
@@ -9154,86 +10421,27 @@ export namespace Prisma {
     studentId?: SortOrder
   }
 
-  export type MajorCreateNestedOneWithoutUserInput = {
-    create?: XOR<MajorCreateWithoutUserInput, MajorUncheckedCreateWithoutUserInput>
-    connectOrCreate?: MajorCreateOrConnectWithoutUserInput
-    connect?: MajorWhereUniqueInput
+  export type AgendaCountOrderByAggregateInput = {
+    id?: SortOrder
+    agendaUrl?: SortOrder
   }
 
-  export type VotesCreateNestedManyWithoutUserInput = {
-    create?: XOR<VotesCreateWithoutUserInput, VotesUncheckedCreateWithoutUserInput> | VotesCreateWithoutUserInput[] | VotesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: VotesCreateOrConnectWithoutUserInput | VotesCreateOrConnectWithoutUserInput[]
-    createMany?: VotesCreateManyUserInputEnvelope
-    connect?: VotesWhereUniqueInput | VotesWhereUniqueInput[]
+  export type AgendaAvgOrderByAggregateInput = {
+    id?: SortOrder
   }
 
-  export type VotesUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<VotesCreateWithoutUserInput, VotesUncheckedCreateWithoutUserInput> | VotesCreateWithoutUserInput[] | VotesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: VotesCreateOrConnectWithoutUserInput | VotesCreateOrConnectWithoutUserInput[]
-    createMany?: VotesCreateManyUserInputEnvelope
-    connect?: VotesWhereUniqueInput | VotesWhereUniqueInput[]
+  export type AgendaMaxOrderByAggregateInput = {
+    id?: SortOrder
+    agendaUrl?: SortOrder
   }
 
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
+  export type AgendaMinOrderByAggregateInput = {
+    id?: SortOrder
+    agendaUrl?: SortOrder
   }
 
-  export type MajorUpdateOneRequiredWithoutUserNestedInput = {
-    create?: XOR<MajorCreateWithoutUserInput, MajorUncheckedCreateWithoutUserInput>
-    connectOrCreate?: MajorCreateOrConnectWithoutUserInput
-    upsert?: MajorUpsertWithoutUserInput
-    connect?: MajorWhereUniqueInput
-    update?: XOR<XOR<MajorUpdateToOneWithWhereWithoutUserInput, MajorUpdateWithoutUserInput>, MajorUncheckedUpdateWithoutUserInput>
-  }
-
-  export type VotesUpdateManyWithoutUserNestedInput = {
-    create?: XOR<VotesCreateWithoutUserInput, VotesUncheckedCreateWithoutUserInput> | VotesCreateWithoutUserInput[] | VotesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: VotesCreateOrConnectWithoutUserInput | VotesCreateOrConnectWithoutUserInput[]
-    upsert?: VotesUpsertWithWhereUniqueWithoutUserInput | VotesUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: VotesCreateManyUserInputEnvelope
-    set?: VotesWhereUniqueInput | VotesWhereUniqueInput[]
-    disconnect?: VotesWhereUniqueInput | VotesWhereUniqueInput[]
-    delete?: VotesWhereUniqueInput | VotesWhereUniqueInput[]
-    connect?: VotesWhereUniqueInput | VotesWhereUniqueInput[]
-    update?: VotesUpdateWithWhereUniqueWithoutUserInput | VotesUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: VotesUpdateManyWithWhereWithoutUserInput | VotesUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: VotesScalarWhereInput | VotesScalarWhereInput[]
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type VotesUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<VotesCreateWithoutUserInput, VotesUncheckedCreateWithoutUserInput> | VotesCreateWithoutUserInput[] | VotesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: VotesCreateOrConnectWithoutUserInput | VotesCreateOrConnectWithoutUserInput[]
-    upsert?: VotesUpsertWithWhereUniqueWithoutUserInput | VotesUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: VotesCreateManyUserInputEnvelope
-    set?: VotesWhereUniqueInput | VotesWhereUniqueInput[]
-    disconnect?: VotesWhereUniqueInput | VotesWhereUniqueInput[]
-    delete?: VotesWhereUniqueInput | VotesWhereUniqueInput[]
-    connect?: VotesWhereUniqueInput | VotesWhereUniqueInput[]
-    update?: VotesUpdateWithWhereUniqueWithoutUserInput | VotesUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: VotesUpdateManyWithWhereWithoutUserInput | VotesUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: VotesScalarWhereInput | VotesScalarWhereInput[]
-  }
-
-  export type MajorCreateNestedOneWithoutAdminInput = {
-    create?: XOR<MajorCreateWithoutAdminInput, MajorUncheckedCreateWithoutAdminInput>
-    connectOrCreate?: MajorCreateOrConnectWithoutAdminInput
-    connect?: MajorWhereUniqueInput
-  }
-
-  export type MajorUpdateOneRequiredWithoutAdminNestedInput = {
-    create?: XOR<MajorCreateWithoutAdminInput, MajorUncheckedCreateWithoutAdminInput>
-    connectOrCreate?: MajorCreateOrConnectWithoutAdminInput
-    upsert?: MajorUpsertWithoutAdminInput
-    connect?: MajorWhereUniqueInput
-    update?: XOR<XOR<MajorUpdateToOneWithWhereWithoutAdminInput, MajorUpdateWithoutAdminInput>, MajorUncheckedUpdateWithoutAdminInput>
+  export type AgendaSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type UserCreateNestedManyWithoutMajorInput = {
@@ -9262,6 +10470,22 @@ export namespace Prisma {
     connectOrCreate?: AdminCreateOrConnectWithoutMajarInput | AdminCreateOrConnectWithoutMajarInput[]
     createMany?: AdminCreateManyMajarInputEnvelope
     connect?: AdminWhereUniqueInput | AdminWhereUniqueInput[]
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type UserUpdateManyWithoutMajorNestedInput = {
@@ -9318,6 +10542,76 @@ export namespace Prisma {
     update?: AdminUpdateWithWhereUniqueWithoutMajarInput | AdminUpdateWithWhereUniqueWithoutMajarInput[]
     updateMany?: AdminUpdateManyWithWhereWithoutMajarInput | AdminUpdateManyWithWhereWithoutMajarInput[]
     deleteMany?: AdminScalarWhereInput | AdminScalarWhereInput[]
+  }
+
+  export type MajorCreateNestedOneWithoutAdminInput = {
+    create?: XOR<MajorCreateWithoutAdminInput, MajorUncheckedCreateWithoutAdminInput>
+    connectOrCreate?: MajorCreateOrConnectWithoutAdminInput
+    connect?: MajorWhereUniqueInput
+  }
+
+  export type MajorUpdateOneRequiredWithoutAdminNestedInput = {
+    create?: XOR<MajorCreateWithoutAdminInput, MajorUncheckedCreateWithoutAdminInput>
+    connectOrCreate?: MajorCreateOrConnectWithoutAdminInput
+    upsert?: MajorUpsertWithoutAdminInput
+    connect?: MajorWhereUniqueInput
+    update?: XOR<XOR<MajorUpdateToOneWithWhereWithoutAdminInput, MajorUpdateWithoutAdminInput>, MajorUncheckedUpdateWithoutAdminInput>
+  }
+
+  export type MajorCreateNestedOneWithoutUserInput = {
+    create?: XOR<MajorCreateWithoutUserInput, MajorUncheckedCreateWithoutUserInput>
+    connectOrCreate?: MajorCreateOrConnectWithoutUserInput
+    connect?: MajorWhereUniqueInput
+  }
+
+  export type VotesCreateNestedManyWithoutUserInput = {
+    create?: XOR<VotesCreateWithoutUserInput, VotesUncheckedCreateWithoutUserInput> | VotesCreateWithoutUserInput[] | VotesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VotesCreateOrConnectWithoutUserInput | VotesCreateOrConnectWithoutUserInput[]
+    createMany?: VotesCreateManyUserInputEnvelope
+    connect?: VotesWhereUniqueInput | VotesWhereUniqueInput[]
+  }
+
+  export type VotesUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<VotesCreateWithoutUserInput, VotesUncheckedCreateWithoutUserInput> | VotesCreateWithoutUserInput[] | VotesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VotesCreateOrConnectWithoutUserInput | VotesCreateOrConnectWithoutUserInput[]
+    createMany?: VotesCreateManyUserInputEnvelope
+    connect?: VotesWhereUniqueInput | VotesWhereUniqueInput[]
+  }
+
+  export type MajorUpdateOneRequiredWithoutUserNestedInput = {
+    create?: XOR<MajorCreateWithoutUserInput, MajorUncheckedCreateWithoutUserInput>
+    connectOrCreate?: MajorCreateOrConnectWithoutUserInput
+    upsert?: MajorUpsertWithoutUserInput
+    connect?: MajorWhereUniqueInput
+    update?: XOR<XOR<MajorUpdateToOneWithWhereWithoutUserInput, MajorUpdateWithoutUserInput>, MajorUncheckedUpdateWithoutUserInput>
+  }
+
+  export type VotesUpdateManyWithoutUserNestedInput = {
+    create?: XOR<VotesCreateWithoutUserInput, VotesUncheckedCreateWithoutUserInput> | VotesCreateWithoutUserInput[] | VotesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VotesCreateOrConnectWithoutUserInput | VotesCreateOrConnectWithoutUserInput[]
+    upsert?: VotesUpsertWithWhereUniqueWithoutUserInput | VotesUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: VotesCreateManyUserInputEnvelope
+    set?: VotesWhereUniqueInput | VotesWhereUniqueInput[]
+    disconnect?: VotesWhereUniqueInput | VotesWhereUniqueInput[]
+    delete?: VotesWhereUniqueInput | VotesWhereUniqueInput[]
+    connect?: VotesWhereUniqueInput | VotesWhereUniqueInput[]
+    update?: VotesUpdateWithWhereUniqueWithoutUserInput | VotesUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: VotesUpdateManyWithWhereWithoutUserInput | VotesUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: VotesScalarWhereInput | VotesScalarWhereInput[]
+  }
+
+  export type VotesUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<VotesCreateWithoutUserInput, VotesUncheckedCreateWithoutUserInput> | VotesCreateWithoutUserInput[] | VotesUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VotesCreateOrConnectWithoutUserInput | VotesCreateOrConnectWithoutUserInput[]
+    upsert?: VotesUpsertWithWhereUniqueWithoutUserInput | VotesUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: VotesCreateManyUserInputEnvelope
+    set?: VotesWhereUniqueInput | VotesWhereUniqueInput[]
+    disconnect?: VotesWhereUniqueInput | VotesWhereUniqueInput[]
+    delete?: VotesWhereUniqueInput | VotesWhereUniqueInput[]
+    connect?: VotesWhereUniqueInput | VotesWhereUniqueInput[]
+    update?: VotesUpdateWithWhereUniqueWithoutUserInput | VotesUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: VotesUpdateManyWithWhereWithoutUserInput | VotesUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: VotesScalarWhereInput | VotesScalarWhereInput[]
   }
 
   export type StudentsCreateNestedManyWithoutCategoriesInput = {
@@ -9471,6 +10765,11 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -9515,145 +10814,18 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type MajorCreateWithoutUserInput = {
-    majorsOrAdmin: string
-    maxQuantity: number
-    passCode: string
-    Admin?: AdminCreateNestedManyWithoutMajarInput
-  }
-
-  export type MajorUncheckedCreateWithoutUserInput = {
-    id?: number
-    majorsOrAdmin: string
-    maxQuantity: number
-    passCode: string
-    Admin?: AdminUncheckedCreateNestedManyWithoutMajarInput
-  }
-
-  export type MajorCreateOrConnectWithoutUserInput = {
-    where: MajorWhereUniqueInput
-    create: XOR<MajorCreateWithoutUserInput, MajorUncheckedCreateWithoutUserInput>
-  }
-
-  export type VotesCreateWithoutUserInput = {
-    Students: StudentsCreateNestedOneWithoutVotesInput
-  }
-
-  export type VotesUncheckedCreateWithoutUserInput = {
-    id?: number
-    studentId: number
-  }
-
-  export type VotesCreateOrConnectWithoutUserInput = {
-    where: VotesWhereUniqueInput
-    create: XOR<VotesCreateWithoutUserInput, VotesUncheckedCreateWithoutUserInput>
-  }
-
-  export type VotesCreateManyUserInputEnvelope = {
-    data: VotesCreateManyUserInput | VotesCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type MajorUpsertWithoutUserInput = {
-    update: XOR<MajorUpdateWithoutUserInput, MajorUncheckedUpdateWithoutUserInput>
-    create: XOR<MajorCreateWithoutUserInput, MajorUncheckedCreateWithoutUserInput>
-    where?: MajorWhereInput
-  }
-
-  export type MajorUpdateToOneWithWhereWithoutUserInput = {
-    where?: MajorWhereInput
-    data: XOR<MajorUpdateWithoutUserInput, MajorUncheckedUpdateWithoutUserInput>
-  }
-
-  export type MajorUpdateWithoutUserInput = {
-    majorsOrAdmin?: StringFieldUpdateOperationsInput | string
-    maxQuantity?: IntFieldUpdateOperationsInput | number
-    passCode?: StringFieldUpdateOperationsInput | string
-    Admin?: AdminUpdateManyWithoutMajarNestedInput
-  }
-
-  export type MajorUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    majorsOrAdmin?: StringFieldUpdateOperationsInput | string
-    maxQuantity?: IntFieldUpdateOperationsInput | number
-    passCode?: StringFieldUpdateOperationsInput | string
-    Admin?: AdminUncheckedUpdateManyWithoutMajarNestedInput
-  }
-
-  export type VotesUpsertWithWhereUniqueWithoutUserInput = {
-    where: VotesWhereUniqueInput
-    update: XOR<VotesUpdateWithoutUserInput, VotesUncheckedUpdateWithoutUserInput>
-    create: XOR<VotesCreateWithoutUserInput, VotesUncheckedCreateWithoutUserInput>
-  }
-
-  export type VotesUpdateWithWhereUniqueWithoutUserInput = {
-    where: VotesWhereUniqueInput
-    data: XOR<VotesUpdateWithoutUserInput, VotesUncheckedUpdateWithoutUserInput>
-  }
-
-  export type VotesUpdateManyWithWhereWithoutUserInput = {
-    where: VotesScalarWhereInput
-    data: XOR<VotesUpdateManyMutationInput, VotesUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type VotesScalarWhereInput = {
-    AND?: VotesScalarWhereInput | VotesScalarWhereInput[]
-    OR?: VotesScalarWhereInput[]
-    NOT?: VotesScalarWhereInput | VotesScalarWhereInput[]
-    id?: IntFilter<"Votes"> | number
-    userId?: IntFilter<"Votes"> | number
-    studentId?: IntFilter<"Votes"> | number
-  }
-
-  export type MajorCreateWithoutAdminInput = {
-    majorsOrAdmin: string
-    maxQuantity: number
-    passCode: string
-    User?: UserCreateNestedManyWithoutMajorInput
-  }
-
-  export type MajorUncheckedCreateWithoutAdminInput = {
-    id?: number
-    majorsOrAdmin: string
-    maxQuantity: number
-    passCode: string
-    User?: UserUncheckedCreateNestedManyWithoutMajorInput
-  }
-
-  export type MajorCreateOrConnectWithoutAdminInput = {
-    where: MajorWhereUniqueInput
-    create: XOR<MajorCreateWithoutAdminInput, MajorUncheckedCreateWithoutAdminInput>
-  }
-
-  export type MajorUpsertWithoutAdminInput = {
-    update: XOR<MajorUpdateWithoutAdminInput, MajorUncheckedUpdateWithoutAdminInput>
-    create: XOR<MajorCreateWithoutAdminInput, MajorUncheckedCreateWithoutAdminInput>
-    where?: MajorWhereInput
-  }
-
-  export type MajorUpdateToOneWithWhereWithoutAdminInput = {
-    where?: MajorWhereInput
-    data: XOR<MajorUpdateWithoutAdminInput, MajorUncheckedUpdateWithoutAdminInput>
-  }
-
-  export type MajorUpdateWithoutAdminInput = {
-    majorsOrAdmin?: StringFieldUpdateOperationsInput | string
-    maxQuantity?: IntFieldUpdateOperationsInput | number
-    passCode?: StringFieldUpdateOperationsInput | string
-    User?: UserUpdateManyWithoutMajorNestedInput
-  }
-
-  export type MajorUncheckedUpdateWithoutAdminInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    majorsOrAdmin?: StringFieldUpdateOperationsInput | string
-    maxQuantity?: IntFieldUpdateOperationsInput | number
-    passCode?: StringFieldUpdateOperationsInput | string
-    User?: UserUncheckedUpdateManyWithoutMajorNestedInput
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type UserCreateWithoutMajorInput = {
     name: string
     email: string
+    isSubmited?: boolean
     Votes?: VotesCreateNestedManyWithoutUserInput
   }
 
@@ -9661,6 +10833,7 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
+    isSubmited?: boolean
     Votes?: VotesUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -9717,6 +10890,7 @@ export namespace Prisma {
     name?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     majorId?: IntFilter<"User"> | number
+    isSubmited?: BoolFilter<"User"> | boolean
   }
 
   export type AdminUpsertWithWhereUniqueWithoutMajarInput = {
@@ -9742,6 +10916,150 @@ export namespace Prisma {
     id?: IntFilter<"Admin"> | number
     email?: StringFilter<"Admin"> | string
     adminMajorId?: IntFilter<"Admin"> | number
+  }
+
+  export type MajorCreateWithoutAdminInput = {
+    majorsOrAdmin: string
+    maxQuantity: number
+    passCode: string
+    isTimeUp?: boolean
+    User?: UserCreateNestedManyWithoutMajorInput
+  }
+
+  export type MajorUncheckedCreateWithoutAdminInput = {
+    id?: number
+    majorsOrAdmin: string
+    maxQuantity: number
+    passCode: string
+    isTimeUp?: boolean
+    User?: UserUncheckedCreateNestedManyWithoutMajorInput
+  }
+
+  export type MajorCreateOrConnectWithoutAdminInput = {
+    where: MajorWhereUniqueInput
+    create: XOR<MajorCreateWithoutAdminInput, MajorUncheckedCreateWithoutAdminInput>
+  }
+
+  export type MajorUpsertWithoutAdminInput = {
+    update: XOR<MajorUpdateWithoutAdminInput, MajorUncheckedUpdateWithoutAdminInput>
+    create: XOR<MajorCreateWithoutAdminInput, MajorUncheckedCreateWithoutAdminInput>
+    where?: MajorWhereInput
+  }
+
+  export type MajorUpdateToOneWithWhereWithoutAdminInput = {
+    where?: MajorWhereInput
+    data: XOR<MajorUpdateWithoutAdminInput, MajorUncheckedUpdateWithoutAdminInput>
+  }
+
+  export type MajorUpdateWithoutAdminInput = {
+    majorsOrAdmin?: StringFieldUpdateOperationsInput | string
+    maxQuantity?: IntFieldUpdateOperationsInput | number
+    passCode?: StringFieldUpdateOperationsInput | string
+    isTimeUp?: BoolFieldUpdateOperationsInput | boolean
+    User?: UserUpdateManyWithoutMajorNestedInput
+  }
+
+  export type MajorUncheckedUpdateWithoutAdminInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    majorsOrAdmin?: StringFieldUpdateOperationsInput | string
+    maxQuantity?: IntFieldUpdateOperationsInput | number
+    passCode?: StringFieldUpdateOperationsInput | string
+    isTimeUp?: BoolFieldUpdateOperationsInput | boolean
+    User?: UserUncheckedUpdateManyWithoutMajorNestedInput
+  }
+
+  export type MajorCreateWithoutUserInput = {
+    majorsOrAdmin: string
+    maxQuantity: number
+    passCode: string
+    isTimeUp?: boolean
+    Admin?: AdminCreateNestedManyWithoutMajarInput
+  }
+
+  export type MajorUncheckedCreateWithoutUserInput = {
+    id?: number
+    majorsOrAdmin: string
+    maxQuantity: number
+    passCode: string
+    isTimeUp?: boolean
+    Admin?: AdminUncheckedCreateNestedManyWithoutMajarInput
+  }
+
+  export type MajorCreateOrConnectWithoutUserInput = {
+    where: MajorWhereUniqueInput
+    create: XOR<MajorCreateWithoutUserInput, MajorUncheckedCreateWithoutUserInput>
+  }
+
+  export type VotesCreateWithoutUserInput = {
+    Students: StudentsCreateNestedOneWithoutVotesInput
+  }
+
+  export type VotesUncheckedCreateWithoutUserInput = {
+    id?: number
+    studentId: number
+  }
+
+  export type VotesCreateOrConnectWithoutUserInput = {
+    where: VotesWhereUniqueInput
+    create: XOR<VotesCreateWithoutUserInput, VotesUncheckedCreateWithoutUserInput>
+  }
+
+  export type VotesCreateManyUserInputEnvelope = {
+    data: VotesCreateManyUserInput | VotesCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MajorUpsertWithoutUserInput = {
+    update: XOR<MajorUpdateWithoutUserInput, MajorUncheckedUpdateWithoutUserInput>
+    create: XOR<MajorCreateWithoutUserInput, MajorUncheckedCreateWithoutUserInput>
+    where?: MajorWhereInput
+  }
+
+  export type MajorUpdateToOneWithWhereWithoutUserInput = {
+    where?: MajorWhereInput
+    data: XOR<MajorUpdateWithoutUserInput, MajorUncheckedUpdateWithoutUserInput>
+  }
+
+  export type MajorUpdateWithoutUserInput = {
+    majorsOrAdmin?: StringFieldUpdateOperationsInput | string
+    maxQuantity?: IntFieldUpdateOperationsInput | number
+    passCode?: StringFieldUpdateOperationsInput | string
+    isTimeUp?: BoolFieldUpdateOperationsInput | boolean
+    Admin?: AdminUpdateManyWithoutMajarNestedInput
+  }
+
+  export type MajorUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    majorsOrAdmin?: StringFieldUpdateOperationsInput | string
+    maxQuantity?: IntFieldUpdateOperationsInput | number
+    passCode?: StringFieldUpdateOperationsInput | string
+    isTimeUp?: BoolFieldUpdateOperationsInput | boolean
+    Admin?: AdminUncheckedUpdateManyWithoutMajarNestedInput
+  }
+
+  export type VotesUpsertWithWhereUniqueWithoutUserInput = {
+    where: VotesWhereUniqueInput
+    update: XOR<VotesUpdateWithoutUserInput, VotesUncheckedUpdateWithoutUserInput>
+    create: XOR<VotesCreateWithoutUserInput, VotesUncheckedCreateWithoutUserInput>
+  }
+
+  export type VotesUpdateWithWhereUniqueWithoutUserInput = {
+    where: VotesWhereUniqueInput
+    data: XOR<VotesUpdateWithoutUserInput, VotesUncheckedUpdateWithoutUserInput>
+  }
+
+  export type VotesUpdateManyWithWhereWithoutUserInput = {
+    where: VotesScalarWhereInput
+    data: XOR<VotesUpdateManyMutationInput, VotesUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type VotesScalarWhereInput = {
+    AND?: VotesScalarWhereInput | VotesScalarWhereInput[]
+    OR?: VotesScalarWhereInput[]
+    NOT?: VotesScalarWhereInput | VotesScalarWhereInput[]
+    id?: IntFilter<"Votes"> | number
+    userId?: IntFilter<"Votes"> | number
+    studentId?: IntFilter<"Votes"> | number
   }
 
   export type StudentsCreateWithoutCategoriesInput = {
@@ -9807,11 +11125,13 @@ export namespace Prisma {
 
   export type CategoriesCreateWithoutStudentInput = {
     name: string
+    isShownResult?: boolean
   }
 
   export type CategoriesUncheckedCreateWithoutStudentInput = {
     id?: number
     name: string
+    isShownResult?: boolean
   }
 
   export type CategoriesCreateOrConnectWithoutStudentInput = {
@@ -9851,11 +11171,13 @@ export namespace Prisma {
 
   export type CategoriesUpdateWithoutStudentInput = {
     name?: StringFieldUpdateOperationsInput | string
+    isShownResult?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CategoriesUncheckedUpdateWithoutStudentInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    isShownResult?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type VotesUpsertWithWhereUniqueWithoutStudentsInput = {
@@ -9877,6 +11199,7 @@ export namespace Prisma {
   export type UserCreateWithoutVotesInput = {
     name: string
     email: string
+    isSubmited?: boolean
     Major: MajorCreateNestedOneWithoutUserInput
   }
 
@@ -9885,6 +11208,7 @@ export namespace Prisma {
     name: string
     email: string
     majorId: number
+    isSubmited?: boolean
   }
 
   export type UserCreateOrConnectWithoutVotesInput = {
@@ -9932,6 +11256,7 @@ export namespace Prisma {
   export type UserUpdateWithoutVotesInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    isSubmited?: BoolFieldUpdateOperationsInput | boolean
     Major?: MajorUpdateOneRequiredWithoutUserNestedInput
   }
 
@@ -9940,6 +11265,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     majorId?: IntFieldUpdateOperationsInput | number
+    isSubmited?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type StudentsUpsertWithoutVotesInput = {
@@ -9974,6 +11300,54 @@ export namespace Prisma {
     categoryId?: IntFieldUpdateOperationsInput | number
   }
 
+  export type UserCreateManyMajorInput = {
+    id?: number
+    name: string
+    email: string
+    isSubmited?: boolean
+  }
+
+  export type AdminCreateManyMajarInput = {
+    id?: number
+    email: string
+  }
+
+  export type UserUpdateWithoutMajorInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    isSubmited?: BoolFieldUpdateOperationsInput | boolean
+    Votes?: VotesUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMajorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    isSubmited?: BoolFieldUpdateOperationsInput | boolean
+    Votes?: VotesUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutMajorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    isSubmited?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AdminUpdateWithoutMajarInput = {
+    email?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AdminUncheckedUpdateWithoutMajarInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AdminUncheckedUpdateManyWithoutMajarInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+  }
+
   export type VotesCreateManyUserInput = {
     id?: number
     studentId: number
@@ -9991,50 +11365,6 @@ export namespace Prisma {
   export type VotesUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     studentId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type UserCreateManyMajorInput = {
-    id?: number
-    name: string
-    email: string
-  }
-
-  export type AdminCreateManyMajarInput = {
-    id?: number
-    email: string
-  }
-
-  export type UserUpdateWithoutMajorInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    Votes?: VotesUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutMajorInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    Votes?: VotesUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateManyWithoutMajorInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type AdminUpdateWithoutMajarInput = {
-    email?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type AdminUncheckedUpdateWithoutMajarInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    email?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type AdminUncheckedUpdateManyWithoutMajarInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    email?: StringFieldUpdateOperationsInput | string
   }
 
   export type StudentsCreateManyCategoriesInput = {

@@ -14,13 +14,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id      Int     @id @default(autoincrement())
-  name    String
-  email   String  @unique()
-  majorId Int
-  Major   Major   @relation(fields: [majorId], references: [id])
-  Votes   Votes[]
+model Major {
+  id            Int     @id @default(autoincrement())
+  majorsOrAdmin String  @unique
+  maxQuantity   Int
+  passCode      String  @unique
+  isTimeUp      Boolean @default(false)
+  User          User[]
+  Admin         Admin[]
 }
 
 model Admin {
@@ -30,19 +31,21 @@ model Admin {
   Majar        Major  @relation(fields: [adminMajorId], references: [id])
 }
 
-model Major {
-  id            Int     @id @default(autoincrement())
-  majorsOrAdmin String  @unique
-  maxQuantity   Int
-  passCode      String  @unique
-  User          User[]
-  Admin         Admin[]
+model User {
+  id         Int     @id @default(autoincrement())
+  name       String
+  email      String  @unique()
+  majorId    Int
+  isSubmited Boolean @default(false)
+  Major      Major   @relation(fields: [majorId], references: [id])
+  Votes      Votes[]
 }
 
 model Categories {
-  id      Int        @id @default(autoincrement())
-  name    String
-  Student Students[]
+  id            Int        @id @default(autoincrement())
+  name          String
+  isShownResult Boolean    @default(false)
+  Student       Students[]
 }
 
 model Students {
@@ -64,4 +67,9 @@ model Votes {
   studentId Int
   User      User     @relation(fields: [userId], references: [id])
   Students  Students @relation(fields: [studentId], references: [id])
+}
+
+model Agenda {
+  id        Int    @id @default(autoincrement())
+  agendaUrl String
 }

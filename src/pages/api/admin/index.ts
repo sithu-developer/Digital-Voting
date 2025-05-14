@@ -19,28 +19,24 @@ export default async function handler(
       if(adminInMajor) {
         const exitedAdmins = await prisma.admin.findMany({ where : { adminMajorId : adminInMajor.id }});
         if(adminInMajor.passCode === password) {
+          const categories = await prisma.categories.findMany({ orderBy : { id : 'asc'}});
+          const students = await prisma.students.findMany({ orderBy : { id : 'asc'}});
+          const votes = await prisma.votes.findMany({ orderBy : { id : 'asc'}});
+          const users = await prisma.user.findMany({ orderBy : { id : "asc" } });
+          const majors = await prisma.major.findMany({ orderBy : { id : "asc"}});
+          const agendas = await prisma.agenda.findMany({ orderBy : { id : "asc" }})
           const exit = await prisma.admin.findUnique({ where : { email }})
           if(exit) {
-            const categories = await prisma.categories.findMany({ orderBy : { id : 'asc'}});
-            const students = await prisma.students.findMany({ orderBy : { id : 'asc'}});
-            const votes = await prisma.votes.findMany({ orderBy : { id : 'asc'}});
-            const users = await prisma.user.findMany({ orderBy : { id : "asc"} });
-            const majors = await prisma.major.findMany({ orderBy : { id : "asc"}});
-            return res.status(200).json({ newAdmin : exit  , categories , students , votes , users , majors })
+            return res.status(200).json({ newAdmin : exit  , categories , students , votes , users , majors , agendas })
           } else {
             if( exitedAdmins.length < adminInMajor.maxQuantity ) {
               const newAdmin = await prisma.admin.create({ data : { email , adminMajorId : adminInMajor.id }})
-              const categories = await prisma.categories.findMany({ orderBy : { id : 'asc'}});
-              const students = await prisma.students.findMany({ orderBy : { id : 'asc'}})
-              const votes = await prisma.votes.findMany({ orderBy : { id : 'asc'}})
-              const users = await prisma.user.findMany({ orderBy : { id : "asc" } });
-              const majors = await prisma.major.findMany({ orderBy : { id : "asc"}});
               if(categories.length) {
-                return res.status(200).json({ newAdmin , categories , students , votes , users , majors })
+                return res.status(200).json({ newAdmin , categories , students , votes , users , majors , agendas })
               } else {
                 const defaultCategory = await prisma.categories.create({ data : { name : "Dafault Category"}});
                 const defaultStudent = await prisma.students.create({ data : { contestantNumber : 1 , major : "default Major" , name : "default name" , year : 1 , zodiacId : 0 , categoryId : defaultCategory.id , url : "/kingDefault.jpg" }});
-                return res.status(200).json({ newAdmin , categories : [defaultCategory] , students : [ defaultStudent ] , votes : [] , users : [] , majors : [] })
+                return res.status(200).json({ newAdmin , categories : [defaultCategory] , students : [ defaultStudent ] , votes : [] , users : [] , majors : [] , agendas : [] })
               }
             } else {
               return res.status(200).json({ err : "Admin limited quantity exceeded !" })

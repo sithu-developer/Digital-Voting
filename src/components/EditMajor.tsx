@@ -7,7 +7,7 @@ import { NewMajorItems, UpdatedMajorItems } from "@/types/major";
 import { Major } from "../../generated/prisma";
 import { Severity } from "@/types/snackBar";
 import { openSnackBar } from "@/store/slices/snackBarSlice";
-import { createMajor, updateMajor } from "@/store/slices/majorSlice";
+import { updateMajor } from "@/store/slices/majorSlice";
 
 interface Props {
     selectedMajorId : number;
