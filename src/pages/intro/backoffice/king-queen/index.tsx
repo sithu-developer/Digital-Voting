@@ -89,7 +89,7 @@ const KingQueenPage = () => {
                     </Box>}
                     <Button variant="contained" onClick={() => setNewStudentOpen(true)} >Create</Button>
                 </Box>
-                <Box sx={{ display : "grid" , gridTemplateColumns : "repeat(auto-fill, minmax(100px, 1fr))" , gap : "10px" , overflowY : "auto", maxHeight : "calc(100vh - 200px)" }}>
+                <Box sx={{ display : "grid" , gridTemplateColumns : "repeat(auto-fill, minmax(100px, 1fr))" , gap : "10px" , borderRadius : "10px" , overflowY : "auto", maxHeight : "calc(100vh - 200px)" }}>
                     {sortedStudents.map(item => {
                     const currentZodiac = zodiacSigns.find(zodiac => zodiac.id === item.zodiacId) as ZodiacSignType;
                     return (
@@ -101,8 +101,8 @@ const KingQueenPage = () => {
                                 <Typography sx={{ position : "absolute" , top : "0px" , left : "15%", textAlign : "center" , width : "22px"}} >{item.contestantNumber}</Typography>
                             </Box>
                             <Box sx={{ position : "absolute" , bottom : "0px" , bgcolor : "info.main" , width : "100%" , display : "flex"  , flexDirection : "column" , justifyContent : "center" , alignItems : "center" , gap : "3px" , p : "5px" , borderRadius : "15px" }} >
-                                <Typography sx={{ fontSize : "12px" , lineHeight : 1}} >{item.name}</Typography>
-                                <Typography sx={{ fontSize : "12px" , lineHeight : 1}}>{ item.year  + " " + item.major } ({currentZodiac.zodiac.replace(/\s*\(.*$/, '')})</Typography>
+                                <Typography sx={{ fontSize : "12px" , lineHeight : 1}} >{item.name} {currentZodiac.zodiac.replace(/^.*?-|\s*\(.*?\)/g, '')}</Typography>
+                                <Typography sx={{ fontSize : "12px" , lineHeight : 1}}>{ item.year  + " " + item.major }</Typography>
                             </Box>
                         </Box>
                     </Link>

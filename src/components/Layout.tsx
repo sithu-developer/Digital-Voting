@@ -18,7 +18,7 @@ const Layout = ({ children } : Props ) => {
     const [ sideBarOpen , setSideBarOpen ] = useState<boolean>(false);
 
     return (
-        <Box  sx={{ bgcolor : "secondary.main" , pt :( isBackoffice ? "30px" : "0px") , width : "100vw" , height : "100vh", overflowY : "auto" }}>
+        <Box  sx={{ bgcolor : "secondary.main" , position : "relative" , pt :( isBackoffice ? "30px" : "0px") , width : "100vw" , height : "100vh", overflowY : "auto" }}>
            {isBackoffice && <BackofficeTopBar setSideBarOpen={setSideBarOpen} />}
            {isBackoffice && <BackofficeSideBar setSideBarOpen={setSideBarOpen} sideBarOpen={sideBarOpen} />}
             <Box>{children}</Box>

@@ -39,7 +39,7 @@ const VotingBottomBar = () => {
     
     if(!user) return null;
     return (
-        <Box>bottom bar</Box>
+        <Box sx={{ position : "absolute" , bottom : "20px" , right : "20px" , color : "white"}} >bottom bar</Box>
     )
 }
 
