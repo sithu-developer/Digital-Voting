@@ -4902,18 +4902,21 @@ export namespace Prisma {
   export type CategoriesMinAggregateOutputType = {
     id: number | null
     name: string | null
+    iconUrl: string | null
     isShownResult: boolean | null
   }
 
   export type CategoriesMaxAggregateOutputType = {
     id: number | null
     name: string | null
+    iconUrl: string | null
     isShownResult: boolean | null
   }
 
   export type CategoriesCountAggregateOutputType = {
     id: number
     name: number
+    iconUrl: number
     isShownResult: number
     _all: number
   }
@@ -4930,18 +4933,21 @@ export namespace Prisma {
   export type CategoriesMinAggregateInputType = {
     id?: true
     name?: true
+    iconUrl?: true
     isShownResult?: true
   }
 
   export type CategoriesMaxAggregateInputType = {
     id?: true
     name?: true
+    iconUrl?: true
     isShownResult?: true
   }
 
   export type CategoriesCountAggregateInputType = {
     id?: true
     name?: true
+    iconUrl?: true
     isShownResult?: true
     _all?: true
   }
@@ -5035,6 +5041,7 @@ export namespace Prisma {
   export type CategoriesGroupByOutputType = {
     id: number
     name: string
+    iconUrl: string
     isShownResult: boolean
     _count: CategoriesCountAggregateOutputType | null
     _avg: CategoriesAvgAggregateOutputType | null
@@ -5060,6 +5067,7 @@ export namespace Prisma {
   export type CategoriesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    iconUrl?: boolean
     isShownResult?: boolean
     Student?: boolean | Categories$StudentArgs<ExtArgs>
     _count?: boolean | CategoriesCountOutputTypeDefaultArgs<ExtArgs>
@@ -5068,22 +5076,25 @@ export namespace Prisma {
   export type CategoriesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    iconUrl?: boolean
     isShownResult?: boolean
   }, ExtArgs["result"]["categories"]>
 
   export type CategoriesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    iconUrl?: boolean
     isShownResult?: boolean
   }, ExtArgs["result"]["categories"]>
 
   export type CategoriesSelectScalar = {
     id?: boolean
     name?: boolean
+    iconUrl?: boolean
     isShownResult?: boolean
   }
 
-  export type CategoriesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "isShownResult", ExtArgs["result"]["categories"]>
+  export type CategoriesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "iconUrl" | "isShownResult", ExtArgs["result"]["categories"]>
   export type CategoriesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Student?: boolean | Categories$StudentArgs<ExtArgs>
     _count?: boolean | CategoriesCountOutputTypeDefaultArgs<ExtArgs>
@@ -5099,6 +5110,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
+      iconUrl: string
       isShownResult: boolean
     }, ExtArgs["result"]["categories"]>
     composites: {}
@@ -5526,6 +5538,7 @@ export namespace Prisma {
   interface CategoriesFieldRefs {
     readonly id: FieldRef<"Categories", 'Int'>
     readonly name: FieldRef<"Categories", 'String'>
+    readonly iconUrl: FieldRef<"Categories", 'String'>
     readonly isShownResult: FieldRef<"Categories", 'Boolean'>
   }
     
@@ -9254,6 +9267,7 @@ export namespace Prisma {
   export const CategoriesScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    iconUrl: 'iconUrl',
     isShownResult: 'isShownResult'
   };
 
@@ -9537,6 +9551,7 @@ export namespace Prisma {
     NOT?: CategoriesWhereInput | CategoriesWhereInput[]
     id?: IntFilter<"Categories"> | number
     name?: StringFilter<"Categories"> | string
+    iconUrl?: StringFilter<"Categories"> | string
     isShownResult?: BoolFilter<"Categories"> | boolean
     Student?: StudentsListRelationFilter
   }
@@ -9544,6 +9559,7 @@ export namespace Prisma {
   export type CategoriesOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    iconUrl?: SortOrder
     isShownResult?: SortOrder
     Student?: StudentsOrderByRelationAggregateInput
   }
@@ -9554,6 +9570,7 @@ export namespace Prisma {
     OR?: CategoriesWhereInput[]
     NOT?: CategoriesWhereInput | CategoriesWhereInput[]
     name?: StringFilter<"Categories"> | string
+    iconUrl?: StringFilter<"Categories"> | string
     isShownResult?: BoolFilter<"Categories"> | boolean
     Student?: StudentsListRelationFilter
   }, "id">
@@ -9561,6 +9578,7 @@ export namespace Prisma {
   export type CategoriesOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    iconUrl?: SortOrder
     isShownResult?: SortOrder
     _count?: CategoriesCountOrderByAggregateInput
     _avg?: CategoriesAvgOrderByAggregateInput
@@ -9575,6 +9593,7 @@ export namespace Prisma {
     NOT?: CategoriesScalarWhereWithAggregatesInput | CategoriesScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Categories"> | number
     name?: StringWithAggregatesFilter<"Categories"> | string
+    iconUrl?: StringWithAggregatesFilter<"Categories"> | string
     isShownResult?: BoolWithAggregatesFilter<"Categories"> | boolean
   }
 
@@ -9899,6 +9918,7 @@ export namespace Prisma {
 
   export type CategoriesCreateInput = {
     name: string
+    iconUrl: string
     isShownResult?: boolean
     Student?: StudentsCreateNestedManyWithoutCategoriesInput
   }
@@ -9906,12 +9926,14 @@ export namespace Prisma {
   export type CategoriesUncheckedCreateInput = {
     id?: number
     name: string
+    iconUrl: string
     isShownResult?: boolean
     Student?: StudentsUncheckedCreateNestedManyWithoutCategoriesInput
   }
 
   export type CategoriesUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
+    iconUrl?: StringFieldUpdateOperationsInput | string
     isShownResult?: BoolFieldUpdateOperationsInput | boolean
     Student?: StudentsUpdateManyWithoutCategoriesNestedInput
   }
@@ -9919,6 +9941,7 @@ export namespace Prisma {
   export type CategoriesUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    iconUrl?: StringFieldUpdateOperationsInput | string
     isShownResult?: BoolFieldUpdateOperationsInput | boolean
     Student?: StudentsUncheckedUpdateManyWithoutCategoriesNestedInput
   }
@@ -9926,17 +9949,20 @@ export namespace Prisma {
   export type CategoriesCreateManyInput = {
     id?: number
     name: string
+    iconUrl: string
     isShownResult?: boolean
   }
 
   export type CategoriesUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
+    iconUrl?: StringFieldUpdateOperationsInput | string
     isShownResult?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CategoriesUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    iconUrl?: StringFieldUpdateOperationsInput | string
     isShownResult?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -10304,6 +10330,7 @@ export namespace Prisma {
   export type CategoriesCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    iconUrl?: SortOrder
     isShownResult?: SortOrder
   }
 
@@ -10314,12 +10341,14 @@ export namespace Prisma {
   export type CategoriesMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    iconUrl?: SortOrder
     isShownResult?: SortOrder
   }
 
   export type CategoriesMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    iconUrl?: SortOrder
     isShownResult?: SortOrder
   }
 
@@ -11125,12 +11154,14 @@ export namespace Prisma {
 
   export type CategoriesCreateWithoutStudentInput = {
     name: string
+    iconUrl: string
     isShownResult?: boolean
   }
 
   export type CategoriesUncheckedCreateWithoutStudentInput = {
     id?: number
     name: string
+    iconUrl: string
     isShownResult?: boolean
   }
 
@@ -11171,12 +11202,14 @@ export namespace Prisma {
 
   export type CategoriesUpdateWithoutStudentInput = {
     name?: StringFieldUpdateOperationsInput | string
+    iconUrl?: StringFieldUpdateOperationsInput | string
     isShownResult?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CategoriesUncheckedUpdateWithoutStudentInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    iconUrl?: StringFieldUpdateOperationsInput | string
     isShownResult?: BoolFieldUpdateOperationsInput | boolean
   }
 

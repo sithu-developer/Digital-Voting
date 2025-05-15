@@ -16,14 +16,14 @@ const initialState : CategoriesInitialState = {
 }
 
 export const createNewCategory = createAsyncThunk("categoriesSlice/createNewCategory" , async( newCategoryItems : NewCategoryItems , thunkApi) => {
-    const { newCategory , isFail , isSuccess } = newCategoryItems;
+    const { newCategory , iconUrl , isFail , isSuccess } = newCategoryItems;
     try {
         const response = await fetch(`${envValues.apiUrl}/categories` , {
             method : "POST",
             headers : {
                 "content-type" : "application/json"
             },
-            body : JSON.stringify({ newCategory })
+            body : JSON.stringify({ newCategory , iconUrl })
         });
         const { category } = await response.json();
         thunkApi.dispatch(addNewCategory(category))
@@ -34,14 +34,14 @@ export const createNewCategory = createAsyncThunk("categoriesSlice/createNewCate
 })
 
 export const updateCategory = createAsyncThunk("categoriesSlice/updateCategory" , async( updatedCategoryItems : UpdatedCategoryItems , thunkApi) => {
-    const { updatedCategory , isFail , isSuccess } = updatedCategoryItems;
+    const { id , name , iconUrl , isShownResult , isFail , isSuccess } = updatedCategoryItems;
     try {
         const response = await fetch(`${envValues.apiUrl}/categories` , {
             method : "PUT",
             headers : {
                 "content-type" : "application/json"
             },
-            body : JSON.stringify({ updatedCategory })
+            body : JSON.stringify({ id , name , iconUrl , isShownResult })
         });
         const { category } = await response.json();
         thunkApi.dispatch(replaceCategory(category))

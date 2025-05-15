@@ -1,8 +1,8 @@
 import { useAppSelector } from "@/store/hooks";
-import { Box, Button, Divider, Typography } from "@mui/material"
+import { BottomNavigation, BottomNavigationAction, Box, Button, Divider, Typography } from "@mui/material"
 import { signOut } from "next-auth/react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Categories } from "../../../../../generated/prisma";
 import { zodiacSigns } from "@/util/general";
 import { ZodiacSignType } from "@/types/general";
@@ -10,53 +10,80 @@ import { ZodiacSignType } from "@/types/general";
 const KingSelectionPage = () => {
     const user = useAppSelector(store => store.userSlice.user);
     const [ selectedCategory , setSelectedCategory ] = useState<Categories>();
+    const categories = useAppSelector(store => store.categoriesSlice.categories);
     const students = useAppSelector(store => store.studentsSlice.students);
     const relatedStudents = students.filter(item => item.categoryId === selectedCategory?.id);
-    const sortedStudents = [...students].sort((a,b) => a.contestantNumber - b.contestantNumber )
+    const sortedStudents = relatedStudents.sort((a,b) => a.contestantNumber - b.contestantNumber );
 
+    useEffect(() => {
+        if(categories.length && localStorage) {
+            const selsectedCategoryId = Number(localStorage.getItem("selectedCategoryIdFromVoting"));
+            const selectedCategory = categories.find(item => item.id === selsectedCategoryId);
+            if(selectedCategory) {
+                setSelectedCategory(selectedCategory);
+            } else {
+                setSelectedCategory(categories[0]);
+                localStorage.setItem("selectedCategoryIdFromVoting" , String(categories[0].id))
+            }
+        }
+    } , [categories])
     
     if(user)
     return (
         <Box sx={{ position : "relative" , width : "100vw" , height : "100vh" , bgcolor : "#031020" , overflow : "hidden" , display : "flex" , flexDirection : "column" , justifyContent : "center" , alignItems : "center"  }}  >
             <img src={"/selectionBackground.jpg"} style={{ height : "100vh" }} />
             <Box sx={{ position : "absolute" , top : "75px" , width : "100%" , display : "flex" , flexDirection : "column" , alignItems : "center" }} >
-                <img src={"/kingCrown.png"} style={{ width : "18%" , position : "absolute" , top : "-53px" }} />
+                <img src={selectedCategory?.iconUrl} style={{ width : "18%" , position : "absolute" , top : "-55px" }} />
                 <Box sx={{ display : "flex" , width : "75%" }}>
                     <Box sx={{ width: "35%", height: "12px", borderTop: "1px solid #BFCDEC"}} />
                     <Box sx={{ width: "30%", height: "12px", borderBottom : "1px solid #BFCDEC" , borderLeft : "1px solid #BFCDEC" , borderRight : "1px solid #BFCDEC" }} />
-                    <Box sx={{ width: "35%", height: "12px", borderTop: "1px solid #BFCDEC" }} />
+                    <Box sx={{ width: "35%", height: "12px", borderTop: "1px solid #BFCDEC" }} >
+
+                    </Box>
                 </Box>
-                <Typography sx={{ width : "100vw" , fontSize : "38px" , fontFamily : "Microsoft YaHei UI" , textAlign : "center" , color : "#DAE9FE" }} >KING SELECTION</Typography>
+                <Typography sx={{ width : "100vw" , fontSize : "38px" , fontFamily : "Microsoft YaHei UI" , textAlign : "center" , color : "#DAE9FE" }} >{selectedCategory?.name.toUpperCase()} SELECTION</Typography>
                 <Box sx={{ display : "flex" , alignItems : "center"  , width : "75%"}}>
                     <Box sx={{ width: "35%", borderTop: "1px solid #BFCDEC"}} />
                     <Typography sx={{ width : "30%" , fontFamily : "Monotype Corsiva" , textAlign : "center" , lineHeight : 1 , color : "#BFCDEC"}} >LET'SVOTE</Typography>
                     <Box sx={{ width: "35%", borderTop: "1px solid #BFCDEC" }} />
                 </Box>
             </Box>
-            <Box sx={{ position : "absolute" , top : "180px" , borderRadius : "10px" , width : "95%" , display : "grid" , gridTemplateColumns : "repeat(auto-fill, minmax(100px, 1fr))" , gap : "10px" , overflowY : "auto", maxHeight : "calc(100vh - 300px)" }}>
+            <Box sx={{ position : "absolute" , top : "180px" , borderRadius : "10px" , width : "95%" , display : "grid" , gridTemplateColumns : "repeat(auto-fill, minmax(100px, 1fr))" , gap : "10px" , overflowY : "auto", height : "calc(100vh - 350px)" }}>
                 {sortedStudents.map(item => {
                 const currentZodiac = zodiacSigns.find(zodiac => zodiac.id === item.zodiacId) as ZodiacSignType;
                 return (
-                <Link href={`/intro/backoffice/king-queen/${item.id}`} key={item.id} style={{ textDecoration : "none"}} >
-                    <Box sx={{ width : "115px" , height : "140px" , background : `radial-gradient(ellipse at center,#AAB6F8 5%,#8D9CF2 25%,#5B6DD7 55%,#3747A3 75%)` , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "start" , alignItems : "center" , position : "relative" , overflow : "hidden" }} >
+                    <Box key={item.id} sx={{ width : "115px" , height : "140px" , background : `radial-gradient(ellipse at center,#AAB6F8 5%,#8D9CF2 25%,#5B6DD7 55%,#3747A3 75%)` , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "start" , alignItems : "center" , position : "relative" , overflow : "hidden" }} >
                         <img alt="king photo" src={item.url} style={{ width : "100%"}} />
                         <Box sx={{ position : "absolute" , top : "5px" , right : "5px"}}>
                             <img alt="number boundary" src={ item.url.includes("Default") ? "/numberBoundaryWithBg.svg" : "/numberBoundary.svg"}/>
                             <Typography sx={{ position : "absolute" , top : "0px" , left : "15%", textAlign : "center" , width : "22px"}} >{item.contestantNumber}</Typography>
                         </Box>
                         <Box sx={{ position : "absolute" , bottom : "0px" , bgcolor : "info.main" , width : "100%" , display : "flex"  , flexDirection : "column" , justifyContent : "center" , alignItems : "center" , gap : "3px" , p : "5px" , borderRadius : "15px" }} >
-                            <Typography sx={{ fontSize : "12px" , lineHeight : 1}} >{item.name} {currentZodiac.zodiac.replace(/^.*?-|\s*\(.*?\)/g, '')}</Typography>
+                            <Typography sx={{ fontSize : "12px" , lineHeight : 1 , textAlign : "center" }} >{item.name} {currentZodiac.zodiac.replace(/^.*?-|\s*\(.*?\)/g, '')}</Typography>
                             <Typography sx={{ fontSize : "12px" , lineHeight : 1}}>{ item.year  + " " + item.major }</Typography>
                         </Box>
                     </Box>
-                </Link>
                 )})}
             </Box>
-            {/* 
-            <Button variant="contained" onClick={() => {
-                localStorage.clear();
-                signOut({callbackUrl : "/intro"})
-            }} >sing out</Button> */}
+            <Box sx={{ display : "flex" , alignItems : "center" , justifyContent : "center" , gap : "40px" , width : "80%" , position : "absolute" , bottom : "85px" , height : "65px"}}>
+                {(categories[0].id === selectedCategory?.id) && <img src={"/kingButtonSide.svg"} />}
+                {(categories[1].id === selectedCategory?.id) && <img src={"/queenButtonSide.svg"} />}
+                <Button variant="contained" sx={{ bgcolor : "#7485E5" , py : "0px" , borderRadius : "20px" , fontSize : "18px" , gap : "5px" }} >Vote<img src={"/voteChecked.svg"} style={{ width : "19px"}} /></Button>
+                {(categories[0].id === selectedCategory?.id) && <img src={"/kingButtonSide.svg"} />}
+                {(categories[1].id === selectedCategory?.id) && <img src={"/queenButtonSide.svg"} />}
+            </Box>
+            <BottomNavigation
+            //   showLabels
+              value={selectedCategory ? selectedCategory.id : categories[0].id }
+              sx={{  position : "absolute" , bottom : "0px" , bgcolor : "#7485E5" , overflowX : "auto" , width : "100%" , display : "flex" , justifyContent : "start" , height : "65px" , borderTopLeftRadius : "20px" , borderTopRightRadius : "20px"}}
+            >
+                {categories.map(item => (
+                    <BottomNavigationAction key={item.id} onClick={() => {
+                        setSelectedCategory(item);
+                        localStorage.setItem("selectedCategoryIdFromVoting" , String(item.id))
+                    }} value={item.id} sx={{ color : "white" , '&.Mui-selected' : { color : "black"} }} label={item.name} icon={<img src={item.iconUrl}  style={{ width : "32px"}} />} />
+                ))} 
+            </BottomNavigation>
         </Box>
     )
     else 

@@ -54,7 +54,7 @@ const NewStudent = ({ selectedCategory , newStudentOpen , setNewStudentOpen } : 
             <DialogContent sx={{ bgcolor : "secondary.main" , display : "flex" , flexDirection : "column" , gap : "20px" }}>
                 <Typography variant="h5" color="info" >New {selectedCategory.name}</Typography>
                 <Box sx={{ display : "flex" , flexDirection : "column" , gap : "10px"}} >
-                    <TextField label="Contestant number" type="number"  onChange={(event) => setNewStudent({...newStudent , contestantNumber : Number(event.target.value)})} />
+                    <TextField autoFocus label="Contestant number" type="number"  onChange={(event) => setNewStudent({...newStudent , contestantNumber : Number(event.target.value)})} />
                     <TextField label="Name" onChange={(event) => setNewStudent({...newStudent , name : event.target.value})} />
                     <TextField label="Year" type="number" onChange={(event) => setNewStudent({...newStudent , year : Number(event.target.value)})} />
                     <TextField label="Major" onChange={(event) => setNewStudent({...newStudent , major : event.target.value})} />

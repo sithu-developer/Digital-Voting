@@ -12,16 +12,18 @@ export default async function handler(
     if(!session) return res.status(401).send("unauthorized");
     const method = req.method;
     if(method === "POST") {
-        const { newCategory } = req.body as NewCategoryItems;
-        if(!newCategory) return res.status(400).send("Bad request");
-        const category = await prisma.categories.create({ data : { name : newCategory }});
-        return res.status(200).json({ category })
+        const { newCategory , iconUrl } = req.body as NewCategoryItems;
+        const isValid = newCategory && iconUrl;
+        if(!isValid) return res.status(400).send("Bad request");
+        const category = await prisma.categories.create({ data : { name : newCategory , iconUrl }});
+        return res.status(200).json({ category });
     } else if(method === "PUT") {
-        const { updatedCategory } = req.body as UpdatedCategoryItems;
-        if(!updatedCategory) return res.status(400).send("Bad request");
-        const isExit = await prisma.categories.findUnique({ where : { id : updatedCategory.id }});
+        const { id , name , iconUrl , isShownResult } = req.body as UpdatedCategoryItems;
+        const isValid = id && name && iconUrl && isShownResult !== undefined;
+        if(!isValid) return res.status(400).send("Bad request");
+        const isExit = await prisma.categories.findUnique({ where : { id }});
         if(!isExit) return res.status(400).send("Bad request");
-        const category = await prisma.categories.update({ where :{ id : updatedCategory.id} , data : { name : updatedCategory.name}});
+        const category = await prisma.categories.update({ where :{ id } , data : { name , iconUrl , isShownResult }});
         return res.status(200).json({ category })
     } else if(method === "DELETE") {
         const categoryId = Number(req.query.categoryId);

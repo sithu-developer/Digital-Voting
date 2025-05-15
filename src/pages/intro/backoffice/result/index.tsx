@@ -58,7 +58,7 @@ const ResultPage = () => {
                 ))}
             </Box>
             <Box sx={{  px : "20px"}}>
-                {searchOpen ? <Box sx={{ flexGrow : 1 , display : "flex" , justifyContent : "space-between"}}>
+                {searchOpen ? <Box sx={{ flexGrow : 1 , display : "flex" , justifyContent : "space-between" ,  alignItems : "center" }}>
                     <TextField sx={{ ml : "20px"}} autoFocus variant="standard" placeholder="Search..." onChange={(event) => setSearchValue(event.target.value)} />
                     <IconButton onClick={() => {
                         setSearchValue("");
@@ -67,8 +67,11 @@ const ResultPage = () => {
                         <CloseRoundedIcon sx={{ color : "black"}} />
                     </IconButton> 
                 </Box>
-                :<Box sx={{ flexGrow : 1 , display : "flex" , justifyContent : "space-between"}}>
-                    <Typography variant="h5" sx={{ ml : "20px"}} >{selectedCategory?.name}</Typography>
+                :<Box sx={{ flexGrow : 1 , display : "flex" , justifyContent : "space-between" , alignItems : "center"}}>
+                    {selectedCategory && <Box sx={{ display : "flex" , alignItems : "center" , gap : "5px" ,  ml : "20px"}} >
+                        <img src={selectedCategory.iconUrl} style={{ width : "35px" , maxHeight : "50px"}} />
+                        <Typography variant="h5" >{selectedCategory.name}</Typography>
+                    </Box>}
                     <IconButton onClick={() => setSearchOpen(true)} >
                         <SearchRoundedIcon sx={{ color : "black"}} />
                     </IconButton>   

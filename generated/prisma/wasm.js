@@ -145,6 +145,7 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.CategoriesScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  iconUrl: 'iconUrl',
   isShownResult: 'isShownResult'
 };
 

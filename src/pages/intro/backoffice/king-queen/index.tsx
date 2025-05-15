@@ -72,7 +72,7 @@ const KingQueenPage = () => {
             <Divider variant="middle" sx={{ bgcolor : "black"}} />
             <Box sx={{ display : "flex" , flexDirection : "column" , gap : "10px", p : "10px"}}>
                 <Box sx={{ display : "flex" , justifyContent : "space-between" , gap : "20px" , alignItems : "center"}} >
-                    {searchOpen ? <Box sx={{ flexGrow : 1 , display : "flex" , justifyContent : "space-between"}}>
+                    {searchOpen ? <Box sx={{ flexGrow : 1 , display : "flex" , justifyContent : "space-between", alignItems : "center"}}>
                         <TextField sx={{ ml : "20px"}} autoFocus variant="standard" placeholder="Search..." onChange={(event) => setSearchValue(event.target.value)} />
                         <IconButton onClick={() => {
                             setSearchValue("")
@@ -81,8 +81,11 @@ const KingQueenPage = () => {
                             <CloseRoundedIcon sx={{ color : "black"}} />
                         </IconButton> 
                     </Box>
-                    :<Box sx={{ flexGrow : 1 , display : "flex" , justifyContent : "space-between"}}>
-                        <Typography variant="h5" sx={{ ml : "20px"}} >{selectedCategory?.name}</Typography>
+                    :<Box sx={{ flexGrow : 1 , display : "flex" , justifyContent : "space-between" , alignItems : "center"}}>
+                        {selectedCategory && <Box sx={{ display : "flex" , alignItems : "center" , gap : "5px" ,  ml : "20px"}} >
+                            <img src={selectedCategory.iconUrl} style={{ width : "35px" , maxHeight : "50px"}} />
+                            <Typography variant="h5" >{selectedCategory.name}</Typography>
+                        </Box>}
                         <IconButton onClick={() => setSearchOpen(true)} >
                             <SearchRoundedIcon sx={{ color : "black"}} />
                         </IconButton>   
@@ -101,7 +104,7 @@ const KingQueenPage = () => {
                                 <Typography sx={{ position : "absolute" , top : "0px" , left : "15%", textAlign : "center" , width : "22px"}} >{item.contestantNumber}</Typography>
                             </Box>
                             <Box sx={{ position : "absolute" , bottom : "0px" , bgcolor : "info.main" , width : "100%" , display : "flex"  , flexDirection : "column" , justifyContent : "center" , alignItems : "center" , gap : "3px" , p : "5px" , borderRadius : "15px" }} >
-                                <Typography sx={{ fontSize : "12px" , lineHeight : 1}} >{item.name} {currentZodiac.zodiac.replace(/^.*?-|\s*\(.*?\)/g, '')}</Typography>
+                                <Typography sx={{ fontSize : "12px" , lineHeight : 1 , textAlign : "center"}} >{item.name} {currentZodiac.zodiac.replace(/^.*?-|\s*\(.*?\)/g, '')}</Typography>
                                 <Typography sx={{ fontSize : "12px" , lineHeight : 1}}>{ item.year  + " " + item.major }</Typography>
                             </Box>
                         </Box>
