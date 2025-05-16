@@ -10,10 +10,12 @@ import { ZodiacSignType } from "@/types/general";
 const KingSelectionPage = () => {
     const user = useAppSelector(store => store.userSlice.user);
     const [ selectedCategory , setSelectedCategory ] = useState<Categories>();
+    const [ numberForBackground  , setNumberForBackground ] = useState<number>(1);
     const categories = useAppSelector(store => store.categoriesSlice.categories);
     const students = useAppSelector(store => store.studentsSlice.students);
     const relatedStudents = students.filter(item => item.categoryId === selectedCategory?.id);
     const sortedStudents = relatedStudents.sort((a,b) => a.contestantNumber - b.contestantNumber );
+    console.log(numberForBackground)
 
     useEffect(() => {
         if(categories.length && localStorage) {
@@ -27,18 +29,28 @@ const KingSelectionPage = () => {
             }
         }
     } , [categories])
+
+    useEffect(() => {
+        if(selectedCategory) {
+            const ceilIndexOfSelectedCategory = Math.ceil((categories.indexOf(selectedCategory) + 1)/2);
+            setNumberForBackground(ceilIndexOfSelectedCategory % 2)
+        } else {
+            setNumberForBackground(1);
+        }
+    } , [selectedCategory])
     
     if(user)
     return (
-        <Box sx={{ position : "relative" , width : "100vw" , height : "100vh" , bgcolor : "#031020" , overflow : "hidden" , display : "flex" , flexDirection : "column" , justifyContent : "center" , alignItems : "center"  }}  >
-            <img src={"/selectionBackground.jpg"} style={{ height : "100vh" }} />
-            <Box sx={{ position : "absolute" , top : "75px" , width : "100%" , display : "flex" , flexDirection : "column" , alignItems : "center" }} >
-                <img src={selectedCategory?.iconUrl} style={{ width : "18%" , position : "absolute" , top : "-55px" }} />
-                <Box sx={{ display : "flex" , width : "75%" }}>
+        <Box sx={{ position : "relative" , width : "100vw" , height : "100vh" , bgcolor : numberForBackground ?  "#031020" : "#091D7D" , overflow : "hidden" , display : "flex" , flexDirection : "column" , alignItems : "center"  }}  >
+            {numberForBackground ? <img src={"/selectionBackground.jpg"} style={{ height : "100vh" , opacity : "60%" }} />
+            : <img src={"/selectionBackground2.jpg"} style={{ height : "calc(100vh - 34px)" , width : "120vw" , opacity : "50%" }} />}
+            <Box sx={{ position : "absolute" , top : "80px" , width : "100%" , display : "flex" , flexDirection : "column" , alignItems : "center" }} >
+                {selectedCategory && <img src={selectedCategory.iconUrl} style={{ width : "18%" , position : "absolute" , top : "-55px" }} />}
+                <Box sx={{ display : "flex" , width : "75%" , position : "relative" }}>
                     <Box sx={{ width: "35%", height: "12px", borderTop: "1px solid #BFCDEC"}} />
                     <Box sx={{ width: "30%", height: "12px", borderBottom : "1px solid #BFCDEC" , borderLeft : "1px solid #BFCDEC" , borderRight : "1px solid #BFCDEC" }} />
                     <Box sx={{ width: "35%", height: "12px", borderTop: "1px solid #BFCDEC" }} >
-
+                        <img src={"/butterfly.gif"} style={{ position : "absolute" , top : "-38px" , right : "-40px" ,  width : "70px" , transform : "rotate(48deg)" }} />
                     </Box>
                 </Box>
                 <Typography sx={{ width : "100vw" , fontSize : "38px" , fontFamily : "Microsoft YaHei UI" , textAlign : "center" , color : "#DAE9FE" }} >{selectedCategory?.name.toUpperCase()} SELECTION</Typography>
@@ -48,7 +60,7 @@ const KingSelectionPage = () => {
                     <Box sx={{ width: "35%", borderTop: "1px solid #BFCDEC" }} />
                 </Box>
             </Box>
-            <Box sx={{ position : "absolute" , top : "180px" , borderRadius : "10px" , width : "95%" , display : "grid" , gridTemplateColumns : "repeat(auto-fill, minmax(100px, 1fr))" , gap : "10px" , overflowY : "auto", height : "calc(100vh - 350px)" }}>
+            <Box sx={{ position : "absolute" , top : "185px" , borderRadius : "10px" , width : "95%" , display : "grid" , gridTemplateColumns : "repeat(auto-fill, minmax(100px, 1fr))" , gap : "10px" , overflowY : "auto", height : "calc(100vh - 350px)" }}>
                 {sortedStudents.map(item => {
                 const currentZodiac = zodiacSigns.find(zodiac => zodiac.id === item.zodiacId) as ZodiacSignType;
                 return (
@@ -75,13 +87,13 @@ const KingSelectionPage = () => {
             <BottomNavigation
             //   showLabels
               value={selectedCategory ? selectedCategory.id : categories[0].id }
-              sx={{  position : "absolute" , bottom : "0px" , bgcolor : "#7485E5" , overflowX : "auto" , width : "100%" , display : "flex" , justifyContent : "start" , height : "65px" , borderTopLeftRadius : "20px" , borderTopRightRadius : "20px"}}
+              sx={{  position : "absolute" , bottom : "0px" , bgcolor : "info.dark" , overflowX : "auto" , width : "100%" , display : "flex" , justifyContent : "start" , height : "65px" , borderTopLeftRadius : "20px" , borderTopRightRadius : "20px"}}
             >
                 {categories.map(item => (
                     <BottomNavigationAction key={item.id} onClick={() => {
                         setSelectedCategory(item);
                         localStorage.setItem("selectedCategoryIdFromVoting" , String(item.id))
-                    }} value={item.id} sx={{ color : "white" , '&.Mui-selected' : { color : "black"} }} label={item.name} icon={<img src={item.iconUrl}  style={{ width : "32px"}} />} />
+                    }} value={item.id} sx={{ color : "white" , '&.Mui-selected' : { color : "white"} }} label={item.name} icon={<img src={item.iconUrl}  style={{ width : "32px"}} />} />
                 ))} 
             </BottomNavigation>
         </Box>
