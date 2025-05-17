@@ -1,5 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Votes } from "../../../generated/prisma";
+import { RevotedStudentItems, VotedStudentItems } from "@/types/vote";
+import { envValues } from "@/util/envValues";
 
 interface VotesSliceInitialState {
     votes : Votes[]
@@ -11,6 +13,42 @@ const initialState : VotesSliceInitialState = {
     error : null,
 }
 
+export const voteStudent = createAsyncThunk("votesSlice/voteStudent" , async( voteStudentItems : VotedStudentItems , thunkApi ) => {
+    const { studentId , userId , isFail , isSuccess } = voteStudentItems;
+    try {
+        const response = await fetch(`${envValues.apiUrl}/vote` , {
+            method : "POST",
+            headers : {
+                "content-type" : "application/json"
+            },
+            body : JSON.stringify({ studentId , userId })
+        });
+        const { newVote } = await response.json();
+        thunkApi.dispatch(addVote(newVote));
+        isSuccess && isSuccess();
+    } catch(err) {
+        console.log(err);
+    }
+})
+
+export const revoteStudent = createAsyncThunk("votesSlice/revoteStudent" , async( revoteStudentItems : RevotedStudentItems , thunkApi ) => {
+    const { id , studentId , isFail , isSuccess } = revoteStudentItems;
+    try {
+        const response = await fetch(`${envValues.apiUrl}/vote` , {
+            method : "PUT",
+            headers : {
+                "content-type" : "application/json"
+            },
+            body : JSON.stringify({ id , studentId })
+        });
+        const { updatedVote } = await response.json();
+        thunkApi.dispatch(replaceVote(updatedVote));
+        isSuccess && isSuccess();
+    } catch(err) {
+        console.log(err);
+    }
+})
+
 const votesSlice = createSlice({
     name : "votesSlice",
     initialState , 
@@ -21,11 +59,17 @@ const votesSlice = createSlice({
         },
         setVotes : (state , action : PayloadAction<Votes[]>) => {
             state.votes = action.payload;
+        },
+        addVote : (state , action : PayloadAction<Votes>) => {
+            state.votes = [...state.votes , action.payload ];
+        },
+        replaceVote : (state , action : PayloadAction<Votes> ) => {
+            state.votes = state.votes.map(item => item.id === action.payload.id ? action.payload : item);
         }
     }
 })
 
-export const { removeVotes , setVotes } = votesSlice.actions;
+export const { removeVotes , setVotes , addVote , replaceVote } = votesSlice.actions;
 
 
 export default votesSlice.reducer;

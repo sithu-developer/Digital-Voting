@@ -1,23 +1,27 @@
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { BottomNavigation, BottomNavigationAction, Box, Button, Divider, Typography } from "@mui/material"
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Categories, Students } from "../../../../../generated/prisma";
+import { Categories, Students, Votes } from "../../../../../generated/prisma";
 import { zodiacSigns } from "@/util/general";
 import { ZodiacSignType } from "@/types/general";
+import { revoteStudent, voteStudent } from "@/store/slices/votesSlice";
+import { openSnackBar } from "@/store/slices/snackBarSlice";
+import { Severity } from "@/types/snackBar";
 
 const KingSelectionPage = () => {
     const user = useAppSelector(store => store.userSlice.user);
     const [ selectedCategory , setSelectedCategory ] = useState<Categories>();
     const [ numberForBackground  , setNumberForBackground ] = useState<number>(1);
     const [ votedStudent , setVotedStudent ] = useState<Students>();
+    const [ alreadyVotedStudent , setAlreadyVotedStudent ] = useState<Students>();
     const categories = useAppSelector(store => store.categoriesSlice.categories);
     const students = useAppSelector(store => store.studentsSlice.students);
     const relatedStudents = students.filter(item => item.categoryId === selectedCategory?.id);
     const sortedStudents = relatedStudents.sort((a,b) => a.contestantNumber - b.contestantNumber );
     const votes = useAppSelector(store => store.votesSlice.votes);
-
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         if(categories.length && localStorage) {
@@ -44,10 +48,10 @@ const KingSelectionPage = () => {
     useEffect(() => {
         if(selectedCategory && votes.length && students.length) {
             const relatedStudents = students.filter(item => item.categoryId === selectedCategory.id);
-            const votedStudentIds = votes.map(item => item.studentId);
-            const votedStudent = relatedStudents.find(item => votedStudentIds.includes(item.id));
-            setVotedStudent(votedStudent);
-            console.log(votedStudent)
+            const alreadyVotedStudentIds = votes.map(item => item.studentId);
+            const alreadyVotedStudent = relatedStudents.find(item => alreadyVotedStudentIds.includes(item.id));
+            setVotedStudent(alreadyVotedStudent);
+            setAlreadyVotedStudent(alreadyVotedStudent);
         } else {
             setVotedStudent(undefined)
         }
@@ -56,7 +60,20 @@ const KingSelectionPage = () => {
     if(user) {
 
     const handleVoteStudent = () => {
-        console.log(votedStudent);
+        if(votedStudent) {
+            dispatch(voteStudent({ studentId : votedStudent.id , userId : user.id , isSuccess : () => {
+                dispatch(openSnackBar({ open : true , message : "Successfully voted" , severity : Severity.success }))
+            } }))
+        }
+    }
+
+    const handleRevoteStudent = () => {
+        if(votedStudent && alreadyVotedStudent) {
+            const alreadyExitVote = votes.find(item => (item.studentId === alreadyVotedStudent.id)) as Votes;
+           dispatch(revoteStudent({ id : alreadyExitVote.id , studentId : votedStudent.id , isSuccess : () => {
+                dispatch(openSnackBar({ open : true , message : "Successfully revoted" , severity : Severity.success}))
+           } }));
+        }
     }
     
     return (
@@ -99,17 +116,20 @@ const KingSelectionPage = () => {
                 )})}
             </Box>
             <Box sx={{ display : "flex" , alignItems : "center" , justifyContent : "center" , gap : "40px" , width : "80%" , position : "absolute" , bottom : "85px" , height : "65px"}}>
-                {(categories[0].id === selectedCategory?.id) && <img src={"/kingButtonSide.svg"} />}
-                {(categories[1].id === selectedCategory?.id) && <img src={"/queenButtonSide.svg"} />}
-                <Button disabled={!votedStudent} variant="contained" sx={{ bgcolor : "#7485E5" , py : "0px" , borderRadius : "20px" , fontSize : "18px" , gap : "5px" , '&.Mui-disabled' : { color : "GrayText" , bgcolor : "rgb(28, 32, 77)"} }} 
+                {(categories[0]?.id === selectedCategory?.id) && <img src={"/kingButtonSide.svg"} />}
+                {(categories[1]?.id === selectedCategory?.id) && <img src={"/queenButtonSide.svg"} />}
+                {(alreadyVotedStudent !== votedStudent && alreadyVotedStudent !== undefined && votedStudent !== undefined) ? <Button variant="contained" sx={{ bgcolor : "#7485E5" , py : "0px" , borderRadius : "20px" , fontSize : "18px" , gap : "5px" }} 
+                    onClick={handleRevoteStudent}
+                >Revote<img src={"/voteChecked.svg"} style={{ width : "19px"}} /></Button>
+                :<Button disabled={!votedStudent || (alreadyVotedStudent === votedStudent)} variant="contained" sx={{ bgcolor : "#7485E5" , py : "0px" , borderRadius : "20px" , fontSize : "18px" , gap : "5px" , '&.Mui-disabled' : { color : "GrayText" , bgcolor : "rgb(28, 32, 77)"} }} 
                     onClick={handleVoteStudent}
-                >Vote<img src={"/voteChecked.svg"} style={{ width : "19px"}} /></Button>
-                {(categories[0].id === selectedCategory?.id) && <img src={"/kingButtonSide.svg"} />}
-                {(categories[1].id === selectedCategory?.id) && <img src={"/queenButtonSide.svg"} />}
+                > {(alreadyVotedStudent === votedStudent && votedStudent !== undefined) ? "Voted" : "Vote"} <img src={"/voteChecked.svg"} style={{ width : "19px"}} /></Button>}
+                {(categories[0]?.id === selectedCategory?.id) && <img src={"/kingButtonSide.svg"} />}
+                {(categories[1]?.id === selectedCategory?.id) && <img src={"/queenButtonSide.svg"} />}
             </Box>
             <BottomNavigation
             //   showLabels
-              value={selectedCategory ? selectedCategory.id : categories[0].id }
+              value={selectedCategory ? selectedCategory.id : categories[0]?.id }
               sx={{  position : "absolute" , bottom : "0px" , bgcolor : "info.dark" , overflowX : "auto" , width : "100%" , display : "flex" , justifyContent : "start" , height : "65px" , borderTopLeftRadius : "20px" , borderTopRightRadius : "20px"}}
             >
                 {categories.map(item => (

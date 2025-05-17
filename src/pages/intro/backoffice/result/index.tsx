@@ -9,6 +9,7 @@ import VoteList from "@/components/VoteList";
 import { Categories } from "../../../../../generated/prisma";
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import Permission from "@/components/Permission";
 
 const ResultPage = () => {
     const admin = useAppSelector(store => store.adminSlice.admin)
@@ -17,6 +18,7 @@ const ResultPage = () => {
     const [ voteListItems , setVoteListItems ] = useState<VoteListItems>({ open : false , selectedStudentId : 0});
     const [ searchOpen , setSearchOpen ] = useState(false);
     const [ searchValue , setSearchValue ] = useState<string>("");
+    const [ permissionOpen , setPermissionOpen ] = useState<boolean>(false);
     const categories = useAppSelector(store => store.categoriesSlice.categories);
     const students = useAppSelector(store => store.studentsSlice.students);
     const votes = useAppSelector(store => store.votesSlice.votes);
@@ -46,7 +48,7 @@ const ResultPage = () => {
         }
     } , [ votes , students , selectedCategory , searchValue ])
 
-    if(admin) 
+    if(admin) {
     return (
         <Box sx={{ display : "flex" , flexDirection : "column" , gap : "5px" , position : "relative"}} >
             <Box sx={{ display : "flex" , justifyContent : "start" , gap : "10px", overflow : "hidden" , overflowX : "auto" , py : "8px" , mx : "20px" }}>
@@ -70,7 +72,7 @@ const ResultPage = () => {
                 :<Box sx={{ flexGrow : 1 , display : "flex" , justifyContent : "space-between" , alignItems : "center"}}>
                     {selectedCategory && <Box sx={{ display : "flex" , alignItems : "center" , gap : "5px" ,  ml : "20px"}} >
                         <img src={selectedCategory.iconUrl} style={{ width : "35px" , maxHeight : "50px"}} />
-                        <Typography variant="h5" >{selectedCategory.name}</Typography>
+                        <Typography variant="h5" >{selectedCategory.name} {selectedCategory.isShownResult ? "(Announced)" :""}</Typography>
                     </Box>}
                     <IconButton onClick={() => setSearchOpen(true)} >
                         <SearchRoundedIcon sx={{ color : "black"}} />
@@ -111,10 +113,11 @@ const ResultPage = () => {
                     </Box>
                 )})}
             </Box>
+            <Permission permissionOpen={permissionOpen} setPermissionOpen={setPermissionOpen} selectedCategory={selectedCategory}  />
             <VoteList voteListItems={voteListItems} setVoteListItems={setVoteListItems} />
-            <Button sx={{ position : "absolute" , bgcolor : "#6D42B2" , bottom : "5px" , left : "50%" , transform: "translateX(-50%)" , border : "1px solid white" , textTransform : "none"}} variant="contained" >Show {selectedCategory?.name} Result</Button>
+            <Button onClick={() => setPermissionOpen(true)} sx={{ position : "absolute" , bgcolor : "#6D42B2" , bottom : "5px" , left : "50%" , transform: "translateX(-50%)" , border : "1px solid white" , textTransform : "none"}} variant="contained" >Show {selectedCategory?.name} Result</Button>
         </Box>
-    )
+    )}
     else 
     return (
         <Box >
