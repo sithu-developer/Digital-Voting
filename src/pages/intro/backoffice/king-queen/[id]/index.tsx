@@ -96,6 +96,7 @@ const EditStudentPage = () => {
                         if(files) {
                            setPhotoFile(files[0]);
                         }
+                        event.target.value = "";
                     }}
                   />
                 </Button>

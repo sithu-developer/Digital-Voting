@@ -34,7 +34,7 @@ export default async function handler(
               if(categories.length) {
                 return res.status(200).json({ newAdmin , categories , students , votes , users , majors , agendas })
               } else {
-                const defaultCategory = await prisma.categories.create({ data : { name : "Dafault Category"}});
+                const defaultCategory = await prisma.categories.create({ data : { name : "Dafault Category" , iconUrl : "/kingCrownLogo.png"}});
                 const defaultStudent = await prisma.students.create({ data : { contestantNumber : 1 , major : "default Major" , name : "default name" , year : 1 , zodiacId : 0 , categoryId : defaultCategory.id , url : "/kingDefault.jpg" }});
                 return res.status(200).json({ newAdmin , categories : [defaultCategory] , students : [ defaultStudent ] , votes : [] , users : [] , majors : [] , agendas : [] })
               }

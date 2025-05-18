@@ -92,7 +92,7 @@ const KingQueenPage = () => {
                     </Box>}
                     <Button variant="contained" onClick={() => setNewStudentOpen(true)} >Create</Button>
                 </Box>
-                <Box sx={{ display : "grid" , gridTemplateColumns : "repeat(auto-fill, minmax(100px, 1fr))" , gap : "10px" , borderRadius : "10px" , overflowY : "auto", maxHeight : "calc(100vh - 200px)" }}>
+                <Box sx={{ display : "grid" , gridTemplateColumns : "repeat(auto-fill, minmax(100px, 1fr))" , gap : 2 , borderRadius : "10px" , overflowY : "auto", maxHeight : "calc(100vh - 200px)" }}>
                     {sortedStudents.map(item => {
                     const currentZodiac = zodiacSigns.find(zodiac => zodiac.id === item.zodiacId) as ZodiacSignType;
                     return (

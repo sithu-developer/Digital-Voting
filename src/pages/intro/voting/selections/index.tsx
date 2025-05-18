@@ -1,6 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { BottomNavigation, BottomNavigationAction, Box, Button, Divider, Typography } from "@mui/material"
-import { signOut } from "next-auth/react";
+import { BottomNavigation, BottomNavigationAction, Box, Button, Typography } from "@mui/material"
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Categories, Students, Votes } from "../../../../../generated/prisma";
@@ -9,6 +8,7 @@ import { ZodiacSignType } from "@/types/general";
 import { revoteStudent, voteStudent } from "@/store/slices/votesSlice";
 import { openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
+import { useRouter } from "next/router";
 
 const KingSelectionPage = () => {
     const user = useAppSelector(store => store.userSlice.user);
@@ -22,6 +22,7 @@ const KingSelectionPage = () => {
     const sortedStudents = relatedStudents.sort((a,b) => a.contestantNumber - b.contestantNumber );
     const votes = useAppSelector(store => store.votesSlice.votes);
     const dispatch = useAppDispatch();
+    const router = useRouter();
 
     useEffect(() => {
         if(categories.length && localStorage) {
@@ -56,6 +57,12 @@ const KingSelectionPage = () => {
             setVotedStudent(undefined)
         }
     } , [selectedCategory , votes , students])
+
+    useEffect(() => {
+        if(categories.length && votes.length && categories.length === votes.length) {
+            router.push("/intro/voting/thank-for-voting");
+        }
+    } , [categories , votes])
     
     if(user) {
 
@@ -96,7 +103,7 @@ const KingSelectionPage = () => {
                     <Box sx={{ width: "35%", borderTop: "1px solid #BFCDEC" }} />
                 </Box>
             </Box>
-            <Box sx={{ position : "absolute" , top : "185px" , borderRadius : "10px" , width : "95%" , display : "grid" , gridTemplateColumns : "repeat(auto-fill, minmax(100px, 1fr))" , gap : "10px" , overflowY : "auto", height : "calc(100vh - 350px)" }}>
+            <Box sx={{ position : "absolute" , top : "185px" , borderRadius : "10px" , width : "95%" , display : "grid" , gridTemplateColumns : "repeat(auto-fill, minmax(100px, 1fr))" , gap : 1 , overflowY : "auto", height : "calc(100vh - 350px)" }}>
                 {sortedStudents.map(item => {
                 const currentZodiac = zodiacSigns.find(zodiac => zodiac.id === item.zodiacId) as ZodiacSignType;
                 return (
@@ -128,7 +135,6 @@ const KingSelectionPage = () => {
                 {(categories[1]?.id === selectedCategory?.id) && <img src={"/queenButtonSide.svg"} />}
             </Box>
             <BottomNavigation
-            //   showLabels
               value={selectedCategory ? selectedCategory.id : categories[0]?.id }
               sx={{  position : "absolute" , bottom : "0px" , bgcolor : "info.dark" , overflowX : "auto" , width : "100%" , display : "flex" , justifyContent : "start" , height : "65px" , borderTopLeftRadius : "20px" , borderTopRightRadius : "20px"}}
             >

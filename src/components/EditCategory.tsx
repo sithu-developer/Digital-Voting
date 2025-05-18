@@ -67,6 +67,7 @@ const EditCategory = ({ selectedCategory , editCategoryOpen ,setEditCategoryOpen
                         if(files) {
                            setPhotoFile(files[0]);
                         }
+                        event.target.value = "";
                     }}
                   />
                 </Button>

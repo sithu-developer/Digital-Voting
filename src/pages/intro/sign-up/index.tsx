@@ -23,7 +23,7 @@ const SignUpPage = () => {
                   autoFocus={true}
                   placeholder="major code"
                   type={showPassword ? "text" : "password"}
-                  sx={{'& .MuiOutlinedInput-root': { borderRadius: '23px', bgcolor : "primary.main" , color : "white" , border : "1px solid white" , fontSize : "23px" , fontFamily : "Jomolhari" , height : "62px" , width : "283px" , px : "21px" , boxShadow : '0px 6px 4px rgba(0, 0, 0, 0.2)' } 
+                  sx={{'& .MuiOutlinedInput-root': { borderRadius: '23px', bgcolor : "primary.main" , color : "white" , border : "1px solid white" , fontSize : "23px" , fontFamily : "Jomolhari" , height : "62px" , width : "283px" , px : "21px" , boxShadow : '0px 6px 4px rgba(0, 0, 0, 0.2)' }
                   }}
                   slotProps={{
                       input: {

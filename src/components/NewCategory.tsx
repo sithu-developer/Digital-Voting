@@ -17,7 +17,7 @@ const NewCategory = ({ newCategoryOpen , setNewCategoryOpen } : Props) => {
 
     const handleCreateNewCategory = () => {
         // here to upload photo to database
-        dispatch(createNewCategory({newCategory , iconUrl : "/kingIcon.svg"/* here to change */ , isSuccess : () => {
+        dispatch(createNewCategory({newCategory , iconUrl : "/kingCrown.png"/* here to change */ , isSuccess : () => {
             setNewCategoryOpen(false);
             setNewCategory("");
             setPhotoFile(undefined);
@@ -49,6 +49,7 @@ const NewCategory = ({ newCategoryOpen , setNewCategoryOpen } : Props) => {
                         if(files) {
                            setPhotoFile(files[0]);
                         }
+                        event.target.value = "";
                     }}
                   />
                 </Button>

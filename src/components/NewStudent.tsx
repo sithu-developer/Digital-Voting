@@ -88,6 +88,7 @@ const NewStudent = ({ selectedCategory , newStudentOpen , setNewStudentOpen } : 
                             if(files) {
                                setPhotoFile(files[0]);
                             }
+                            event.target.value = "";
                         }}
                       />
                     </Button>
