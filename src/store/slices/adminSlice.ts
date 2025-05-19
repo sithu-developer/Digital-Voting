@@ -42,6 +42,17 @@ export const createNewAdmin = createAsyncThunk("adminSlice/checkAdminPassword" ,
     }
 })
 
+export const checkUsersAndVotes = createAsyncThunk("adminSlice/checkUsersAndVotes" , async( _ , thunkApi ) => {
+    try {
+        const response = await fetch(`${envValues.apiUrl}/admin`);
+        const { users , votes } = await response.json();
+        thunkApi.dispatch(setVotes(votes));
+        thunkApi.dispatch(setUsersFromAdmin(users))
+    } catch(err) {
+        console.log(err)
+    }
+})
+
 const initialState : AdminSliceInitialState = {
     admin : null,
     error : null,

@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { BottomNavigation, BottomNavigationAction, Box, Button, Typography } from "@mui/material"
+import { BottomNavigation, BottomNavigationAction, Box, Button, IconButton, Typography } from "@mui/material"
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Categories, Students, Votes } from "../../../../../generated/prisma";
@@ -9,6 +9,7 @@ import { revoteStudent, voteStudent } from "@/store/slices/votesSlice";
 import { openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
 import { useRouter } from "next/router";
+import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 
 const KingSelectionPage = () => {
     const user = useAppSelector(store => store.userSlice.user);
@@ -23,9 +24,10 @@ const KingSelectionPage = () => {
     const votes = useAppSelector(store => store.votesSlice.votes);
     const dispatch = useAppDispatch();
     const router = useRouter();
+    const categoryId = Number(router.query.categoryId);
 
     useEffect(() => {
-        if(categories.length && localStorage) {
+        if(categories.length && localStorage && !categoryId) {
             const selsectedCategoryId = Number(localStorage.getItem("selectedCategoryIdFromVoting"));
             const selectedCategory = categories.find(item => item.id === selsectedCategoryId);
             if(selectedCategory) {
@@ -34,6 +36,10 @@ const KingSelectionPage = () => {
                 setSelectedCategory(categories[0]);
                 localStorage.setItem("selectedCategoryIdFromVoting" , String(categories[0].id))
             }
+        } else if(categories.length && localStorage && categoryId) {
+            const selectedCategory = categories.find(item => item.id === categoryId) as Categories;
+            setSelectedCategory(selectedCategory);
+            localStorage.setItem("selectedCategoryIdFromVoting" , String(selectedCategory.id))
         }
     } , [categories])
 
@@ -59,10 +65,12 @@ const KingSelectionPage = () => {
     } , [selectedCategory , votes , students])
 
     useEffect(() => {
-        if(categories.length && votes.length && categories.length === votes.length) {
+        if(categories.length && votes.length && categories.length === votes.length && !categoryId) {
             router.push("/intro/voting/thank-for-voting");
         }
-    } , [categories , votes])
+    } , [categories , votes , categoryId ])
+
+    
     
     if(user) {
 
@@ -78,6 +86,7 @@ const KingSelectionPage = () => {
         if(votedStudent && alreadyVotedStudent) {
             const alreadyExitVote = votes.find(item => (item.studentId === alreadyVotedStudent.id)) as Votes;
            dispatch(revoteStudent({ id : alreadyExitVote.id , studentId : votedStudent.id , isSuccess : () => {
+                categoryId && router.push("/intro/voting/thank-for-voting");
                 dispatch(openSnackBar({ open : true , message : "Successfully revoted" , severity : Severity.success}))
            } }));
         }
@@ -122,18 +131,24 @@ const KingSelectionPage = () => {
                     </Box>
                 )})}
             </Box>
-            <Box sx={{ display : "flex" , alignItems : "center" , justifyContent : "center" , gap : "40px" , width : "80%" , position : "absolute" , bottom : "85px" , height : "65px"}}>
+            <Box sx={{ display : "flex" , alignItems : "center" , justifyContent : "center" , gap : categoryId ? "20px" : "40px" , width : "80%" , position : "absolute" , bottom : "85px" , height : "65px"}}>
                 {(categories[0]?.id === selectedCategory?.id) && <img src={"/kingButtonSide.svg"} />}
                 {(categories[1]?.id === selectedCategory?.id) && <img src={"/queenButtonSide.svg"} />}
-                {(alreadyVotedStudent !== votedStudent && alreadyVotedStudent !== undefined && votedStudent !== undefined) ? <Button variant="contained" sx={{ bgcolor : "#7485E5" , py : "0px" , borderRadius : "20px" , fontSize : "18px" , gap : "5px" }} 
+                <Box sx={{ display : "flex" , alignItems : "center" , ml : "5px" }}>
+                    {categoryId ? <IconButton onClick={() => router.push("/intro/voting/thank-for-voting") } >
+                        <ClearRoundedIcon sx={{ color : "white" , fontSize : "30px" , bgcolor : "#7485E5" , borderRadius : "10px" }} />
+                    </IconButton> : undefined}
+                    {(alreadyVotedStudent !== votedStudent && alreadyVotedStudent !== undefined && votedStudent !== undefined) ? <Button variant="contained" sx={{ bgcolor : "#7485E5" , py : "0px" , borderRadius : "20px" , fontSize : "18px" , gap : "5px" }} 
                     onClick={handleRevoteStudent}
-                >Revote<img src={"/voteChecked.svg"} style={{ width : "19px"}} /></Button>
-                :<Button disabled={!votedStudent || (alreadyVotedStudent === votedStudent)} variant="contained" sx={{ bgcolor : "#7485E5" , py : "0px" , borderRadius : "20px" , fontSize : "18px" , gap : "5px" , '&.Mui-disabled' : { color : "GrayText" , bgcolor : "rgb(28, 32, 77)"} }} 
-                    onClick={handleVoteStudent}
-                > {(alreadyVotedStudent === votedStudent && votedStudent !== undefined) ? "Voted" : "Vote"} <img src={"/voteChecked.svg"} style={{ width : "19px"}} /></Button>}
+                    >Revote<img src={"/voteChecked.svg"} style={{ width : "19px"}} /></Button>
+                    :<Button disabled={!votedStudent || (alreadyVotedStudent === votedStudent)} variant="contained" sx={{ bgcolor : "#7485E5" , py : "0px" , borderRadius : "20px" , fontSize : "18px" , gap : "5px" , '&.Mui-disabled' : { color : "GrayText" , bgcolor : "rgb(28, 32, 77)"} }} 
+                        onClick={handleVoteStudent}
+                    > {(alreadyVotedStudent === votedStudent && votedStudent !== undefined) ? "Voted" : "Vote"} <img src={"/voteChecked.svg"} style={{ width : "19px"}} /></Button>}
+                </Box>
                 {(categories[0]?.id === selectedCategory?.id) && <img src={"/kingButtonSide.svg"} />}
                 {(categories[1]?.id === selectedCategory?.id) && <img src={"/queenButtonSide.svg"} />}
             </Box>
+            
             <BottomNavigation
               value={selectedCategory ? selectedCategory.id : categories[0]?.id }
               sx={{  position : "absolute" , bottom : "0px" , bgcolor : "info.dark" , overflowX : "auto" , width : "100%" , display : "flex" , justifyContent : "start" , height : "65px" , borderTopLeftRadius : "20px" , borderTopRightRadius : "20px"}}
@@ -156,3 +171,5 @@ const KingSelectionPage = () => {
 }
 
 export default KingSelectionPage;
+
+//  sx={{ position : "absolute" , bottom : "85px" , right : "30px"}}

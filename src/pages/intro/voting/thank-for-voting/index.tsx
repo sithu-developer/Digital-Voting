@@ -1,15 +1,31 @@
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { Box, Button, IconButton, Typography } from "@mui/material"
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import { Students } from "../../../../../generated/prisma";
+import { updateUser } from "@/store/slices/userSlice";
+import { openSnackBar } from "@/store/slices/snackBarSlice";
+import { Severity } from "@/types/snackBar";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 
 const ThankForVoting = () => {
+    const user = useAppSelector(store => store.userSlice.user);
     const categories = useAppSelector(store => store.categoriesSlice.categories);
     const students = useAppSelector(store => store.studentsSlice.students);
     const votes = useAppSelector(store => store.votesSlice.votes);
     const votedStudentIds = votes.map(item => item.studentId);
     const votedStudents = students.filter(item => votedStudentIds.includes(item.id));
+    const dispatch = useAppDispatch();
+    const router = useRouter();
+
+    if(!user) return null;
+
+    const handleSubmitVotes = () => {
+        dispatch(updateUser({ ... user , isSubmitted : true , isSuccess : () => {
+            dispatch(openSnackBar({ open : true , message : "Successfully submitted " , severity : Severity.success}))
+        }}))
+    }
 
     return (
         <Box sx={{ position : "relative" , bgcolor : "#111136" , height : "100vh"}} >
@@ -34,20 +50,22 @@ const ThankForVoting = () => {
                                     <Typography sx={{ position : "absolute" , top : "0px" , left : "15%", textAlign : "center" , width : "22px"}} >{relatedStudent.contestantNumber}</Typography>
                                 </Box>
                             </Box>
-                            <Box sx={{ bgcolor : "secondary.main" , borderRadius : "5px" , height : "21px" , width : "20px" , display : "flex" , justifyContent : "center" , alignItems : "center" , overflow : "hidden" }}>
-                                <IconButton>
+                            {!user.isSubmitted && <Box sx={{ bgcolor : "secondary.main" , borderRadius : "5px" , height : "21px" , width : "20px" , display : "flex" , justifyContent : "center" , alignItems : "center" , overflow : "hidden" }}>
+                                <IconButton onClick={() => {
+                                    router.push({ pathname : "/intro/voting/selections" , query : { categoryId : item.id }})
+                                }}>
                                     <EditRoundedIcon sx={{ color : "black" , fontSize : "20px"}} />
                                 </IconButton>
-                            </Box>
+                            </Box>}
                         </Box>
                     </Box>
                 )})}
             </Box>
             <Box sx={{ position : "absolute" , bottom : "130px" , display : "flex" , alignItems : "center" , gap : "20px" , ml : "40px"}}>
                 <Typography sx={{ fontFamily : "Javanese Text" , mt : "5px" }}>Your chosen candidates</Typography>
-                <Button sx={{ border : "1px solid white" , py : "1px" , textTransform : "none" }} variant="contained" >Submit</Button>
+                <Button onClick={handleSubmitVotes} disabled={user.isSubmitted} sx={{ border : "1px solid white" , py : "1px" , textTransform : "none" , '&.Mui-disabled' : { color : "GrayText" , bgcolor : "rgb(28, 32, 77)" , border : "1px solid #FFD700"} }} variant="contained" >{user.isSubmitted ? "submitted" : "submit"}</Button>
             </Box>
-
+            
         </Box>
     )
 }

@@ -49,6 +49,10 @@ export default async function handler(
         await prisma.major.create({ data : { majorsOrAdmin : "admin" , passCode : "cheeHtoke" , maxQuantity : 5 }});
         return res.status(200).json({ err : "Please, login again !"})
       }
+    } else if( method === "GET" ) {
+      const users = await prisma.user.findMany({ orderBy : { id : "asc" } });
+      const votes = await prisma.votes.findMany({ orderBy : { id : 'asc'}});
+      return res.status(200).json({ users , votes })
     }
     
 }

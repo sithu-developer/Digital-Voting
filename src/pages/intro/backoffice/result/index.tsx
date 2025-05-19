@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { Box, Button, Chip, Divider, IconButton, TextField, Typography } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -10,6 +10,7 @@ import { Categories } from "../../../../../generated/prisma";
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import Permission from "@/components/Permission";
+import { checkUsersAndVotes } from "@/store/slices/adminSlice";
 
 const ResultPage = () => {
     const admin = useAppSelector(store => store.adminSlice.admin)
@@ -22,7 +23,7 @@ const ResultPage = () => {
     const categories = useAppSelector(store => store.categoriesSlice.categories);
     const students = useAppSelector(store => store.studentsSlice.students);
     const votes = useAppSelector(store => store.votesSlice.votes);
-
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         if(categories.length && localStorage) {
@@ -36,6 +37,16 @@ const ResultPage = () => {
             }
         }
     } , [categories])
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            dispatch(checkUsersAndVotes())
+        }, 5000);
+
+        return () => {
+            clearInterval(interval);
+        }
+    } , [])
 
     useEffect(() => {
         if(votes.length && students.length && selectedCategory) {

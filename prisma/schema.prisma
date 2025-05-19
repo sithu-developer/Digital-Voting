@@ -36,7 +36,7 @@ model User {
   name       String
   email      String  @unique()
   majorId    Int
-  isSubmited Boolean @default(false)
+  isSubmitted Boolean @default(false)
   Major      Major   @relation(fields: [majorId], references: [id])
   Votes      Votes[]
 }

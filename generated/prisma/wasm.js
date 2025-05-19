@@ -139,7 +139,7 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   majorId: 'majorId',
-  isSubmited: 'isSubmited'
+  isSubmitted: 'isSubmitted'
 };
 
 exports.Prisma.CategoriesScalarFieldEnum = {

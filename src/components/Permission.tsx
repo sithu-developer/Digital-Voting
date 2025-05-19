@@ -35,19 +35,22 @@ const Permission = ({ permissionOpen , setPermissionOpen , selectedCategory } : 
     useEffect(() => {
         if(selectedCategory) {
             setIsShownResult(selectedCategory.isShownResult);
-            console.log(selectedCategory.isShownResult);
         }
     } , [selectedCategory])
 
     const handleIsTimeUp = () => {
         if(adminCode === adminCodeFromTyping) {
             if(selectedCategory) {
-                dispatch(updateCategory({...selectedCategory , isShownResult , isSuccess : () => {
-                    setPermissionOpen(false);
-                    setAdminCodeFromTyping("");
-                    setShowAdminPassword(false);
-                    dispatch(openSnackBar({open : true , message : ( isShownResult ? `Successfully showed winner of ${selectedCategory.name}`: `Closed showing`) , severity : Severity.success}))
-                } }))
+                if(isClose) {
+                    dispatch(updateCategory({...selectedCategory , isShownResult , isSuccess : () => {
+                        setPermissionOpen(false);
+                        setAdminCodeFromTyping("");
+                        setShowAdminPassword(false);
+                        dispatch(openSnackBar({open : true , message : ( isShownResult ? `Successfully showed winner of ${selectedCategory.name}`: `Closed showing`) , severity : Severity.success}))
+                    } }))
+                } else {
+                    dispatch(openSnackBar({ open : true , message : "Close Voting first in setting !" , severity : Severity.error}))
+                }
             } else {
                 const admin = majorsAndAdmin.find(item => item.majorsOrAdmin === "admin") as Major ;
                 dispatch(changeAdminCodeAndLimit({ ...admin , isTimeUp : isClose  , isSuccess : () => {

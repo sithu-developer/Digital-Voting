@@ -32,13 +32,13 @@ model Admin {
 }
 
 model User {
-  id         Int     @id @default(autoincrement())
-  name       String
-  email      String  @unique()
-  majorId    Int
-  isSubmited Boolean @default(false)
-  Major      Major   @relation(fields: [majorId], references: [id])
-  Votes      Votes[]
+  id          Int     @id @default(autoincrement())
+  name        String
+  email       String  @unique()
+  majorId     Int
+  isSubmitted Boolean @default(false)
+  Major       Major   @relation(fields: [majorId], references: [id])
+  Votes       Votes[]
 }
 
 model Categories {

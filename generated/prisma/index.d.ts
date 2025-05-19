@@ -3780,7 +3780,7 @@ export namespace Prisma {
     name: string | null
     email: string | null
     majorId: number | null
-    isSubmited: boolean | null
+    isSubmitted: boolean | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -3788,7 +3788,7 @@ export namespace Prisma {
     name: string | null
     email: string | null
     majorId: number | null
-    isSubmited: boolean | null
+    isSubmitted: boolean | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -3796,7 +3796,7 @@ export namespace Prisma {
     name: number
     email: number
     majorId: number
-    isSubmited: number
+    isSubmitted: number
     _all: number
   }
 
@@ -3816,7 +3816,7 @@ export namespace Prisma {
     name?: true
     email?: true
     majorId?: true
-    isSubmited?: true
+    isSubmitted?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -3824,7 +3824,7 @@ export namespace Prisma {
     name?: true
     email?: true
     majorId?: true
-    isSubmited?: true
+    isSubmitted?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -3832,7 +3832,7 @@ export namespace Prisma {
     name?: true
     email?: true
     majorId?: true
-    isSubmited?: true
+    isSubmitted?: true
     _all?: true
   }
 
@@ -3927,7 +3927,7 @@ export namespace Prisma {
     name: string
     email: string
     majorId: number
-    isSubmited: boolean
+    isSubmitted: boolean
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -3954,7 +3954,7 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     majorId?: boolean
-    isSubmited?: boolean
+    isSubmitted?: boolean
     Major?: boolean | MajorDefaultArgs<ExtArgs>
     Votes?: boolean | User$VotesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -3965,7 +3965,7 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     majorId?: boolean
-    isSubmited?: boolean
+    isSubmitted?: boolean
     Major?: boolean | MajorDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3974,7 +3974,7 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     majorId?: boolean
-    isSubmited?: boolean
+    isSubmitted?: boolean
     Major?: boolean | MajorDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3983,10 +3983,10 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     majorId?: boolean
-    isSubmited?: boolean
+    isSubmitted?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "majorId" | "isSubmited", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "majorId" | "isSubmitted", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Major?: boolean | MajorDefaultArgs<ExtArgs>
     Votes?: boolean | User$VotesArgs<ExtArgs>
@@ -4010,7 +4010,7 @@ export namespace Prisma {
       name: string
       email: string
       majorId: number
-      isSubmited: boolean
+      isSubmitted: boolean
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -4440,7 +4440,7 @@ export namespace Prisma {
     readonly name: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly majorId: FieldRef<"User", 'Int'>
-    readonly isSubmited: FieldRef<"User", 'Boolean'>
+    readonly isSubmitted: FieldRef<"User", 'Boolean'>
   }
     
 
@@ -9258,7 +9258,7 @@ export namespace Prisma {
     name: 'name',
     email: 'email',
     majorId: 'majorId',
-    isSubmited: 'isSubmited'
+    isSubmitted: 'isSubmitted'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -9493,7 +9493,7 @@ export namespace Prisma {
     name?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     majorId?: IntFilter<"User"> | number
-    isSubmited?: BoolFilter<"User"> | boolean
+    isSubmitted?: BoolFilter<"User"> | boolean
     Major?: XOR<MajorScalarRelationFilter, MajorWhereInput>
     Votes?: VotesListRelationFilter
   }
@@ -9503,7 +9503,7 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     majorId?: SortOrder
-    isSubmited?: SortOrder
+    isSubmitted?: SortOrder
     Major?: MajorOrderByWithRelationInput
     Votes?: VotesOrderByRelationAggregateInput
   }
@@ -9516,7 +9516,7 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     name?: StringFilter<"User"> | string
     majorId?: IntFilter<"User"> | number
-    isSubmited?: BoolFilter<"User"> | boolean
+    isSubmitted?: BoolFilter<"User"> | boolean
     Major?: XOR<MajorScalarRelationFilter, MajorWhereInput>
     Votes?: VotesListRelationFilter
   }, "id" | "email">
@@ -9526,7 +9526,7 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     majorId?: SortOrder
-    isSubmited?: SortOrder
+    isSubmitted?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -9542,7 +9542,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     majorId?: IntWithAggregatesFilter<"User"> | number
-    isSubmited?: BoolWithAggregatesFilter<"User"> | boolean
+    isSubmitted?: BoolWithAggregatesFilter<"User"> | boolean
   }
 
   export type CategoriesWhereInput = {
@@ -9863,7 +9863,7 @@ export namespace Prisma {
   export type UserCreateInput = {
     name: string
     email: string
-    isSubmited?: boolean
+    isSubmitted?: boolean
     Major: MajorCreateNestedOneWithoutUserInput
     Votes?: VotesCreateNestedManyWithoutUserInput
   }
@@ -9873,14 +9873,14 @@ export namespace Prisma {
     name: string
     email: string
     majorId: number
-    isSubmited?: boolean
+    isSubmitted?: boolean
     Votes?: VotesUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    isSubmited?: BoolFieldUpdateOperationsInput | boolean
+    isSubmitted?: BoolFieldUpdateOperationsInput | boolean
     Major?: MajorUpdateOneRequiredWithoutUserNestedInput
     Votes?: VotesUpdateManyWithoutUserNestedInput
   }
@@ -9890,7 +9890,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     majorId?: IntFieldUpdateOperationsInput | number
-    isSubmited?: BoolFieldUpdateOperationsInput | boolean
+    isSubmitted?: BoolFieldUpdateOperationsInput | boolean
     Votes?: VotesUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -9899,13 +9899,13 @@ export namespace Prisma {
     name: string
     email: string
     majorId: number
-    isSubmited?: boolean
+    isSubmitted?: boolean
   }
 
   export type UserUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    isSubmited?: BoolFieldUpdateOperationsInput | boolean
+    isSubmitted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -9913,7 +9913,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     majorId?: IntFieldUpdateOperationsInput | number
-    isSubmited?: BoolFieldUpdateOperationsInput | boolean
+    isSubmitted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CategoriesCreateInput = {
@@ -10288,7 +10288,7 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     majorId?: SortOrder
-    isSubmited?: SortOrder
+    isSubmitted?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -10301,7 +10301,7 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     majorId?: SortOrder
-    isSubmited?: SortOrder
+    isSubmitted?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -10309,7 +10309,7 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     majorId?: SortOrder
-    isSubmited?: SortOrder
+    isSubmitted?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
@@ -10854,7 +10854,7 @@ export namespace Prisma {
   export type UserCreateWithoutMajorInput = {
     name: string
     email: string
-    isSubmited?: boolean
+    isSubmitted?: boolean
     Votes?: VotesCreateNestedManyWithoutUserInput
   }
 
@@ -10862,7 +10862,7 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
-    isSubmited?: boolean
+    isSubmitted?: boolean
     Votes?: VotesUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -10919,7 +10919,7 @@ export namespace Prisma {
     name?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     majorId?: IntFilter<"User"> | number
-    isSubmited?: BoolFilter<"User"> | boolean
+    isSubmitted?: BoolFilter<"User"> | boolean
   }
 
   export type AdminUpsertWithWhereUniqueWithoutMajarInput = {
@@ -11232,7 +11232,7 @@ export namespace Prisma {
   export type UserCreateWithoutVotesInput = {
     name: string
     email: string
-    isSubmited?: boolean
+    isSubmitted?: boolean
     Major: MajorCreateNestedOneWithoutUserInput
   }
 
@@ -11241,7 +11241,7 @@ export namespace Prisma {
     name: string
     email: string
     majorId: number
-    isSubmited?: boolean
+    isSubmitted?: boolean
   }
 
   export type UserCreateOrConnectWithoutVotesInput = {
@@ -11289,7 +11289,7 @@ export namespace Prisma {
   export type UserUpdateWithoutVotesInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    isSubmited?: BoolFieldUpdateOperationsInput | boolean
+    isSubmitted?: BoolFieldUpdateOperationsInput | boolean
     Major?: MajorUpdateOneRequiredWithoutUserNestedInput
   }
 
@@ -11298,7 +11298,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     majorId?: IntFieldUpdateOperationsInput | number
-    isSubmited?: BoolFieldUpdateOperationsInput | boolean
+    isSubmitted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type StudentsUpsertWithoutVotesInput = {
@@ -11337,7 +11337,7 @@ export namespace Prisma {
     id?: number
     name: string
     email: string
-    isSubmited?: boolean
+    isSubmitted?: boolean
   }
 
   export type AdminCreateManyMajarInput = {
@@ -11348,7 +11348,7 @@ export namespace Prisma {
   export type UserUpdateWithoutMajorInput = {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    isSubmited?: BoolFieldUpdateOperationsInput | boolean
+    isSubmitted?: BoolFieldUpdateOperationsInput | boolean
     Votes?: VotesUpdateManyWithoutUserNestedInput
   }
 
@@ -11356,7 +11356,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    isSubmited?: BoolFieldUpdateOperationsInput | boolean
+    isSubmitted?: BoolFieldUpdateOperationsInput | boolean
     Votes?: VotesUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -11364,7 +11364,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    isSubmited?: BoolFieldUpdateOperationsInput | boolean
+    isSubmitted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type AdminUpdateWithoutMajarInput = {

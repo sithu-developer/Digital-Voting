@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "../../../generated/prisma";
-import { NewUserType } from "@/types/user";
+import { NewUserType, UpdatedUserItems } from "@/types/user";
 import { envValues } from "@/util/envValues";
 import { setCategories } from "./categoriesSlice";
 import { setStudents } from "./studentsSlice";
@@ -39,6 +39,25 @@ export const createNewUser = createAsyncThunk("userSlice" , async( newUser : New
     }
 })
 
+export const updateUser = createAsyncThunk("userSlice/updateUser" , async( updatedUserItems : UpdatedUserItems , thunkApi) => {
+    const { id , name , isSubmitted , isFail , isSuccess } = updatedUserItems;
+    try {
+        const response = await fetch(`${envValues.apiUrl}/user` , {
+            method : "PUT",
+            headers : {
+                "content-type" : "application/json"
+            },
+            body : JSON.stringify({ id , name , isSubmitted })
+        });
+        const { updatedUser } = await response.json();
+        thunkApi.dispatch(replaceUser(updatedUser))
+        isSuccess && isSuccess();
+    } catch(err) {
+        console.log(err);
+    }
+
+})
+
 const initialState : userInitialState = {
     user : null,
     usersFromAdmin : [],
@@ -57,10 +76,13 @@ const userSlice = createSlice({
         },
         removeUsersFromMajor : ( state , action : PayloadAction<number>) => {
             state.usersFromAdmin = state.usersFromAdmin.filter(item => item.majorId !== action.payload)
+        },
+        replaceUser : ( state , action : PayloadAction<User>) => {
+            state.user = action.payload;
         }
     }
 })
 
-export const { setUser , setUsersFromAdmin , removeUsersFromMajor } = userSlice.actions;
+export const { setUser , setUsersFromAdmin , removeUsersFromMajor , replaceUser } = userSlice.actions;
 
 export default userSlice.reducer;
