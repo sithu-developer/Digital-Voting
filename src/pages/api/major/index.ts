@@ -25,7 +25,7 @@ export default async function handler(
     } else if(method === "POST") {
         const { majorName , majorCode , quantity } = req.body as NewMajorItems;
         const isValid = majorName && majorCode && quantity;
-        if(!isValid) return res.status(400).send("Bad request");
+        if(!isValid || majorName === "admin") return res.status(400).send("Bad request");
         const newMajor = await prisma.major.create({ data : { majorsOrAdmin : majorName , passCode : majorCode , maxQuantity : quantity }});
         return res.status(200).json({ newMajor })
     } else if(method === "DELETE") {

@@ -100,8 +100,8 @@ const Permission = ({ permissionOpen , setPermissionOpen , selectedCategory } : 
                     }} 
                 />
                 <Box>
-                    {selectedCategory ? <FormControlLabel control={<Switch checked={isShownResult} />} onChange={( _ , value) => setIsShownResult(value)} label="Show winner ?" />
-                    :<FormControlLabel control={<Switch checked={isClose} />} onChange={( _ , value) => setIsClose(value)} label="Close voting ?" />}
+                    {selectedCategory ? <FormControlLabel control={<Switch checked={isShownResult} />} onChange={( _ , value) => setIsShownResult(value)} label={"Announce winner of " + selectedCategory.name + " ?"} sx={{ '& .MuiFormControlLabel-label' : { color : "info.main"}}} />
+                    :<FormControlLabel control={<Switch checked={isClose} />} onChange={( _ , value) => setIsClose(value)} label="Close voting ?"  sx={{ '& .MuiFormControlLabel-label' : { color : "info.main"}}} />}
                 </Box>
                 <Box sx={{ display : "flex" , gap : "10px" , justifyContent : "end"}} >
                     <Button variant="contained" sx={{ textTransform : "none"}} onClick={() => {

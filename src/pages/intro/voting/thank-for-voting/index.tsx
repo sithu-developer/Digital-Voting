@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { Box, Button, IconButton, Typography } from "@mui/material"
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import { Students } from "../../../../../generated/prisma";
-import { updateUser } from "@/store/slices/userSlice";
+import { checkIsTimeUp, updateUser } from "@/store/slices/userSlice";
 import { openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
 import { useRouter } from "next/router";
@@ -11,6 +11,7 @@ import { useEffect } from "react";
 
 const ThankForVoting = () => {
     const user = useAppSelector(store => store.userSlice.user);
+    const isTimeUp = useAppSelector(store => store.userSlice.isTimeUp);
     const categories = useAppSelector(store => store.categoriesSlice.categories);
     const students = useAppSelector(store => store.studentsSlice.students);
     const votes = useAppSelector(store => store.votesSlice.votes);
@@ -19,7 +20,29 @@ const ThankForVoting = () => {
     const dispatch = useAppDispatch();
     const router = useRouter();
 
-    if(!user) return null;
+    useEffect(() => {
+        if(categories.length && votes.length && categories.length !== votes.length ) {
+            router.push("/intro/voting/selections");
+        }
+    } , [categories , votes ])
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            dispatch(checkIsTimeUp());
+        } , 6000);
+        return () => {
+            clearInterval(interval);
+        }
+    } , [])
+
+    useEffect(() => {
+        if(isTimeUp) {
+            router.push("/intro/voting/results");
+        }
+    } , [ isTimeUp ])
+
+
+    if(!user || categories.length !== votes.length) return null;
 
     const handleSubmitVotes = () => {
         dispatch(updateUser({ ... user , isSubmitted : true , isSuccess : () => {

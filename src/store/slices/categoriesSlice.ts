@@ -3,7 +3,8 @@ import { Categories } from "../../../generated/prisma";
 import { DeletedCategoryItems, NewCategoryItems, UpdatedCategoryItems } from "@/types/categories";
 import { envValues } from "@/util/envValues";
 import { removeStudentsFromCategory } from "./studentsSlice";
-import { removeVotes } from "./votesSlice";
+import { removeVotes, setVotes } from "./votesSlice";
+import { setIsTimeUp } from "./userSlice";
 
 interface CategoriesInitialState {
     categories : Categories[],
@@ -64,6 +65,18 @@ export const deleteCategory = createAsyncThunk("categoriesSlice/deleteCategory" 
         isSuccess && isSuccess();
     } catch(err) {
         isFail && isFail();
+    }
+})
+
+export const checkFromResultPage = createAsyncThunk("categoriesSlice/checkFromResultPage" , async( _ , thunkApi ) => {
+    try {
+        const response = await fetch(`${envValues.apiUrl}/categories`);
+        const {  categories , votes , isTimeUp  } = await response.json();
+        thunkApi.dispatch(setIsTimeUp(isTimeUp))
+        thunkApi.dispatch(setCategories(categories))
+        thunkApi.dispatch(setVotes(votes))
+    } catch(err) {
+
     }
 })
 

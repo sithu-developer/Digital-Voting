@@ -10,9 +10,11 @@ import { openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
 import { useRouter } from "next/router";
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
+import { checkIsTimeUp } from "@/store/slices/userSlice";
 
 const KingSelectionPage = () => {
     const user = useAppSelector(store => store.userSlice.user);
+    const isTimeUp = useAppSelector(store => store.userSlice.isTimeUp);
     const [ selectedCategory , setSelectedCategory ] = useState<Categories>();
     const [ numberForBackground  , setNumberForBackground ] = useState<number>(1);
     const [ votedStudent , setVotedStudent ] = useState<Students>();
@@ -68,9 +70,23 @@ const KingSelectionPage = () => {
         if(categories.length && votes.length && categories.length === votes.length && !categoryId) {
             router.push("/intro/voting/thank-for-voting");
         }
-    } , [categories , votes , categoryId ])
+    } , [categories , votes , categoryId ]);
 
-    
+    useEffect(() => {
+        const interval = setInterval(() => {
+            dispatch(checkIsTimeUp());
+        } , 6000);
+        return () => {
+            clearInterval(interval);
+        }
+    } , [])
+
+    useEffect(() => {
+        if(isTimeUp) {
+            router.push("/intro/voting/results");
+        }
+    } , [ isTimeUp ])
+
     
     if(user) {
 

@@ -10,10 +10,21 @@ import { setVotes } from "./votesSlice";
 interface userInitialState {
     user : User | null,
     usersFromAdmin : User[]
+    isTimeUp : boolean,
     error : Error | null
 }
 
-export const createNewUser = createAsyncThunk("userSlice" , async( newUser : NewUserType , thunkApi ) => {
+export const checkIsTimeUp = createAsyncThunk("userSlice/checkIsTimeUp" , async( _ , thunkApi ) => {
+    try {
+        const response = await fetch(`${envValues.apiUrl}/user`);
+        const { isTimeUp } = await response.json();
+        thunkApi.dispatch(setIsTimeUp(isTimeUp));
+    } catch(err) {
+        console.log(err)
+    }
+})
+
+export const createNewUser = createAsyncThunk("userSlice/createNewUser" , async( newUser : NewUserType , thunkApi ) => {
     const { email , majorCode , isFail , isSuccess } = newUser;
     try {
         const response = await fetch(`${envValues.apiUrl}/user` , {
@@ -23,13 +34,14 @@ export const createNewUser = createAsyncThunk("userSlice" , async( newUser : New
             },
             body : JSON.stringify({ email , majorCode })
         });
-        const { newUser , categories , students , agendas , votes , err } = await response.json();
+        const { newUser , categories , students , agendas , votes , isTimeUp , err } = await response.json();
         if(newUser) {
             thunkApi.dispatch(setUser(newUser));
             thunkApi.dispatch(setCategories(categories));
             thunkApi.dispatch(setStudents(students));
             thunkApi.dispatch(setAgendas(agendas));
             thunkApi.dispatch(setVotes(votes));
+            thunkApi.dispatch(setIsTimeUp(isTimeUp));
             isSuccess && isSuccess();
         } else {
             isFail && isFail(err);
@@ -61,6 +73,7 @@ export const updateUser = createAsyncThunk("userSlice/updateUser" , async( updat
 const initialState : userInitialState = {
     user : null,
     usersFromAdmin : [],
+    isTimeUp : false,
     error : null,
 }
 
@@ -79,10 +92,13 @@ const userSlice = createSlice({
         },
         replaceUser : ( state , action : PayloadAction<User>) => {
             state.user = action.payload;
+        },
+        setIsTimeUp : ( state , action : PayloadAction<boolean> ) => {
+            state.isTimeUp = action.payload;
         }
     }
 })
 
-export const { setUser , setUsersFromAdmin , removeUsersFromMajor , replaceUser } = userSlice.actions;
+export const { setUser , setUsersFromAdmin , removeUsersFromMajor , replaceUser , setIsTimeUp } = userSlice.actions;
 
 export default userSlice.reducer;

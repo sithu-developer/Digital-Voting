@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]";
 import { DeletedCategoryItems, NewCategoryItems, UpdatedCategoryItems } from "@/types/categories";
 import { prisma } from "@/util/prisma";
+import { Major } from "../../../../generated/prisma";
 
 export default async function handler(
   req: NextApiRequest,
@@ -36,5 +37,10 @@ export default async function handler(
         await prisma.students.deleteMany({ where : { categoryId }});
         await prisma.categories.delete({ where : { id : categoryId }});
         return res.status(200).json({ deletedCategoryId : categoryId , deletedVotes })
-    }
+    } else if(method === "GET") {
+        const majorOfAdmin = await prisma.major.findUnique({ where : { majorsOrAdmin : "admin" }}) as Major;
+        const categories = await prisma.categories.findMany({ orderBy : { id : "asc" }});
+        const votes = await prisma.votes.findMany({ orderBy : { id : "asc" }});
+        return res.status(200).json({ categories , votes , isTimeUp : majorOfAdmin.isTimeUp });
+    }   
 }
