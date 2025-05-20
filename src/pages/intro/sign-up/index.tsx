@@ -16,7 +16,7 @@ const SignUpPage = () => {
 
     return (
         <Box sx={{ position : "relative" , width : "100vw" , height : "100vh" , bgcolor : "secondary.main" , overflow : "hidden" , display : "flex" , justifyContent : "center" , alignItems : "center"  }} >
-            <img src={"/BlurBackground.png"} style={{ height : "100vh" , opacity : "30%" }} />
+            <img src={"/signUpBg.jpg"} style={{ height : "100vh" , opacity : "30%" }} />
             <Box sx={{ position : "absolute" , mb : "40px" , display : "flex" , flexDirection : "column" , gap : "13px" , justifyContent : "center" , alignItems : "center"  }} >
                 <TextField
                   onChange={(event) => setMajorCode(event.target.value)}

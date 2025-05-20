@@ -27,13 +27,13 @@ const ResultPage = () => {
 
     useEffect(() => {
         if(categories.length && localStorage) {
-            const selsectedCategoryId = Number(localStorage.getItem("selectedCategoryIdFromVotePage"));
+            const selsectedCategoryId = Number(localStorage.getItem("selectedCategoryIdFromResultPage"));
             const selectedCategory = categories.find(item => item.id === selsectedCategoryId);
             if(selectedCategory) {
                 setSelectedCategory(selectedCategory);
             } else {
                 setSelectedCategory(categories[0]);
-                localStorage.setItem("selectedCategoryIdFromVotePage" , String(categories[0].id))
+                localStorage.setItem("selectedCategoryIdFromResultPage" , String(categories[0].id))
             }
         }
     } , [categories])
@@ -65,7 +65,7 @@ const ResultPage = () => {
             <Box sx={{ display : "flex" , justifyContent : "start" , gap : "10px", overflow : "hidden" , overflowX : "auto" , py : "8px" , mx : "20px" }}>
                 {selectedCategory && categories.map(item => (
                     <Chip  key={item.id} sx={{ bgcolor : (selectedCategory.id === item.id ? "info.dark" : "") , '&:hover' : { bgcolor : "info.dark"} , color : (selectedCategory.id === item.id ? "white" : "black") }} label={item.name} onClick={() => {
-                        localStorage.setItem("selectedCategoryIdFromVotePage" , String(item.id))
+                        localStorage.setItem("selectedCategoryIdFromResultPage" , String(item.id))
                         setSelectedCategory(item);
                     }} />
                 ))}

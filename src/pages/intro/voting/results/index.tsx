@@ -3,7 +3,7 @@ import { checkFromResultPage } from "@/store/slices/categoriesSlice";
 import { Box, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const VotingResultPage = () => {
     const isTimeUp = useAppSelector(store => store.userSlice.isTimeUp);
@@ -43,7 +43,7 @@ const VotingResultPage = () => {
                 <img alt="voting result crown" src={"/votingResultCrown.png"} style={{ width : "80px" }} />
                 <Typography variant="h4" sx={{ fontFamily : "Inria Serif" , fontStyle : "italic" , textAlign : "center" , WebkitTextStroke: '1.5px #EAAA45', textStroke: '1.5px #EAAA45'}} >VOTING RESULTS</Typography>
             </Box>
-            <Box sx={{ position : "absolute" , top : "155px" , height : "calc(100vh - 210px)" , width : "80%" , display : "flex" , gap : "20px" , flexWrap : "wrap"}}>
+            <Box sx={{ position : "absolute" , top : "155px" , height : "calc(100vh - 200px)" , width : "65%" , display : "flex" , flexDirection : "column", p : "10px" , overflowY : "auto" }}>
                 {(categories.length && students.length && votes.length) ? categories.map(item => {
                     const relatedStudents = students.filter(stu => stu.categoryId === item.id);
                     const studentsWithVoteNumber = relatedStudents.map(student => {
@@ -52,14 +52,16 @@ const VotingResultPage = () => {
                     }).sort((a,b) => b.relatedVoteNumber - a.relatedVoteNumber );
                     const winner = studentsWithVoteNumber[0];
                     return (
-                        <Box key={item.id} >
-                            <Box sx={{ position : "relative"}} >
-                                <Box sx={{ position: "absolute" , top : "0px" , width : "100px" , height : "130px" , borderRadius: '50%' , p : "4px" , background: 'linear-gradient(90deg, #CD9C56 5%, #DECCB3 32%, #BD8F4F 66%, #AA8146 84%, #CBDBA5 100%)' , WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)', WebkitMaskComposite: 'xor', maskComposite: 'exclude', pointerEvents: 'none' }} ></Box>
-                                <Box sx={{ width : "100px" , height : "130px" , borderRadius: '50%' ,display : "flex" , flexDirection : "column" , justifyContent : "center" , overflow : "hidden"}} >
-                                    <img alt="winner photo" src={winner.student.url} style={{ width : "100px"}} />
+                        <Box key={item.id} sx={{ display : "flex" , flexDirection : "column" , justifyContent : "center" , alignItems : !(categories.indexOf(item) % 2 ) ? "start" : "end"  , height : "155px" }} >
+                            <Box>
+                                <Box sx={{ position : "relative"}} >
+                                    <Box sx={{ position: "absolute" , top : "0px" , width : "100px" , height : "130px" , borderRadius: '50%' , p : "4px" , background: 'linear-gradient(90deg, #CD9C56 5%, #DECCB3 32%, #BD8F4F 66%, #AA8146 84%, #CBDBA5 100%)' , WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)', WebkitMaskComposite: 'xor', maskComposite: 'exclude', pointerEvents: 'none' }} ></Box>
+                                    <Box sx={{ width : "100px" , height : "130px" , borderRadius: '50%' ,display : "flex" , flexDirection : "column" , justifyContent : "center" , overflow : "hidden"}} >
+                                        <img alt="winner photo" src={item.isShownResult ? winner.student.url : "/secretWinner.jpg"} style={{ width : "100px"}} />
+                                    </Box>
                                 </Box>
+                                <Typography sx={{ fontFamily : "Average" , color : "#B4884B" , fontSize : "25px" , textAlign: "center" }} >{item.name.toUpperCase()}</Typography>
                             </Box>
-                            <Typography sx={{ fontFamily : "Average" , color : "#B4884B" , fontSize : "31px" }} >{item.name.toUpperCase()}</Typography>
                         </Box>
                     )
                 })
