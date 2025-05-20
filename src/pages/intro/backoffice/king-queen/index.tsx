@@ -92,19 +92,19 @@ const KingQueenPage = () => {
                     </Box>}
                     <Button variant="contained" onClick={() => setNewStudentOpen(true)} >Create</Button>
                 </Box>
-                <Box sx={{ display : "grid" , gridTemplateColumns : "repeat(auto-fill, minmax(100px, 1fr))" , gap : 2 , borderRadius : "10px" , overflowY : "auto", maxHeight : "calc(100vh - 200px)" }}>
+                <Box sx={{ display : "grid" , gridTemplateColumns : "repeat(auto-fill, minmax(100px, 1fr))" , gap : 2 , borderRadius : "10px" , overflowY : "auto", height : "calc(100vh - 200px)" }}>
                     {sortedStudents.map(item => {
                     const currentZodiac = zodiacSigns.find(zodiac => zodiac.id === item.zodiacId) as ZodiacSignType;
                     return (
                     <Link href={`/intro/backoffice/king-queen/${item.id}`} key={item.id} style={{ textDecoration : "none"}} >
-                        <Box sx={{ width : "115px" , height : "140px" , background : `radial-gradient(ellipse at center,#AAB6F8 5%,#8D9CF2 25%,#5B6DD7 55%,#3747A3 75%)` , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "start" , alignItems : "center" , position : "relative" , overflow : "hidden" }} >
+                        <Box sx={{ width : "115px" , height : "145px" ,  bgcolor : `#28316B` , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "start" , alignItems : "center" , position : "relative" , overflow : "hidden" }} >
                             <img alt="king photo" src={item.url} style={{ width : "100%"}} />
                             <Box sx={{ position : "absolute" , top : "5px" , right : "5px"}}>
                                 <img alt="number boundary" src={ item.url.includes("Default") ? "/numberBoundaryWithBg.svg" : "/numberBoundary.svg"}/>
                                 <Typography sx={{ position : "absolute" , top : "0px" , left : "15%", textAlign : "center" , width : "22px"}} >{item.contestantNumber}</Typography>
                             </Box>
                             <Box sx={{ position : "absolute" , bottom : "0px" , bgcolor : "info.main" , width : "100%" , display : "flex"  , flexDirection : "column" , justifyContent : "center" , alignItems : "center" , gap : "3px" , p : "5px" , borderRadius : "15px" }} >
-                                <Typography sx={{ fontSize : "12px" , lineHeight : 1 , textAlign : "center"}} >{item.name} {currentZodiac.zodiac.replace(/^.*?-|\s*\(.*?\)/g, '')}</Typography>
+                                <Typography sx={{ fontSize : "12px" , lineHeight : 1 , textAlign : "center"}} >{item.name}{currentZodiac.zodiac.replace(/^.*?-|\s*\(.*?\)/g, '')}</Typography>
                                 <Typography sx={{ fontSize : "12px" , lineHeight : 1}}>{ item.year  + " " + item.major }</Typography>
                             </Box>
                         </Box>

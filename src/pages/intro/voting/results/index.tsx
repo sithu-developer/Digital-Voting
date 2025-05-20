@@ -1,11 +1,12 @@
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { checkFromResultPage } from "@/store/slices/categoriesSlice";
-import { Box, Typography } from "@mui/material";
-import Link from "next/link";
+import { filterRelatedVotes } from "@/store/slices/votesSlice";
+import { Box, Button, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 const VotingResultPage = () => {
+    const user = useAppSelector(store  => store.userSlice.user);
     const isTimeUp = useAppSelector(store => store.userSlice.isTimeUp);
     const categories = useAppSelector(store => store.categoriesSlice.categories);
     const votes = useAppSelector(store => store.votesSlice.votes);
@@ -14,15 +15,16 @@ const VotingResultPage = () => {
     const router = useRouter();
 
     useEffect(() => {
-        if(!isTimeUp) {
+        if(!isTimeUp && user) {
             const interval = setTimeout(() => {
+                dispatch(filterRelatedVotes(user.id))
                 router.push("/intro/voting/selections");
-            } , 15000);
+            } , 5000);
             return () => {
                 clearTimeout(interval);
             }
         }
-    } , [isTimeUp]);
+    } , [isTimeUp , user]);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -39,6 +41,7 @@ const VotingResultPage = () => {
     return (
         <Box sx={{ position : "relative" , bgcolor : "#01005D" , height : "100vh" , display : "flex" , flexDirection : "column" , alignItems : "center"}}>
             <img alt="voting result background" src={"/votingResultBg.png"} style={{ height : "100%" , width : "100%"}}/>
+            <img alt="result celebrate gold filter" src={"/resultCelebrate.gif"} style={{ position : "absolute" , top : "0px" , width : "100%" , height : "100%"}} />
             <Box sx={{ position : "absolute" , top : "35px" , display : "flex" , flexDirection : "column" , alignItems : "center"}}>
                 <img alt="voting result crown" src={"/votingResultCrown.png"} style={{ width : "80px" }} />
                 <Typography variant="h4" sx={{ fontFamily : "Inria Serif" , fontStyle : "italic" , textAlign : "center" , WebkitTextStroke: '1.5px #EAAA45', textStroke: '1.5px #EAAA45'}} >VOTING RESULTS</Typography>
@@ -69,10 +72,14 @@ const VotingResultPage = () => {
             </Box>
         </Box>
     )}
-    else 
+    else if(user && !isTimeUp)
     return (
-        <Box>
-            <Typography variant="h5" sx={{ textAlign : "center"}} > Go to the selection page <Link href={"/intro/voting/selections"} >Click here</Link></Typography>
+        <Box sx={{ display : "flex" , flexDirection : "column" , alignItems : "center" , gap : "10px" , p : "10px"}}>
+            <Typography variant="h5" sx={{ textAlign : "center"}} > Go to the selection page</Typography>
+            <Button variant="contained" onClick={() => {
+                dispatch(filterRelatedVotes(user.id))
+                router.push("/intro/voting/selections");
+            }} >Click me</Button>
         </Box>
     )
 }

@@ -65,11 +65,14 @@ const votesSlice = createSlice({
         },
         replaceVote : (state , action : PayloadAction<Votes> ) => {
             state.votes = state.votes.map(item => item.id === action.payload.id ? action.payload : item);
+        },
+        filterRelatedVotes : ( state , action : PayloadAction<number> ) => {
+            state.votes = state.votes.filter(item => item.userId === action.payload);
         }
     }
 })
 
-export const { removeVotes , setVotes , addVote , replaceVote } = votesSlice.actions;
+export const { removeVotes , setVotes , addVote , replaceVote , filterRelatedVotes } = votesSlice.actions;
 
 
 export default votesSlice.reducer;

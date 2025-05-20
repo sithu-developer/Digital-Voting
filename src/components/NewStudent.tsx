@@ -102,7 +102,7 @@ const NewStudent = ({ selectedCategory , newStudentOpen , setNewStudentOpen } : 
                         setPhotoFile(undefined);
                         setNewStudent({...defaultNewStudent , categoryId : selectedCategory.id , url : `/${selectedCategory.name.toLowerCase().trim()}Default.jpg` });
                     }} >cancel</Button>
-                    <Button variant="contained" disabled={!newStudent.contestantNumber || !newStudent.name || !newStudent.year || !newStudent.major} onClick={handleCreateNewStudent} >Create</Button>
+                    <Button variant="contained" disabled={!newStudent.contestantNumber || !newStudent.name || !newStudent.year || !newStudent.major || !photoFile} onClick={handleCreateNewStudent} >Create</Button>
                 </Box>
             </DialogContent>
         </Dialog>

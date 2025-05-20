@@ -1,4 +1,4 @@
-import { Box } from "@mui/material"
+import { Box, IconButton } from "@mui/material"
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { openSnackBar } from "@/store/slices/snackBarSlice";
 import { createNewUser } from "@/store/slices/userSlice";
@@ -6,9 +6,13 @@ import { Severity } from "@/types/snackBar";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
+import UserSetting from "./userSetting";
+
 
 const VotingBottomBar = () => {
     const [ majorCode , setMajorCode ] = useState<string>("");
+    const [ userSettingOpen , setUserSettingOpen ] = useState<boolean>(false);
     const { data : session } = useSession();
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -39,7 +43,12 @@ const VotingBottomBar = () => {
     
     if(!user) return null;
     return (
-        <Box sx={{ position : "absolute" , top : "20px" , right : "20px" , color : "white"}} >bottom bar</Box>
+        <Box sx={{ position : "absolute" , top : "35px" , right : "10px" , color : "white"}} >
+            <IconButton onClick={() => setUserSettingOpen(true)} >
+                <SettingsRoundedIcon sx={{ fontSize : "35px" , color : "lightgray"}} />
+            </IconButton>
+            <UserSetting userSettingOpen={userSettingOpen} setUserSettingOpen={setUserSettingOpen} />
+        </Box>
     )
 }
 

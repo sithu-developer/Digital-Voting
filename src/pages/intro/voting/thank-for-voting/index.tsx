@@ -51,9 +51,9 @@ const ThankForVoting = () => {
     }
 
     return (
-        <Box sx={{ position : "relative" , bgcolor : "#111136" , height : "100vh"}} >
+        <Box sx={{ position : "relative" , bgcolor : "#111136" , height : "100vh" , overflow : "hidden"}} >
             <img src={"/thankForVotingBg.jpg"} style={{ height : "100%" , opacity : "50%"}} />
-            <Box sx={{ width : "fit-content" , position : "absolute" , left : "20px" , top : "60px"}}  >
+            <Box sx={{ width : "fit-content" , position : "absolute" , left : "20px" , top : "65px"}}  >
                 <Typography variant="h3" sx={{ textAlign : "center" , fontFamily : "Javanese Text"}} >THANKS</Typography>
                 <Typography variant="h4" sx={{ textAlign : "center" , fontFamily : "Javanese Text"}}>FOR</Typography>
                 <Typography variant="h3" sx={{ textAlign : "center" , fontFamily : "Javanese Text"}}>VOTING</Typography>
@@ -66,7 +66,7 @@ const ThankForVoting = () => {
                     <Box  key={item.id}>
                         <Typography sx={{ ml : "10px" , fontFamily : "Javanese Text" }}>{item.name}</Typography>
                         <Box sx={{ display : "flex" , alignItems : "end", gap : "3px"}} >
-                            <Box sx={{ width : "115px" , height : "115px" , background : `radial-gradient(ellipse at center,#AAB6F8 5%,#8D9CF2 25%,#5B6DD7 55%,#3747A3 75%)` , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "center" , alignItems : "center" , position : "relative" , overflow : "hidden" }}>
+                            <Box sx={{ width : "115px" , height : "115px" , bgcolor : "#28316B" , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "center" , alignItems : "center" , position : "relative" , overflow : "hidden" }}>
                                 <img alt="king photo" src={relatedStudent.url} style={{ width : "100%"}} />
                                 <Box sx={{ position : "absolute" , top : "5px" , right : "5px"}}>
                                     <img alt="number boundary" src={ relatedStudent.url.includes("Default") ? "/numberBoundaryWithBg.svg" : "/numberBoundary.svg"}/>
@@ -88,7 +88,11 @@ const ThankForVoting = () => {
                 <Typography sx={{ fontFamily : "Javanese Text" , mt : "5px" }}>Your chosen candidates</Typography>
                 <Button onClick={handleSubmitVotes} disabled={user.isSubmitted} sx={{ border : "1px solid white" , py : "1px" , textTransform : "none" , '&.Mui-disabled' : { color : "GrayText" , bgcolor : "rgb(28, 32, 77)" , border : "1px solid #FFD700"} }} variant="contained" >{user.isSubmitted ? "submitted" : "submit"}</Button>
             </Box>
-            
+            <Box sx={{ position : "absolute" , bottom : "-10px" , width : "100%" , display : "flex" , justifyContent : "space-between"}} >
+                <img alt="cute cat" src={"/cuteCat.gif"} style={{ width : "150px" }} />
+                <img alt="runnng cute" src={"/floweringCute.gif"} style={{ width : "150px"}} />
+            </Box>
+
         </Box>
     )
 }

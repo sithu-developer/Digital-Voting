@@ -67,10 +67,10 @@ const KingSelectionPage = () => {
     } , [selectedCategory , votes , students])
 
     useEffect(() => {
-        if(categories.length && votes.length && categories.length === votes.length && !categoryId) {
+        if((categories.length && votes.length && categories.length === votes.length && !categoryId) || (categories.length && votes.length && user && user.isSubmitted )) {
             router.push("/intro/voting/thank-for-voting");
         }
-    } , [categories , votes , categoryId ]);
+    } , [categories , votes , categoryId , user ]);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -117,9 +117,7 @@ const KingSelectionPage = () => {
                 <Box sx={{ display : "flex" , width : "75%" , position : "relative" }}>
                     <Box sx={{ width: "35%", height: "12px", borderTop: "1px solid #BFCDEC"}} />
                     <Box sx={{ width: "30%", height: "12px", borderBottom : "1px solid #BFCDEC" , borderLeft : "1px solid #BFCDEC" , borderRight : "1px solid #BFCDEC" }} />
-                    <Box sx={{ width: "35%", height: "12px", borderTop: "1px solid #BFCDEC" }} >
-                        <img src={"/butterfly.gif"} style={{ position : "absolute" , top : "-38px" , right : "-40px" ,  width : "70px" , transform : "rotate(48deg)" }} />
-                    </Box>
+                    <Box sx={{ width: "35%", height: "12px", borderTop: "1px solid #BFCDEC" }} />
                 </Box>
                 <Typography sx={{ width : "100vw" , fontSize : "38px" , fontFamily : "Microsoft YaHei UI" , textAlign : "center" , color : "#DAE9FE" }} >{selectedCategory?.name.toUpperCase()} SELECTION</Typography>
                 <Box sx={{ display : "flex" , alignItems : "center"  , width : "75%"}}>
@@ -132,7 +130,7 @@ const KingSelectionPage = () => {
                 {sortedStudents.map(item => {
                 const currentZodiac = zodiacSigns.find(zodiac => zodiac.id === item.zodiacId) as ZodiacSignType;
                 return (
-                    <Box key={item.id} sx={{ border : (votedStudent?.id === item.id ?  "3px solid #FFD700" : "") , width : "115px" , height : "140px" , background : `radial-gradient(ellipse at center,#AAB6F8 5%,#8D9CF2 25%,#5B6DD7 55%,#3747A3 75%)` , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "start" , alignItems : "center" , position : "relative" , overflow : "hidden" , cursor : "pointer" }}
+                    <Box key={item.id} sx={{ border : (votedStudent?.id === item.id ?  "3px solid #FFD700" : "") , width : "115px" , height : "145px" , bgcolor : `#28316B` , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "start" , alignItems : "center" , position : "relative" , overflow : "hidden" , cursor : "pointer" }}
                         onClick={() => setVotedStudent(item)}
                     >
                         <img alt="king photo" src={item.url} style={{ width : "100%"}} />
@@ -141,7 +139,7 @@ const KingSelectionPage = () => {
                             <Typography sx={{ position : "absolute" , top : "0px" , left : "15%", textAlign : "center" , width : "22px"}} >{item.contestantNumber}</Typography>
                         </Box>
                         <Box sx={{ position : "absolute" , bottom : "0px" , bgcolor : "info.main" , width : "100%" , display : "flex"  , flexDirection : "column" , justifyContent : "center" , alignItems : "center" , gap : "3px" , p : "5px" , borderRadius : "15px" }} >
-                            <Typography sx={{ fontSize : "12px" , lineHeight : 1 , textAlign : "center" }} >{item.name} {currentZodiac.zodiac.replace(/^.*?-|\s*\(.*?\)/g, '')}</Typography>
+                            <Typography sx={{ fontSize : "12px" , lineHeight : 1 , textAlign : "center" }} >{item.name}{currentZodiac.zodiac.replace(/^.*?-|\s*\(.*?\)/g, '')}</Typography>
                             <Typography sx={{ fontSize : "12px" , lineHeight : 1}}>{ item.year  + " " + item.major }</Typography>
                         </Box>
                     </Box>

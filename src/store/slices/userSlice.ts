@@ -62,7 +62,7 @@ export const updateUser = createAsyncThunk("userSlice/updateUser" , async( updat
             body : JSON.stringify({ id , name , isSubmitted })
         });
         const { updatedUser } = await response.json();
-        thunkApi.dispatch(replaceUser(updatedUser))
+        thunkApi.dispatch(setUser(updatedUser))
         isSuccess && isSuccess();
     } catch(err) {
         console.log(err);
@@ -90,15 +90,12 @@ const userSlice = createSlice({
         removeUsersFromMajor : ( state , action : PayloadAction<number>) => {
             state.usersFromAdmin = state.usersFromAdmin.filter(item => item.majorId !== action.payload)
         },
-        replaceUser : ( state , action : PayloadAction<User>) => {
-            state.user = action.payload;
-        },
         setIsTimeUp : ( state , action : PayloadAction<boolean> ) => {
             state.isTimeUp = action.payload;
         }
     }
 })
 
-export const { setUser , setUsersFromAdmin , removeUsersFromMajor , replaceUser , setIsTimeUp } = userSlice.actions;
+export const { setUser , setUsersFromAdmin , removeUsersFromMajor  , setIsTimeUp } = userSlice.actions;
 
 export default userSlice.reducer;
