@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import ModeNightOutlinedIcon from '@mui/icons-material/ModeNightOutlined';
+import Image from "next/image";
 
 interface Props {
     setSideBarOpen : ( value : boolean ) => void;
@@ -28,7 +29,7 @@ const BackofficeTopBar = ({ setSideBarOpen } : Props ) => {
     } , [] )
 
     useEffect(() => {
-        if(password && session && session.user){
+        if(password && session && session.user && dispatch && router){
             dispatch(createNewAdmin({ password , email : String(session.user.email) , isFail : (err) => {
                 router.push("/intro/sign-up")
                 dispatch(openSnackBar({ open : true , message : String(err) , severity : Severity.error}))
@@ -42,7 +43,7 @@ const BackofficeTopBar = ({ setSideBarOpen } : Props ) => {
             }
         }
         
-    } , [password , session])
+    } , [password , session , dispatch , router])
     
     if(!admin) return null;
     return (
@@ -55,7 +56,7 @@ const BackofficeTopBar = ({ setSideBarOpen } : Props ) => {
                 <ModeNightOutlinedIcon sx={{ color : "white" , transform : "rotate(30deg)", fontSize : "25px"}} />
             </IconButton>
             <Box sx={{ bgcolor : "secondary.main" , position : "absolute" , top : "-25px" , left : "50%" , transform: 'translateX(-50%)',  justifySelf : "center" , clipPath: 'polygon(-5% 0%, 105% 0%, 80% 100%, 20% 100%)' , width : "90px" , height : "40px" , display : "flex" , justifyContent : "center" , alignItems : "center"  }}> 
-                <img alt="king crown logo" src={"/kingCrownLogo.png"} style={{ width : "50px" , height : "50px"}} />
+                <Image alt="king crown logo" src={"/kingCrownLogo.png"} width={200} height={200} style={{ width : "50px" , height : "50px"}} />
             </Box>
         </Box>
     )

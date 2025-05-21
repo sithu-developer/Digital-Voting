@@ -1,7 +1,9 @@
+import { SvgIconProps } from "@mui/material";
+
 export interface SideBarListItemType {
     id : number,
     href : string,
-    icon : any
+    icon : React.ComponentType<SvgIconProps>
 }
 
 export interface ZodiacSignType {

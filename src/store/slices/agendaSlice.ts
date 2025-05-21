@@ -14,7 +14,7 @@ const initialState : AgendaInitialState = {
 }
 
 export const createAgenda = createAsyncThunk("agendaSlice/createAgenda" , async( newAgendaItems : NewAgendaItems  , thunkApi ) => {
-    const { agendaUrl , isFail , isSuccess } = newAgendaItems;
+    const { agendaUrl , isSuccess } = newAgendaItems;
     try {
         const response = await fetch(`${envValues.apiUrl}/agenda` , {
             method : "POST",
@@ -25,14 +25,16 @@ export const createAgenda = createAsyncThunk("agendaSlice/createAgenda" , async(
         });
         const { newAgenda } = await response.json();
         thunkApi.dispatch(addAgenda(newAgenda));
-        isSuccess && isSuccess();
+        if(isSuccess) {
+            isSuccess();
+        }
     } catch(err) {
         console.log(err);
     }
 })
 
 export const updateAgenda = createAsyncThunk("agendaSlice/updateAgenda" , async( updatedAgendaItems : UpdatedAgendaItems  , thunkApi ) => {
-    const { id , agendaUrl , isFail , isSuccess } = updatedAgendaItems;
+    const { id , agendaUrl , isSuccess } = updatedAgendaItems;
     try {
         const response = await fetch(`${envValues.apiUrl}/agenda` , {
             method : "PUT",
@@ -43,21 +45,25 @@ export const updateAgenda = createAsyncThunk("agendaSlice/updateAgenda" , async(
         });
         const { updatedAgenda } = await response.json();
         thunkApi.dispatch(replaceAgenda(updatedAgenda));
-        isSuccess && isSuccess();
+        if(isSuccess) {
+            isSuccess();
+        }
     } catch(err) {
         console.log(err);
     }
 })
 
 export const deleteAgenda = createAsyncThunk("agendaSlice/deleteAgenda" , async( deletedAgendaItems : DeletedAgendaItems  , thunkApi ) => {
-    const { id , isFail , isSuccess } = deletedAgendaItems;
+    const { id , isSuccess } = deletedAgendaItems;
     try {
         const response = await fetch(`${envValues.apiUrl}/agenda?id=${id}` , {
             method : "DELETE"
         });
         const { deletedAgendaId } = await response.json();
         thunkApi.dispatch(removeAgenda(deletedAgendaId));
-        isSuccess && isSuccess();
+        if(isSuccess) {
+            isSuccess();
+        }
     } catch(err) {
         console.log(err);
     }

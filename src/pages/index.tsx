@@ -6,8 +6,10 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    router.push("/intro/sign-up")
-  } , [])
+    if(router) {
+      router.push("/intro/sign-up")
+    }
+  } , [router])
 
   return (
     <>

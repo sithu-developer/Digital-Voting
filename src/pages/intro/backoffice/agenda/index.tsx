@@ -10,6 +10,7 @@ import EditAgenda from "@/components/EditAgenda";
 import { EditAgendaItems } from "@/types/agenda";
 import FileDownloadRoundedIcon from '@mui/icons-material/FileDownloadRounded';
 import { Agenda } from "../../../../../generated/prisma";
+import Image from "next/image";
 
 const AgendaPage = () => {
     const agendas = useAppSelector(store => store.agendaSlice.agendas);
@@ -18,14 +19,14 @@ const AgendaPage = () => {
     const dispatch = useAppDispatch();
     
     useEffect(() => {
-      if(photoFile) {
+      if(photoFile && dispatch) {
         // here to upload photo to database
         dispatch(createAgenda({ agendaUrl : "/selectionBackground.jpg" , isSuccess : () => {
           setPhotoFile(undefined)
           dispatch(openSnackBar({ open : true , message : "Successfully added new Agenda Photo" , severity : Severity.success}))
         }}))
       }
-    } , [photoFile]);
+    } , [photoFile , dispatch]);
 
     const handleDeleteAgenda = ( id : number) => {
       dispatch(deleteAgenda({ id , isSuccess : () => {
@@ -70,7 +71,7 @@ const AgendaPage = () => {
             <Box sx={{ height : "calc(100vh - 180px)"  , overflowY : "auto" ,display : "flex" , flexDirection : "column" , alignItems : "center" , gap : "10px" , borderRadius : "5px"}} >
               {agendas.map(item => (
                 <Box  key={item.id} sx={{ width : "90%" , display : "flex" , flexDirection : "column" , gap : "3px"}} >
-                  <img alt="Agenda photo" src={item.agendaUrl} style={{ width : "100%" , borderRadius : "5px"}} />
+                  <Image alt="Agenda photo" src={item.agendaUrl} width={1000} height={1000} style={{ width : "100%" , height : "auto" , borderRadius : "5px"}} />
                   <Box sx={{ display : "flex" , justifyContent : "end" , gap : "5px"}}>
                     <IconButton onClick={() => handleDownload(item)}>
                       <FileDownloadRoundedIcon sx={{ color : "black"}} />

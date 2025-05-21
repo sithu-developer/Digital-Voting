@@ -27,7 +27,7 @@ const NewStudent = ({ selectedCategory , newStudentOpen , setNewStudentOpen } : 
     
     useEffect(() => {
         if(selectedCategory) {
-            setNewStudent({...newStudent , categoryId : selectedCategory.id , url : `/${selectedCategory.name.toLowerCase().trim()}Default.jpg`})
+            setNewStudent(prev => ({...prev , categoryId : selectedCategory.id , url : `/${selectedCategory.name.toLowerCase().trim()}Default.jpg`}))
         }
     } , [selectedCategory])
 

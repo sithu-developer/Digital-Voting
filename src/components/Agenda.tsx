@@ -1,6 +1,7 @@
 import { Box, Dialog, IconButton, Typography } from "@mui/material"
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import { useAppSelector } from "@/store/hooks";
+import Image from "next/image";
 
 interface Props {
     agendaOpen : boolean;
@@ -20,7 +21,7 @@ const Agenda = ({ agendaOpen , setAgendaOpen } : Props) => {
             </Box>
             <Box sx={{ bgcolor : "info.main" , height : "calc(100vh - 66px)" , overflowY : "auto"}} >
                 {agendas.map(item => (
-                    <img key={item.id} alt="agenda photo" src={item.agendaUrl} style={{ width : "100%"}} />
+                    <Image key={item.id} alt="agenda photo" src={item.agendaUrl} width={1000} height={1000} style={{ width : "100%" , height : "auto"}} />
                 ))}
             </Box>
         </Dialog>

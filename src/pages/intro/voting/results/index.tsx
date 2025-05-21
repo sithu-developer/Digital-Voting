@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { checkFromResultPage } from "@/store/slices/categoriesSlice";
 import { filterRelatedVotes } from "@/store/slices/votesSlice";
 import { Box, Button, Typography } from "@mui/material";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -15,7 +16,7 @@ const VotingResultPage = () => {
     const router = useRouter();
 
     useEffect(() => {
-        if(!isTimeUp && user) {
+        if(!isTimeUp && user && dispatch && router) {
             const interval = setTimeout(() => {
                 dispatch(filterRelatedVotes(user.id))
                 router.push("/intro/voting/selections");
@@ -24,26 +25,28 @@ const VotingResultPage = () => {
                 clearTimeout(interval);
             }
         }
-    } , [isTimeUp , user]);
+    } , [isTimeUp , user , dispatch , router]);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            dispatch(checkFromResultPage())
-        } , 5000);
-        return () => {
-            clearInterval(interval);
+        if(dispatch) {
+            const interval = setInterval(() => {
+                dispatch(checkFromResultPage())
+            } , 5000);
+            return () => {
+                clearInterval(interval);
+            }
         }
-    } , [])
+    } , [dispatch])
 
 
     
     if(isTimeUp) { 
     return (
         <Box sx={{ position : "relative" , bgcolor : "#01005D" , height : "100vh" , display : "flex" , flexDirection : "column" , alignItems : "center"}}>
-            <img alt="voting result background" src={"/votingResultBg.png"} style={{ height : "100%" , width : "100%"}}/>
-            <img alt="result celebrate gold filter" src={"/resultCelebrate.gif"} style={{ position : "absolute" , top : "0px" , width : "100%" , height : "100%"}} />
+            <Image alt="voting result background" src={"/votingResultBg.png"} width={1000} height={1000} style={{ height : "100%" , width : "100%"}}/>
+            <Image alt="result celebrate gold filter" src={"/resultCelebrate.gif"} width={1000} height={1000} style={{ position : "absolute" , top : "0px" , width : "100%" , height : "100%"}} />
             <Box sx={{ position : "absolute" , top : "35px" , display : "flex" , flexDirection : "column" , alignItems : "center"}}>
-                <img alt="voting result crown" src={"/votingResultCrown.png"} style={{ width : "80px" }} />
+                <Image alt="voting result crown" src={"/votingResultCrown.png"} width={200} height={200} style={{ width : "80px" , height : "auto" }} />
                 <Typography variant="h4" sx={{ fontFamily : "Inria Serif" , fontStyle : "italic" , textAlign : "center" , WebkitTextStroke: '1.5px #EAAA45', textStroke: '1.5px #EAAA45'}} >VOTING RESULTS</Typography>
             </Box>
             <Box sx={{ position : "absolute" , top : "155px" , height : "calc(100vh - 200px)" , width : "90%" , display : "flex" , flexDirection : "column", p : "10px" , overflowY : "auto" }}>
@@ -60,7 +63,7 @@ const VotingResultPage = () => {
                                 <Box sx={{ position : "relative"}} >
                                     <Box sx={{ position: "absolute" , top : "0px" , width : "100px" , height : "130px" , borderRadius: '50%' , p : "4px" , background: 'linear-gradient(90deg, #CD9C56 5%, #DECCB3 32%, #BD8F4F 66%, #AA8146 84%, #CBDBA5 100%)' , WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)', WebkitMaskComposite: 'xor', maskComposite: 'exclude', pointerEvents: 'none' }} ></Box>
                                     <Box sx={{ width : "100px" , height : "130px" , borderRadius: '50%' ,display : "flex" , flexDirection : "column" , justifyContent : "center" , overflow : "hidden"}} >
-                                        <img alt="winner photo" src={item.isShownResult ? winner.student.url : (!(categories.indexOf(item) % 2) ? "/secretMale.png" : "/secretFemale.png" )} style={{ width : "100%"}} />
+                                        <Image alt="winner photo" src={item.isShownResult ? winner.student.url : (!(categories.indexOf(item) % 2) ? "/secretMale.png" : "/secretFemale.png" )} width={1000} height={1000} style={{ width : "100%" , height : "auto"}} />
                                     </Box>
                                 </Box>
                                 <Typography sx={{ fontFamily : "Average" , color : "#B4884B" , fontSize : "25px" , textAlign: "center" }} >{item.name.toUpperCase()}</Typography>

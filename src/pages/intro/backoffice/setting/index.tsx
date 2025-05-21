@@ -54,7 +54,7 @@ const SettingPage = () => {
                   >
                     <MenuItem value={0} sx={{ color : "black"}} >Select Major first</MenuItem>
                     {majors.map(item => (
-                        <MenuItem value={item.id} sx={{ color : "black"}} >{item.majorsOrAdmin}</MenuItem>
+                        <MenuItem key={item.id} value={item.id} sx={{ color : "black"}} >{item.majorsOrAdmin}</MenuItem>
                     ))}
                   </Select>
                 </FormControl>

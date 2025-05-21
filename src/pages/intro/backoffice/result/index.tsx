@@ -11,6 +11,7 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import Permission from "@/components/Permission";
 import { checkUsersAndVotes } from "@/store/slices/adminSlice";
+import Image from "next/image";
 
 const ResultPage = () => {
     const admin = useAppSelector(store => store.adminSlice.admin)
@@ -39,14 +40,16 @@ const ResultPage = () => {
     } , [categories])
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            dispatch(checkUsersAndVotes())
-        }, 5000);
-
-        return () => {
-            clearInterval(interval);
+        if(dispatch) {
+            const interval = setInterval(() => {
+                dispatch(checkUsersAndVotes())
+            }, 5000);
+        
+            return () => {
+                clearInterval(interval);
+            }
         }
-    } , [])
+    } , [ dispatch ])
 
     useEffect(() => {
         if(students.length && selectedCategory) {
@@ -82,7 +85,7 @@ const ResultPage = () => {
                 </Box>
                 :<Box sx={{ flexGrow : 1 , display : "flex" , justifyContent : "space-between" , alignItems : "center"}}>
                     {selectedCategory && <Box sx={{ display : "flex" , alignItems : "center" , gap : "5px" ,  ml : "20px"}} >
-                        <img src={selectedCategory.iconUrl} style={{ width : "35px" , maxHeight : "50px"}} />
+                        <Image alt="category photo" src={selectedCategory.iconUrl} width={100} height={100} style={{ width : "35px" , height : "35px"}} />
                         <Typography variant="h5" >{selectedCategory.name} {selectedCategory.isShownResult ? "(Announced)" :""}</Typography>
                     </Box>}
                     <IconButton onClick={() => setSearchOpen(true)} >
@@ -96,9 +99,9 @@ const ResultPage = () => {
                 return (
                     <Box key={item.student.id} sx={{ display : "flex" , gap : "15px" , bgcolor : "info.main" , p : "10px" , borderRadius : "15px" , minWidth : "350px" , maxWidth : "500px"}} >
                         <Box sx={{ width : "90px" , height : "90px" , bgcolor : `#28316B` , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "start" , alignItems : "center" , position : "relative" , overflow : "hidden" }} >
-                            <img alt="candidate photo" src={item.student.url} style={{ width : "100%"}} />
+                            <Image alt="candidate photo" src={item.student.url} width={1000} height={1000} style={{ width : "100%" , height : "auto"}} />
                             <Box sx={{ position : "absolute" , top : "5px" , right : "5px"}}>
-                                <img alt="number boundary" src={"/numberBoundary.svg"}/>
+                                <Image alt="number boundary" src={"/numberBoundary.svg"} width={100} height={100} style={{ width : "auto" , height : "auto"}} />
                                 <Typography sx={{ position : "absolute" , top : "0px" , left : "15%", textAlign : "center" , width : "22px"}} >{item.student.contestantNumber}</Typography>
                             </Box>
                         </Box>

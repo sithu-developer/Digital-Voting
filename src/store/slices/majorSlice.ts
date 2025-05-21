@@ -16,7 +16,7 @@ const initialState : MajorsSliceInitialState = {
 }
 
 export const changeAdminCodeAndLimit = createAsyncThunk( "majorSlice/changeAdminCodeAndLimit" , async( changedAdminInMajor : UpdatedMajorItems , thunkApi ) => {
-    const { id , majorsOrAdmin , maxQuantity , passCode , isTimeUp , isFail , isSuccess } = changedAdminInMajor;
+    const { id , majorsOrAdmin , maxQuantity , passCode , isTimeUp , isSuccess } = changedAdminInMajor;
     try {
         const response = await fetch(`${envValues.apiUrl}/major` , {
             method : "PUT",
@@ -27,14 +27,16 @@ export const changeAdminCodeAndLimit = createAsyncThunk( "majorSlice/changeAdmin
         });
         const { updatedAdminInMajor } = await response.json();
         thunkApi.dispatch(replaceMajor(updatedAdminInMajor));
-        isSuccess && isSuccess();
+        if(isSuccess) {
+            isSuccess();
+        }
     } catch(err) {
         console.log(err)
     }
 })
 
 export const createMajor = createAsyncThunk( "majorSlice/createMajor" , async( newMajor : NewMajorItems , thunkApi ) => {
-    const { majorName , majorCode , quantity , isFail , isSuccess } = newMajor;
+    const { majorName , majorCode , quantity , isSuccess } = newMajor;
     try {
         const response = await fetch(`${envValues.apiUrl}/major` , {
             method : "POST",
@@ -45,14 +47,16 @@ export const createMajor = createAsyncThunk( "majorSlice/createMajor" , async( n
         });
         const { newMajor } = await response.json();
         thunkApi.dispatch(addMajor(newMajor));
-        isSuccess && isSuccess();
+        if(isSuccess) {
+            isSuccess();
+        }
     } catch(err) {
         console.log(err)
     }
 })
 
 export const updateMajor = createAsyncThunk( "majorSlice/updateMajor" , async( updatedMajor : UpdatedMajorItems , thunkApi ) => {
-    const { id , majorsOrAdmin , maxQuantity , passCode , isTimeUp , isFail , isSuccess } = updatedMajor;
+    const { id , majorsOrAdmin , maxQuantity , passCode , isTimeUp , isSuccess } = updatedMajor;
     try {
         const response = await fetch(`${envValues.apiUrl}/major` , {
             method : "PUT",
@@ -63,14 +67,16 @@ export const updateMajor = createAsyncThunk( "majorSlice/updateMajor" , async( u
         });
         const { updatedMajor } = await response.json();
         thunkApi.dispatch(replaceMajor(updatedMajor));
-        isSuccess && isSuccess();
+        if(isSuccess) {
+            isSuccess();
+        }
     } catch(err) {
         console.log(err)
     }
 })
 
 export const deleteMajor = createAsyncThunk( "majorSlice/deleteMajor" , async( deletedMajor : DeletedMajorItems , thunkApi ) => {
-    const { majorId , isFail , isSuccess } = deletedMajor;
+    const { majorId , isSuccess } = deletedMajor;
     try {
         const response = await fetch(`${envValues.apiUrl}/major?majorId=${majorId}` , {
             method : "DELETE"
@@ -79,7 +85,9 @@ export const deleteMajor = createAsyncThunk( "majorSlice/deleteMajor" , async( d
         thunkApi.dispatch(removeVotes(deletedVotes));
         thunkApi.dispatch(removeUsersFromMajor(deletedMajorId));
         thunkApi.dispatch(removeMajor(deletedMajorId));
-        isSuccess && isSuccess();
+        if(isSuccess) {
+            isSuccess();
+        }
     } catch(err) {
         console.log(err)
     }

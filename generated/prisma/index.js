@@ -203,11 +203,12 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres:digitalVoting123@localhost:5432/digital-voting?schema=public"
+        "value": null
       }
     }
   },

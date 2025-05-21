@@ -4,8 +4,8 @@ export interface AdminPasswordItemsType {
 }
 
 export interface IsFailOrSuccessType {
-    isFail ?: (value ?: any ) => void;
-    isSuccess ?: (value ?: any) => void;
+    isFail ?: (value ?: unknown ) => void;
+    isSuccess ?: (value ?: unknown ) => void;
 }
 
 export interface NewAdminType extends IsFailOrSuccessType {

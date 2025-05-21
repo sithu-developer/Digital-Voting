@@ -78,7 +78,9 @@ const DeleteComfirmation = ({ deleteOpen , setDeleteOpen , categoryToDelete , st
                     setAdminCodeFromTyping("");
                     setShowPassword(false);
                     setDeleteOpen(false);
-                    setSelectedMajorId && setSelectedMajorId(0);
+                    if(setSelectedMajorId) {
+                        setSelectedMajorId(0);
+                    };
                     dispatch(openSnackBar({ open : true , message : "Successfully deleted to this major" , severity : Severity.success }))
                 }}))
             } else {

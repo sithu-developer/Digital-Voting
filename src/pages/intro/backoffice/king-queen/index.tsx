@@ -14,6 +14,7 @@ import { ZodiacSignType } from "@/types/general";
 import { Categories } from "../../../../../generated/prisma";
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import Image from "next/image";
 
 
 const KingQueenPage = () => {
@@ -83,7 +84,7 @@ const KingQueenPage = () => {
                     </Box>
                     :<Box sx={{ flexGrow : 1 , display : "flex" , justifyContent : "space-between" , alignItems : "center"}}>
                         {selectedCategory && <Box sx={{ display : "flex" , alignItems : "center" , gap : "5px" ,  ml : "20px"}} >
-                            <img src={selectedCategory.iconUrl} style={{ width : "35px" , maxHeight : "50px"}} />
+                            <Image alt="category icon" src={selectedCategory.iconUrl} width={100} height={100} style={{ width : "35px" , height : "35px"}} />
                             <Typography variant="h5" >{selectedCategory.name}</Typography>
                         </Box>}
                         <IconButton onClick={() => setSearchOpen(true)} >
@@ -98,9 +99,9 @@ const KingQueenPage = () => {
                     return (
                     <Link href={`/intro/backoffice/king-queen/${item.id}`} key={item.id} style={{ textDecoration : "none"}} >
                         <Box sx={{ width : "115px" , height : "145px" ,  bgcolor : `#28316B` , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "start" , alignItems : "center" , position : "relative" , overflow : "hidden" }} >
-                            <img alt="candidate photo" src={item.url} style={{ width : "100%"}} />
+                            <Image alt="candidate photo" src={item.url} width={1000} height={1000} style={{ width : "100%" , height : "auto"}} />
                             <Box sx={{ position : "absolute" , top : "5px" , right : "5px"}}>
-                                <img alt="number boundary" src={"/numberBoundary.svg"}/>
+                                <Image alt="number boundary" src={"/numberBoundary.svg"} width={100} height={100} style={{ width : "auto" , height : "auto"}} />
                                 <Typography sx={{ position : "absolute" , top : "0px" , left : "15%", textAlign : "center" , width : "22px"}} >{item.contestantNumber}</Typography>
                             </Box>
                             <Box sx={{ position : "absolute" , bottom : "0px" , bgcolor : "info.main" , width : "100%" , display : "flex"  , flexDirection : "column" , justifyContent : "center" , alignItems : "center" , gap : "3px" , p : "5px" , borderRadius : "15px" }} >

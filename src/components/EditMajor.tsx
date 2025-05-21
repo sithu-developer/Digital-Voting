@@ -3,7 +3,7 @@ import { Box, Button, Dialog, DialogContent, Divider, IconButton, InputAdornment
 import { useEffect, useState } from "react";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { NewMajorItems, UpdatedMajorItems } from "@/types/major";
+import { UpdatedMajorItems } from "@/types/major";
 import { Major } from "../../generated/prisma";
 import { Severity } from "@/types/snackBar";
 import { openSnackBar } from "@/store/slices/snackBarSlice";
@@ -14,8 +14,6 @@ interface Props {
     editMajorOpen : boolean;
     setEditMajorOpen : (value : boolean) => void
 }
-
-const defaultNewMajor : NewMajorItems = { majorName : "" , majorCode : "" , quantity : 0 };
 
 const EditMajor = ( { selectedMajorId , editMajorOpen , setEditMajorOpen } : Props) => {
     const majorsAndAdmin = useAppSelector(store => store.majorsSlice.majors);

@@ -33,9 +33,13 @@ export const createNewAdmin = createAsyncThunk("adminSlice/checkAdminPassword" ,
             thunkApi.dispatch(setUsersFromAdmin(users))
             thunkApi.dispatch(setMajors(majors))
             thunkApi.dispatch(setAgendas(agendas))
-            isSuccess && isSuccess();
+            if(isSuccess) {
+                isSuccess();
+            }
         } else {
-            isFail && isFail(err);
+            if(isFail) {
+                isFail(err);
+            } 
         }
     } catch(err) {
         console.log(err)

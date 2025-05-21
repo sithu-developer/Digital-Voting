@@ -42,9 +42,13 @@ export const createNewUser = createAsyncThunk("userSlice/createNewUser" , async(
             thunkApi.dispatch(setAgendas(agendas));
             thunkApi.dispatch(setVotes(votes));
             thunkApi.dispatch(setIsTimeUp(isTimeUp));
-            isSuccess && isSuccess();
+            if(isSuccess) {
+                isSuccess();
+            }
         } else {
-            isFail && isFail(err);
+            if(isFail) {
+                isFail(err);
+            }
         }
     } catch (err) {
         console.log(err);
@@ -52,7 +56,7 @@ export const createNewUser = createAsyncThunk("userSlice/createNewUser" , async(
 })
 
 export const updateUser = createAsyncThunk("userSlice/updateUser" , async( updatedUserItems : UpdatedUserItems , thunkApi) => {
-    const { id , name , isSubmitted , isFail , isSuccess } = updatedUserItems;
+    const { id , name , isSubmitted , isSuccess } = updatedUserItems;
     try {
         const response = await fetch(`${envValues.apiUrl}/user` , {
             method : "PUT",
@@ -63,7 +67,9 @@ export const updateUser = createAsyncThunk("userSlice/updateUser" , async( updat
         });
         const { updatedUser } = await response.json();
         thunkApi.dispatch(setUser(updatedUser))
-        isSuccess && isSuccess();
+        if(isSuccess) {
+            isSuccess();
+        }
     } catch(err) {
         console.log(err);
     }

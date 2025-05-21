@@ -17,7 +17,7 @@ const initialState : CategoriesInitialState = {
 }
 
 export const createNewCategory = createAsyncThunk("categoriesSlice/createNewCategory" , async( newCategoryItems : NewCategoryItems , thunkApi) => {
-    const { newCategory , iconUrl , isFail , isSuccess } = newCategoryItems;
+    const { newCategory , iconUrl , isSuccess } = newCategoryItems;
     try {
         const response = await fetch(`${envValues.apiUrl}/categories` , {
             method : "POST",
@@ -28,14 +28,16 @@ export const createNewCategory = createAsyncThunk("categoriesSlice/createNewCate
         });
         const { category } = await response.json();
         thunkApi.dispatch(addNewCategory(category))
-        isSuccess && isSuccess();
+        if(isSuccess) {
+            isSuccess();
+        }
     } catch(err) {
         console.log(err)
     }
 })
 
 export const updateCategory = createAsyncThunk("categoriesSlice/updateCategory" , async( updatedCategoryItems : UpdatedCategoryItems , thunkApi) => {
-    const { id , name , iconUrl , isShownResult , isFail , isSuccess } = updatedCategoryItems;
+    const { id , name , iconUrl , isShownResult , isSuccess } = updatedCategoryItems;
     try {
         const response = await fetch(`${envValues.apiUrl}/categories` , {
             method : "PUT",
@@ -46,14 +48,16 @@ export const updateCategory = createAsyncThunk("categoriesSlice/updateCategory" 
         });
         const { category } = await response.json();
         thunkApi.dispatch(replaceCategory(category))
-        isSuccess && isSuccess();
+        if(isSuccess) {
+            isSuccess();
+        }
     } catch(err) {
         console.log(err)
     }
 })
 
 export const deleteCategory = createAsyncThunk("categoriesSlice/deleteCategory" , async( deletedCategoryItems : DeletedCategoryItems , thunkApi) => {
-    const { categoryId , isFail , isSuccess } = deletedCategoryItems;
+    const { categoryId , isSuccess } = deletedCategoryItems;
     try {
         const response = await fetch(`${envValues.apiUrl}/categories?categoryId=${categoryId}` , {
             method : "DELETE",
@@ -62,7 +66,9 @@ export const deleteCategory = createAsyncThunk("categoriesSlice/deleteCategory" 
         thunkApi.dispatch(removeCategory(deletedCategoryId));
         thunkApi.dispatch(removeStudentsFromCategory(deletedCategoryId));
         thunkApi.dispatch(removeVotes(deletedVotes));
-        isSuccess && isSuccess();
+        if(isSuccess) {
+            isSuccess();
+        }
     } catch(err) {
         console.log(err)
     }

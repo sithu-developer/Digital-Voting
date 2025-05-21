@@ -15,7 +15,7 @@ const initialState : StudentsSliceInitialState = {
 }
 
 export const createNewStudent  = createAsyncThunk("studentsSlice/createNewStudent" , async( newStudentItems : NewStudentItems , thunkApi ) => {
-    const { contestantNumber , name , year , major , zodiacId , url , categoryId , isFail , isSuccess } = newStudentItems;
+    const { contestantNumber , name , year , major , zodiacId , url , categoryId , isSuccess } = newStudentItems;
     try {
         const response = await fetch(`${envValues.apiUrl}/student` , {
             method : "POST",
@@ -26,14 +26,16 @@ export const createNewStudent  = createAsyncThunk("studentsSlice/createNewStuden
         });
         const { newStudent } = await response.json();
         thunkApi.dispatch(addStudent(newStudent));
-        isSuccess && isSuccess();
+        if(isSuccess) {
+            isSuccess();
+        }
     } catch(err) {
         console.log(err)
     }
 } )
 
 export const updateStudent  = createAsyncThunk("studentsSlice/updateStudent" , async( updatedStudentItems : UpdatedStudentItems , thunkApi ) => {
-    const { id , contestantNumber , name , year , major , zodiacId , url  , isFail , isSuccess } = updatedStudentItems;
+    const { id , contestantNumber , name , year , major , zodiacId , url , isSuccess } = updatedStudentItems;
     try {
         const response = await fetch(`${envValues.apiUrl}/student` , {
             method : "PUT",
@@ -44,14 +46,16 @@ export const updateStudent  = createAsyncThunk("studentsSlice/updateStudent" , a
         });
         const { updatedStudent } = await response.json();
         thunkApi.dispatch(replaceStudent(updatedStudent));
-        isSuccess && isSuccess();
+        if(isSuccess) {
+            isSuccess();
+        }
     } catch(err) {
         console.log(err)
     }
 } )
 
 export const deleteStudent = createAsyncThunk("categoriesSlice/deleteStudent" , async( deletedStudentItems : DeletedStudentItems , thunkApi) => {
-    const { studentId , isFail , isSuccess } = deletedStudentItems;
+    const { studentId , isSuccess } = deletedStudentItems;
     try {
         const response = await fetch(`${envValues.apiUrl}/student?studentId=${studentId}` , {
             method : "DELETE",
@@ -59,7 +63,9 @@ export const deleteStudent = createAsyncThunk("categoriesSlice/deleteStudent" , 
         const { deletedStudentId , deletedVotes } = await response.json();
         thunkApi.dispatch(removeStudent(deletedStudentId));
         thunkApi.dispatch(removeVotes(deletedVotes));
-        isSuccess && isSuccess();
+        if(isSuccess) {
+            isSuccess();
+        }
     } catch(err) {
         console.log(err)
     }

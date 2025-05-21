@@ -14,7 +14,7 @@ const initialState : VotesSliceInitialState = {
 }
 
 export const voteStudent = createAsyncThunk("votesSlice/voteStudent" , async( voteStudentItems : VotedStudentItems , thunkApi ) => {
-    const { studentId , userId , isFail , isSuccess } = voteStudentItems;
+    const { studentId , userId , isSuccess } = voteStudentItems;
     try {
         const response = await fetch(`${envValues.apiUrl}/vote` , {
             method : "POST",
@@ -25,14 +25,16 @@ export const voteStudent = createAsyncThunk("votesSlice/voteStudent" , async( vo
         });
         const { newVote } = await response.json();
         thunkApi.dispatch(addVote(newVote));
-        isSuccess && isSuccess();
+        if(isSuccess) {
+            isSuccess();
+        }
     } catch(err) {
         console.log(err);
     }
 })
 
 export const revoteStudent = createAsyncThunk("votesSlice/revoteStudent" , async( revoteStudentItems : RevotedStudentItems , thunkApi ) => {
-    const { id , studentId , isFail , isSuccess } = revoteStudentItems;
+    const { id , studentId , isSuccess } = revoteStudentItems;
     try {
         const response = await fetch(`${envValues.apiUrl}/vote` , {
             method : "PUT",
@@ -43,7 +45,9 @@ export const revoteStudent = createAsyncThunk("votesSlice/revoteStudent" , async
         });
         const { updatedVote } = await response.json();
         thunkApi.dispatch(replaceVote(updatedVote));
-        isSuccess && isSuccess();
+        if(isSuccess) {
+            isSuccess();
+        }
     } catch(err) {
         console.log(err);
     }

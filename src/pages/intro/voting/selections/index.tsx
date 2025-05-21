@@ -11,6 +11,7 @@ import { Severity } from "@/types/snackBar";
 import { useRouter } from "next/router";
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import { checkIsTimeUp } from "@/store/slices/userSlice";
+import Image from "next/image";
 
 const KingSelectionPage = () => {
     const user = useAppSelector(store => store.userSlice.user);
@@ -43,16 +44,16 @@ const KingSelectionPage = () => {
             setSelectedCategory(selectedCategory);
             localStorage.setItem("selectedCategoryIdFromVoting" , String(selectedCategory.id))
         }
-    } , [categories])
+    } , [categories , categoryId])
 
     useEffect(() => {
-        if(selectedCategory) {
+        if(selectedCategory && categories.length) {
             const ceilIndexOfSelectedCategory = Math.ceil((categories.indexOf(selectedCategory) + 1)/2);
             setNumberForBackground(ceilIndexOfSelectedCategory % 2);
         } else {
             setNumberForBackground(1);
         }
-    } , [selectedCategory])
+    } , [selectedCategory , categories])
 
     useEffect(() => {
         if(selectedCategory && votes.length && students.length) {
@@ -67,25 +68,27 @@ const KingSelectionPage = () => {
     } , [selectedCategory , votes , students])
 
     useEffect(() => {
-        if((categories.length && votes.length && categories.length === votes.length && !categoryId) || (categories.length && votes.length && user && user.isSubmitted )) {
+        if((categories.length && votes.length && categories.length === votes.length && !categoryId && router) || (categories.length && votes.length && user && user.isSubmitted && router )) {
             router.push("/intro/voting/thank-for-voting");
         }
-    } , [categories , votes , categoryId , user ]);
+    } , [categories , votes , categoryId , user , router ]);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            dispatch(checkIsTimeUp());
-        } , 6000);
-        return () => {
-            clearInterval(interval);
+        if(dispatch) {
+            const interval = setInterval(() => {
+                dispatch(checkIsTimeUp());
+            } , 6000);
+            return () => {
+                clearInterval(interval);
+            }
         }
-    } , [])
+    } , [dispatch])
 
     useEffect(() => {
-        if(isTimeUp) {
+        if(isTimeUp && router) {
             router.push("/intro/voting/results");
         }
-    } , [ isTimeUp ])
+    } , [ isTimeUp , router ])
 
     
     if(user) {
@@ -102,7 +105,9 @@ const KingSelectionPage = () => {
         if(votedStudent && alreadyVotedStudent) {
             const alreadyExitVote = votes.find(item => (item.studentId === alreadyVotedStudent.id)) as Votes;
            dispatch(revoteStudent({ id : alreadyExitVote.id , studentId : votedStudent.id , isSuccess : () => {
-                categoryId && router.push("/intro/voting/thank-for-voting");
+                if(categoryId) {
+                    router.push("/intro/voting/thank-for-voting");
+                }
                 dispatch(openSnackBar({ open : true , message : "Successfully revoted" , severity : Severity.success}))
            } }));
         }
@@ -110,10 +115,10 @@ const KingSelectionPage = () => {
     
     return (
         <Box sx={{ position : "relative" , width : "100vw" , height : "100vh" , bgcolor : numberForBackground ?  "#031020" : "#091D7D" , overflow : "hidden" , display : "flex" , flexDirection : "column" , alignItems : "center"  }}  >
-            {numberForBackground ? <img src={"/selectionBackground.jpg"} style={{ height : "100vh"  , opacity : "60%" }} />
-            : <img src={"/selectionBackground2.jpg"} style={{ height : "calc(100vh - 34px)" , width : "120vw" , opacity : "50%" }} />}
+            {numberForBackground ? <Image alt="selectionBackground1" src={"/selectionBackground.jpg"} width={1000} height={1000} style={{ width : "auto" , height : "100vh"  , opacity : "60%" }} />
+            : <Image alt="selectionBackground2" src={"/selectionBackground2.jpg"} width={1000} height={1000} style={{ height : "calc(100vh - 34px)" , width : "120vw" , opacity : "50%" }} />}
             <Box sx={{ position : "absolute" , top : "80px" , width : "100%" , display : "flex" , flexDirection : "column" , alignItems : "center" }} >
-                {selectedCategory && <img src={selectedCategory.iconUrl} style={{ width : "18%" , position : "absolute" , top : "-55px" }} />}
+                {selectedCategory && <Image alt="category photo" src={selectedCategory.iconUrl} width={300} height={300} style={{ width : "18%" , height : "auto" , position : "absolute" , top : "-55px" }} />}
                 <Box sx={{ display : "flex" , width : "75%" , position : "relative" }}>
                     <Box sx={{ width: "35%", height: "12px", borderTop: "1px solid #BFCDEC"}} />
                     <Box sx={{ width: "30%", height: "12px", borderBottom : "1px solid #BFCDEC" , borderLeft : "1px solid #BFCDEC" , borderRight : "1px solid #BFCDEC" }} />
@@ -122,7 +127,7 @@ const KingSelectionPage = () => {
                 <Typography sx={{ width : "100vw" , fontSize : "38px" , fontFamily : "Microsoft YaHei UI" , textAlign : "center" , color : "#DAE9FE" }} >{selectedCategory?.name.toUpperCase()} SELECTION</Typography>
                 <Box sx={{ display : "flex" , alignItems : "center"  , width : "75%"}}>
                     <Box sx={{ width: "35%", borderTop: "1px solid #BFCDEC"}} />
-                    <Typography sx={{ width : "30%" , fontFamily : "Monotype Corsiva" , textAlign : "center" , lineHeight : 1 , color : "#BFCDEC"}} >LET'SVOTE</Typography>
+                    <Typography sx={{ width : "30%" , fontFamily : "Monotype Corsiva" , textAlign : "center" , lineHeight : 1 , color : "#BFCDEC"}} >LET&apos;SVOTE</Typography>
                     <Box sx={{ width: "35%", borderTop: "1px solid #BFCDEC" }} />
                 </Box>
             </Box>
@@ -133,9 +138,9 @@ const KingSelectionPage = () => {
                     <Box key={item.id} sx={{ border : (votedStudent?.id === item.id ?  "3px solid #FFD700" : "") , width : "115px" , height : "145px" , bgcolor : `#28316B` , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "start" , alignItems : "center" , position : "relative" , overflow : "hidden" , cursor : "pointer" }}
                         onClick={() => setVotedStudent(item)}
                     >
-                        <img alt="candidate photo" src={item.url} style={{ width : "100%"}} />
+                        <Image alt="candidate photo" src={item.url} width={1000} height={1000} style={{ width : "100%" , height : "auto"}} />
                         <Box sx={{ position : "absolute" , top : "5px" , right : "5px"}}>
-                            <img alt="number boundary" src={"/numberBoundary.svg"}/>
+                            <Image alt="number boundary" src={"/numberBoundary.svg"} width={100} height={100} style={{ width : "auto" , height : "auto"}}/>
                             <Typography sx={{ position : "absolute" , top : "0px" , left : "15%", textAlign : "center" , width : "22px"}} >{item.contestantNumber}</Typography>
                         </Box>
                         <Box sx={{ position : "absolute" , bottom : "0px" , bgcolor : "info.main" , width : "100%" , display : "flex"  , flexDirection : "column" , justifyContent : "center" , alignItems : "center" , gap : "3px" , p : "5px" , borderRadius : "15px" }} >
@@ -146,21 +151,21 @@ const KingSelectionPage = () => {
                 )})}
             </Box>
             <Box sx={{ display : "flex" , alignItems : "center" , justifyContent : "center" , gap : categoryId ? "20px" : "40px" , width : "80%" , position : "absolute" , bottom : "85px" , height : "65px"}}>
-                {(categories[0]?.id === selectedCategory?.id) && <img src={"/kingButtonSide.svg"} />}
-                {(categories[1]?.id === selectedCategory?.id) && <img src={"/queenButtonSide.svg"} />}
+                {(categories[0]?.id === selectedCategory?.id) && <Image alt="king button side" src={"/kingButtonSide.svg"} width={300} height={300} style={{ width : "auto" , height : "auto"}} />}
+                {(categories[1]?.id === selectedCategory?.id) && <Image alt="queen button side" src={"/queenButtonSide.svg"} width={300} height={300} style={{ width : "auto" , height : "auto"}} />}
                 <Box sx={{ display : "flex" , alignItems : "center" , ml : "5px" }}>
                     {categoryId ? <IconButton onClick={() => router.push("/intro/voting/thank-for-voting") } >
                         <ClearRoundedIcon sx={{ color : "white" , fontSize : "30px" , bgcolor : "#7485E5" , borderRadius : "10px" }} />
                     </IconButton> : undefined}
                     {(alreadyVotedStudent !== votedStudent && alreadyVotedStudent !== undefined && votedStudent !== undefined) ? <Button variant="contained" sx={{ bgcolor : "#7485E5" , py : "0px" , borderRadius : "20px" , fontSize : "18px" , gap : "5px" }} 
                     onClick={handleRevoteStudent}
-                    >Revote<img src={"/voteChecked.svg"} style={{ width : "19px"}} /></Button>
+                    >Revote<Image alt="vote checked icon" src={"/voteChecked.svg"} width={100} height={100} style={{ width : "19px" , height : "auto" }} /></Button>
                     :<Button disabled={!votedStudent || (alreadyVotedStudent === votedStudent)} variant="contained" sx={{ bgcolor : "#7485E5" , py : "0px" , borderRadius : "20px" , fontSize : "18px" , gap : "5px" , '&.Mui-disabled' : { color : "GrayText" , bgcolor : "rgb(28, 32, 77)"} }} 
                         onClick={handleVoteStudent}
-                    > {(alreadyVotedStudent === votedStudent && votedStudent !== undefined) ? "Voted" : "Vote"} <img src={"/voteChecked.svg"} style={{ width : "19px"}} /></Button>}
+                    > {(alreadyVotedStudent === votedStudent && votedStudent !== undefined) ? "Voted" : "Vote"} <Image alt="vote checked icon" src={"/voteChecked.svg"} width={100} height={100} style={{ width : "19px" , height : "auto"}} /></Button>}
                 </Box>
-                {(categories[0]?.id === selectedCategory?.id) && <img src={"/kingButtonSide.svg"} />}
-                {(categories[1]?.id === selectedCategory?.id) && <img src={"/queenButtonSide.svg"} />}
+                {(categories[0]?.id === selectedCategory?.id) && <Image alt="king button side" src={"/kingButtonSide.svg"} width={300} height={300} style={{ width : "auto" , height : "auto"}} />}
+                {(categories[1]?.id === selectedCategory?.id) && <Image alt="queen button side" src={"/queenButtonSide.svg"} width={300} height={300} style={{ width : "auto" , height : "auto"}} />}
             </Box>
             
             <BottomNavigation
@@ -171,7 +176,7 @@ const KingSelectionPage = () => {
                     <BottomNavigationAction key={item.id} onClick={() => {
                         setSelectedCategory(item);
                         localStorage.setItem("selectedCategoryIdFromVoting" , String(item.id))
-                    }} value={item.id} sx={{ color : "white" , '&.Mui-selected' : { color : "white"} }} label={item.name} icon={<img src={item.iconUrl}  style={{ width : "32px"}} />} />
+                    }} value={item.id} sx={{ color : "white" , '&.Mui-selected' : { color : "white"} }} label={item.name} icon={<Image alt="category photo" src={item.iconUrl} width={200} height={200}  style={{ width : "32px" , height : "auto"}} />} />
                 ))}
             </BottomNavigation>
         </Box>

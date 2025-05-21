@@ -70,7 +70,9 @@ const Permission = ({ permissionOpen , setPermissionOpen , selectedCategory } : 
         <Dialog open={permissionOpen} onClose={() => {
             const admin = majorsAndAdmin.find(item => item.majorsOrAdmin === "admin") as Major ;
             setIsClose(admin.isTimeUp);
-            selectedCategory && setIsShownResult(selectedCategory.isShownResult);
+            if(selectedCategory) {
+                setIsShownResult(selectedCategory.isShownResult);
+            }
             setPermissionOpen(false);
             setAdminCodeFromTyping("");
             setShowAdminPassword(false);
@@ -108,7 +110,9 @@ const Permission = ({ permissionOpen , setPermissionOpen , selectedCategory } : 
                         const admin = majorsAndAdmin.find(item => item.majorsOrAdmin === "admin") as Major ;
                         setIsClose(admin.isTimeUp)
                         setPermissionOpen(false);
-                        selectedCategory && setIsShownResult(selectedCategory.isShownResult);
+                        if(selectedCategory) {
+                            setIsShownResult(selectedCategory.isShownResult);
+                        } 
                         setAdminCodeFromTyping("");
                         setShowAdminPassword(false);
                     }} >Cancel</Button>

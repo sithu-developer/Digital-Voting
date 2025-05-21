@@ -7,6 +7,7 @@ import { openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import Image from "next/image";
 
 
 const ThankForVoting = () => {
@@ -21,25 +22,27 @@ const ThankForVoting = () => {
     const router = useRouter();
 
     useEffect(() => {
-        if(categories.length && votes.length && categories.length !== votes.length ) {
+        if(categories.length && votes.length && categories.length !== votes.length && router ) {
             router.push("/intro/voting/selections");
         }
-    } , [categories , votes ])
+    } , [categories , votes , router ])
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            dispatch(checkIsTimeUp());
-        } , 6000);
-        return () => {
-            clearInterval(interval);
+        if(dispatch) {
+            const interval = setInterval(() => {
+                dispatch(checkIsTimeUp());
+            } , 6000);
+            return () => {
+                clearInterval(interval);
+            }
         }
-    } , [])
+    } , [ dispatch ])
 
     useEffect(() => {
-        if(isTimeUp) {
+        if(isTimeUp && router) {
             router.push("/intro/voting/results");
         }
-    } , [ isTimeUp ])
+    } , [ isTimeUp , router ])
 
 
     if(!user || categories.length !== votes.length) return null;
@@ -52,7 +55,7 @@ const ThankForVoting = () => {
 
     return (
         <Box sx={{ position : "relative" , bgcolor : "#111136" , height : "100vh" , overflow : "hidden"}} >
-            <img src={"/thankForVotingBg.jpg"} style={{ height : "100%" , opacity : "50%"}} />
+            <Image alt="thank for voting Bg" src={"/thankForVotingBg.jpg"} height={1000} width={1000} style={{ width : "auto" , height : "100%" , opacity : "50%"}} />
             <Box sx={{ width : "fit-content" , position : "absolute" , left : "20px" , top : "65px"}}  >
                 <Typography variant="h3" sx={{ textAlign : "center" , fontFamily : "Javanese Text"}} >THANKS</Typography>
                 <Typography variant="h4" sx={{ textAlign : "center" , fontFamily : "Javanese Text"}}>FOR</Typography>
@@ -67,9 +70,9 @@ const ThankForVoting = () => {
                         <Typography sx={{ ml : "10px" , fontFamily : "Javanese Text" }}>{item.name}</Typography>
                         <Box sx={{ display : "flex" , alignItems : "end", gap : "3px"}} >
                             <Box sx={{ width : "115px" , height : "115px" , bgcolor : "#28316B" , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "center" , alignItems : "center" , position : "relative" , overflow : "hidden" }}>
-                                <img alt="candidate photo" src={relatedStudent.url} style={{ width : "100%"}} />
+                                <Image alt="candidate photo" src={relatedStudent.url} width={1000} height={1000} style={{ width : "100%" , height : "auto"}} />
                                 <Box sx={{ position : "absolute" , top : "5px" , right : "5px"}}>
-                                    <img alt="number boundary" src={"/numberBoundary.svg"}/>
+                                    <Image alt="number boundary" src={"/numberBoundary.svg"} width={100} height={100} style={{ width : "auto" , height : "auto"}} />
                                     <Typography sx={{ position : "absolute" , top : "0px" , left : "15%", textAlign : "center" , width : "22px"}} >{relatedStudent.contestantNumber}</Typography>
                                 </Box>
                             </Box>
@@ -89,8 +92,8 @@ const ThankForVoting = () => {
                 <Button onClick={handleSubmitVotes} disabled={user.isSubmitted} sx={{ border : "1px solid white" , py : "1px" , textTransform : "none" , '&.Mui-disabled' : { color : "GrayText" , bgcolor : "rgb(28, 32, 77)" , border : "1px solid #FFD700"} }} variant="contained" >{user.isSubmitted ? "submitted" : "submit"}</Button>
             </Box>
             <Box sx={{ position : "absolute" , bottom : "-10px" , width : "100%" , display : "flex" , justifyContent : "space-between"}} >
-                <img alt="cute cat" src={"/cuteCat.gif"} style={{ width : "150px" }} />
-                <img alt="runnng cute" src={"/floweringCute.gif"} style={{ width : "150px"}} />
+                <Image alt="cute cat" src={"/cuteCat.gif"} width={300} height={300} style={{ width : "150px" , height : "auto" }} />
+                <Image alt="runnng cute" src={"/floweringCute.gif"} width={300} height={300} style={{ width : "150px" , height : "auto" }} />
             </Box>
 
         </Box>

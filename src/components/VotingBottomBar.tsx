@@ -26,7 +26,7 @@ const VotingBottomBar = () => {
     } , [] )
 
     useEffect(() => {
-        if(majorCode && session && session.user){
+        if(majorCode && session && session.user && dispatch && router){
             dispatch(createNewUser({ majorCode , email : String(session.user.email) , isFail : (err) => {
                 router.push("/intro/sign-up")
                 dispatch(openSnackBar({ open : true , message : String(err) , severity : Severity.error}))
@@ -39,7 +39,7 @@ const VotingBottomBar = () => {
                 clearInterval(interval);
             }
         }
-    } , [majorCode , session])
+    } , [majorCode , session , dispatch , router ])
     
     if(!user) return null;
     return (

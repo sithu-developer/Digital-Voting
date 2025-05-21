@@ -9,6 +9,7 @@ import { openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
 import DeleteComfirmation from "@/components/DeleteComfirmation";
 import { Students } from "../../../../../../generated/prisma";
+import Image from "next/image";
 
 const EditStudentPage = () => {
     const admin = useAppSelector(store => store.adminSlice.admin)
@@ -52,8 +53,8 @@ const EditStudentPage = () => {
             <Box sx={{ width : "100%" , display : "flex" , justifyContent : "end"}} >
                 <Button variant="outlined" color="error" onClick={() => setDeleteOpen(true)} >Delete</Button> 
             </Box>
-            <Box sx={{ width : "150px" , borderRadius : "10px" , overflow : "hidden" , background : `radial-gradient(ellipse at center,#AAB6F8 5%,#8D9CF2 25%,#5B6DD7 55%,#3747A3 75%)` , display : "flex" , flexDirection : "column" , justifyContent : "end" , alignItems : "center"}} >
-                <img alt="profile" src={updatedStudent.url} style={{ width : "150px"}}  />
+            <Box sx={{ width : "150px" , borderRadius : "10px" , overflow : "hidden" , bgcolor : `#28316B` , display : "flex" , flexDirection : "column" , justifyContent : "end" , alignItems : "center"}} >
+                <Image alt="profile" src={updatedStudent.url} width={1000} height={1000} style={{ width : "150px" , height : "auto"}}  />
             </Box>
             <Box sx={{ display : "flex" , flexDirection : "column" , gap : "10px" , width : "100%"}}>
                 <TextField label="Contestant number" type="number" defaultValue={updatedStudent.contestantNumber} onChange={(event) => setUpdatedStudent({...updatedStudent , contestantNumber : Number(event.target.value)})} />
