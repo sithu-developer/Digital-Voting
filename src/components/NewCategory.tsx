@@ -2,7 +2,9 @@ import { useAppDispatch } from "@/store/hooks";
 import { createNewCategory } from "@/store/slices/categoriesSlice";
 import { openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
+import { uploadPhoto } from "@/util/uploadPhoto";
 import { Box, Button, Chip, Dialog, DialogContent, TextField, Typography } from "@mui/material"
+import { PutBlobResult } from "@vercel/blob";
 import { useState } from "react";
 
 interface Props {
@@ -15,14 +17,18 @@ const NewCategory = ({ newCategoryOpen , setNewCategoryOpen } : Props) => {
     const [ photoFile , setPhotoFile ] = useState<File>();
     const dispatch = useAppDispatch();
 
-    const handleCreateNewCategory = () => {
+    const handleCreateNewCategory = async() => {
         // here to upload photo to database
-        dispatch(createNewCategory({newCategory , iconUrl : "/kingCrown.png"/* here to change */ , isSuccess : () => {
-            setNewCategoryOpen(false);
-            setNewCategory("");
-            setPhotoFile(undefined);
-            dispatch(openSnackBar({open : true , message : "New Category is successfully created" , severity : Severity.success}))
-        }}));
+        if(photoFile) {
+            const blob = await uploadPhoto(photoFile) as PutBlobResult;
+            console.log(blob , blob.url)
+            dispatch(createNewCategory({newCategory , iconUrl : blob.url , isSuccess : () => {
+                setNewCategoryOpen(false);
+                setNewCategory("");
+                setPhotoFile(undefined);
+                dispatch(openSnackBar({open : true , message : "New Category is successfully created" , severity : Severity.success}))
+            }}));
+        }
     }
 
     return (

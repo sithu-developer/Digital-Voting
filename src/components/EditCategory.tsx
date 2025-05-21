@@ -5,6 +5,8 @@ import { useAppDispatch } from "@/store/hooks";
 import { updateCategory } from "@/store/slices/categoriesSlice";
 import { openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
+import { uploadPhoto } from "@/util/uploadPhoto";
+import { PutBlobResult } from "@vercel/blob";
 
 interface Props {
     selectedCategory : Categories
@@ -24,10 +26,12 @@ const EditCategory = ({ selectedCategory , editCategoryOpen ,setEditCategoryOpen
     } , [selectedCategory])
 
 
-    const handleUpdateCategory = () => {
+    const handleUpdateCategory = async() => {
         if(photoFile) {
             // here to upload photo to database
-            dispatch(updateCategory({ ... editedCategory , iconUrl : "/kingIcon.svg"/* here to change */ , isSuccess : () => {
+            const blob = await uploadPhoto(photoFile) as PutBlobResult;
+            console.log(blob , blob.url)
+            dispatch(updateCategory({ ... editedCategory , iconUrl : blob.url , isSuccess : () => {
                 dispatch(openSnackBar({open : true , message : `Successfully updated from ${selectedCategory.name} to ${editedCategory.name}` , severity  : Severity.success}))
                 setEditCategoryOpen(false);
                 setEditedCategory(editedCategory);

@@ -7,6 +7,8 @@ import { zodiacSigns } from "@/util/general";
 import { Box, Button, Chip, Dialog, DialogContent, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
 import { useEffect, useState } from "react";
 import { Categories } from "../../generated/prisma";
+import { uploadPhoto } from "@/util/uploadPhoto";
+import { PutBlobResult } from "@vercel/blob";
 
 interface Props {
     selectedCategory : Categories,
@@ -27,20 +29,24 @@ const NewStudent = ({ selectedCategory , newStudentOpen , setNewStudentOpen } : 
     
     useEffect(() => {
         if(selectedCategory) {
-            setNewStudent(prev => ({...prev , categoryId : selectedCategory.id , url : `/${selectedCategory.name.toLowerCase().trim()}Default.jpg`}))
+            setNewStudent(prev => ({...prev , categoryId : selectedCategory.id }))
         }
     } , [selectedCategory])
 
-    const handleCreateNewStudent = () => {
+    const handleCreateNewStudent = async() => {
         const exitContestantNumbers = relatedStudent.map(item => item.contestantNumber);
         if(!exitContestantNumbers.includes(newStudent.contestantNumber) ) {
             // here to upload photo to database
-            dispatch(createNewStudent({...newStudent , isSuccess : () => {
-                setNewStudentOpen(false);
-                setPhotoFile(undefined);
-                setNewStudent({...defaultNewStudent , categoryId : selectedCategory.id  , url : `/${selectedCategory.name.toLowerCase().trim()}Default.jpg` });
-                dispatch(openSnackBar({ open : true , message : "Successfully created a student" , severity : Severity.success}))
-            } }))
+            if(photoFile) {
+                const blob = await uploadPhoto(photoFile) as PutBlobResult;
+                console.log(blob , blob.url)
+                dispatch(createNewStudent({...newStudent , url : blob.url , isSuccess : () => {
+                    setNewStudentOpen(false);
+                    setPhotoFile(undefined);
+                    setNewStudent({...defaultNewStudent , categoryId : selectedCategory.id  , url : `/${selectedCategory.name.toLowerCase().trim()}Default.jpg` });
+                    dispatch(openSnackBar({ open : true , message : "Successfully created a student" , severity : Severity.success}))
+                } }))
+            }
         } else {
             dispatch(openSnackBar({ open : true , message : `Contestant Number already exit in ${selectedCategory.name} !` , severity : Severity.warning}))
         }

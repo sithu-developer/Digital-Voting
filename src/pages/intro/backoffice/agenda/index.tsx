@@ -11,6 +11,8 @@ import { EditAgendaItems } from "@/types/agenda";
 import FileDownloadRoundedIcon from '@mui/icons-material/FileDownloadRounded';
 import { Agenda } from "../../../../../generated/prisma";
 import Image from "next/image";
+import { uploadPhoto } from "@/util/uploadPhoto";
+import { PutBlobResult } from "@vercel/blob";
 
 const AgendaPage = () => {
     const agendas = useAppSelector(store => store.agendaSlice.agendas);
@@ -18,15 +20,21 @@ const AgendaPage = () => {
     const [ editAgendaItems , setEditAgendaItems ] = useState<EditAgendaItems>({open : false , agendaId : 0});
     const dispatch = useAppDispatch();
     
-    useEffect(() => {
-      if(photoFile && dispatch) {
+    const handleCreateAgenda = async(photoFile : File ) => {
         // here to upload photo to database
-        dispatch(createAgenda({ agendaUrl : "/selectionBackground.jpg" , isSuccess : () => {
+        const blob = await uploadPhoto(photoFile) as PutBlobResult;
+        console.log(blob , blob.url)
+        dispatch(createAgenda({ agendaUrl : blob.url , isSuccess : () => {
           setPhotoFile(undefined)
           dispatch(openSnackBar({ open : true , message : "Successfully added new Agenda Photo" , severity : Severity.success}))
         }}))
+    }
+
+    useEffect(() => {
+      if(photoFile) {
+        handleCreateAgenda(photoFile);
       }
-    } , [photoFile , dispatch]);
+    } , [photoFile]);
 
     const handleDeleteAgenda = ( id : number) => {
       dispatch(deleteAgenda({ id , isSuccess : () => {

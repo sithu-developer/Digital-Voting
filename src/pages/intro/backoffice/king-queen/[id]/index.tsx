@@ -10,6 +10,8 @@ import { Severity } from "@/types/snackBar";
 import DeleteComfirmation from "@/components/DeleteComfirmation";
 import { Students } from "../../../../../../generated/prisma";
 import Image from "next/image";
+import { uploadPhoto } from "@/util/uploadPhoto";
+import { PutBlobResult } from "@vercel/blob";
 
 const EditStudentPage = () => {
     const admin = useAppSelector(store => store.adminSlice.admin)
@@ -35,13 +37,21 @@ const EditStudentPage = () => {
     if(admin && updatedStudent) {
 
 
-    const handleUpdateStudent = () => {
+    const handleUpdateStudent = async() => {
         const exitContestantNumbers = relatedStudent.map(item => item.contestantNumber);
         if(!exitContestantNumbers.includes(updatedStudent.contestantNumber) ) {
-            // here to upload photo to database and delete previous photo
-            dispatch(updateStudent({...updatedStudent , isSuccess : () => {
-                dispatch(openSnackBar({ open : true , message : "Successfully updated" , severity : Severity.success}))
-            }}))
+            if(photoFile) {
+                // here to upload photo to database and delete previous photo
+                const blob = await uploadPhoto(photoFile) as PutBlobResult;
+                console.log(blob , blob.url)
+                dispatch(updateStudent({...updatedStudent , url : blob.url , isSuccess : () => {
+                    dispatch(openSnackBar({ open : true , message : "Successfully updated" , severity : Severity.success}))
+                }}))
+            } else {
+                dispatch(updateStudent({...updatedStudent , isSuccess : () => {
+                    dispatch(openSnackBar({ open : true , message : "Successfully updated" , severity : Severity.success}))
+                }}))
+            }
         } else {
             dispatch(openSnackBar({ open : true , message : `Contestant Number already exit !` , severity : Severity.warning}))
         }

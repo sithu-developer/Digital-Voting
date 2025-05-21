@@ -3,7 +3,9 @@ import { updateAgenda } from "@/store/slices/agendaSlice";
 import { openSnackBar } from "@/store/slices/snackBarSlice";
 import { EditAgendaItems } from "@/types/agenda";
 import { Severity } from "@/types/snackBar";
+import { uploadPhoto } from "@/util/uploadPhoto";
 import { Box, Button, Chip, Dialog, DialogContent, Typography } from "@mui/material"
+import { PutBlobResult } from "@vercel/blob";
 import { useState } from "react";
 
 interface Props {
@@ -15,13 +17,17 @@ const EditAgenda = ({ editAgendaItems , setEditAgendaItems } : Props) => {
     const [ photoFile , setPhotoFile ] = useState<File>();
     const dispatch = useAppDispatch();
 
-    const handleUpdateAgenda = () => {
+    const handleUpdateAgenda = async() => {
         // here to upload photo to database
-        dispatch(updateAgenda({ id : editAgendaItems.agendaId , agendaUrl : "/selectionBackground2.jpg" , isSuccess : () => {
-            setPhotoFile(undefined)
-            setEditAgendaItems({ open : false , agendaId : 0});
-            dispatch(openSnackBar({ open : true , message : "Successfully changed Agenda photo" , severity : Severity.success }))
-        }}))
+        if(photoFile) {
+            const blob = await uploadPhoto(photoFile) as PutBlobResult;
+            console.log(blob , blob.url)
+            dispatch(updateAgenda({ id : editAgendaItems.agendaId , agendaUrl : blob.url , isSuccess : () => {
+                setPhotoFile(undefined)
+                setEditAgendaItems({ open : false , agendaId : 0});
+                dispatch(openSnackBar({ open : true , message : "Successfully changed Agenda photo" , severity : Severity.success }))
+            }}))
+        }
     } 
 
     return (
