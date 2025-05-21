@@ -31,10 +31,10 @@ const AgendaPage = () => {
     }
 
     useEffect(() => {
-      if(photoFile) {
+      if(photoFile && handleCreateAgenda) {
         handleCreateAgenda(photoFile);
       }
-    } , [photoFile]);
+    } , [photoFile , handleCreateAgenda]);
 
     const handleDeleteAgenda = ( id : number) => {
       dispatch(deleteAgenda({ id , isSuccess : () => {
