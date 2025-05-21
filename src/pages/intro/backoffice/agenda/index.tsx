@@ -21,9 +21,7 @@ const AgendaPage = () => {
     const dispatch = useAppDispatch();
     
     const handleCreateAgenda = async(photoFile : File ) => {
-        // here to upload photo to database
         const blob = await uploadPhoto(photoFile) as PutBlobResult;
-        console.log(blob , blob.url)
         dispatch(createAgenda({ agendaUrl : blob.url , isSuccess : () => {
           setPhotoFile(undefined)
           dispatch(openSnackBar({ open : true , message : "Successfully added new Agenda Photo" , severity : Severity.success}))

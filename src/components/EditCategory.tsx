@@ -28,9 +28,7 @@ const EditCategory = ({ selectedCategory , editCategoryOpen ,setEditCategoryOpen
 
     const handleUpdateCategory = async() => {
         if(photoFile) {
-            // here to upload photo to database
             const blob = await uploadPhoto(photoFile) as PutBlobResult;
-            console.log(blob , blob.url)
             dispatch(updateCategory({ ... editedCategory , iconUrl : blob.url , isSuccess : () => {
                 dispatch(openSnackBar({open : true , message : `Successfully updated from ${selectedCategory.name} to ${editedCategory.name}` , severity  : Severity.success}))
                 setEditCategoryOpen(false);

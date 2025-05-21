@@ -36,10 +36,8 @@ const NewStudent = ({ selectedCategory , newStudentOpen , setNewStudentOpen } : 
     const handleCreateNewStudent = async() => {
         const exitContestantNumbers = relatedStudent.map(item => item.contestantNumber);
         if(!exitContestantNumbers.includes(newStudent.contestantNumber) ) {
-            // here to upload photo to database
             if(photoFile) {
                 const blob = await uploadPhoto(photoFile) as PutBlobResult;
-                console.log(blob , blob.url)
                 dispatch(createNewStudent({...newStudent , url : blob.url , isSuccess : () => {
                     setNewStudentOpen(false);
                     setPhotoFile(undefined);

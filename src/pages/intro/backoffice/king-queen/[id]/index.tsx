@@ -41,9 +41,7 @@ const EditStudentPage = () => {
         const exitContestantNumbers = relatedStudent.map(item => item.contestantNumber);
         if(!exitContestantNumbers.includes(updatedStudent.contestantNumber) ) {
             if(photoFile) {
-                // here to upload photo to database and delete previous photo
                 const blob = await uploadPhoto(photoFile) as PutBlobResult;
-                console.log(blob , blob.url)
                 dispatch(updateStudent({...updatedStudent , url : blob.url , isSuccess : () => {
                     dispatch(openSnackBar({ open : true , message : "Successfully updated" , severity : Severity.success}))
                 }}))
