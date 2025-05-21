@@ -12,8 +12,8 @@ export const theme  = createTheme({
             main : "#091370" // backoffice topbar bg color
         }
     },
-    typography : {
-        fontFamily : "cursive",
+    typography : { // cursive
+        fontFamily : "monospace",
         allVariants : {
             color : "white"
         }
