@@ -55,7 +55,7 @@ const UserSetting = ( { setUserSettingOpen , userSettingOpen } : Props) => {
                 <Box sx={{ display : "flex" , justifyContent : "center"}}>
                     <Button variant="contained" sx={{bgcolor : "#7485E5" , color : "black"  , borderRadius : "10px" , textTransform : "none"}} onClick={() => {
                         localStorage.clear();
-                        signOut({callbackUrl : "/intro"})
+                        signOut({callbackUrl : "/intro/sign-up"})
                     }} >Sign Out</Button>
                 </Box>
                 <Agenda agendaOpen={agendaOpen} setAgendaOpen={setAgendaOpen} />

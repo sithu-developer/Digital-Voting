@@ -46,7 +46,7 @@ const VotingResultPage = () => {
                 <img alt="voting result crown" src={"/votingResultCrown.png"} style={{ width : "80px" }} />
                 <Typography variant="h4" sx={{ fontFamily : "Inria Serif" , fontStyle : "italic" , textAlign : "center" , WebkitTextStroke: '1.5px #EAAA45', textStroke: '1.5px #EAAA45'}} >VOTING RESULTS</Typography>
             </Box>
-            <Box sx={{ position : "absolute" , top : "155px" , height : "calc(100vh - 200px)" , width : "65%" , display : "flex" , flexDirection : "column", p : "10px" , overflowY : "auto" }}>
+            <Box sx={{ position : "absolute" , top : "155px" , height : "calc(100vh - 200px)" , width : "90%" , display : "flex" , flexDirection : "column", p : "10px" , overflowY : "auto" }}>
                 {(categories.length && students.length && votes.length) ? categories.map(item => {
                     const relatedStudents = students.filter(stu => stu.categoryId === item.id);
                     const studentsWithVoteNumber = relatedStudents.map(student => {
@@ -55,12 +55,12 @@ const VotingResultPage = () => {
                     }).sort((a,b) => b.relatedVoteNumber - a.relatedVoteNumber );
                     const winner = studentsWithVoteNumber[0];
                     return (
-                        <Box key={item.id} sx={{ display : "flex" , flexDirection : "column" , justifyContent : "center" , alignItems : !(categories.indexOf(item) % 2 ) ? "start" : "end"  , height : "155px" }} >
+                        <Box key={item.id} sx={{ display : "flex" , flexDirection : "column" , justifyContent : "center" , alignItems : !(categories.indexOf(item) % 2 ) ? "start" : "end"  , height : "155px" , px : "14%" }} >
                             <Box>
                                 <Box sx={{ position : "relative"}} >
                                     <Box sx={{ position: "absolute" , top : "0px" , width : "100px" , height : "130px" , borderRadius: '50%' , p : "4px" , background: 'linear-gradient(90deg, #CD9C56 5%, #DECCB3 32%, #BD8F4F 66%, #AA8146 84%, #CBDBA5 100%)' , WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)', WebkitMaskComposite: 'xor', maskComposite: 'exclude', pointerEvents: 'none' }} ></Box>
                                     <Box sx={{ width : "100px" , height : "130px" , borderRadius: '50%' ,display : "flex" , flexDirection : "column" , justifyContent : "center" , overflow : "hidden"}} >
-                                        <img alt="winner photo" src={item.isShownResult ? winner.student.url : "/secretWinner.jpg"} style={{ width : "100px"}} />
+                                        <img alt="winner photo" src={item.isShownResult ? winner.student.url : (!(categories.indexOf(item) % 2) ? "/secretMale.png" : "/secretFemale.png" )} style={{ width : "100%"}} />
                                     </Box>
                                 </Box>
                                 <Typography sx={{ fontFamily : "Average" , color : "#B4884B" , fontSize : "25px" , textAlign: "center" }} >{item.name.toUpperCase()}</Typography>

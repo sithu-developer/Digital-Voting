@@ -92,15 +92,15 @@ const KingQueenPage = () => {
                     </Box>}
                     <Button variant="contained" onClick={() => setNewStudentOpen(true)} >Create</Button>
                 </Box>
-                <Box sx={{ display : "grid" , gridTemplateColumns : "repeat(auto-fill, minmax(100px, 1fr))" , gap : 2 , borderRadius : "10px" , overflowY : "auto", height : "calc(100vh - 200px)" }}>
+                <Box sx={{ display : "grid" , gridTemplateColumns : "repeat(auto-fill, minmax(100px, 1fr))" , gap : 2 , borderRadius : "10px" , overflowY : "auto" , maxHeight : "calc(100vh - 200px)" }}>
                     {sortedStudents.map(item => {
                     const currentZodiac = zodiacSigns.find(zodiac => zodiac.id === item.zodiacId) as ZodiacSignType;
                     return (
                     <Link href={`/intro/backoffice/king-queen/${item.id}`} key={item.id} style={{ textDecoration : "none"}} >
                         <Box sx={{ width : "115px" , height : "145px" ,  bgcolor : `#28316B` , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "start" , alignItems : "center" , position : "relative" , overflow : "hidden" }} >
-                            <img alt="king photo" src={item.url} style={{ width : "100%"}} />
+                            <img alt="candidate photo" src={item.url} style={{ width : "100%"}} />
                             <Box sx={{ position : "absolute" , top : "5px" , right : "5px"}}>
-                                <img alt="number boundary" src={ item.url.includes("Default") ? "/numberBoundaryWithBg.svg" : "/numberBoundary.svg"}/>
+                                <img alt="number boundary" src={"/numberBoundary.svg"}/>
                                 <Typography sx={{ position : "absolute" , top : "0px" , left : "15%", textAlign : "center" , width : "22px"}} >{item.contestantNumber}</Typography>
                             </Box>
                             <Box sx={{ position : "absolute" , bottom : "0px" , bgcolor : "info.main" , width : "100%" , display : "flex"  , flexDirection : "column" , justifyContent : "center" , alignItems : "center" , gap : "3px" , p : "5px" , borderRadius : "15px" }} >
@@ -121,7 +121,7 @@ const KingQueenPage = () => {
     else 
     return (
         <Box >
-            <Typography variant="h5" sx={{ textAlign : "center"}} > Wait for the nextwork or go to intro page <Link href={"/intro"} >Click here</Link></Typography>
+            <Typography variant="h5" sx={{ textAlign : "center"}} > Wait for the nextwork or go to intro page <Link href={"/intro/sign-up"} >Click here</Link></Typography>
         </Box>
     )
 }

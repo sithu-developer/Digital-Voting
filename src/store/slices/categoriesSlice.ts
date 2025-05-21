@@ -30,7 +30,7 @@ export const createNewCategory = createAsyncThunk("categoriesSlice/createNewCate
         thunkApi.dispatch(addNewCategory(category))
         isSuccess && isSuccess();
     } catch(err) {
-        isFail && isFail();
+        console.log(err)
     }
 })
 
@@ -48,7 +48,7 @@ export const updateCategory = createAsyncThunk("categoriesSlice/updateCategory" 
         thunkApi.dispatch(replaceCategory(category))
         isSuccess && isSuccess();
     } catch(err) {
-        isFail && isFail();
+        console.log(err)
     }
 })
 
@@ -64,7 +64,7 @@ export const deleteCategory = createAsyncThunk("categoriesSlice/deleteCategory" 
         thunkApi.dispatch(removeVotes(deletedVotes));
         isSuccess && isSuccess();
     } catch(err) {
-        isFail && isFail();
+        console.log(err)
     }
 })
 
@@ -76,7 +76,7 @@ export const checkFromResultPage = createAsyncThunk("categoriesSlice/checkFromRe
         thunkApi.dispatch(setCategories(categories))
         thunkApi.dispatch(setVotes(votes))
     } catch(err) {
-
+        console.log(err)
     }
 })
 

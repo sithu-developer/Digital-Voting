@@ -1,6 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { openSnackBar } from "@/store/slices/snackBarSlice";
-import { Severity } from "@/types/snackBar";
 import { Alert, Snackbar } from "@mui/material"
 
 const SnackBarComp = () => {

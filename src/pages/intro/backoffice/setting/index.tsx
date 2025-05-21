@@ -70,14 +70,15 @@ const SettingPage = () => {
                 </Box>
             </Box>
             <Divider sx={{ bgcolor : "black"}} />
-            <Box sx={{ display : "flex" , justifyContent : "center"}} >
+            <Box sx={{ display : "flex" , flexDirection : "column" , alignItems : "center" , gap : "20px"}} >
+                <Typography variant="h5" >To Control Voting</Typography>
                 <Button variant="contained" sx={{ textTransform : "none"}} onClick={() => setPermissionOpen(true)} >Close Voting</Button>
             </Box>
             <Divider sx={{ bgcolor : "black"}} />
             <Box sx={{ display : "flex" , justifyContent : "center"}} >
                 <Button variant="contained"  sx={{ textTransform : "none"}} onClick={() => {
                     localStorage.clear();
-                    signOut({callbackUrl : "/intro"})
+                    signOut({callbackUrl : "/intro/sign-up"})
                 }} >Sign Out</Button>
             </Box>
             <Permission permissionOpen={permissionOpen} setPermissionOpen={setPermissionOpen} />
@@ -90,7 +91,7 @@ const SettingPage = () => {
     else 
     return (
         <Box >
-            <Typography variant="h5" sx={{ textAlign : "center"}} > Wait for the nextwork or go to intro page <Link href={"/intro"} >Click here</Link></Typography>
+            <Typography variant="h5" sx={{ textAlign : "center"}} > Wait for the nextwork or go to intro page <Link href={"/intro/sign-up"} >Click here</Link></Typography>
         </Box>
     )
 }

@@ -61,7 +61,7 @@ export const deleteStudent = createAsyncThunk("categoriesSlice/deleteStudent" , 
         thunkApi.dispatch(removeVotes(deletedVotes));
         isSuccess && isSuccess();
     } catch(err) {
-        isFail && isFail();
+        console.log(err)
     }
 })
 

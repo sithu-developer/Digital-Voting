@@ -41,8 +41,8 @@ const EditUser = ( { setUserEditUserOpen , userEditUserOpen } : Props) => {
                 }
             }}
         >
-            <DialogContent sx={{ bgcolor : "info.main" , display : "flex" , flexDirection : "column" , gap : "15px" }} >
-                <Typography variant="h5" >Edit Name</Typography>
+            <DialogContent sx={{ bgcolor : "info.main" , display : "flex" , flexDirection : "column" , gap : "20px" }} >
+                <Typography variant="h5" >Change Name</Typography>
                 <TextField defaultValue={updatedUser.name} label="Name"  sx={{ '& .MuiOutlinedInput-root' : { color : "white"} }} onChange={(event) => setUpdatedUser({...updatedUser , name : event.target.value})} />
                 <Box sx={{ display : "flex" , gap : "10px" , justifyContent : "end"}}>
                     <Button variant="contained" sx={{ bgcolor : "#7485E5", color : "black"  , borderRadius : "10px" , textTransform : "none" }} onClick={() => {
@@ -51,8 +51,6 @@ const EditUser = ( { setUserEditUserOpen , userEditUserOpen } : Props) => {
                     }} >Cancel</Button>
                     <Button disabled={!updatedUser.name || user.name === updatedUser.name} variant="contained" sx={{ bgcolor : "#7485E5" , color : "black" , borderRadius : "10px" , textTransform : "none" , '&.Mui-disabled' : { color : "GrayText" , bgcolor : "rgb(28, 32, 77)" , border : "1px solid GrayText"} }} onClick={handleUpdateUser}>Update</Button>
                 </Box>
-
-                
             </DialogContent>
         </Dialog>
     )

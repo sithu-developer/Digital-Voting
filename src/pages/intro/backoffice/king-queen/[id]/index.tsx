@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { zodiacSigns } from "@/util/general";
-import { deleteStudent, updateStudent } from "@/store/slices/studentsSlice";
+import { updateStudent } from "@/store/slices/studentsSlice";
 import { openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
 import DeleteComfirmation from "@/components/DeleteComfirmation";
@@ -114,7 +114,7 @@ const EditStudentPage = () => {
     else 
     return (
         <Box >
-            <Typography variant="h5" sx={{ textAlign : "center"}} > Wait for the nextwork or go to intro page <Link href={"/intro"} >Click here</Link></Typography>
+            <Typography variant="h5" sx={{ textAlign : "center"}} > Wait for the nextwork or go to intro page <Link href={"/intro/sign-up"} >Click here</Link></Typography>
         </Box>
     )
 }

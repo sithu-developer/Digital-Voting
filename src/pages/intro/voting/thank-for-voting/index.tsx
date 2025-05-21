@@ -67,9 +67,9 @@ const ThankForVoting = () => {
                         <Typography sx={{ ml : "10px" , fontFamily : "Javanese Text" }}>{item.name}</Typography>
                         <Box sx={{ display : "flex" , alignItems : "end", gap : "3px"}} >
                             <Box sx={{ width : "115px" , height : "115px" , bgcolor : "#28316B" , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "center" , alignItems : "center" , position : "relative" , overflow : "hidden" }}>
-                                <img alt="king photo" src={relatedStudent.url} style={{ width : "100%"}} />
+                                <img alt="candidate photo" src={relatedStudent.url} style={{ width : "100%"}} />
                                 <Box sx={{ position : "absolute" , top : "5px" , right : "5px"}}>
-                                    <img alt="number boundary" src={ relatedStudent.url.includes("Default") ? "/numberBoundaryWithBg.svg" : "/numberBoundary.svg"}/>
+                                    <img alt="number boundary" src={"/numberBoundary.svg"}/>
                                     <Typography sx={{ position : "absolute" , top : "0px" , left : "15%", textAlign : "center" , width : "22px"}} >{relatedStudent.contestantNumber}</Typography>
                                 </Box>
                             </Box>

@@ -2,8 +2,6 @@ import { Severity, SnackBarItem } from "@/types/snackBar";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 
-
-
 interface SnackBarInitialState {
     item : SnackBarItem
 }

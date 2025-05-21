@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]";
-import { DeletedCategoryItems, NewCategoryItems, UpdatedCategoryItems } from "@/types/categories";
+import { NewCategoryItems, UpdatedCategoryItems } from "@/types/categories";
 import { prisma } from "@/util/prisma";
 import { Major } from "../../../../generated/prisma";
 

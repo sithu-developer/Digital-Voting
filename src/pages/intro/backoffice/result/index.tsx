@@ -49,7 +49,7 @@ const ResultPage = () => {
     } , [])
 
     useEffect(() => {
-        if(votes.length && students.length && selectedCategory) {
+        if(students.length && selectedCategory) {
             const relatedStudents = students.filter(item => item.categoryId === selectedCategory.id);
             const studentsWithVotes = relatedStudents.map(student => {
                 const relatedVotes = votes.filter(vote => vote.studentId === student.id);
@@ -95,10 +95,10 @@ const ResultPage = () => {
                 const currentZodiac = zodiacSigns.find(zodiac => zodiac.id === item.student.zodiacId) as ZodiacSignType;
                 return (
                     <Box key={item.student.id} sx={{ display : "flex" , gap : "15px" , bgcolor : "info.main" , p : "10px" , borderRadius : "15px" , minWidth : "350px" , maxWidth : "500px"}} >
-                        <Box sx={{ width : "90px" , height : "90px" , background : `radial-gradient(ellipse at center,#AAB6F8 5%,#8D9CF2 25%,#5B6DD7 55%,#3747A3 75%)` , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "start" , alignItems : "center" , position : "relative" , overflow : "hidden" }} >
-                            <img alt="king photo" src={item.student.url} style={{ width : "100%"}} />
+                        <Box sx={{ width : "90px" , height : "90px" , bgcolor : `#28316B` , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "start" , alignItems : "center" , position : "relative" , overflow : "hidden" }} >
+                            <img alt="candidate photo" src={item.student.url} style={{ width : "100%"}} />
                             <Box sx={{ position : "absolute" , top : "5px" , right : "5px"}}>
-                                <img alt="number boundary" src={ item.student.url.includes("Default") ? "/numberBoundaryWithBg.svg" : "/numberBoundary.svg"}/>
+                                <img alt="number boundary" src={"/numberBoundary.svg"}/>
                                 <Typography sx={{ position : "absolute" , top : "0px" , left : "15%", textAlign : "center" , width : "22px"}} >{item.student.contestantNumber}</Typography>
                             </Box>
                         </Box>
@@ -132,7 +132,7 @@ const ResultPage = () => {
     else 
     return (
         <Box >
-            <Typography variant="h5" sx={{ textAlign : "center"}} > Wait for the nextwork or go to intro page <Link href={"/intro"} >Click here</Link></Typography>
+            <Typography variant="h5" sx={{ textAlign : "center"}} > Wait for the nextwork or go to intro page <Link href={"/intro/sign-up"} >Click here</Link></Typography>
         </Box>
     )
 }
