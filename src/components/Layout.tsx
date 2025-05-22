@@ -19,7 +19,9 @@ const Layout = ({ children } : Props ) => {
 
     return (
         <Box  sx={{ bgcolor : "secondary.main" , position : "relative" , pt :( isBackoffice ? "30px" : "0px") , width : "100vw" , height : "100vh", overflowY : "auto" }}>
-           {isBackoffice && <BackofficeTopBar setSideBarOpen={setSideBarOpen} />}
+           {isBackoffice && <Box sx={{ display : "flex" , justifyContent : "center"}}>
+                <BackofficeTopBar setSideBarOpen={setSideBarOpen} />
+           </Box>}
            {isBackoffice && <BackofficeSideBar setSideBarOpen={setSideBarOpen} sideBarOpen={sideBarOpen} />}
             <Box>{children}</Box>
             {isVotingPage && <VotingSetting />}

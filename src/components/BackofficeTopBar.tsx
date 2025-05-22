@@ -47,7 +47,7 @@ const BackofficeTopBar = ({ setSideBarOpen } : Props ) => {
     
     if(!admin) return null;
     return (
-        <Box sx={{ bgcolor : "info.main" , position : "relative" , width : "90%" , height : "50px" , borderRadius : "8px" , justifySelf : "center", display : "flex" , justifyContent : "space-between" , alignItems : "center" , px : "8px"}} >
+        <Box sx={{ bgcolor : "info.main" , position : "relative" , width : "95%" , height : "50px" , borderRadius : "8px", display : "flex" , justifyContent : "space-between" , alignItems : "center" , px : "8px"}} >
             <IconButton onClick={() => setSideBarOpen(true)} >
                 <MenuRoundedIcon sx={{ color : "white" , fontSize : "32px"}}  />
             </IconButton>

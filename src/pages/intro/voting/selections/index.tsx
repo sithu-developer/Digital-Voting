@@ -17,7 +17,7 @@ const KingSelectionPage = () => {
     const user = useAppSelector(store => store.userSlice.user);
     const isTimeUp = useAppSelector(store => store.userSlice.isTimeUp);
     const [ selectedCategory , setSelectedCategory ] = useState<Categories>();
-    const [ numberForBackground  , setNumberForBackground ] = useState<number>(1);
+    const [ numberForBackground  , setNumberForBackground ] = useState<number>();
     const [ votedStudent , setVotedStudent ] = useState<Students>();
     const [ alreadyVotedStudent , setAlreadyVotedStudent ] = useState<Students>();
     const categories = useAppSelector(store => store.categoriesSlice.categories);
@@ -51,7 +51,7 @@ const KingSelectionPage = () => {
             const ceilIndexOfSelectedCategory = Math.ceil((categories.indexOf(selectedCategory) + 1)/2);
             setNumberForBackground(ceilIndexOfSelectedCategory % 2);
         } else if(categories.length) {
-            setNumberForBackground(1);
+            setNumberForBackground(undefined);
         }
     } , [selectedCategory , categories])
 
@@ -92,8 +92,8 @@ const KingSelectionPage = () => {
     } , [ isTimeUp , router ])
 
     
-    if(user && selectedCategory && sortedStudents.length) {
-
+    if(user && selectedCategory && sortedStudents.length && numberForBackground !== undefined) {
+    
     const handleVoteStudent = () => {
         if(votedStudent) {
             dispatch(voteStudent({ studentId : votedStudent.id , userId : user.id , isSuccess : () => {

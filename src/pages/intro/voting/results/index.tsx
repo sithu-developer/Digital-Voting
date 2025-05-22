@@ -66,7 +66,7 @@ const VotingResultPage = () => {
                                         <Image alt="winner photo" src={item.isShownResult ? winner.student.url : (!(categories.indexOf(item) % 2) ? "/secretMale.png" : "/secretFemale.png" )} width={1000} height={1000} style={{ width : "100%" , height : "auto"}} />
                                     </Box>
                                 </Box>
-                                <Typography sx={{ fontFamily : "Average" , color : "#B4884B" , fontSize : "25px" , textAlign: "center" }} >{item.name.toUpperCase()}</Typography>
+                                <Typography sx={{ fontFamily : "'Times New Roman', Times, serif" , color : "#B4884B" , fontSize : "25px" , textAlign: "center" }} >{item.name.toUpperCase()}</Typography>
                             </Box>
                         </Box>
                     )
