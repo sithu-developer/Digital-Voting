@@ -116,8 +116,10 @@ const KingSelectionPage = () => {
     
     return (
         <Box sx={{ position : "relative" , width : "100vw" , height : "100vh" , bgcolor : numberForBackground ?  "#031020" : "#091D7D" , overflow : "hidden" , display : "flex" , flexDirection : "column" , alignItems : "center"  }}  >
-            {numberForBackground ? <Image alt="selectionBackground1" src={"/selectionBackground.jpg"} width={1000} height={1000} style={{ width : "auto" , height : "100vh"  , opacity : "60%" }} />
-            : <Image alt="selectionBackground2" src={"/selectionBackground2.jpg"} width={1000} height={1000} style={{ height : "calc(100vh - 34px)" , width : "120vw" , opacity : "50%" }} />}
+            {typeof numberForBackground !== 'number' ? null : (
+            numberForBackground ? <Image alt="selectionBackground1" src={"/selectionBackground.jpg"} width={1000} height={1000} style={{ width : "auto" , height : "100vh"  , opacity : "60%" }} />
+            : <Image alt="selectionBackground2" src={"/selectionBackground2.jpg"} width={1000} height={1000} style={{ height : "calc(100vh - 34px)" , width : "120vw" , opacity : "50%" }} />
+            )}
             <Box sx={{ position : "absolute" , top : "80px" , width : "100%" , display : "flex" , flexDirection : "column" , alignItems : "center" }} >
                 {selectedCategory && <Image alt="category photo" src={selectedCategory.iconUrl} width={300} height={300} style={{ width : "18%" , height : "auto" , position : "absolute" , top : "-55px" }} />}
                 <Box sx={{ display : "flex" , width : "84%" , position : "relative" }}>
@@ -128,7 +130,7 @@ const KingSelectionPage = () => {
                 <Typography sx={{ width : "100vw" , fontSize : "40px" , fontFamily : "Microsoft YaHei UI" , textAlign : "center" , color : "#DAE9FE" }} >{selectedCategory?.name.toUpperCase()} SELECTION</Typography>
                 <Box sx={{ display : "flex" , alignItems : "center"  , width : "84%"}}>
                     <Box sx={{ width: "35%", borderTop: "1px solid #BFCDEC"}} />
-                    <Typography sx={{ width : "30%" , fontFamily : "Norican" , fontStyle : "italic" , textAlign : "center" , lineHeight : 1 , color : "#BFCDEC"}} >LET&apos;SVOTE</Typography>
+                    <Typography sx={{ width : "30%" , fontFamily : `"Lucida Handwriting", "Brush Script MT", cursive` , fontStyle : "italic" , textAlign : "center" , lineHeight : 1 , color : "#BFCDEC"}} >LET&apos;SVOTE</Typography>
                     <Box sx={{ width: "35%", borderTop: "1px solid #BFCDEC" }} />
                 </Box>
             </Box>
