@@ -10,13 +10,14 @@ import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import UserSetting from "./userSetting";
 
 
-const VotingBottomBar = () => {
+const VotingSetting = () => {
     const [ majorCode , setMajorCode ] = useState<string>("");
     const [ userSettingOpen , setUserSettingOpen ] = useState<boolean>(false);
     const { data : session } = useSession();
     const dispatch = useAppDispatch();
-    const router = useRouter();
     const user = useAppSelector(store => store.userSlice.user);
+    const router = useRouter();
+    const path = router.asPath;
 
     useEffect(() => {
         if(localStorage) {
@@ -41,9 +42,9 @@ const VotingBottomBar = () => {
         }
     } , [majorCode , session , dispatch , router ])
     
-    if(!user) return null;
+    if(!user || path === "/intro/voting/results") return null;
     return (
-        <Box sx={{ position : "absolute" , top : "35px" , right : "10px" , color : "white"}} >
+        <Box sx={{ position : "absolute" , top : "33px" , right : "8px" , color : "white"}} >
             <IconButton onClick={() => setUserSettingOpen(true)} >
                 <SettingsRoundedIcon sx={{ fontSize : "35px" , color : "lightgray"}} />
             </IconButton>
@@ -52,4 +53,4 @@ const VotingBottomBar = () => {
     )
 }
 
-export default VotingBottomBar;
+export default VotingSetting;

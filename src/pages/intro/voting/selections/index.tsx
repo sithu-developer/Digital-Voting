@@ -50,7 +50,7 @@ const KingSelectionPage = () => {
         if(selectedCategory && categories.length) {
             const ceilIndexOfSelectedCategory = Math.ceil((categories.indexOf(selectedCategory) + 1)/2);
             setNumberForBackground(ceilIndexOfSelectedCategory % 2);
-        } else {
+        } else if(categories.length) {
             setNumberForBackground(1);
         }
     } , [selectedCategory , categories])
@@ -62,8 +62,9 @@ const KingSelectionPage = () => {
             const alreadyVotedStudent = relatedStudents.find(item => alreadyVotedStudentIds.includes(item.id));
             setVotedStudent(alreadyVotedStudent);
             setAlreadyVotedStudent(alreadyVotedStudent);
-        } else {
+        } else if(selectedCategory && students.length) {
             setVotedStudent(undefined)
+            setAlreadyVotedStudent(undefined);
         }
     } , [selectedCategory , votes , students])
 
@@ -91,7 +92,7 @@ const KingSelectionPage = () => {
     } , [ isTimeUp , router ])
 
     
-    if(user) {
+    if(user && selectedCategory && sortedStudents.length) {
 
     const handleVoteStudent = () => {
         if(votedStudent) {
@@ -119,15 +120,15 @@ const KingSelectionPage = () => {
             : <Image alt="selectionBackground2" src={"/selectionBackground2.jpg"} width={1000} height={1000} style={{ height : "calc(100vh - 34px)" , width : "120vw" , opacity : "50%" }} />}
             <Box sx={{ position : "absolute" , top : "80px" , width : "100%" , display : "flex" , flexDirection : "column" , alignItems : "center" }} >
                 {selectedCategory && <Image alt="category photo" src={selectedCategory.iconUrl} width={300} height={300} style={{ width : "18%" , height : "auto" , position : "absolute" , top : "-55px" }} />}
-                <Box sx={{ display : "flex" , width : "75%" , position : "relative" }}>
+                <Box sx={{ display : "flex" , width : "84%" , position : "relative" }}>
                     <Box sx={{ width: "35%", height: "12px", borderTop: "1px solid #BFCDEC"}} />
                     <Box sx={{ width: "30%", height: "12px", borderBottom : "1px solid #BFCDEC" , borderLeft : "1px solid #BFCDEC" , borderRight : "1px solid #BFCDEC" }} />
                     <Box sx={{ width: "35%", height: "12px", borderTop: "1px solid #BFCDEC" }} />
                 </Box>
-                <Typography sx={{ width : "100vw" , fontSize : "38px" , fontFamily : "Microsoft YaHei UI" , textAlign : "center" , color : "#DAE9FE" }} >{selectedCategory?.name.toUpperCase()} SELECTION</Typography>
-                <Box sx={{ display : "flex" , alignItems : "center"  , width : "75%"}}>
+                <Typography sx={{ width : "100vw" , fontSize : "40px" , fontFamily : "Microsoft YaHei UI" , textAlign : "center" , color : "#DAE9FE" }} >{selectedCategory?.name.toUpperCase()} SELECTION</Typography>
+                <Box sx={{ display : "flex" , alignItems : "center"  , width : "84%"}}>
                     <Box sx={{ width: "35%", borderTop: "1px solid #BFCDEC"}} />
-                    <Typography sx={{ width : "30%" , fontFamily : "Monotype Corsiva" , textAlign : "center" , lineHeight : 1 , color : "#BFCDEC"}} >LET&apos;SVOTE</Typography>
+                    <Typography sx={{ width : "30%" , fontFamily : "Norican" , fontStyle : "italic" , textAlign : "center" , lineHeight : 1 , color : "#BFCDEC"}} >LET&apos;SVOTE</Typography>
                     <Box sx={{ width: "35%", borderTop: "1px solid #BFCDEC" }} />
                 </Box>
             </Box>

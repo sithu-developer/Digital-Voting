@@ -3,7 +3,7 @@ import { ReactNode, useState } from "react";
 import BackofficeTopBar from "./BackofficeTopBar";
 import { useRouter } from "next/router";
 import SnackBarComp from "./SnackBar";
-import VotingBottomBar from "./VotingBottomBar";
+import VotingSetting from "./VotingSetting";
 import BackofficeSideBar from "./BackofficeSideBar";
 
 interface Props {
@@ -22,7 +22,7 @@ const Layout = ({ children } : Props ) => {
            {isBackoffice && <BackofficeTopBar setSideBarOpen={setSideBarOpen} />}
            {isBackoffice && <BackofficeSideBar setSideBarOpen={setSideBarOpen} sideBarOpen={sideBarOpen} />}
             <Box>{children}</Box>
-            {isVotingPage && <VotingBottomBar />}
+            {isVotingPage && <VotingSetting />}
             <SnackBarComp />
         </Box>
     )

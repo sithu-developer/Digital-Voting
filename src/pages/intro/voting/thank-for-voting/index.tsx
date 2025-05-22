@@ -56,18 +56,18 @@ const ThankForVoting = () => {
     return (
         <Box sx={{ position : "relative" , bgcolor : "#111136" , height : "100vh" , overflow : "hidden"}} >
             <Image alt="thank for voting Bg" src={"/thankForVotingBg.jpg"} height={1000} width={1000} style={{ width : "auto" , height : "100%" , opacity : "50%"}} />
-            <Box sx={{ width : "fit-content" , position : "absolute" , left : "20px" , top : "65px"}}  >
-                <Typography variant="h3" sx={{ textAlign : "center" , fontFamily : "Javanese Text"}} >THANKS</Typography>
-                <Typography variant="h4" sx={{ textAlign : "center" , fontFamily : "Javanese Text"}}>FOR</Typography>
-                <Typography variant="h3" sx={{ textAlign : "center" , fontFamily : "Javanese Text"}}>VOTING</Typography>
-                <Typography  sx={{ textAlign : "center" , fontFamily : "Javanese Text"}} >Results will be announced soon</Typography>
+            <Box sx={{ width : "fit-content" , position : "absolute" , left : "20px" , top : "35px"}}  >
+                <Typography variant="h3" sx={{ textAlign : "center" , fontFamily : "Prata"}} >THANKS</Typography>
+                <Typography variant="h4" sx={{ textAlign : "center" , fontFamily : "Prata"}}>FOR</Typography>
+                <Typography variant="h3" sx={{ textAlign : "center" , fontFamily : "Prata"}}>VOTING</Typography>
+                <Typography  sx={{ textAlign : "center" , fontFamily : "Libre Baskerville"}} >Results will be announced soon</Typography>
             </Box>
             <Box sx={{ position : "absolute" , top : "255px" , borderRadius : "10px" , width : "95%" , display : "flex" , flexWrap : "wrap" , gap : "15px" , ml : "10px" , height : "calc(100vh - 450px)" , overflowY : "auto" , py : "10px" }}>
                 {categories.map(item => {
                     const relatedStudent = votedStudents.find(stu => stu.categoryId === item.id) as Students;
                 return (
                     <Box  key={item.id}>
-                        <Typography sx={{ ml : "10px" , fontFamily : "Javanese Text" }}>{item.name}</Typography>
+                        <Typography sx={{ ml : "10px" , fontFamily : "Libre Baskerville" }}>{item.name}</Typography>
                         <Box sx={{ display : "flex" , alignItems : "end", gap : "3px"}} >
                             <Box sx={{ width : "115px" , height : "115px" , bgcolor : "#28316B" , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "center" , alignItems : "center" , position : "relative" , overflow : "hidden" }}>
                                 <Image alt="candidate photo" src={relatedStudent.url} width={1000} height={1000} style={{ width : "100%" , height : "auto"}} />
@@ -88,14 +88,13 @@ const ThankForVoting = () => {
                 )})}
             </Box>
             <Box sx={{ position : "absolute" , bottom : "130px" , display : "flex" , alignItems : "center" , gap : "20px" , ml : "40px"}}>
-                <Typography sx={{ fontFamily : "Javanese Text" , mt : "5px" }}>Your chosen candidates</Typography>
-                <Button onClick={handleSubmitVotes} disabled={user.isSubmitted} sx={{ border : "1px solid white" , py : "1px" , textTransform : "none" , '&.Mui-disabled' : { color : "GrayText" , bgcolor : "rgb(28, 32, 77)" , border : "1px solid #FFD700"} }} variant="contained" >{user.isSubmitted ? "submitted" : "submit"}</Button>
+                <Typography sx={{ fontFamily : "Libre Baskerville" , mt : "5px" }}>Your chosen candidates</Typography>
+                <Button onClick={handleSubmitVotes} disabled={user.isSubmitted} sx={{ border : "1px solid white" , borderRadius : "15px" , fontFamily : "Libre Baskerville" , py : "1px" , textTransform : "none" , '&.Mui-disabled' : { color : "GrayText" , bgcolor : "rgb(28, 32, 77)" , border : "1px solid #FFD700"} }} variant="contained" >{user.isSubmitted ? "submitted" : "submit"}</Button>
             </Box>
-            <Box sx={{ position : "absolute" , bottom : "-10px" , width : "100%" , display : "flex" , justifyContent : "space-between"}} >
+            <Box sx={{ position : "absolute" , bottom : "-10px" , left : "50%" , transform: "translateX(-50%)" , width : "105%" , display : "flex" , justifyContent : "space-between"}} >
                 <Image alt="cute cat" src={"/cuteCat.gif"} width={300} height={300} style={{ width : "150px" , height : "auto" }} />
                 <Image alt="runnng cute" src={"/floweringCute.gif"} width={300} height={300} style={{ width : "150px" , height : "auto" }} />
             </Box>
-
         </Box>
     )
 }

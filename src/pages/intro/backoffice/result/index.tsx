@@ -97,7 +97,7 @@ const ResultPage = () => {
                 {studentsWithVotes.map(item => {
                 const currentZodiac = zodiacSigns.find(zodiac => zodiac.id === item.student.zodiacId) as ZodiacSignType;
                 return (
-                    <Box key={item.student.id} sx={{ display : "flex" , gap : "15px" , bgcolor : "info.main" , p : "10px" , borderRadius : "15px" , minWidth : "350px" , maxWidth : "500px"}} >
+                    <Box key={item.student.id} sx={{ display : "flex" , gap : "15px" , bgcolor : "info.main" , p : "10px" , borderRadius : "15px" , width : "100%"}} >
                         <Box sx={{ width : "90px" , height : "90px" , bgcolor : `#28316B` , borderRadius : "15px" , display : "flex" , flexDirection : "column" , justifyContent : "start" , alignItems : "center" , position : "relative" , overflow : "hidden" }} >
                             <Image alt="candidate photo" src={item.student.url} width={1000} height={1000} style={{ width : "100%" , height : "auto"}} />
                             <Box sx={{ position : "absolute" , top : "5px" , right : "5px"}}>
@@ -108,13 +108,11 @@ const ResultPage = () => {
                         <Divider orientation="vertical" flexItem sx={{ bgcolor : "white"}} />
                         <Box sx={{ position : "relative" , flexGrow : 1 , bgcolor : "rgba(255, 255, 255, 0.2)", borderRadius : "10px", backdropFilter : "blur(10px)", WebkitBackdropFilter: "blur(10px)" , p : "5px"}} >
                             <Typography sx={{ textAlign : "center"}}>{item.student.name}</Typography>
-                            <Box sx={{ display : "flex" , mt : "5px" , height : "45px" ,px : "10px" , justifyContent : "space-between"}} >
-                                <Box>
-                                    <Typography sx={{  fontSize : "12px"}}>Year : {item.student.year}</Typography>
-                                    <Typography sx={{ fontSize : "12px" , mt : "10px"}}>Major : {item.student.major}</Typography>
-                                </Box>
+                            <Box sx={{ display : "flex" , justifyContent : "space-between" , pl : "5px" , pt : "5px"}}>
+                                <Typography sx={{  fontSize : "12px"}}>Year : {item.student.year}</Typography>
                                 <Typography sx={{ fontSize : "12px" }} >Zodiac : {currentZodiac.zodiac.replace(/\s*\(.*$/, '')}</Typography>
                             </Box>
+                            <Typography sx={{ fontSize : "12px" , mt : "10px" , pl : "5px"}}>Major : {item.student.major}</Typography>
                             <Box sx={{ clipPath: 'polygon(10% 0%, 100% 0%, 100% 100%, 0% 100%)' , width : "58%" , p : "5px" , cursor : "pointer" , bgcolor : "info.main" , position : "absolute" , bottom : "-1px" , right : "-1px" , display : "flex" , justifyContent : "end" , alignItems : "center" , gap :  "5px"}} onClick={() => {
                                 setVoteListItems({open : true , selectedStudentId : item.student.id })
                             }} >
