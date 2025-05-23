@@ -116,7 +116,7 @@ const KingSelectionPage = () => {
         <Box sx={{ position : "relative" , width : "100vw" , height : "100vh" , bgcolor : numberForBackground ?  "#031020" : "#091D7D" , overflow : "hidden" , display : "flex" , flexDirection : "column" , alignItems : "center"  }}  >
             {numberForBackground ? <Image alt="selectionBackground" src={"/selectionBackground.jpg"} width={1000} height={1000} style={{ width : "auto" , height : "100vh"  , opacity : "60%" }} />
             :<Image alt="selectionBackgroundTwo" src={"/selectionBackgroundTwo.jpg"} width={1000} height={1000} style={{ height : "calc(100vh - 34px)" , width : "120vw" , opacity : "50%" }} />}
-            <Box sx={{ position : "absolute" , top : "70px" , width : "100%" , display : "flex" , flexDirection : "column" , alignItems : "center" }} >
+            <Box sx={{ position : "absolute" , top : "73px" , width : "100%" , display : "flex" , flexDirection : "column" , alignItems : "center" }} >
                 {selectedCategory && <Image alt="category photo" src={selectedCategory.iconUrl} width={300} height={300} style={{ width : "18%" , height : "auto" , position : "absolute" , top : "-53px" }} />}
                 <Box sx={{ display : "flex" , width : "93%" , position : "relative" }}>
                     <Box sx={{ width: "35%", height: "12px", borderTop: "1px solid #BFCDEC"}} />

@@ -46,7 +46,7 @@ const VotingSetting = () => {
     
     if(!user || path === "/intro/voting/results") return null;
     return (
-        <Box sx={{ position : "absolute" , top : "15px" , right : "10px" , color : "white"}} >
+        <Box sx={{ position : "absolute" , top : "17px" , right : "11px" , color : "white"}} >
             <IconButton onClick={() => setUserSettingOpen(true)} >
                 <SettingsRoundedIcon sx={{ fontSize : "35px" , color : "white"}} />
             </IconButton>
