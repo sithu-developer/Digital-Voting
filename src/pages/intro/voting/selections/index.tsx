@@ -39,10 +39,12 @@ const KingSelectionPage = () => {
                 setSelectedCategory(categories[0]);
                 localStorage.setItem("selectedCategoryIdFromVoting" , String(categories[0].id))
             }
+            console.log(1)
         } else if(categories.length && localStorage && categoryId) {
             const selectedCategory = categories.find(item => item.id === categoryId) as Categories;
             setSelectedCategory(selectedCategory);
             localStorage.setItem("selectedCategoryIdFromVoting" , String(selectedCategory.id))
+            console.log(2)
         }
     } , [categories , categoryId])
 
@@ -50,8 +52,10 @@ const KingSelectionPage = () => {
         if(selectedCategory && categories.length) {
             const ceilIndexOfSelectedCategory = Math.ceil((categories.indexOf(selectedCategory) + 1)/2);
             setNumberForBackground(ceilIndexOfSelectedCategory % 2);
+            console.log(3)
         } else if(categories.length) {
             setNumberForBackground(null);
+            console.log(4)
         }
     } , [selectedCategory , categories])
 
@@ -62,15 +66,18 @@ const KingSelectionPage = () => {
             const alreadyVotedStudent = relatedStudents.find(item => alreadyVotedStudentIds.includes(item.id));
             setVotedStudent(alreadyVotedStudent);
             setAlreadyVotedStudent(alreadyVotedStudent);
+            console.log(5)
         } else if(selectedCategory && students.length) {
             setVotedStudent(undefined)
             setAlreadyVotedStudent(undefined);
+            console.log(6)
         }
     } , [selectedCategory , votes , students])
 
     useEffect(() => {
         if((categories.length && votes.length && categories.length === votes.length && !categoryId && router) || (categories.length && votes.length && user && user.isSubmitted && router )) {
             router.push("/intro/voting/thank-for-voting");
+            console.log(7)
         }
     } , [categories , votes , categoryId , user , router ]);
 
@@ -79,6 +86,7 @@ const KingSelectionPage = () => {
             const interval = setInterval(() => {
                 dispatch(checkIsTimeUp());
             } , 6000);
+            console.log(8)
             return () => {
                 clearInterval(interval);
             }
@@ -88,6 +96,7 @@ const KingSelectionPage = () => {
     useEffect(() => {
         if(isTimeUp && router) {
             router.push("/intro/voting/results");
+            console.log(9)
         }
     } , [ isTimeUp , router ])
 
@@ -113,24 +122,25 @@ const KingSelectionPage = () => {
            } }));
         }
     }
-    
+    console.log("here")
     return (
         <Box sx={{ position : "relative" , width : "100vw" , height : "100vh" , bgcolor : numberForBackground ?  "#031020" : "#091D7D" , overflow : "hidden" , display : "flex" , flexDirection : "column" , alignItems : "center"  }}  >
-            {typeof numberForBackground !== 'number' ? null : (
+            {/* {typeof numberForBackground !== 'number' ? null : (
             numberForBackground ? <Image alt="selectionBackground1" src={"/selectionBackground.jpg"} width={1000} height={1000} style={{ width : "auto" , height : "100vh"  , opacity : "60%" }} />
             : <Image alt="selectionBackground2" src={"/selectionBackground2.jpg"} width={1000} height={1000} style={{ height : "calc(100vh - 34px)" , width : "120vw" , opacity : "50%" }} />
-            )}
-            <Box sx={{ position : "absolute" , top : "80px" , width : "100%" , display : "flex" , flexDirection : "column" , alignItems : "center" }} >
+            )} */}
+            <Image alt="selectionBackground1" src={"/selectionBackground.jpg"} width={1000} height={1000} style={{ width : "auto" , height : "100vh"  , opacity : "60%" }} />
+            <Box sx={{ position : "absolute" , top : numberForBackground ? "60px" : "80px" , width : "100%" , display : "flex" , flexDirection : "column" , alignItems : "center" }} >
                 {selectedCategory && <Image alt="category photo" src={selectedCategory.iconUrl} width={300} height={300} style={{ width : "18%" , height : "auto" , position : "absolute" , top : "-55px" }} />}
-                <Box sx={{ display : "flex" , width : "84%" , position : "relative" }}>
+                <Box sx={{ display : "flex" , width : "90%" , position : "relative" }}>
                     <Box sx={{ width: "35%", height: "12px", borderTop: "1px solid #BFCDEC"}} />
                     <Box sx={{ width: "30%", height: "12px", borderBottom : "1px solid #BFCDEC" , borderLeft : "1px solid #BFCDEC" , borderRight : "1px solid #BFCDEC" }} />
                     <Box sx={{ width: "35%", height: "12px", borderTop: "1px solid #BFCDEC" }} />
                 </Box>
                 <Typography sx={{ width : "100vw" , fontSize : "40px" , fontFamily : "Microsoft YaHei UI" , textAlign : "center" , color : "#DAE9FE" }} >{selectedCategory?.name.toUpperCase()} SELECTION</Typography>
-                <Box sx={{ display : "flex" , alignItems : "center"  , width : "84%"}}>
+                <Box sx={{ display : "flex" , alignItems : "center"  , width : "90%"}}>
                     <Box sx={{ width: "35%", borderTop: "1px solid #BFCDEC"}} />
-                    <Typography sx={{ width : "30%" , fontFamily : `"Lucida Handwriting", "Brush Script MT", cursive` , fontStyle : "italic" , textAlign : "center" , lineHeight : 1 , color : "#BFCDEC"}} >LET&apos;SVOTE</Typography>
+                    <Typography sx={{ width : "30%" , fontFamily : `"Lucida Handwriting", "Brush Script MT", cursive` , fontStyle : "italic" , fontWeight : "bold" , textAlign : "center" , lineHeight : 1 , color : "#BFCDEC"}} >LET&apos;SVOTE</Typography>
                     <Box sx={{ width: "35%", borderTop: "1px solid #BFCDEC" }} />
                 </Box>
             </Box>
