@@ -29,21 +29,22 @@ const BackofficeTopBar = ({ setSideBarOpen } : Props ) => {
     } , [] )
 
     useEffect(() => {
-        if(password && session && session.user && dispatch && router){
-            dispatch(createNewAdmin({ password , email : String(session.user.email) , isFail : (err) => {
-                router.push("/intro/sign-up")
-                dispatch(openSnackBar({ open : true , message : String(err) , severity : Severity.error}))
-            } }))
-        } else {
-            const interval = setInterval(() => {
-                router.push("/intro/sign-up")
-            } , 15000)
-            return () => {
-                clearInterval(interval);
+        if(!admin) {
+            if(password && session && session.user && dispatch && router){
+                dispatch(createNewAdmin({ password , email : String(session.user.email) , isFail : (err) => {
+                    router.push("/intro/sign-up")
+                    dispatch(openSnackBar({ open : true , message : String(err) , severity : Severity.error}))
+                } }))
+            } else {
+                const interval = setInterval(() => {
+                    router.push("/intro/sign-up")
+                } , 15000)
+                return () => {
+                    clearInterval(interval);
+                }
             }
         }
-        
-    } , [password , session , dispatch , router])
+    } , [password , session , dispatch , router , admin])
     
     if(!admin) return null;
     return (

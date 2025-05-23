@@ -27,26 +27,28 @@ const VotingSetting = () => {
     } , [] )
 
     useEffect(() => {
-        if(majorCode && session && session.user && dispatch && router){
-            dispatch(createNewUser({ majorCode , email : String(session.user.email) , isFail : (err) => {
-                router.push("/intro/sign-up")
-                dispatch(openSnackBar({ open : true , message : String(err) , severity : Severity.error}))
-            }}))
-        } else {
-            const interval = setInterval(() => {
-                router.push("/intro/sign-up")
-            } , 15000)
-            return () => {
-                clearInterval(interval);
+        if(!user) {
+            if(majorCode && session && session.user && dispatch && router){
+                dispatch(createNewUser({ majorCode , email : String(session.user.email) , isFail : (err) => {
+                    router.push("/intro/sign-up")
+                    dispatch(openSnackBar({ open : true , message : String(err) , severity : Severity.error}))
+                }}))
+            } else {
+                const interval = setInterval(() => {
+                    router.push("/intro/sign-up")
+                } , 15000)
+                return () => {
+                    clearInterval(interval);
+                }
             }
         }
-    } , [majorCode , session , dispatch , router ])
+    } , [majorCode , session , dispatch , router , user ])
     
     if(!user || path === "/intro/voting/results") return null;
     return (
-        <Box sx={{ position : "absolute" , top : "33px" , right : "8px" , color : "white"}} >
+        <Box sx={{ position : "absolute" , top : "15px" , right : "10px" , color : "white"}} >
             <IconButton onClick={() => setUserSettingOpen(true)} >
-                <SettingsRoundedIcon sx={{ fontSize : "35px" , color : "lightgray"}} />
+                <SettingsRoundedIcon sx={{ fontSize : "35px" , color : "white"}} />
             </IconButton>
             <UserSetting userSettingOpen={userSettingOpen} setUserSettingOpen={setUserSettingOpen} />
         </Box>
