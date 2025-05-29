@@ -126,7 +126,7 @@ const KingSelectionPage = () => {
                 <Typography sx={{ width : "100vw" , fontSize : "40px" , fontFamily : "Microsoft YaHei UI" , textAlign : "center" , color : "#DAE9FE" }} >{selectedCategory?.name.toUpperCase()} SELECTION</Typography>
                 <Box sx={{ display : "flex" , alignItems : "center"  , width : "93%"}}>
                     <Box sx={{ width: "35%", borderTop: "1px solid #BFCDEC"}} />
-                    <Typography sx={{ width : "30%" , fontFamily : `"Lucida Handwriting", "Brush Script MT", cursive` , fontStyle : "italic" , fontWeight : "bold" , textAlign : "center" , lineHeight : 1 , color : "#BFCDEC"}} >LET&apos;SVOTE</Typography>
+                    <Typography sx={{ width : "30%" , fontFamily : `"Lucida Handwriting", "Brush Script MT", cursive` , fontStyle : "italic" , fontWeight : 900 , textAlign : "center" , lineHeight : 1 , color : "#BFCDEC"}} >LET&apos;SVOTE</Typography>
                     <Box sx={{ width: "35%", borderTop: "1px solid #BFCDEC" }} />
                 </Box>
             </Box>

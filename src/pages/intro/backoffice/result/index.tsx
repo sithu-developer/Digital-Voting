@@ -108,12 +108,12 @@ const ResultPage = () => {
                         <Divider orientation="vertical" flexItem sx={{ bgcolor : "white"}} />
                         <Box sx={{ position : "relative" , flexGrow : 1 , bgcolor : "rgba(255, 255, 255, 0.2)", borderRadius : "10px", backdropFilter : "blur(10px)", WebkitBackdropFilter: "blur(10px)" , p : "5px"}} >
                             <Typography sx={{ textAlign : "center"}}>{item.student.name}</Typography>
-                            <Box sx={{ display : "flex" , justifyContent : "space-between" , pl : "5px" , pt : "5px"}}>
+                            <Box sx={{ display : "flex" , justifyContent : "space-between" , pl : "3px" , pt : "5px"}}>
                                 <Typography sx={{  fontSize : "12px"}}>Year : {item.student.year}</Typography>
                                 <Typography sx={{ fontSize : "12px" }} >Zodiac : {currentZodiac.zodiac.replace(/\s*\(.*$/, '')}</Typography>
                             </Box>
-                            <Typography sx={{ fontSize : "12px" , mt : "10px" , pl : "5px"}}>Major : {item.student.major}</Typography>
-                            <Box sx={{ clipPath: 'polygon(10% 0%, 100% 0%, 100% 100%, 0% 100%)' , width : "58%" , p : "5px" , cursor : "pointer" , bgcolor : "info.main" , position : "absolute" , bottom : "-1px" , right : "-1px" , display : "flex" , justifyContent : "end" , alignItems : "center" , gap :  "5px"}} onClick={() => {
+                            <Typography sx={{ fontSize : "12px" , mt : "10px" , pl : "3px"}}>Major: {item.student.major}</Typography>
+                            <Box sx={{ clipPath: 'polygon(10% 0%, 100% 0%, 100% 100%, 0% 100%)' , width : "60%" , p : "5px" , cursor : "pointer" , bgcolor : "info.main" , position : "absolute" , bottom : "-1px" , right : "-1px" , display : "flex" , justifyContent : "end" , alignItems : "center" , gap :  "5px"}} onClick={() => {
                                 setVoteListItems({open : true , selectedStudentId : item.student.id })
                             }} >
                                 <Typography sx={{ fontSize : "12px" }}>Total votes</Typography>

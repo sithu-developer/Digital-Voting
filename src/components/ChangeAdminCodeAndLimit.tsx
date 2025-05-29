@@ -28,7 +28,7 @@ const ChangeAdminCodeAndLimit = ( { changeAdminCodeAndLimitOpen , setChangeAdmin
         if(majorsAndAdmin.length) {
             const admin = majorsAndAdmin.find(item => item.majorsOrAdmin === "admin") as Major ;
             setChangedAdmin(admin);
-            setAdminFromTyping(prev => ({...prev , newLimit : admin.maxQuantity }));
+            setAdminFromTyping(prev => ({...prev , newAdminCodeFromTyping : "" , oldAdminCodeFromTyping : "" , newLimit : admin.maxQuantity }));
         }
     } , [majorsAndAdmin])
 

@@ -17,6 +17,9 @@ export default async function handler(
         if(!isValid) return res.status(400).send("Bad request");
         const exitStudent = await prisma.user.findUnique({ where : { id : userId }});
         if(!exitStudent) return res.status(400).send("Bad request");
+        const isAlreadyVote = await prisma.votes.findFirst({ where : { AND : { studentId , userId }}});
+        console.log(isAlreadyVote)
+        if(isAlreadyVote) return res.status(400).send("Already Voted");
         const newVote = await prisma.votes.create({ data : { studentId , userId }});
         return res.status(200).json({ newVote })
     } else if( method === "PUT") {
