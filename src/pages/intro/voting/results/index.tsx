@@ -32,11 +32,14 @@ const VotingResultPage = () => {
             const interval = setInterval(() => {
                 dispatch(checkFromResultPage())
             } , 5000);
+            if(!isTimeUp) {
+                clearInterval(interval);
+            }
             return () => {
                 clearInterval(interval);
             }
         }
-    } , [dispatch])
+    } , [dispatch , isTimeUp])
 
 
     
