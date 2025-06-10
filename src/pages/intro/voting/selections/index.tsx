@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import { checkIsTimeUp } from "@/store/slices/userSlice";
 import Image from "next/image";
+import Loading from "@/components/Loading";
 
 const KingSelectionPage = () => {
     const user = useAppSelector(store => store.userSlice.user);
@@ -20,6 +21,7 @@ const KingSelectionPage = () => {
     const [ numberForBackground  , setNumberForBackground ] = useState<number | null>(null);
     const [ votedStudent , setVotedStudent ] = useState<Students>();
     const [ alreadyVotedStudent , setAlreadyVotedStudent ] = useState<Students>();
+    const [ loadingOpen , setLoadingOpen ] = useState<boolean>(false);
     const categories = useAppSelector(store => store.categoriesSlice.categories);
     const students = useAppSelector(store => store.studentsSlice.students);
     const relatedStudents = students.filter(item => item.categoryId === selectedCategory?.id);
@@ -94,7 +96,9 @@ const KingSelectionPage = () => {
     
     const handleVoteStudent = () => {
         if(votedStudent) {
+            setLoadingOpen(true);
             dispatch(voteStudent({ studentId : votedStudent.id , userId : user.id , isSuccess : () => {
+                setLoadingOpen(false);
                 dispatch(openSnackBar({ open : true , message : "Successfully voted" , severity : Severity.success }))
             } }))
         }
@@ -102,8 +106,10 @@ const KingSelectionPage = () => {
 
     const handleRevoteStudent = () => {
         if(votedStudent && alreadyVotedStudent) {
+            setLoadingOpen(true);
             const alreadyExitVote = votes.find(item => (item.studentId === alreadyVotedStudent.id)) as Votes;
            dispatch(revoteStudent({ id : alreadyExitVote.id , studentId : votedStudent.id , isSuccess : () => {
+            setLoadingOpen(false);
                 if(categoryId) {
                     router.push("/intro/voting/thank-for-voting");
                 }
@@ -166,6 +172,7 @@ const KingSelectionPage = () => {
                 {(categories[0]?.id === selectedCategory?.id) && <Image alt="king button side" src={"/kingButtonSide.svg"} width={300} height={300} style={{ width : "auto" , height : "auto"}} />}
                 {(categories[1]?.id === selectedCategory?.id) && <Image alt="queen button side" src={"/queenButtonSide.svg"} width={300} height={300} style={{ width : "auto" , height : "auto"}} />}
             </Box>
+            <Loading loadingOpen={loadingOpen} />
             
             <BottomNavigation
               value={selectedCategory ? selectedCategory.id : categories[0]?.id }
@@ -189,5 +196,3 @@ const KingSelectionPage = () => {
 }
 
 export default KingSelectionPage;
-
-//  sx={{ position : "absolute" , bottom : "85px" , right : "30px"}}
