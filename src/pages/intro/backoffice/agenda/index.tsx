@@ -25,13 +25,30 @@ const AgendaPage = () => {
       } }))
     }
 
-    const handleDownload = ( agenda : Agenda) => {
-      const link = document.createElement("a");
-      link.href = agenda.agendaUrl;
-      link.download = `agenda${agenda.id}.jpg`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+    const handleDownload = async( agenda : Agenda) => {
+      try {
+        const response = await fetch(agenda.agendaUrl, { mode: "cors" });
+        const blob = await response.blob();
+        const blobUrl = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = blobUrl;
+        link.download = `agenda${agenda.id}.jpg`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        URL.revokeObjectURL(blobUrl); 
+      } catch (error) {
+        console.error("Download failed:", error);
+      }
+
+      // const link = document.createElement("a");  // for local
+      // link.href = agenda.agendaUrl;
+      // link.download = `agenda${agenda.id}.jpg`;
+      // document.body.appendChild(link);
+      // link.click();
+      // document.body.removeChild(link);
     };
     
     
