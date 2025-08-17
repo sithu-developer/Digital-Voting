@@ -18,8 +18,9 @@ export default async function handler(
     const method = req.method;
     if(method === "POST") {
         const filename = String(req.query.filename);
+        const random = crypto.randomUUID().replace(/-/g, '').slice(0, 8);
         if (!filename) return res.status(400).json({ error: 'Missing filename' });
-        const blob = await put(filename, req, {
+        const blob = await put(`digital-voting/${random + "-" + filename}`, req, {
           access: 'public',
           addRandomSuffix: true,
         });
