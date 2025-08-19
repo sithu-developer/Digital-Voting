@@ -1,15 +1,15 @@
+import { useAppSelector } from "@/store/hooks";
 import { Backdrop, Box, CircularProgress } from "@mui/material";
 
-interface Props {
-    loadingOpen : boolean;
-}
 
-const Loading = ( { loadingOpen } : Props ) => {
+const Loading = () => {
+    const isLoading = useAppSelector(store => store.snackBar.isLoading);
+
     return (
     <Box>
       <Backdrop
-        sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
-        open={loadingOpen}
+        sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.tooltip + 1 })}
+        open={isLoading}
       >
         <CircularProgress color="inherit" />
       </Backdrop>

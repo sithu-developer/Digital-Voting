@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Categories, Major } from "../../generated/prisma";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { openSnackBar } from "@/store/slices/snackBarSlice";
+import { changeIsLoading, openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
 import { changeAdminCodeAndLimit } from "@/store/slices/majorSlice";
 import { updateCategory } from "@/store/slices/categoriesSlice";
@@ -42,10 +42,12 @@ const Permission = ({ permissionOpen , setPermissionOpen , selectedCategory } : 
         if(adminCode === adminCodeFromTyping) {
             if(selectedCategory) {
                 if(isClose) {
+                    dispatch(changeIsLoading(true));
                     dispatch(updateCategory({...selectedCategory , isShownResult , isSuccess : () => {
                         setPermissionOpen(false);
                         setAdminCodeFromTyping("");
                         setShowAdminPassword(false);
+                        dispatch(changeIsLoading(false));
                         dispatch(openSnackBar({open : true , message : ( isShownResult ? `Successfully showed winner of ${selectedCategory.name}`: `Closed showing`) , severity : Severity.success}))
                     } }))
                 } else {
@@ -53,10 +55,12 @@ const Permission = ({ permissionOpen , setPermissionOpen , selectedCategory } : 
                 }
             } else {
                 const admin = majorsAndAdmin.find(item => item.majorsOrAdmin === "admin") as Major ;
+                dispatch(changeIsLoading(true));
                 dispatch(changeAdminCodeAndLimit({ ...admin , isTimeUp : isClose  , isSuccess : () => {
                     setPermissionOpen(false);
                     setAdminCodeFromTyping("");
                     setShowAdminPassword(false);
+                    dispatch(changeIsLoading(false));
                     dispatch(openSnackBar({ open : true , message : `Voting is successfully ${isClose ? "closed" : "opened"} ` , severity : Severity.success}))
                 } }))
             }

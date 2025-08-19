@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { zodiacSigns } from "@/util/general";
 import { updateStudent } from "@/store/slices/studentsSlice";
-import { openSnackBar } from "@/store/slices/snackBarSlice";
+import { changeIsLoading, openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
 import DeleteComfirmation from "@/components/DeleteComfirmation";
 import { Students } from "../../../../../../generated/prisma";
@@ -40,13 +40,16 @@ const EditStudentPage = () => {
     const handleUpdateStudent = async() => {
         const exitContestantNumbers = relatedStudent.map(item => item.contestantNumber);
         if(!exitContestantNumbers.includes(updatedStudent.contestantNumber) ) {
+            dispatch(changeIsLoading(true));
             if(photoFile) {
                 const blob = await uploadPhoto(photoFile) as PutBlobResult;
                 dispatch(updateStudent({...updatedStudent , url : blob.url , isSuccess : () => {
+                    dispatch(changeIsLoading(false));
                     dispatch(openSnackBar({ open : true , message : "Successfully updated" , severity : Severity.success}))
                 }}))
             } else {
                 dispatch(updateStudent({...updatedStudent , isSuccess : () => {
+                    dispatch(changeIsLoading(false));
                     dispatch(openSnackBar({ open : true , message : "Successfully updated" , severity : Severity.success}))
                 }}))
             }

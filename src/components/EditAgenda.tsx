@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@/store/hooks";
 import { updateAgenda } from "@/store/slices/agendaSlice";
-import { openSnackBar } from "@/store/slices/snackBarSlice";
+import { changeIsLoading, openSnackBar } from "@/store/slices/snackBarSlice";
 import { EditAgendaItems } from "@/types/agenda";
 import { Severity } from "@/types/snackBar";
 import { uploadPhoto } from "@/util/uploadPhoto";
@@ -20,9 +20,11 @@ const EditAgenda = ({ editAgendaItems , setEditAgendaItems } : Props) => {
     const handleUpdateAgenda = async() => {
         if(photoFile) {
             const blob = await uploadPhoto(photoFile) as PutBlobResult;
+            dispatch(changeIsLoading(true));
             dispatch(updateAgenda({ id : editAgendaItems.agendaId , agendaUrl : blob.url , isSuccess : () => {
                 setPhotoFile(undefined)
                 setEditAgendaItems({ open : false , agendaId : 0});
+                dispatch(changeIsLoading(false));
                 dispatch(openSnackBar({ open : true , message : "Successfully changed Agenda photo" , severity : Severity.success }))
             }}))
         }

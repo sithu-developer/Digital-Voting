@@ -4,6 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface SnackBarInitialState {
     item : SnackBarItem
+    isLoading : boolean,
 }
 
 const item : SnackBarItem = {
@@ -13,7 +14,8 @@ const item : SnackBarItem = {
 }
 
 const initialState : SnackBarInitialState = {
-    item
+    item ,
+    isLoading : false
 }
 
 const snackBarSlice = createSlice({
@@ -22,11 +24,14 @@ const snackBarSlice = createSlice({
     reducers : {
         openSnackBar : ( state , action : PayloadAction<SnackBarItem>) => {
             state.item = {...action.payload};
+        },
+        changeIsLoading : ( state , action : PayloadAction<boolean> ) => {
+            state.isLoading = action.payload;
         }
     }
 })
 
-export const { openSnackBar } = snackBarSlice.actions;
+export const { openSnackBar , changeIsLoading } = snackBarSlice.actions;
 
 
 export default snackBarSlice.reducer;

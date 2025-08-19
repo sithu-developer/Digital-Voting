@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@/store/hooks";
 import { createAgenda } from "@/store/slices/agendaSlice";
-import { openSnackBar } from "@/store/slices/snackBarSlice";
+import { changeIsLoading, openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
 import { uploadPhoto } from "@/util/uploadPhoto";
 import { Box, Button, Chip, Dialog, DialogContent, Typography } from "@mui/material"
@@ -20,9 +20,11 @@ const NewAgenda = ( { newAgendaOpen , setNewAgendaOpen } : Props ) => {
     const handleCreateAgenda = async() => {
         if(photoFile) {
             const blob = await uploadPhoto(photoFile) as PutBlobResult;
+            dispatch(changeIsLoading(true));
             dispatch(createAgenda({ agendaUrl : blob.url , isSuccess : () => {
               setPhotoFile(undefined);
               setNewAgendaOpen(false);
+              dispatch(changeIsLoading(false));
               dispatch(openSnackBar({ open : true , message : "Successfully added new Agenda Photo" , severity : Severity.success}))
             }}));
         }

@@ -4,7 +4,7 @@ import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { deleteAgenda } from "@/store/slices/agendaSlice";
-import { openSnackBar } from "@/store/slices/snackBarSlice";
+import { changeIsLoading, openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
 import EditAgenda from "@/components/EditAgenda";
 import { EditAgendaItems } from "@/types/agenda";
@@ -20,7 +20,9 @@ const AgendaPage = () => {
     const dispatch = useAppDispatch();
 
     const handleDeleteAgenda = ( id : number) => {
+      dispatch(changeIsLoading(true));
       dispatch(deleteAgenda({ id , isSuccess : () => {
+        dispatch(changeIsLoading(false));
         dispatch(openSnackBar({ open : true , message : "Successfully Deleted" , severity : Severity.success}))
       } }))
     }

@@ -3,7 +3,7 @@ import { Box, Button, Dialog, DialogContent, Divider, IconButton, InputAdornment
 import { useEffect, useState } from "react";
 import { Major } from "../../generated/prisma";
 import { AdminFromTyping } from "@/types/major";
-import { openSnackBar } from "@/store/slices/snackBarSlice";
+import { changeIsLoading, openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -36,10 +36,12 @@ const ChangeAdminCodeAndLimit = ( { changeAdminCodeAndLimitOpen , setChangeAdmin
 
     const handleChangeAdmin = () => {
         if(changedAdmin.passCode === adminFromTyping.oldAdminCodeFromTyping) {
+            dispatch(changeIsLoading(true));
             dispatch(changeAdminCodeAndLimit({...changedAdmin , maxQuantity : adminFromTyping.newLimit , passCode : adminFromTyping.newAdminCodeFromTyping , isSuccess : () => {
                 setChangeAdminCodeAndLimitOpen(false);
                 setShowPassword(false);
                 setShowNewPassword(false);
+                dispatch(changeIsLoading(false));
                 dispatch(openSnackBar({open : true , message : "Successfully changed Admin code" , severity : Severity.success}))
                 localStorage.setItem("adminPassword" , adminFromTyping.newAdminCodeFromTyping)
             }}))

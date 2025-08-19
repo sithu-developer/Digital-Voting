@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import SnackBarComp from "./SnackBar";
 import VotingSetting from "./VotingSetting";
 import BackofficeSideBar from "./BackofficeSideBar";
+import Loading from "./Loading";
 
 interface Props {
     children : ReactNode;
@@ -26,6 +27,7 @@ const Layout = ({ children } : Props ) => {
             <Box>{children}</Box>
             {isVotingPage && <VotingSetting />}
             <SnackBarComp />
+            <Loading />
         </Box>
     )
 }

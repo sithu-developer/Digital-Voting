@@ -3,7 +3,7 @@ import { Categories } from "../../generated/prisma";
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "@/store/hooks";
 import { updateCategory } from "@/store/slices/categoriesSlice";
-import { openSnackBar } from "@/store/slices/snackBarSlice";
+import { changeIsLoading, openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
 import { uploadPhoto } from "@/util/uploadPhoto";
 import { PutBlobResult } from "@vercel/blob";
@@ -27,9 +27,11 @@ const EditCategory = ({ selectedCategory , editCategoryOpen ,setEditCategoryOpen
 
 
     const handleUpdateCategory = async() => {
+        dispatch(changeIsLoading(true));
         if(photoFile) {
             const blob = await uploadPhoto(photoFile) as PutBlobResult;
             dispatch(updateCategory({ ... editedCategory , iconUrl : blob.url , isSuccess : () => {
+                dispatch(changeIsLoading(false));
                 dispatch(openSnackBar({open : true , message : `Successfully updated from ${selectedCategory.name} to ${editedCategory.name}` , severity  : Severity.success}))
                 setEditCategoryOpen(false);
                 setEditedCategory(editedCategory);
@@ -37,6 +39,7 @@ const EditCategory = ({ selectedCategory , editCategoryOpen ,setEditCategoryOpen
             }}))
         } else {
             dispatch(updateCategory({ ... editedCategory , isSuccess : () => {
+                dispatch(changeIsLoading(false));
                 dispatch(openSnackBar({open : true , message : `Successfully updated from ${selectedCategory.name} to ${editedCategory.name}` , severity  : Severity.success}))
                 setEditCategoryOpen(false);
                 setEditedCategory(editedCategory);

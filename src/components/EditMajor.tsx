@@ -6,7 +6,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { UpdatedMajorItems } from "@/types/major";
 import { Major } from "../../generated/prisma";
 import { Severity } from "@/types/snackBar";
-import { openSnackBar } from "@/store/slices/snackBarSlice";
+import { changeIsLoading, openSnackBar } from "@/store/slices/snackBarSlice";
 import { updateMajor } from "@/store/slices/majorSlice";
 
 interface Props {
@@ -37,11 +37,13 @@ const EditMajor = ( { selectedMajorId , editMajorOpen , setEditMajorOpen } : Pro
 
     const handleUpdateMajor = () => {
         if(adminCode === adminCodeFromTyping) {
+            dispatch(changeIsLoading(true));
             dispatch(updateMajor({...updatedMajor , isSuccess : () => {
                 setAdminCodeFromTyping("")
                 setEditMajorOpen(false);
                 setShowAdminPassword(false);
                 setShowMajorPassword(false);
+                dispatch(changeIsLoading(false));
                 dispatch(openSnackBar({open : true , message : "Successfully updated !" , severity : Severity.success}));
             }}))
         } else {

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { openSnackBar } from "@/store/slices/snackBarSlice";
+import { changeIsLoading, openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
 import { deleteCategory } from "@/store/slices/categoriesSlice";
 import { deleteStudent } from "@/store/slices/studentsSlice";
@@ -47,10 +47,12 @@ const DeleteComfirmation = ({ deleteOpen , setDeleteOpen , categoryToDelete , st
     const handleDeleteCategory = () => {
         if(categoryToDelete) {
             if(adminCodeFromLocalStrage === adminCodeFromTyping) {
+                dispatch(changeIsLoading(true));
                 dispatch(deleteCategory({categoryId : categoryToDelete.id , isSuccess : () => {
                     setAdminCodeFromTyping("");
                     setShowPassword(false);
                     setDeleteOpen(false);
+                    dispatch(changeIsLoading(false));
                     dispatch(openSnackBar({open : true , message : "Successfully deleted" , severity : Severity.success}))
                 } }))
             } else {
@@ -61,10 +63,12 @@ const DeleteComfirmation = ({ deleteOpen , setDeleteOpen , categoryToDelete , st
 
     const handleDeleteStudent = () => {
         if(studentToDelete) {
+            dispatch(changeIsLoading(true));
             dispatch(deleteStudent({studentId : studentToDelete.id , isSuccess : () => {
                 setShowPassword(false);
                 setDeleteOpen(false);
                 router.push("/intro/backoffice/king-queen")
+                dispatch(changeIsLoading(false));
                 dispatch(openSnackBar({ open : true , message : "Successfully deleted to this student" , severity : Severity.success}))
             }}))
 
@@ -74,6 +78,7 @@ const DeleteComfirmation = ({ deleteOpen , setDeleteOpen , categoryToDelete , st
     const handleDeleteMajor = () => {
         if(majorToDelete) {
             if(adminCodeFromLocalStrage === adminCodeFromTyping) {
+                dispatch(changeIsLoading(true));
                 dispatch(deleteMajor({majorId : majorToDelete.id , isSuccess : () => {
                     setAdminCodeFromTyping("");
                     setShowPassword(false);
@@ -81,6 +86,7 @@ const DeleteComfirmation = ({ deleteOpen , setDeleteOpen , categoryToDelete , st
                     if(setSelectedMajorId) {
                         setSelectedMajorId(0);
                     };
+                    dispatch(changeIsLoading(false));
                     dispatch(openSnackBar({ open : true , message : "Successfully deleted to this major" , severity : Severity.success }))
                 }}))
             } else {

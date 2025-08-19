@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { openSnackBar } from "@/store/slices/snackBarSlice";
+import { changeIsLoading, openSnackBar } from "@/store/slices/snackBarSlice";
 import { createNewStudent } from "@/store/slices/studentsSlice";
 import { Severity } from "@/types/snackBar";
 import { NewStudentItems } from "@/types/student";
@@ -38,12 +38,14 @@ const NewStudent = ({ selectedCategory , newStudentOpen , setNewStudentOpen } : 
         if(!exitContestantNumbers.includes(newStudent.contestantNumber) ) {
             if(photoFile) {
                 const blob = await uploadPhoto(photoFile) as PutBlobResult;
+                dispatch(changeIsLoading(true));
                 dispatch(createNewStudent({...newStudent , url : blob.url , isSuccess : () => {
                     setNewStudentOpen(false);
                     setPhotoFile(undefined);
                     setNewStudent({...defaultNewStudent , categoryId : selectedCategory.id  , url : `/${selectedCategory.name.toLowerCase().trim()}Default.jpg` });
+                    dispatch(changeIsLoading(false));
                     dispatch(openSnackBar({ open : true , message : "Successfully created a student" , severity : Severity.success}))
-                } }))
+                }}))
             }
         } else {
             dispatch(openSnackBar({ open : true , message : `Contestant Number already exit in ${selectedCategory.name} !` , severity : Severity.warning}))

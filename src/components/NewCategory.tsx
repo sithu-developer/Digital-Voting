@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@/store/hooks";
 import { createNewCategory } from "@/store/slices/categoriesSlice";
-import { openSnackBar } from "@/store/slices/snackBarSlice";
+import { changeIsLoading, openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
 import { uploadPhoto } from "@/util/uploadPhoto";
 import { Box, Button, Chip, Dialog, DialogContent, TextField, Typography } from "@mui/material"
@@ -20,10 +20,12 @@ const NewCategory = ({ newCategoryOpen , setNewCategoryOpen } : Props) => {
     const handleCreateNewCategory = async() => {
         if(photoFile) {
             const blob = await uploadPhoto(photoFile) as PutBlobResult;
+            dispatch(changeIsLoading(true));
             dispatch(createNewCategory({newCategory , iconUrl : blob.url , isSuccess : () => {
                 setNewCategoryOpen(false);
                 setNewCategory("");
                 setPhotoFile(undefined);
+                dispatch(changeIsLoading(false));                
                 dispatch(openSnackBar({open : true , message : "New Category is successfully created" , severity : Severity.success}))
             }}));
         }

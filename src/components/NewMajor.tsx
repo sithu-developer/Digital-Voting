@@ -6,7 +6,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { NewMajorItems } from "@/types/major";
 import { Major } from "../../generated/prisma";
 import { Severity } from "@/types/snackBar";
-import { openSnackBar } from "@/store/slices/snackBarSlice";
+import { changeIsLoading, openSnackBar } from "@/store/slices/snackBarSlice";
 import { createMajor } from "@/store/slices/majorSlice";
 
 interface Props {
@@ -34,12 +34,14 @@ const NewMajor = ( { newMajorOpen , setNewMajorOpen } : Props) => {
 
     const handleCreateNewMajor = () => {
         if(adminCode === adminCodeFromTyping) {
+            dispatch(changeIsLoading(true));
             dispatch(createMajor({...newMajor , isSuccess : () => {
                 setAdminCodeFromTyping("")
                 setNewMajor(defaultNewMajor)
                 setNewMajorOpen(false);
                 setShowPassword(false);
                 setShowNewPassword(false);
+                dispatch(changeIsLoading(false));
                 dispatch(openSnackBar({open : true , message : "Successfully created new major." , severity : Severity.success}))
             }}))
         } else {

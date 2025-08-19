@@ -3,7 +3,7 @@ import { Box, Button, Dialog, DialogContent, TextField, Typography } from "@mui/
 import { useEffect, useState } from "react";
 import { User } from "../../generated/prisma";
 import { updateUser } from "@/store/slices/userSlice";
-import { openSnackBar } from "@/store/slices/snackBarSlice";
+import { changeIsLoading, openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
 
 interface Props {
@@ -25,8 +25,10 @@ const EditUser = ( { setUserEditUserOpen , userEditUserOpen } : Props) => {
     if(!user || !updatedUser) return null;
 
     const handleUpdateUser = () => {
+        dispatch(changeIsLoading(true));
         dispatch(updateUser({...updatedUser , isSuccess : () => {
             setUserEditUserOpen(false);
+            dispatch(changeIsLoading(false));
             dispatch(openSnackBar({ open : true , message : "Name is successfully changed" , severity : Severity.success}))
         }}))
     }

@@ -3,7 +3,7 @@ import { Box, Button, IconButton, Typography } from "@mui/material"
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import { Students } from "../../../../../generated/prisma";
 import { checkIsTimeUp, updateUser } from "@/store/slices/userSlice";
-import { openSnackBar } from "@/store/slices/snackBarSlice";
+import { changeIsLoading, openSnackBar } from "@/store/slices/snackBarSlice";
 import { Severity } from "@/types/snackBar";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -48,7 +48,9 @@ const ThankForVoting = () => {
     if(!user || categories.length !== votes.length) return null;
 
     const handleSubmitVotes = () => {
+        dispatch(changeIsLoading(true));
         dispatch(updateUser({ ... user , isSubmitted : true , isSuccess : () => {
+            dispatch(changeIsLoading(false));
             dispatch(openSnackBar({ open : true , message : "Successfully submitted " , severity : Severity.success}))
         }}))
     }
