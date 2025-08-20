@@ -7,7 +7,6 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import ModeNightOutlinedIcon from '@mui/icons-material/ModeNightOutlined';
 import Image from "next/image";
 
 interface Props {
