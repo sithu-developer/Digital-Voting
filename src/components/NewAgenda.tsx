@@ -19,8 +19,8 @@ const NewAgenda = ( { newAgendaOpen , setNewAgendaOpen } : Props ) => {
     
     const handleCreateAgenda = async() => {
         if(photoFile) {
-            const blob = await uploadPhoto(photoFile) as PutBlobResult;
             dispatch(changeIsLoading(true));
+            const blob = await uploadPhoto(photoFile) as PutBlobResult;
             dispatch(createAgenda({ agendaUrl : blob.url , isSuccess : () => {
               setPhotoFile(undefined);
               setNewAgendaOpen(false);

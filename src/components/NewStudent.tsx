@@ -37,8 +37,8 @@ const NewStudent = ({ selectedCategory , newStudentOpen , setNewStudentOpen } : 
         const exitContestantNumbers = relatedStudent.map(item => item.contestantNumber);
         if(!exitContestantNumbers.includes(newStudent.contestantNumber) ) {
             if(photoFile) {
-                const blob = await uploadPhoto(photoFile) as PutBlobResult;
                 dispatch(changeIsLoading(true));
+                const blob = await uploadPhoto(photoFile) as PutBlobResult;
                 dispatch(createNewStudent({...newStudent , url : blob.url , isSuccess : () => {
                     setNewStudentOpen(false);
                     setPhotoFile(undefined);

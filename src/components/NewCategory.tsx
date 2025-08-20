@@ -19,8 +19,8 @@ const NewCategory = ({ newCategoryOpen , setNewCategoryOpen } : Props) => {
 
     const handleCreateNewCategory = async() => {
         if(photoFile) {
-            const blob = await uploadPhoto(photoFile) as PutBlobResult;
             dispatch(changeIsLoading(true));
+            const blob = await uploadPhoto(photoFile) as PutBlobResult;
             dispatch(createNewCategory({newCategory , iconUrl : blob.url , isSuccess : () => {
                 setNewCategoryOpen(false);
                 setNewCategory("");

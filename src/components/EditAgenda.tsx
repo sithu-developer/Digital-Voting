@@ -19,8 +19,8 @@ const EditAgenda = ({ editAgendaItems , setEditAgendaItems } : Props) => {
 
     const handleUpdateAgenda = async() => {
         if(photoFile) {
-            const blob = await uploadPhoto(photoFile) as PutBlobResult;
             dispatch(changeIsLoading(true));
+            const blob = await uploadPhoto(photoFile) as PutBlobResult;
             dispatch(updateAgenda({ id : editAgendaItems.agendaId , agendaUrl : blob.url , isSuccess : () => {
                 setPhotoFile(undefined)
                 setEditAgendaItems({ open : false , agendaId : 0});
