@@ -53,9 +53,7 @@ const BackofficeTopBar = ({ setSideBarOpen } : Props ) => {
                 <MenuRoundedIcon sx={{ color : "white" , fontSize : "32px"}}  />
             </IconButton>
             <Typography sx={{ mt : "10px"}}>Admin</Typography>
-            <IconButton>
-                <ModeNightOutlinedIcon sx={{ color : "white" , transform : "rotate(30deg)", fontSize : "25px"}} />
-            </IconButton>
+            <Image alt="Digital-voting-logo" src={"/Digital Voting-logo-transparent.png"} width={300} height={300} style={{ width : "auto" , height : "100%"}} />
             <Box sx={{ bgcolor : "secondary.main" , position : "absolute" , top : "-25px" , left : "50%" , transform: 'translateX(-50%)',  justifySelf : "center" , clipPath: 'polygon(-5% 0%, 105% 0%, 80% 100%, 20% 100%)' , width : "90px" , height : "40px" , display : "flex" , justifyContent : "center" , alignItems : "center"  }}> 
                 <Image alt="king crown logo" src={"/kingCrownLogo.png"} width={200} height={200} style={{ width : "50px" , height : "50px"}} />
             </Box>
