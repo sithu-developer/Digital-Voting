@@ -26,7 +26,7 @@ const VoteList = ( { voteListItems , setVoteListItems } : Props ) => {
             setVoteListItems({...voteListItems , open : false});
         }} >
                 <DialogTitle sx={{  display : "flex" , justifyContent : "space-between" , alignItems : "center" , bgcolor : "secondary.light"  }}>
-                    {!showSearch && <Typography color="info" sx={{ fontSize : "25px"}} >Get Votes from</Typography>}
+                    {!showSearch && <Typography color="info" sx={{ fontSize : "20px" , fontWeight : 600}} >{voteListItems.name}'s voters..</Typography>}
                     {showSearch && <TextField autoFocus onChange={(event) => setSearchGamil(event.target.value) } variant="standard" placeholder="Search gmail.." />}
                     <Box sx={{ display : "flex"}} >
                         {!showSearch && <IconButton onClick={() => setShowSearch(true)} >

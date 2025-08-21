@@ -17,7 +17,7 @@ const ResultPage = () => {
     const admin = useAppSelector(store => store.adminSlice.admin)
     const [ selectedCategory , setSelectedCategory ] = useState<Categories>();
     const [ studentsWithVotes , setStudentsWithVotes ] = useState<StudentWithVotes[]>([]);
-    const [ voteListItems , setVoteListItems ] = useState<VoteListItems>({ open : false , selectedStudentId : 0});
+    const [ voteListItems , setVoteListItems ] = useState<VoteListItems>({ open : false , selectedStudentId : 0  , name : ""});
     const [ searchOpen , setSearchOpen ] = useState(false);
     const [ searchValue , setSearchValue ] = useState<string>("");
     const [ permissionOpen , setPermissionOpen ] = useState<boolean>(false);
@@ -114,7 +114,7 @@ const ResultPage = () => {
                             </Box>
                             <Typography sx={{ fontSize : "12px" , mt : "10px" , pl : "3px"}}>Major: {item.student.major}</Typography>
                             <Box sx={{ clipPath: 'polygon(10% 0%, 100% 0%, 100% 100%, 0% 100%)' , width : "60%" , p : "5px" , cursor : "pointer" , bgcolor : "info.main" , position : "absolute" , bottom : "-1px" , right : "-1px" , display : "flex" , justifyContent : "end" , alignItems : "center" , gap :  "5px"}} onClick={() => {
-                                setVoteListItems({open : true , selectedStudentId : item.student.id })
+                                setVoteListItems({open : true , selectedStudentId : item.student.id , name : item.student.name })
                             }} >
                                 <Typography sx={{ fontSize : "12px" }}>Total votes</Typography>
                                 <Box sx={{ bgcolor : "#6D42B2" , minWidth : "30px" , px : "1px" , borderRadius : "3px"}}>

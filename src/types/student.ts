@@ -25,4 +25,5 @@ export interface StudentWithVotes {
 export interface VoteListItems {
     open : boolean,
     selectedStudentId : number,
+    name : string;
 }
